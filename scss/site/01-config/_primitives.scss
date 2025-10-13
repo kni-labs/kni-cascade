@@ -1,0 +1,29 @@
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 📄 _primitives.scss
+// Site design primitives and root variables. Probably don't edit these?
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+:root {
+  // pxv unit primitives
+  --site-min: var(--mobile-min);
+  --site-basis: var(--mobile-basis);
+  --site-max: var(--mobile-max);
+
+  // pxv unit
+  --pxv-unit: clamp(
+    calc(1px * var(--site-min) / var(--site-basis)),
+    calc((100 / var(--site-basis)) * 1vw),
+    calc(1px * var(--site-max) / var(--site-basis))
+  );
+
+  // Fluid type primitives
+  --font-max-clamp: 9999px; // no touch
+  --font-size: 16pxv; // fluid-type base font size
+
+  // system font stacks
+  --font-family-system: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
+    helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}

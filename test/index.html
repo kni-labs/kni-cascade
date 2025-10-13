@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="icon"
+      type="image/ico"
+      href="https://www.kurtnoble.com/img/favicon.ico"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KNI CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="test">
+    <div id="width">
+      <span class="bp"></span>
+      <span class="currentWidth"></span>
+    </div>
+    <script>
+      const width = document.querySelector('#width span.currentWidth');
+
+      window.onload = function () {
+        width.innerHTML = window.innerWidth;
+      };
+      window.onresize = function () {
+        width.innerHTML = window.innerWidth;
+      };
+    </script>
+
+    <h1>KNI-Cascade</h1>
+    <p>This is how we CSS.</p>
+    <div class="box">I'm a cool box</div>
+    <main>
+      <section id="typography">
+        <h4>Typography</h4>
+        <hr /><br>
+        <h1 class="fluid-type-bad"">h1 – This is how we CSS</h1>
+        <h2>I'm an h2</h2>
+        <h3>h3's are cool</h3>
+        <div><pre><code>this is some code</code></pre></div>
+<button>i'm a button</button>
+
+        <div class="negative">i have a negative margin</div>
+      </section>
+    </main>
+  </body>
+</html>

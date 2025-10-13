@@ -1,0 +1,29 @@
+@use '../scss/site' as *;
+
+body {
+  border: 30px solid green;
+  background: lavenderblush;
+  padding: 15pxv 40pxv;
+}
+
+h1 {
+  --font-min-clamp: 48px;
+  --font-max-clamp: 52px;
+  --font-size: 50pxv; /* author-friendly syntax */
+}
+
+h2 {
+  --font-min-clamp: 68px;
+  --font-size: 72pxv; /* author-friendly syntax */
+}
+
+h3 {
+  --font-size: 30pxv;
+}
+
+.box {
+  background-color: darkblue;
+  color: whitesmoke;
+  width: 270pxv;
+  height: 200pxv;
+}

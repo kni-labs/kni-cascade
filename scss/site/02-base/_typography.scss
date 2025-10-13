@@ -1,0 +1,41 @@
+@use '../01-config' as *;
+@use '../../engine' as *;
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 📄 _typography.scss
+// Type system + custom styles
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+// 🧩  Type system
+// -----------------------------------------------------------------------------
+
+@include fluid-type; // remove this if you dont want fluid type
+
+html {
+  font-family: var(--font-family-system); // edit me
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  text-wrap: var(--text-wrap);
+}
+
+// Rules for all text elements. :where means it has specificity of 0
+// so easy to override
+:where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, pre, figure) {
+  margin-block-end: var(--type-margin);
+}
+
+// Header specific styles
+:where(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.2;
+}
+
+code,
+kbd,
+samp,
+pre,
+tt {
+  font-family: var(--font-family-monospace);
+}
+
+// ✏️  Custom type styles – write your css here
+// -----------------------------------------------------------------------------
