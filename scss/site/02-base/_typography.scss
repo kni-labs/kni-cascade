@@ -9,14 +9,14 @@
 // 🧩  Type system
 // -----------------------------------------------------------------------------
 
-// Enable fluid type
-@include all-text-elements {
+// Enable fluid type - delete to disable
+  :where(*, *::before, *::after) {
     font-size: clamp(
       var(--font-min-clamp),
       var(--font-size),
       var(--font-max-clamp)
     );
-}
+  }
 
 html {
   font-family: var(--font-family-system); // edit me
@@ -25,8 +25,7 @@ html {
   text-wrap: var(--text-wrap);
 }
 
-// Rules for all text elements. :where means it has specificity of 0
-// so easy to override
+// Rules for all text elements
 :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, pre, figure) {
   margin-block-end: var(--type-margin);
 }
