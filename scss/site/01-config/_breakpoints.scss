@@ -17,9 +17,19 @@ $dm: 1440 !default; // Desktop medium
 $dl: 1600 !default; // Desktop large
 $dxl: 1800 !default; // Desktop x-large
 
+$desktop-max: 1800; // edit here, used in media queries as well
 // sample mq
 // @media (min-width: #{$tm}) {}
 
+:root {
+    // pxv settings - Match figma
+  --mobile-min: 0;
+  --mobile-basis: 375; // Figma mobile
+  --mobile-max: 767;
+  --desktop-min: 768;
+  --desktop-basis: 1440; // Figma desktop
+  --desktop-max: #{$desktop-max};
+}
 // 🛠️  Media Queries
 //    "sm" and "lg" should handle 95% of use cases. Feel free to add "med"
 //    or roll your own per project!

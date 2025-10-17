@@ -1,7 +1,7 @@
 @use '../scss/site' as *;
 
 body {
-  border: 30px solid green;
+  border: 15pxv solid peru;
   background: lavenderblush;
   padding: 15pxv 40pxv;
 }
@@ -22,8 +22,9 @@ h3 {
 }
 
 .box {
-  background-color: darkblue;
+  background-color: black;
   color: whitesmoke;
   width: 270pxv;
   height: 200pxv;
+  border: 5px solid green;
 }

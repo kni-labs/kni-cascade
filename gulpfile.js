@@ -63,12 +63,6 @@ gulp.task('build-sass', async function () {
           siteMin: 0,
           siteBasis: 375,
           siteMax: 767,
-          vars: {
-            min: '--site-min',
-            basis: '--site-basis',
-            max: '--site-max',
-            unit: '--pxv-unit',
-          },
           writeVars: false, // set to true if you want :root vars injected
         }),
       ])

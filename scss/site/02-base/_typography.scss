@@ -9,7 +9,14 @@
 // 🧩  Type system
 // -----------------------------------------------------------------------------
 
-@include fluid-type; // remove this if you dont want fluid type
+// Enable fluid type
+@include all-text-elements {
+    font-size: clamp(
+      var(--font-min-clamp),
+      var(--font-size),
+      var(--font-max-clamp)
+    );
+}
 
 html {
   font-family: var(--font-family-system); // edit me

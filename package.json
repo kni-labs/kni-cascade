@@ -35,7 +35,6 @@
     "http-server": "^14.1.1",
     "husky": "^8.0.1",
     "postcss": "^8.4.28",
-    "postcss-pxv": "https://github.com/kni-labs/postcss-pxv/varify",
     "sass": "^1.54.9",
     "stylelint": "^15.10.2",
     "stylelint-config-prettier-scss": "^1.0.0",
@@ -47,6 +46,7 @@
     "caniuse-lite": "^1.0.30001746",
     "gulp-insert": "^0.5.0",
     "lint-staged": "^13.0.3",
+    "postcss-pxv": "^2.0.0",
     "prettier": "^2.7.1"
   }
 }
