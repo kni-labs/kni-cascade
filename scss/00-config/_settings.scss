@@ -30,12 +30,12 @@ $type-scale: (
 );
 
 :root {
-  // defaults
+  // defaults. nh   n6o     b
   --easing: cubic-bezier(0.23, 1, 0.32, 1); // Michael Jordan Magic Johnson
   --border-radius: 5pxv; 
 
   // default type settings
-  --font-min-clamp: 11px; // forced min-size for all type
+  --font-min-clamp: 11px; // default min-size for all type
   --line-height: 1.5; // default line height
   --text-wrap: pretty; // default
   --letter-spacing: normal; // 0.01em etc - match figma
