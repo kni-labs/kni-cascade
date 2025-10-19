@@ -5,14 +5,9 @@
 // Type system + custom styles
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// Enable fluid type - delete to disable
-  :where(*, *::before, *::after) {
-    font-size: clamp(
-      var(--font-min-clamp),
-      var(--font-size),
-      var(--font-max-clamp)
-    );
-  }
+@if $enable-fluid-type {
+  @include fluid-type;
+}
 
 // Set top level rules
 html {
@@ -85,7 +80,6 @@ h6, .h6 {
 //     --font-min-clamp: 12px;
 // }
 
-// Enter any custom code here
 .body-l {
     @include type-scale(body-l);
     --font-min-clamp: 14px;

@@ -20,6 +20,18 @@
   }
 }
 
+// fluid type
+
+@mixin fluid-type {
+  :where(*, *::before, *::after) {
+    font-size: clamp(
+      var(--font-min-clamp),
+      var(--font-size),
+      var(--font-max-clamp)
+    );
+  }
+}
+
 @mixin touch-device {
   @media (hover: none) {
     @content;

@@ -2,12 +2,8 @@
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 // 📄 _primitives.scss
-// This file powers the "physics" of the design system — how scaling, pxv units,
-// and typography behave. It references values from _settings.scss (like
-// $desktop-max) to stay project-aware.
-//
-// 💡 TL;DR: You probably don't need to edit this.
-// If you're tweaking design values, go to _settings.scss instead.
+// System-level "physics" of the design system — how scaling, pxv units,
+// and fluid typography behave under the hood. You normally don’t edit this.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 
@@ -43,11 +39,15 @@ $type-scale-breakpoint: $tm !default;
   --desktop-max: #{$desktop-max}; // Edit this in settings
 
   // pxv unit
-  --pxv-unit: clamp(
-    calc(1px * var(--site-min) / var(--site-basis)),
-    calc((100 / var(--site-basis)) * 1vw),
-    calc(1px * var(--site-max) / var(--site-basis))
-  );
+  @if $enable-pxv {
+    --pxv-unit: clamp(
+      calc(1px * var(--site-min) / var(--site-basis)),
+      calc((100 / var(--site-basis)) * 1vw),
+      calc(1px * var(--site-max) / var(--site-basis))
+    );
+  } @else {
+    --pxv-unit: 1px; // effectively disables fluid scaling
+  }
 
   // Fluid type primitives
   --font-max-clamp: 9999px; // no touch
