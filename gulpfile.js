@@ -18,21 +18,18 @@ const sassWatchDir = ['./scss/**/*.scss', './test/**/*.scss'];
 const htmlWatchDir = './test/**/*.html';
 const colors = require('ansi-colors');
 // --------------------------
-// Lint SCSS (non-blocking)
+// 🔍 Lint SCSS (non-blocking)
 // --------------------------
-
-
 gulp.task('lint-css-fix', function (done) {
   exec(
-    'npx stylelint "scss/**/*.scss" "test/**/*.scss" --config .stylelintrc --fix --formatter string',
+    'npx stylelint "scss/**/*.scss" "test/**/*.scss" --config .stylelintrc.js --fix --formatter string',
     function (err, stdout, stderr) {
       if (stdout) {
-        // Highlight key tokens
         const coloredOutput = stdout
           .replace(/✖/g, colors.red('✖'))
           .replace(/⚠️/g, colors.yellow('⚠️'))
           .replace(/\.scss/g, colors.cyan('.scss'))
-          .replace(/\(\S+\)/g, match => colors.dim(match)); // rule name in dim gray
+          .replace(/\(\S+\)/g, match => colors.dim(match));
         console.log(coloredOutput);
       }
 
@@ -93,16 +90,20 @@ gulp.task('build-sass', async function () {
 // --------------------------
 // Serve + Watch
 // --------------------------
-gulp.task('serve', gulp.series('lint-css-fix', function () {
+gulp.task('serve', function () {
   browserSync.init({
-    server: {baseDir: './test'},
+    server: { baseDir: './test' },
     open: false,
     notify: false,
   });
 
-  gulp.watch(sassWatchDir, gulp.series('lint-css-fix', 'build-sass'));
+  // Run lint and build simultaneously, but don’t block reload
+  gulp.watch(sassWatchDir, function (cb) {
+    gulp.parallel('lint-css-fix', 'build-sass')(cb);
+  });
+
   gulp.watch(htmlWatchDir).on('change', browserSync.reload);
-}));
+});
 
 // --------------------------
 // Tasks

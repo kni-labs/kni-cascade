@@ -16,7 +16,7 @@
 @include wp-admin-bar;
 
 // Primary Media Query
-@media (min-width: 768px) {
+@media (width >= 768px) {
   :root {
     --site-min: var(--desktop-min);
     --site-basis: var(--desktop-basis);

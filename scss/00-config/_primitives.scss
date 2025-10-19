@@ -24,7 +24,6 @@ $dxl: 1800 !default; // Desktop x-large
 $type-scale-breakpoint: $tm !default;
 
 :root {
-
   // pxv unit primitives
   --site-min: var(--mobile-min);
   --site-basis: var(--mobile-basis);

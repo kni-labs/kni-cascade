@@ -35,48 +35,59 @@ code, kbd, samp, pre, tt {
 
 // Open up lineheight for longform reading
 .longform {
-    line-height: 1.5;
+  line-height: 1.5;
 }
+
 .caps {
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .2em;
 }
+
 // Indivdual headings are based on  $type-scale in settings.scss
 h1, .h1 {
-    @include type-scale(header-xxl);
-    // // note you can do overwrites here
-    // --font-min-clamp: 52px;
-    // --font-max-clamp: 68px;
+  @include type-scale(header-xxl);
 
-    line-height: 1.2; // edit me
+  // // note you can do overwrites here
+  // --font-min-clamp: 52px;
+  // --font-max-clamp: 68px;
+
+  line-height: 1.2; // edit me
 }
 
 h2, .h2 {
-    @include type-scale(header-xl);
+  @include type-scale(header-xl);
+
   --font-min-clamp: 28px;    
 
-//  Setting max-clamp in a small mq probably a good idea
-//   @include sm {
-//     --font-max-clamp: 32px;
-//   }
+  //  Setting max-clamp in a small mq probably a good idea
+  //   @include sm {
+  //     --font-max-clamp: 32px;
+  //   }
 }
 
 h3, .h3 {
-    @include type-scale(header-l);
+  @include type-scale(header-l);
+
   --font-min-clamp: 24px;      
 }
+
 h4, .h4 {
-    @include type-scale(header-m);
-    --font-min-clamp: 20px;      
+  @include type-scale(header-m);
+
+  --font-min-clamp: 20px;      
 }
+
 h5, .h5 {
-    @include type-scale(header-s);
-    --font-min-clamp: 18px;       
+  @include type-scale(header-s);
+
+  --font-min-clamp: 18px;       
 }
+
 h6, .h6 {
-    @include type-scale(header-xs);
-    --font-min-clamp: 16px;    
+  @include type-scale(header-xs);
+
+  --font-min-clamp: 16px;    
 }
 
 // does p get default styles 🤔
@@ -86,21 +97,27 @@ h6, .h6 {
 // }
 
 .body-l {
-    @include type-scale(body-l);
-    --font-min-clamp: 14px;
+  @include type-scale(body-l);
+
+  --font-min-clamp: 14px;
 }
+
 .body-m  {
-    @include type-scale(body-m);
+  @include type-scale(body-m);
 }
+
 .body-s  {
-    @include type-scale(body-s);
+  @include type-scale(body-s);
 }
+
 .body-xs  {
-    @include type-scale(body-xs);
+  @include type-scale(body-xs);
 }
+
 .body-xxs {
-    @include type-scale(body-xxs);
+  @include type-scale(body-xxs);
 }
+
 .body-xxxs  {
-    @include type-scale(body-xxxs);
+  @include type-scale(body-xxxs);
 }
