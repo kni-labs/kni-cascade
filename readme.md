@@ -1,29 +1,136 @@
 # KNI Cascade
+A modern front-end architecture creating a single source of truth for all our CSS — across **WordPress**, **React**, **static**, or any future builds.
 
-A modern front-end architecture creating a single source of truth for all our css - across WP, React, static, or any future builds.
+KNI Cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.  
+It’s designed for **clarity, scalability, and minimal friction** — a single shared foundation that powers every KNI build.
 
-We package:
-- A revamped css folder structure and updated/modernized css base that fixes all inheritance issues.
-- **Sass** for clean and familiar DX
-- **PostCSS** to transform the compiled CSS into browser-ready output.
-  - **[postcss-pxv](https://github.com/kni-labs/postcss-pxv)** — Our custom viewport unit (now 40% smaller!)
-  - **Autoprefixer** (? to discuss)
-  - **CSSNano** (?)
-- **Stylelint** (config only?) to enforce code style and consistency across .scss files.
-- **Prettier**  config file (that get pulled into each boilerplate)
-- **config.js** Pulled into each boilerplate
 
-### NPM Library or CSS Boilerplate?
+## What We Package
 
-The answer: why not both?
 
-Currently everything in KNI-SCSS lives in npm modules. This is great for pushing updates but creates 2 main pain points:
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Revamped SCSS Boilerplate</strong></td>
+      <td>
+        <ul>
+          <li>Modern, layered structure that fixes inheritance issues</li>
+          <li>Clear separation of responsibility → <BR><code>00-config → 01-base → 02-components → 03-modules → 04-pages</code></li>
+          <li>Config-first system — tokens, mixins, and primitives power everything downstream</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Sass (SCSS)</strong></td>
+      <td>
+        <ul>
+          <li>Clean, familiar syntax and developer experience</li>
+          <li>Zero CSS output from config layer ensures predictable, isolated overrides</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>PostCSS Pipeline</strong></td>
+      <td>
+        <ul>
+          <li><code>postcss-pxv</code> — our custom viewport unit plugin</li>
+          <li>Autoprefixer for cross-browser prefixes</li>
+          <li>CSSNano for production minification(?)</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Shared Config.js (Lint + Format)</strong></td>
+      <td>
+        <ul>
+          <li>Centralized configs for Stylelint and Prettier</li>
+          <li>Enforces consistent formatting and linting across all projects</li>
+          <li>Shared rules easily imported into any boilerplate or environment</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-1. No clear reference where to override variables
-2. Our CSS boilerplates are still living in different places (kni-wp-bp, kni-next, etc)
+## Folder Structure
+```plaintext
+scss/
+├── 00-config/      # Tokens, mixins, functions, no CSS output
+├── 01-base/        # Resets, type, layout, and core utilities
+├── 02-components/  # Reusable UI building blocks
+├── 03-modules/     # Larger composite regions (header, hero, footer)
+├── 04-pages/       # Page-specific overrides
+└── cascade.scss    # Public entry file for final CSS build
+```
 
-I'm proposing that we split out css file into 2 main folders:
-- **/engine**: (Lives in npm modules) - houses reset, mixins, functions, utility classes etc
-- **/site**: (copied to appropriate location with a postinstall script) - css boilerplate housing tokens, primitives, base styling and normalized folder structure 
+---
 
-This allows this repo to truly be a single source of truth for all things css, and completely removes css from all boilerplates. Devs can dive in and start coding knowing exactly where to edit everything.
+## 🧩 Core Features
+
+- **Fluid Typography** – Scales seamlessly across breakpoints using `$type-scale` maps  
+- **Viewport-Based Units (`pxv`)** – Uniform responsive sizing with fallback support  
+- **Token-Driven Architecture** – Edit `_settings.scss` to update a project globally  
+- **Predictable Cascade** – Each layer builds safely on the one before it  
+- **Framework-Agnostic** – Single source of truth across any kni boilerplate 
+
+---
+
+## ⚙️ Local Build Setup
+
+```bash
+# install dependencies
+npm install
+
+# run local dev build
+npx gulp
+
+# compile & minify for production
+npx gulp build
+```
+
+By default, **Gulp** runs:
+- `sass` → compile SCSS → CSS  
+- `postcss` → apply pxv, autoprefixer, and minify  
+- `stylelint` → lint & auto-fix code style  
+- `browsersync` → live-reload for local development  
+
+---
+
+##  Design Principles
+
+1. **Settings-first** – All editable project values live in `_settings.scss`.  
+2. **No CSS output in config** – Logic, not styling.  
+3. **Token inheritance** – Everything flows from primitives to components.  
+4. **Small overrides > big rewrites** – The cascade should always work with you.  
+5. **Readable by default** – Comments are documentation.  
+
+---
+
+## 🧰 Requirements
+- Node v18+  
+- npm or pnpm  
+- Gulp CLI (global)  
+
+---
+
+## 🧑‍💻 Contributing
+
+1. Clone this repo  
+2. Create a new branch  
+3. Run `npx gulp` and make your changes  
+4. Submit a PR with a clear summary  
+
+---
+
+## 🪄 Quick Philosophy
+
+> *“If it’s visual, it lives in base.  
+If it’s reusable, it lives in components.  
+If it’s page-specific, it lives in pages.  
+And if it defines how the system works — it lives in config.”*
