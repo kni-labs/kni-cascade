@@ -11,6 +11,11 @@ body {
     border: 15pxv solid cadetblue;
     padding: 15pxv 300pxv;
   }
+
+  @include max {
+    background: lightyellow;
+    border: 25pxv solid black;
+  }
 }
 
 .box {

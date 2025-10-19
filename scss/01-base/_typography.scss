@@ -37,7 +37,11 @@ code, kbd, samp, pre, tt {
 .longform {
     line-height: 1.5;
 }
-
+.caps {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .2em;
+}
 // Indivdual headings are based on  $type-scale in settings.scss
 h1, .h1 {
     @include type-scale(header-xxl);
@@ -85,18 +89,18 @@ h6, .h6 {
     @include type-scale(body-l);
     --font-min-clamp: 14px;
 }
-.body-m {
+.body-m  {
     @include type-scale(body-m);
 }
-.body-s {
+.body-s  {
     @include type-scale(body-s);
 }
-.body-xs {
+.body-xs  {
     @include type-scale(body-xs);
 }
 .body-xxs {
     @include type-scale(body-xxs);
 }
-.body-xxxs {
+.body-xxxs  {
     @include type-scale(body-xxxs);
 }

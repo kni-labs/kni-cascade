@@ -2,7 +2,7 @@
 @use 'primitives' as *;
 
 
-// powers all fluid typogrpahy
+// Powers all type-sizing - see settings map
 @mixin type-scale($token, $mq: $type-scale-breakpoint) {
   $scale: map-get($type-scale, $token);
 
@@ -20,8 +20,7 @@
   }
 }
 
-// fluid type
-
+// Fluid type - no edit
 @mixin fluid-type {
   :where(*, *::before, *::after) {
     font-size: clamp(
@@ -52,7 +51,7 @@
 }
 
 @mixin max {
-  @media (min-width: #{settings.$desktop-max}px) {
+  @media (min-width: #{$desktop-max}px) {
     @content;
   }
 }
