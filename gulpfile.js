@@ -7,6 +7,7 @@ const postcss = require('gulp-postcss');
 const postcsspxv = require('postcss-pxv');
 const browserSync = require('browser-sync').create();
 const {exec} = require('child_process'); // stylelint via CLI
+const config = require('./cascade-config.js');
 
 // --------------------------
 // Paths
@@ -58,14 +59,20 @@ gulp.task('build-sass', async function () {
     .pipe(plumber())
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(
-      postcss([
-        postcsspxv({
-          siteMin: 0,
-          siteBasis: 375,
-          siteMax: 767,
-          writeVars: false, // set to true if you want :root vars injected
-        }),
-      ])
+      postcss(
+        Object.entries(config.postcss.plugins)
+          .filter(([_, options]) => options !== false)
+          .map(([name, options]) => {
+            try {
+              console.log(`↳ Using ${name}`);
+              return require(name)(options);
+            } catch (e) {
+              console.log(`⚠️ Missing PostCSS plugin: ${name}`);
+              return null;
+            }
+          })
+          .filter(Boolean)
+      )
     )
     .pipe(gulpAutoprefixer())
     .pipe(
