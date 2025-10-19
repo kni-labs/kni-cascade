@@ -1,1 +1,68 @@
-@use '../scss/' as *;
+/**
+ * 🧠 Cascade Config
+ * Shared configuration consumed by all KNI Cascade environments:
+ * WordPress (Gulp), React (Next.js), static sites, or anything else.
+ */
+
+const path = require('path');
+const isProd = process.env.NODE_ENV === 'production';
+
+module.exports = {
+  // ------------------------------------------------------------
+  // 📁 PATHS
+  // ------------------------------------------------------------
+  paths: {
+    src: path.resolve(__dirname, 'scss'),   // SCSS source folder
+    dist: path.resolve(__dirname, 'dist'),  // Compiled output folder
+    cssEntry: 'cascade.scss',               // Entry file (compiled by Gulp or Next)
+    cssOutput: 'cascade.css',               // Final output file name
+  },
+
+  // ------------------------------------------------------------
+  // 🧩 POSTCSS
+  // ------------------------------------------------------------
+  postcss: {
+    plugins: {
+      // Viewport-based units — our custom plugin
+      'postcss-pxv': {
+        siteMin: 0,
+        siteBasis: 375,
+        siteMax: 1440,
+        writeVars: false,
+      },
+
+      // Add browser prefixes automatically
+      autoprefixer: {},
+
+      // Minify only in production
+      cssnano: isProd ? { preset: 'default' } : false,
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 🎨 STYLELINT
+  // ------------------------------------------------------------
+  stylelint: {
+    extends: [
+      'stylelint-config-standard-scss',
+      'stylelint-prettier/recommended',
+    ],
+    rules: {
+      indentation: 2,
+      'no-empty-source': null,
+      'max-nesting-depth': 3,
+      'selector-max-id': 0,
+      'declaration-no-important': null,
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 🧹 PRETTIER
+  // ------------------------------------------------------------
+  prettier: {
+    singleQuote: true,
+    printWidth: 100,
+    tabWidth: 2,
+    trailingComma: 'es5',
+  },
+};
