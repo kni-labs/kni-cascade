@@ -1,28 +1,31 @@
-@use '../scss/site' as *;
+// @use '../scss/site' as *;
+@use '../scss/' as *;
 
 body {
-  border: 20pxv solid navajowhite;
+  border: 12pxv solid navajowhite;
   background: lavenderblush;
-  padding: 15pxv 40pxv;
-}
+  padding: 15pxv;
 
-h1 {
-  @include type-scale(header-xxl);
-  --font-max-clamp: 68px;
-}
-
-h2 {
-  @include type-scale(header-xl);
-}
-
-h3 {
-    @include type-scale(header-l);
+  @include lg {
+    background: oldlace;
+    border: 15pxv solid cadetblue;
+    padding: 15pxv 300pxv;
+  }
 }
 
 .box {
-  background-color: black;
+  background-color: gold;
   color: whitesmoke;
   width: 270pxv;
   height: 200pxv;
   border: 5px solid green;
+
+  @include lg {
+    background-color: indianred;
+    border: 12pxv solid goldenrod;
+  }
 }
+
+
+
+

@@ -1,0 +1,43 @@
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 📄 _settings.scss
+// General site settings and design tokens. Turn these knobs!
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+// Where should the site stop scaling?
+$desktop-max: 1600; 
+
+
+// Type scale map - Match Figma vars, edit per project. Add any as needed!!
+$type-scale: (
+  header-xxl: (desktop: 64, mobile: 36),
+  header-xl:  (desktop: 48, mobile: 32),
+  header-l:   (desktop: 36, mobile: 24),
+  header-m:   (desktop: 30, mobile: 22),
+  header-s:   (desktop: 24, mobile: 20),
+  header-xs:  (desktop: 20, mobile: 18),
+  header-xxs: (desktop: 18, mobile: 16),
+  body-l:     (desktop: 18, mobile: 16),
+  body-m:     (desktop: 16, mobile: 14),
+  body-s:     (desktop: 14, mobile: 12),
+  body-xs:    (desktop: 12, mobile: 11),
+  body-xxs:   (desktop: 11, mobile: 10),
+  body-xxxs:  (desktop: 10, mobile: 10),
+  caps-m:     (desktop: 16, mobile: 14),
+  caps-s:     (desktop: 14, mobile: 12),
+  caps-xs:    (desktop: 12, mobile: 11),
+  caps-xxs:   (desktop: 11, mobile: 10),
+  caps-xxxs:  (desktop: 10, mobile: 10)
+);
+
+:root {
+  // defaults
+  --easing: cubic-bezier(0.23, 1, 0.32, 1); // Michael Jordan Magic Johnson
+  --border-radius: 5pxv; 
+
+  // default type settings
+  --font-min-clamp: 11px; // forced min-size for all type
+  --line-height: 1.5; // default line height
+  --text-wrap: pretty; // default
+  --letter-spacing: normal; // 0.01em etc - match figma
+  --type-margin: 15pxv; // Bottom spacing under type elements todo: replace with spacing var
+}

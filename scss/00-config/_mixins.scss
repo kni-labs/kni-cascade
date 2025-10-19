@@ -1,0 +1,105 @@
+@use 'settings' as *;
+@use 'primitives' as *;
+
+
+// powers all fluid typogrpahy
+@mixin type-scale($token, $mq: $type-scale-breakpoint) {
+  $scale: map-get($type-scale, $token);
+
+  @if $scale == null {
+    @warn "⚠️ Unknown token: #{$token}.";
+  } @else {
+    $desktop-size: map-get($scale, desktop);
+    $mobile-size: map-get($scale, mobile);
+
+    --font-size: #{$mobile-size}pxv;
+
+    @media (min-width: #{$mq}px) {
+      --font-size: #{$desktop-size}pxv;
+    }
+  }
+}
+
+@mixin touch-device {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+// Breakpoint mixins used across layout - add your own 
+@mixin sm {
+  @media (max-width: #{$tm - 1}px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$tm}px) {
+    @content;
+  }
+}
+
+@mixin max {
+  @media (min-width: #{settings.$desktop-max}px) {
+    @content;
+  }
+}
+
+@mixin screen-reader-only {
+  position: absolute;
+  overflow: hidden;
+  top: auto;
+  left: -10000px;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+}
+
+@mixin focus {
+  &:focus,
+  > *:focus {
+    outline: none;
+  }
+
+  &:focus > * {
+    box-shadow: 0 0 0 2px #0061c7;
+    border-radius: 2px;
+  }
+}
+
+@mixin no-focus {
+  &:focus,
+  > *:focus {
+    outline: none;
+  }
+
+  &:focus > * {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+@mixin abs-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin wp-admin-bar {
+  #wpadminbar {
+    position: fixed !important;
+    opacity: 0.3 !important;
+    transition: transform 0.3s, opacity 0.3s;
+    transform: translateY(-80%) !important;
+
+    &:hover {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
