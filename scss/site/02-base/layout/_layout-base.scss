@@ -3,6 +3,28 @@
 // Site layout and container styles
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+@use '../../01-config/primitives' as primitives;
+@use '../../01-config/settings' as settings;
+
+// Breakpoint mixins used across layout
+@mixin sm {
+  @media (max-width: #{primitives.$tm - 1}px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{primitives.$tm}px) {
+    @content;
+  }
+}
+
+@mixin max {
+  @media (min-width: #{settings.$desktop-max}px) {
+    @content;
+  }
+}
+
 // 🧩  Responsive Engine
 // -----------------------------------------------------------------------------
 // This is our magic "it just works" responsive engine but there are other

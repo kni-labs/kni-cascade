@@ -1,13 +1,46 @@
+@use 'settings' as *;
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 // 📄 _primitives.scss
-// Site design primitives and root variables. Probably don't edit these.
+// This file powers the "physics" of the design system — how scaling, pxv units,
+// and typography behave. It references values from _settings.scss (like
+// $desktop-max) to stay project-aware.
+//
+// 💡 TL;DR: You probably don't need to edit this.
+// If you're tweaking design values, go to _settings.scss instead.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+
+// 🧩  Breakpoints for Sassy mqs
+// -----------------------------------------------------------------------------
+$ms: 320 !default; // Mobile small
+$mm: 375 !default; // Mobile medium
+$ml: 500 !default; // Mobile large
+$ts: 600 !default; // Tablet small
+$tm: 768 !default; // Tablet medium
+$tl: 1024 !default; // Tablet large
+$dxs: $tl !default; // Desktop x-small
+$ds: 1280 !default; // Desktop small
+$dm: 1440 !default; // Desktop medium
+$dl: 1600 !default; // Desktop large
+$dxl: 1800 !default; // Desktop x-large
+
+$type-scale-breakpoint: $tm !default;
+
 :root {
+
   // pxv unit primitives
   --site-min: var(--mobile-min);
   --site-basis: var(--mobile-basis);
   --site-max: var(--mobile-max);
+
+  // pxv settings - Match figma
+  --mobile-min: 0;
+  --mobile-basis: 375; // Figma mobile
+  --mobile-max: 767;
+  --desktop-min: 768;
+  --desktop-basis: 1440; // Figma desktop
+  --desktop-max: #{$desktop-max}; // Edit this in settings
 
   // pxv unit
   --pxv-unit: clamp(

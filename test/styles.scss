@@ -7,18 +7,16 @@ body {
 }
 
 h1 {
-  --font-min-clamp: 48px;
-  --font-max-clamp: 52px;
-  --font-size: 50pxv; /* author-friendly syntax */
+  @include type-scale(header-xxl);
+  --font-max-clamp: 68px;
 }
 
 h2 {
-  --font-min-clamp: 68px;
-  --font-size: 72pxv; /* author-friendly syntax */
+  @include type-scale(header-xl);
 }
 
 h3 {
-  --font-size: 30pxv;
+    @include type-scale(header-l);
 }
 
 .box {
