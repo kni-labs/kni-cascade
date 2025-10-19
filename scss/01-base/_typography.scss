@@ -5,6 +5,7 @@
 // Type system + custom styles
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+// Toggle fluid-type in settings.scss
 @if $enable-fluid-type {
   @include fluid-type;
 }

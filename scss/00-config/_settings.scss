@@ -11,7 +11,8 @@ $desktop-max: 1600;
 $enable-fluid-type: true !default;
 $enable-pxv: true !default;
 
-// Type scale map - Match Figma vars, edit per project. Add any as needed!!
+// Type scale map 
+// Note: these values exist in Figma vars, edit per project. Add any as needed!!
 $type-scale: (
   header-xxl: (desktop: 64, mobile: 36),
   header-xl:  (desktop: 48, mobile: 32),
