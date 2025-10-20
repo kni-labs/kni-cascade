@@ -74,11 +74,7 @@ gulp.task('build-sass', async function () {
     .pipe(gulp.dest(cssDest))
     .pipe(browserSync.stream())
     .on('end', () => {
-      console.log(
-        colors.green(
-          `✅ Built ${config.paths.cssEntry} → ${config.paths.dist}/${config.paths.cssOutput}`
-        )
-      );
+      console.log(colors.green(`✅ Built ${config.paths.cssEntry} → ${config.paths.dist}/${config.paths.cssOutput}`));
     });
 });
 

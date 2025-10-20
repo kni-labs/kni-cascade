@@ -52,8 +52,8 @@ $type-scale-breakpoint: $tm !default;
   --font-size: 16pxv; // fluid-type base font size
 
   // system font stacks
-  --font-family-system: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  --font-family-system: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New',
+    monospace;
 }

@@ -51,7 +51,6 @@ module.exports = {
   // ------------------------------------------------------------
   postcss: {
     plugins: {
-      // Custom KNI plugin
       'postcss-pxv': {
         writeVars: false,
       },
@@ -101,7 +100,15 @@ module.exports = {
       indentation: null,
       'max-nesting-depth': 4,
       'declaration-no-important': null,
+
+      // 👇 These help avoid fights with Prettier on token maps
       'value-list-comma-newline-after': null,
+      'value-list-comma-space-after': 'always-single-line',
+      'value-list-comma-space-before': 'never',
+
+      // 👇 Optional: allow inline SCSS maps like (desktop: 60, mobile: 34)
+      'scss/dollar-variable-colon-space-after': 'at-least-one-space',
+      'scss/dollar-variable-colon-space-before': 'never',
     },
     overrides: [
       {
@@ -116,8 +123,11 @@ module.exports = {
   // ------------------------------------------------------------
   prettier: {
     singleQuote: true,
-    printWidth: 100,
+    printWidth: 120, // wider line width before wrapping
     tabWidth: 2,
     trailingComma: 'es5',
+    bracketSameLine: true, // prevents forced multi-line for short maps
+    bracketSpacing: true,
+    embeddedLanguageFormatting: 'off',
   },
 };
