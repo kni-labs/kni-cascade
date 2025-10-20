@@ -7,8 +7,8 @@ body {
   padding: 15pxv;
 
   @include lg {
-    background: oldlace;
-    border: 15pxv solid cadetblue;
+    background: oldlayce;
+    border: 12pxv solid cadetblue;
     padding: 15pxv 300pxv;
   }
 
@@ -20,13 +20,14 @@ body {
 
 .box {
   background-color: gold;
-  color: whitesmoke;
+  color: navy;
   width: 270pxv;
   height: 200pxv;
-  border: 5px solid green;
+  border: 15px solid purple;
 
   @include lg {
     background-color: indianred;
     border: 12pxv solid goldenrod;
+    color: whitesmoke;
   }
 }

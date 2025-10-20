@@ -27,8 +27,8 @@ switch (env) {
     break;
 
   default: // static (local test)
-    srcDir = path.resolve(__dirname, 'test');
-    distDir = path.resolve(__dirname, 'test');
+    srcDir = path.resolve(__dirname, 'scss'); // main source folder
+    distDir = path.resolve(__dirname, 'test'); // BrowserSync sandbox + compiled CSS
     break;
 }
 
