@@ -1,94 +1,109 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="icon" type="image/ico" href="https://www.kurtnoble.com/img/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KNI CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-  <link rel="icon" type="image/ico" href="https://www.kurtnoble.com/img/favicon.ico" />
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KNI CSS</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <body class="test">
+    <div id="width">
+      <span class="bp"></span>
+      <span class="currentWidth"></span>
+    </div>
+    <script>
+      const width = document.querySelector('#width span.currentWidth');
 
-<body class="test">
-  <div id="width">
-    <span class="bp"></span>
-    <span class="currentWidth"></span>
-  </div>
-  <script>
-    const width = document.querySelector('#width span.currentWidth');
+      window.onload = function () {
+        width.innerHTML = window.innerWidth;
+      };
+      window.onresize = function () {
+        width.innerHTML = window.innerWidth;
+      };
+    </script>
 
-    window.onload = function () {
-      width.innerHTML = window.innerWidth;
-    };
-    window.onresize = function () {
-      width.innerHTML = window.innerWidth;
-    };
-  </script>
-
-  <h1>KNI-Cascade</h1>
-  <p>This is how we CSS.</p>
-  <div class="box">I'm a cool box</div>
-  <main>
-    <section id="typography">
-      <h4>Typography</h4>
-      <hr /><br>
-      <h1>Fluid grids jump quickly when pixel boundaries fade</h1>
-      <p>here's a paragraph</p>
-      <h2>Bold layers of type mix sharp quartz and new glyphs</h2>
-      <p>here's a paragraph</p>
-      <h3>Jazzy mockups bring quirky UX flow and crisp detail</h3>
-      <p>here's a paragraph</p>
-      <h4>Quick designers juggle hazy fonts, warm color, and depth</h4>
-      <p>here's a paragraph</p>
-      <h5>Twelve bright panels form a just-in-time CSS layout</h5>
-      <p>here's a paragraph</p>
-      <h6>Dynamic boxes flex through jumpy scroll and radiant hue</h6>
-      <p class="body-l">Alex, Brianna, Charlie, Danielle, Elijah, Fiona, Gabriel, Harper, Isaac, Jasmine, Kieran,
-        Lillian, Mateo, Nadia, Oliver, Penelope, Quinn, Rafael, Sophia, Tristan, Ursula, Victor, Willow, Xavier,
-        Yasmine, and Zachary gathered in the quirky old library, flipping through dusty books while exchanging jokes.
-      </p>
-      <p class="bodyl longform">From the highest shelf, an ancient volume tumbled, making Jasmine yelp and Quinn laugh.
-        “Unexpected surprises keep things exciting!” Xavier quipped, adjusting his glasses, amazed by the bizarre
-        discovery.</p>
-      <p class="body-m">The efficient officer shuffled swiftly through the artificial lights, affixing a final note to
-        the affable florist’s door. He studied an old encyclopædia and an œuvre on mediæval craftsmanship while enjoying
-        a hors d’œuvre on the café’s terrace in the straße </p>
-      <p class="body-m longform">AVoid wavy kerning! Typographers often fix TA, WA, To, and VA pairs while refining
-        ‘tight’ and ‘loose’ spaces. “It’s tricky!” Xavier joked, adjusting 7.9° of alignment. </p>
-      <p class="body-s">Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome
-        is increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial
-        activation, neurodegeneration, motor impairments and cognitive decline in animal models. However, molecular and
-        cellular mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease
-        remain undefined. </p>
-      <p class="body-xs">Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome
-        is increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial
-        activation, neurodegeneration, motor impairments and cognitive decline in animal models. However, molecular and
-        cellular mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease
-        remain undefined. </p>
-      <p class="body-xxs">Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
-        microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial
-        activation, neurodegeneration, motor impairments and cognitive decline in animal models. However, molecular and
-        cellular mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease
-        remain undefined. </p>
-      <p class="body-xxxs">Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
-        microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial
-        activation, neurodegeneration, motor impairments and cognitive decline in animal models. However, molecular and
-        cellular mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease
-        remain undefined. </p>
+    <h1>KNI-Cascade</h1>
+    <p>This is how we CSS.</p>
+    <div class="box">I'm a cool box</div>
+    <main>
+      <section id="typography">
+        <h4>Typography</h4>
+        <hr />
+        <br />
+        <h1>Fluid grids jump quickly when pixel boundaries fade</h1>
+        <p>here's a paragraph</p>
+        <h2>Bold layers of type mix sharp quartz and new glyphs</h2>
+        <p>here's a paragraph</p>
+        <h3>Jazzy mockups bring quirky UX flow and crisp detail</h3>
+        <p>here's a paragraph</p>
+        <h4>Quick designers juggle hazy fonts, warm color, and depth</h4>
+        <p>here's a paragraph</p>
+        <h5>Twelve bright panels form a just-in-time CSS layout</h5>
+        <p>here's a paragraph</p>
+        <h6>Dynamic boxes flex through jumpy scroll and radiant hue</h6>
+        <p class="body-l">
+          Alex, Brianna, Charlie, Danielle, Elijah, Fiona, Gabriel, Harper, Isaac, Jasmine, Kieran,
+          Lillian, Mateo, Nadia, Oliver, Penelope, Quinn, Rafael, Sophia, Tristan, Ursula, Victor,
+          Willow, Xavier, Yasmine, and Zachary gathered in the quirky old library, flipping through
+          dusty books while exchanging jokes.
+        </p>
+        <p class="bodyl longform">
+          From the highest shelf, an ancient volume tumbled, making Jasmine yelp and Quinn laugh.
+          “Unexpected surprises keep things exciting!” Xavier quipped, adjusting his glasses, amazed
+          by the bizarre discovery.
+        </p>
+        <p class="body-m">
+          The efficient officer shuffled swiftly through the artificial lights, affixing a final
+          note to the affable florist’s door. He studied an old encyclopædia and an œuvre on
+          mediæval craftsmanship while enjoying a hors d’œuvre on the café’s terrace in the straße
+        </p>
+        <p class="body-m longform">
+          AVoid wavy kerning! Typographers often fix TA, WA, To, and VA pairs while refining ‘tight’
+          and ‘loose’ spaces. “It’s tricky!” Xavier joked, adjusting 7.9° of alignment.
+        </p>
+        <p class="body-s">
+          Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
+          microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid
+          pathology, microglial activation, neurodegeneration, motor impairments and cognitive
+          decline in animal models. However, molecular and cellular mechanisms underlying how the
+          gut microbiota influences core symptoms of neurodegenerative disease remain undefined.
+        </p>
+        <p class="body-xs">
+          Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
+          microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid
+          pathology, microglial activation, neurodegeneration, motor impairments and cognitive
+          decline in animal models. However, molecular and cellular mechanisms underlying how the
+          gut microbiota influences core symptoms of neurodegenerative disease remain undefined.
+        </p>
+        <p class="body-xxs">
+          Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
+          microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid
+          pathology, microglial activation, neurodegeneration, motor impairments and cognitive
+          decline in animal models. However, molecular and cellular mechanisms underlying how the
+          gut microbiota influences core symptoms of neurodegenerative disease remain undefined.
+        </p>
+        <p class="body-xxxs">
+          Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut
+          microbiome is increasingly implicated in neurodegenerative diseases, with links to amyloid
+          pathology, microglial activation, neurodegeneration, motor impairments and cognitive
+          decline in animal models. However, molecular and cellular mechanisms underlying how the
+          gut microbiota influences core symptoms of neurodegenerative disease remain undefined.
+        </p>
         <p class="body-l caps">Harvard medical school</p>
         <p class="body-m caps">Harvard medical school</p>
         <p class="body-s caps">Harvard medical school</p>
         <p class="body-xs caps">Harvard medical school</p>
         <p class="body-xxs caps">Harvard medical school</p>
         <p class="body-xxs caps">Harvard medical school</p>
-      <div>
-        <pre><code>this is some code</code></pre>
-      </div>
-      <button>i'm a button</button>
+        <div>
+          <pre><code>this is some code</code></pre>
+        </div>
+        <button>i'm a button</button>
 
-      <div class="negative">i have a negative margin</div>
-    </section>
-  </main>
-</body>
-
+        <div class="negative">i have a negative margin</div>
+      </section>
+    </main>
+  </body>
 </html>

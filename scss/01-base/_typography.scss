@@ -29,7 +29,11 @@ html {
 }
 
 // Code looks like code
-code, kbd, samp, pre, tt {
+code,
+kbd,
+samp,
+pre,
+tt {
   font-family: var(--font-family-monospace);
 }
 
@@ -41,11 +45,12 @@ code, kbd, samp, pre, tt {
 .caps {
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
 }
 
 // Indivdual headings are based on  $type-scale in settings.scss
-h1, .h1 {
+h1,
+.h1 {
   @include type-scale(header-xxl);
 
   // // note you can do overwrites here
@@ -55,10 +60,11 @@ h1, .h1 {
   line-height: 1.2; // edit me
 }
 
-h2, .h2 {
+h2,
+.h2 {
   @include type-scale(header-xl);
 
-  --font-min-clamp: 28px;    
+  --font-min-clamp: 28px;
 
   //  Setting max-clamp in a small mq probably a good idea
   //   @include sm {
@@ -66,28 +72,32 @@ h2, .h2 {
   //   }
 }
 
-h3, .h3 {
+h3,
+.h3 {
   @include type-scale(header-l);
 
-  --font-min-clamp: 24px;      
+  --font-min-clamp: 24px;
 }
 
-h4, .h4 {
+h4,
+.h4 {
   @include type-scale(header-m);
 
-  --font-min-clamp: 20px;      
+  --font-min-clamp: 20px;
 }
 
-h5, .h5 {
+h5,
+.h5 {
   @include type-scale(header-s);
 
-  --font-min-clamp: 18px;       
+  --font-min-clamp: 18px;
 }
 
-h6, .h6 {
+h6,
+.h6 {
   @include type-scale(header-xs);
 
-  --font-min-clamp: 16px;    
+  --font-min-clamp: 16px;
 }
 
 // does p get default styles 🤔
@@ -102,15 +112,15 @@ h6, .h6 {
   --font-min-clamp: 14px;
 }
 
-.body-m  {
+.body-m {
   @include type-scale(body-m);
 }
 
-.body-s  {
+.body-s {
   @include type-scale(body-s);
 }
 
-.body-xs  {
+.body-xs {
   @include type-scale(body-xs);
 }
 
@@ -118,6 +128,6 @@ h6, .h6 {
   @include type-scale(body-xxs);
 }
 
-.body-xxxs  {
+.body-xxxs {
   @include type-scale(body-xxxs);
 }

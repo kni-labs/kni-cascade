@@ -1,12 +1,11 @@
 # KNI Cascade
+
 A modern front-end architecture creating a single source of truth for all our CSS — across **WordPress**, **React**, **static**, or any future builds.
 
 KNI Cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.  
 It’s designed for **clarity, scalability, and minimal friction** — a single shared foundation that powers every KNI build.
 
-
 ## What We Package
-
 
 <table>
   <thead>
@@ -59,6 +58,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
 </table>
 
 ## Folder Structure
+
 ```plaintext
 scss/
 ├── 00-config/      # Tokens, mixins, functions, no CSS output
@@ -73,11 +73,11 @@ scss/
 
 ## 🧩 Core Features
 
-- **Fluid Typography** – Scales seamlessly across breakpoints using `$type-scale` maps  
-- **Viewport-Based Units (`pxv`)** – Uniform responsive sizing with fallback support  
-- **Token-Driven Architecture** – Edit `_settings.scss` to update a project globally  
-- **Predictable Cascade** – Each layer builds safely on the one before it  
-- **Framework-Agnostic** – Single source of truth across any kni boilerplate 
+- **Fluid Typography** – Scales seamlessly across breakpoints using `$type-scale` maps
+- **Viewport-Based Units (`pxv`)** – Uniform responsive sizing with fallback support
+- **Token-Driven Architecture** – Edit `_settings.scss` to update a project globally
+- **Predictable Cascade** – Each layer builds safely on the one before it
+- **Framework-Agnostic** – Single source of truth across any kni boilerplate
 
 ---
 
@@ -95,42 +95,44 @@ npx gulp build
 ```
 
 By default, **Gulp** runs:
-- `sass` → compile SCSS → CSS  
-- `postcss` → apply pxv, autoprefixer, and minify  
-- `stylelint` → lint & auto-fix code style  
-- `browsersync` → live-reload for local development  
+
+- `sass` → compile SCSS → CSS
+- `postcss` → apply pxv, autoprefixer, and minify
+- `stylelint` → lint & auto-fix code style
+- `browsersync` → live-reload for local development
 
 ---
 
-##  Design Principles
+## Design Principles
 
-1. **Settings-first** – All editable project values live in `_settings.scss`.  
-2. **No CSS output in config** – Logic, not styling.  
-3. **Token inheritance** – Everything flows from primitives to components.  
-4. **Small overrides > big rewrites** – The cascade should always work with you.  
-5. **Readable by default** – Comments are documentation.  
+1. **Settings-first** – All editable project values live in `_settings.scss`.
+2. **No CSS output in config** – Logic, not styling.
+3. **Token inheritance** – Everything flows from primitives to components.
+4. **Small overrides > big rewrites** – The cascade should always work with you.
+5. **Readable by default** – Comments are documentation.
 
 ---
 
 ## 🧰 Requirements
-- Node v18+  
-- npm or pnpm  
-- Gulp CLI (global)  
+
+- Node v18+
+- npm or pnpm
+- Gulp CLI (global)
 
 ---
 
 ## 🧑‍💻 Contributing
 
-1. Clone this repo  
-2. Create a new branch  
-3. Run `npx gulp` and make your changes  
-4. Submit a PR with a clear summary  
+1. Clone this repo
+2. Create a new branch
+3. Run `npx gulp` and make your changes
+4. Submit a PR with a clear summary
 
 ---
 
 ## 🪄 Quick Philosophy
 
-> *“If it’s visual, it lives in base.  
-If it’s reusable, it lives in components.  
-If it’s page-specific, it lives in pages.  
-And if it defines how the system works — it lives in config.”*
+> _“If it’s visual, it lives in base.  
+> If it’s reusable, it lives in components.  
+> If it’s page-specific, it lives in pages.  
+> And if it defines how the system works — it lives in config.”_

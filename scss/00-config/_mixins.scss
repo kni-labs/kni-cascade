@@ -1,7 +1,6 @@
 @use 'settings' as *;
 @use 'primitives' as *;
 
-
 // Powers all type-sizing - see settings map
 @mixin type-scale($token, $mq: $type-scale-breakpoint) {
   $scale: map-get($type-scale, $token);
@@ -23,11 +22,7 @@
 // Fluid type - no edit
 @mixin fluid-type {
   :where(*, *::before, *::after) {
-    font-size: clamp(
-      var(--font-min-clamp),
-      var(--font-size),
-      var(--font-max-clamp)
-    );
+    font-size: clamp(var(--font-min-clamp), var(--font-size), var(--font-max-clamp));
   }
 }
 
@@ -37,7 +32,7 @@
   }
 }
 
-// Breakpoint mixins used across layout - add your own 
+// Breakpoint mixins used across layout - add your own
 @mixin sm {
   @media (max-width: #{$tm - 1}px) {
     @content;

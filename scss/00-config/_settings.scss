@@ -5,34 +5,73 @@
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 // Where should the site stop scaling?
-$desktop-max: 1600; 
+$desktop-max: 1600;
 
 // Scale everything
 $enable-fluid-type: true !default;
 $enable-pxv: true !default;
 
-// Type scale map 
+// Type scale map
 // Note: these values exist in Figma vars, edit per project. Add any as needed!!
 $type-scale: (
-  header-xxl: (desktop: 60, mobile: 34),
-  header-xl:  (desktop: 48, mobile: 30),
-  header-l:   (desktop: 38, mobile: 26),
-  header-m:   (desktop: 32, mobile: 22),
-  header-s:   (desktop: 26, mobile: 20),
-  header-xs:  (desktop: 20, mobile: 18),
-  header-xxs: (desktop: 18, mobile: 16),
-  body-l:     (desktop: 18, mobile: 16),
-  body-m:     (desktop: 16, mobile: 14),
-  body-s:     (desktop: 14, mobile: 12),
-  body-xs:    (desktop: 12, mobile: 11),
-  body-xxs:   (desktop: 11, mobile: 10),
-  body-xxxs:  (desktop: 10, mobile: 10)
+  header-xxl: (
+    desktop: 60,
+    mobile: 34,
+  ),
+  header-xl: (
+    desktop: 48,
+    mobile: 30,
+  ),
+  header-l: (
+    desktop: 38,
+    mobile: 26,
+  ),
+  header-m: (
+    desktop: 32,
+    mobile: 22,
+  ),
+  header-s: (
+    desktop: 26,
+    mobile: 20,
+  ),
+  header-xs: (
+    desktop: 20,
+    mobile: 18,
+  ),
+  header-xxs: (
+    desktop: 18,
+    mobile: 16,
+  ),
+  body-l: (
+    desktop: 18,
+    mobile: 16,
+  ),
+  body-m: (
+    desktop: 16,
+    mobile: 14,
+  ),
+  body-s: (
+    desktop: 14,
+    mobile: 12,
+  ),
+  body-xs: (
+    desktop: 12,
+    mobile: 11,
+  ),
+  body-xxs: (
+    desktop: 11,
+    mobile: 10,
+  ),
+  body-xxxs: (
+    desktop: 10,
+    mobile: 10,
+  ),
 );
 
 :root {
   // defaults
   --easing: cubic-bezier(0.23, 1, 0.32, 1); // Michael Jordan Magic Johnson
-  --border-radius: 5pxv; 
+  --border-radius: 5pxv;
 
   // default type settings
   --font-min-clamp: 11px; // default min-size for all type
