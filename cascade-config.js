@@ -117,17 +117,4 @@ module.exports = {
       },
     ],
   },
-
-  // ------------------------------------------------------------
-  // 🧹 PRETTIER
-  // ------------------------------------------------------------
-  prettier: {
-    singleQuote: true,
-    printWidth: 120, // wider line width before wrapping
-    tabWidth: 2,
-    trailingComma: 'es5',
-    bracketSameLine: true, // prevents forced multi-line for short maps
-    bracketSpacing: true,
-    embeddedLanguageFormatting: 'off',
-  },
 };

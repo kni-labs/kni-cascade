@@ -29,11 +29,8 @@ html {
 }
 
 // Code looks like code
-code,
-kbd,
-samp,
-pre,
-tt {
+// prettier-ignore
+code, kbd, samp, pre, tt {
   font-family: var(--font-family-monospace);
 }
 
@@ -49,19 +46,17 @@ tt {
 }
 
 // Indivdual headings are based on  $type-scale in settings.scss
-h1,
-.h1 {
+h1, .h1 {
   @include type-scale(header-xxl);
 
-  // // note you can do overwrites here
+  // note you can do overwrites here
   // --font-min-clamp: 52px;
   // --font-max-clamp: 68px;
 
   line-height: 1.2; // edit me
 }
 
-h2,
-.h2 {
+h2, .h2 {
   @include type-scale(header-xl);
 
   --font-min-clamp: 28px;
@@ -72,29 +67,25 @@ h2,
   //   }
 }
 
-h3,
-.h3 {
+h3, .h3 {
   @include type-scale(header-l);
 
   --font-min-clamp: 24px;
 }
 
-h4,
-.h4 {
+h4, .h4 {
   @include type-scale(header-m);
 
   --font-min-clamp: 20px;
 }
 
-h5,
-.h5 {
+h5, .h5 {
   @include type-scale(header-s);
 
   --font-min-clamp: 18px;
 }
 
-h6,
-.h6 {
+h6, .h6 {
   @include type-scale(header-xs);
 
   --font-min-clamp: 16px;
