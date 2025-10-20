@@ -100,7 +100,7 @@ gulp.task('build-sass', async function () {
 // --------------------------
 gulp.task(
   'serve',
-  gulp.series('lint-css-fix', function () {
+  gulp.series('lint-css-fix', 'build-sass', function () {
     browserSync.init({
       server: { baseDir: './test' },
       open: false,
