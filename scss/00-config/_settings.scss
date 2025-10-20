@@ -13,7 +13,6 @@ $enable-pxv: true !default;
 
 // Type scale map
 // Note: these values exist in Figma vars, edit per project. Add any as needed!!
-// prettier-ignore
 $type-scale: (
   header-xxl: (desktop: 60, mobile: 34),
   header-xl:  (desktop: 48, mobile: 30),
