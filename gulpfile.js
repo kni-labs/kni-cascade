@@ -6,7 +6,10 @@
 const gulp = require('gulp');
 const gulpAutoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
-const sass = require('gulp-dart-sass');
+
+// 🧩 Modern Dart Sass setup (no legacy warnings)
+const gulpSass = require('gulp-dart-sass');
+
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
@@ -78,7 +81,7 @@ gulp.task('build-sass', async function () {
     .src(sassSrcFile)
     .pipe(sourcemaps.init())
     .pipe(plumber())
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+    .pipe(gulpSass({ outputStyle: 'expanded' }).on('error', gulpSass.logError))
     .pipe(postcss(activePlugins))
     .pipe(gulpAutoprefixer())
     .pipe(
