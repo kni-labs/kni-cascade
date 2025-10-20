@@ -65,56 +65,61 @@ module.exports = {
     },
   },
 
-  // ------------------------------------------------------------
-  // 🎨 STYLELINT
-  // ------------------------------------------------------------
-  stylelint: {
-    root: true,
-    extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
-    ignoreFiles: ['**/*.{js,mjs,jsx,ts,tsx,json,md,mdx}', 'test/*{.css,.css.map}'],
-    rules: {
-      // Syntax
-      'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
-      'at-rule-empty-line-before': null,
-      'custom-property-pattern': null,
-      'declaration-block-no-redundant-longhand-properties': null,
-      'function-name-case': null,
-      'function-no-unknown': null,
-      'keyframes-name-pattern': null,
-      'no-descending-specificity': null,
-      'property-no-vendor-prefix': null,
-      'selector-no-vendor-prefix': null,
-      'scss/no-global-function-names': null,
-      'scss/at-if-no-null': null,
-      'unit-no-unknown': [true, { ignoreUnits: ['pxv'] }],
-      'media-query-no-invalid': null,
-      'media-feature-range-notation': null,
-      'no-empty-source': null,
+// 🎨 STYLELINT (Stylelint 16+)
+stylelint: {
+  root: true,
+  extends: [
+    'stylelint-config-standard-scss',
+  ],
+  ignoreFiles: [
+    '**/*.{js,mjs,jsx,ts,tsx,json,md,mdx}',
+    'test/*.{css,css.map}',
+  ],
+  rules: {
+    // ------------------------------------------------------------------
+    // ⚙️ Core syntax / SCSS
+    // ------------------------------------------------------------------
+    'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
+    'scss/at-import-no-partial-leading-underscore': null, // ✅ new rule name
+    'custom-property-pattern': null,
+    'declaration-block-no-redundant-longhand-properties': null,
+    'function-no-unknown': null,
+    'function-name-case': null,
+    'keyframes-name-pattern': null,
+    'no-descending-specificity': null,
+    'property-no-vendor-prefix': null,
+    'selector-no-vendor-prefix': null,
+    'scss/no-global-function-names': null,
+    'scss/at-if-no-null': null,
+    'unit-no-unknown': [true, { ignoreUnits: ['pxv'] }],
+    'media-query-no-invalid': null,
+    'media-feature-range-notation': null,
+    'no-empty-source': null,
 
-      // Selectors
-      'selector-class-pattern': null,
-      'selector-id-pattern': null,
-      'selector-max-id': 2,
+    // ------------------------------------------------------------------
+    // ⚙️ Formatting
+    // ------------------------------------------------------------------
+    'max-nesting-depth': 4,
+    'declaration-no-important': null,
 
-      // Formatting
-      indentation: null,
-      'max-nesting-depth': 4,
-      'declaration-no-important': null,
+    // ------------------------------------------------------------------
+    // ⚙️ Selectors
+    // ------------------------------------------------------------------
+    'selector-class-pattern': null,
+    'selector-id-pattern': null,
+    'selector-max-id': 2,
 
-      // 👇 These help avoid fights with Prettier on token maps
-      'value-list-comma-newline-after': null,
-      'value-list-comma-space-after': 'always-single-line',
-      'value-list-comma-space-before': 'never',
-
-      // 👇 Optional: allow inline SCSS maps like (desktop: 60, mobile: 34)
-      'scss/dollar-variable-colon-space-after': 'at-least-one-space',
-      'scss/dollar-variable-colon-space-before': 'never',
-    },
-    overrides: [
-      {
-        files: ['**/*.scss'],
-        customSyntax: 'postcss-scss',
-      },
-    ],
+    // ------------------------------------------------------------------
+    // ⚙️ Optional SCSS niceties
+    // ------------------------------------------------------------------
+    'scss/dollar-variable-colon-space-after': 'at-least-one-space',
+    'scss/dollar-variable-colon-space-before': 'never',
   },
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
+},
 };

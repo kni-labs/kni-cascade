@@ -6,7 +6,7 @@
 const gulp = require('gulp');
 const gulpAutoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
-const sass = require('gulp-sass')(require('sass'));
+const sass = require('gulp-dart-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
@@ -33,8 +33,7 @@ const htmlWatchDir = './test/**/*.html';
 // 🔍 Lint SCSS (non-blocking)
 // --------------------------
 gulp.task('lint-css-fix', function (done) {
-  const lintCmd = `npx stylelint "${config.paths.src}/**/*.scss" "test/**/*.scss" --config .stylelintrc.js --fix --formatter string`;
-
+  const lintCmd = `node -e "require('./cascade-config').stylelint && console.log('✅ Loaded stylelint from cascade-config.js');" && npx stylelint "${config.paths.src}/**/*.scss" "test/**/*.scss" --fix --formatter string`;
   exec(lintCmd, function (err, stdout, stderr) {
     if (stdout) {
       const coloredOutput = stdout

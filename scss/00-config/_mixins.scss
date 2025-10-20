@@ -1,15 +1,16 @@
 @use 'settings' as *;
 @use 'primitives' as *;
+@use "sass:map";
 
 // Powers all type-sizing - see settings map
 @mixin type-scale($token, $mq: $type-scale-breakpoint) {
-  $scale: map-get($type-scale, $token);
+  $scale: map.get($type-scale, $token);
 
   @if $scale == null {
     @warn "⚠️ Unknown token: #{$token}.";
   } @else {
-    $desktop-size: map-get($scale, desktop);
-    $mobile-size: map-get($scale, mobile);
+    $desktop-size: map.get($scale, desktop);
+    $mobile-size: map.get($scale, mobile);
 
     --font-size: #{$mobile-size}pxv;
 
