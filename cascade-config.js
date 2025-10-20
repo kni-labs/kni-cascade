@@ -1,21 +1,49 @@
-/**
+/** ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  * 🧠 Cascade Config
  * Shared configuration consumed by all KNI Cascade environments:
  * WordPress (Gulp), React (Next.js), static sites, or anything else.
+ * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  */
 
 const path = require('path');
 const isProd = process.env.NODE_ENV === 'production';
+
+// ------------------------------------------------------------
+// 📁 PATHS
+// ------------------------------------------------------------
+const env = process.env.KNI_ENV || 'static'; // static | wordpress | react
+
+let srcDir, distDir;
+
+switch (env) {
+  case 'wordpress':
+    srcDir = path.resolve(__dirname, 'wp-content/themes/kni-gulp/dev/scss');
+    distDir = path.resolve(__dirname, 'wp-content/themes/kni-gulp/dev/css');
+    break;
+
+  case 'react':
+    srcDir = path.resolve(__dirname, 'src/styles');
+    distDir = path.resolve(__dirname, 'public/css');
+    break;
+
+  default: // static (local test)
+    srcDir = path.resolve(__dirname, 'test');
+    distDir = path.resolve(__dirname, 'test');
+    break;
+}
+
+// Optional: log environment for clarity
+console.log(`🧠 KNI Cascade environment: ${env}`);
 
 module.exports = {
   // ------------------------------------------------------------
   // 📁 PATHS
   // ------------------------------------------------------------
   paths: {
-    src: path.resolve(__dirname, 'test'), // SCSS source folder
-    dist: path.resolve(__dirname, 'test'), // Compiled output folder
-    cssEntry: 'styles.scss', // Entry file
-    cssOutput: 'styles.css', // Output file
+    src: srcDir,
+    dist: distDir,
+    cssEntry: 'styles.scss',
+    cssOutput: 'styles.css',
   },
 
   // ------------------------------------------------------------
@@ -23,14 +51,18 @@ module.exports = {
   // ------------------------------------------------------------
   postcss: {
     plugins: {
-      // Viewport-based units — our custom plugin
+      // Custom KNI plugin
       'postcss-pxv': {
         writeVars: false,
       },
 
-      // ⚙️ Optional PostCSS plugins (re-enable once verified)
-      // autoprefixer: {},
-      // cssnano: isProd ? { preset: 'default' } : false,
+      // Vendor prefixing (safe default)
+      autoprefixer: {
+        grid: 'autoplace',
+      },
+
+      // Minify only in production
+      cssnano: isProd ? { preset: 'default' } : false,
     },
   },
 
@@ -45,7 +77,7 @@ module.exports = {
       // Syntax
       'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
       'at-rule-empty-line-before': null,
-      'custom-property-pattern': null, // disable – conflicts with SCSS $vars
+      'custom-property-pattern': null,
       'declaration-block-no-redundant-longhand-properties': null,
       'function-name-case': null,
       'function-no-unknown': null,
@@ -53,7 +85,7 @@ module.exports = {
       'no-descending-specificity': null,
       'property-no-vendor-prefix': null,
       'selector-no-vendor-prefix': null,
-      'scss/no-global-function-names': null, // allow legacy map-get
+      'scss/no-global-function-names': null,
       'scss/at-if-no-null': null,
       'unit-no-unknown': [true, { ignoreUnits: ['pxv'] }],
       'media-query-no-invalid': null,
@@ -66,7 +98,7 @@ module.exports = {
       'selector-max-id': 2,
 
       // Formatting
-      indentation: null, // handled by Prettier
+      indentation: null,
       'max-nesting-depth': 4,
       'declaration-no-important': null,
       'value-list-comma-newline-after': null,

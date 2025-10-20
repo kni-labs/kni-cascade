@@ -17,9 +17,12 @@
     "gulp-build": "gulp build-sass",
     "http-server": "http-server",
     "serve": "cd test && npm run http-server",
-    "prepare": "husky install",
     "prettier": "npx prettier --write .",
-    "stylelint": "npx stylelint \"**/*.{css,sass,scss}\" --fix"
+    "stylelint": "npx stylelint \"**/*.{css,sass,scss}\" --fix",
+    "prepare": "husky install && npm run husky:init",
+    "husky:init": "test -f .husky/pre-commit || npm run husky:create",
+    "husky:create": "npx husky add .husky/pre-commit \"npx lint-staged || { echo 'Commit failed: lint-staged errors'; exit 1; }\" && chmod +x .husky/pre-commit",
+    "postinstall": "echo '\n✅ KNI Cascade ready — Husky & lint-staged configured!\n'"
   },
   "author": "KNI",
   "license": "ISC",
