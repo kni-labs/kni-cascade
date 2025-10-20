@@ -47,7 +47,6 @@
     "postcss-pxv": "^2.0.0",
     "sass": "^1.69.5",
     "stylelint": "^16.25.0",
-    "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-scss": "^6.2.1"
