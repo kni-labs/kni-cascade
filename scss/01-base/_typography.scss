@@ -23,12 +23,12 @@ html {
   margin-block-end: var(--type-margin);
 }
 
-// Header specific styles
+// Heading specific styles
 :where(h1, h2, h3, h4, h5, h6) {
   line-height: 1.2;
 }
 
-// Code looks like code
+// Make code look like code
 code, kbd, samp, pre, tt {
   font-family: var(--font-family-monospace);
 }
@@ -44,9 +44,12 @@ code, kbd, samp, pre, tt {
   letter-spacing: 0.2em;
 }
 
-// Indivdual headings are based on  $type-scale in settings.scss
-h1, .h1 {
-  @include type-scale(header-xxl);
+// Typography classes correspond directly to design tokens in $type-scale.
+// Each class sets responsive font size via @include type-scale() and
+// can be safely overridden per component without side effects.
+
+.heading--xxl {
+  @include type-scale(heading-xxl);
 
   // // note you can do overwrites here
   // --font-min-clamp: 52px;
@@ -55,69 +58,54 @@ h1, .h1 {
   line-height: 1.2; // edit me
 }
 
-h2, .h2 {
-  @include type-scale(header-xl);
+.heading--xl  {
+  @include type-scale(heading-xl);
 
   --font-min-clamp: 28px;
-
-    // probably smart to do this for mobile
-    // @include sm {
-    //   --font-max-clamp: 24px;
-    // }
 }
 
-h3, .h3 {
-  @include type-scale(header-l);
+.heading--l  {
+  @include type-scale(heading-l);
 
   --font-min-clamp: 24px;
 }
 
-h4, .h4 {
-  @include type-scale(header-m);
+.heading--m  {
+  @include type-scale(heading-m);
 
   --font-min-clamp: 20px;
 }
 
-h5, .h5 {
-  @include type-scale(header-s);
+.heading--s {
+  @include type-scale(heading-s);
 
   --font-min-clamp: 18px;
 }
 
-h6, .h6 {
-  @include type-scale(header-xs);
+.heading--xs {
+  @include type-scale(heading-xs);
 
   --font-min-clamp: 16px;
 }
 
-// does p get default styles 🤔
-// p {
-//   @include type-scale(body-m);
-//     --font-min-clamp: 12px;
-// }
-
-.body-l {
+.body--l {
   @include type-scale(body-l);
 
   --font-min-clamp: 14px;
 }
 
-.body-m {
-  @include type-scale(body-m);
-}
+.body--m { @include type-scale(body-m); }
 
-.body-s {
-  @include type-scale(body-s);
-}
+.body--s { @include type-scale(body-s);}
 
-.body-xs {
+.body--xs {
   @include type-scale(body-xs);
 }
 
-.body-xxs {
+.body--xxs {
   @include type-scale(body-xxs);
 }
 
-.body-xxxs {
+.body--xxxs {
   @include type-scale(body-xxxs);
 }

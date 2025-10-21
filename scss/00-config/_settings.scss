@@ -14,13 +14,13 @@ $enable-pxv: true !default;
 // Type scale map
 // Note: these values exist in Figma vars, edit per project. Add any as needed!!
 $type-scale: (
-  header-xxl: (desktop: 60, mobile: 34),
-  header-xl:  (desktop: 48, mobile: 30),
-  header-l:   (desktop: 38, mobile: 26),
-  header-m:   (desktop: 32, mobile: 22),
-  header-s:   (desktop: 26, mobile: 20),
-  header-xs:  (desktop: 20, mobile: 18),
-  header-xxs: (desktop: 18, mobile: 16),
+  heading-xxl: (desktop: 60, mobile: 34),
+  heading-xl:  (desktop: 48, mobile: 30),
+  heading-l:   (desktop: 38, mobile: 26),
+  heading-m:   (desktop: 32, mobile: 22),
+  heading-s:   (desktop: 26, mobile: 20),
+  heading-xs:  (desktop: 20, mobile: 18),
+  heading-xxs: (desktop: 18, mobile: 16),
   body-l:     (desktop: 18, mobile: 16),
   body-m:     (desktop: 16, mobile: 14),
   body-s:     (desktop: 14, mobile: 12),
