@@ -2,7 +2,6 @@
 @use '../scss/' as *;
 
 body {
-  border: 12pxv solid navajowhite;
   background: lavenderblush;
   padding: 15pxv;
 
@@ -35,4 +34,99 @@ body {
 .color-test {
   color: rgb(38 95 51);
   font-size: 99pxv;
+}
+
+#dev-config--width {
+  position: fixed;
+  top: 18pxv;
+  right: 20pxv;
+  background: lightgreen;
+  padding: 10px 15px;
+  opacity: .8;
+
+  &::before,
+  span {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  @media (width >= 1px) and (max-width: #{($mm - 1)}px) {
+    background: lightseagreen;
+
+    &::before {
+      content: 'Below $ms ';
+    }
+  }
+
+  @media (min-width: #{$ms}px) {
+    background: lightblue;
+
+    &::before {
+      content: '$ms ';
+    }
+  }
+
+  @media (min-width: #{$mm}px) {
+    background: lightgoldenrodyellow;
+
+    &::before {
+      content: '$mm';
+    }
+  }
+
+  @media (min-width: #{$ml}px) {
+    background: yellow;
+
+    &::before {
+      content: '$ml';
+    }
+  }
+
+  @media (min-width: #{$ts}px) {
+    background: lightsalmon;
+
+    &::before {
+      content: '$ts';
+    }
+  }
+
+  @media (min-width: #{$tm}px) {
+    background: lightsteelblue;
+
+    &::before {
+      content: '$tm';
+    }
+  }
+
+  @media (min-width: #{$tl}px) {
+    background: lightpink;
+
+    &::before {
+      content: '$tl';
+    }
+  }
+
+  @media (min-width: #{$dm}px) {
+    background: rgb(90 216 244);
+
+    &::before {
+      content: '$dm';
+    }
+  }
+
+  @media (min-width: #{$dl}px) {
+    background: rgb(147 245 128);
+
+    &::before {
+      content: '$dl';
+    }
+  }
+
+  @media (min-width: #{$dxl}px) {
+    background: yellow;
+
+    &::before {
+      content: '$dxl';
+    }
+  }
 }
