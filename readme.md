@@ -48,7 +48,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
       <td><strong>Shared Config.js (Lint + Format)</strong></td>
       <td>
         <ul>
-          <li>Centralized configs for Stylelint and Prettier</li>
+          <li>Centralized configs for Stylelint and Postcss</li>
           <li>Enforces consistent formatting and linting across all projects</li>
           <li>Shared rules easily imported into any boilerplate or environment</li>
         </ul>
