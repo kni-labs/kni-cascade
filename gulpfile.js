@@ -1,42 +1,57 @@
 /**
  * 🧠 KNI Cascade — Gulpfile
- * Uses shared settings from cascade-config.js
+ * Local dev / test harness for the Cascade engine.
+ *
+ * - test/styles.scss is the entry for local testing
+ * - test/styles.scss should `@use '../scss/styles' as *;`
+ * - Compiles test/styles.scss -> test/styles.css
+ * - Applies postcss-pxv
+ * - Uses .stylelintrc.cjs for linting (auto-resolved by Stylelint)
  */
 
 const gulp = require('gulp');
-const gulpAutoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
-
-// 🧩 Modern Dart Sass setup (no legacy warnings)
 const gulpSass = require('gulp-dart-sass');
-
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
 const { exec } = require('child_process');
 const colors = require('ansi-colors');
 const path = require('path');
-
-// Shared Cascade config
-const config = require('./cascade-config.js');
-const isProd = process.env.NODE_ENV === 'production';
+const postcssPxv = require('postcss-pxv');
 
 // --------------------------
-// 🔍 Paths
+// 🔍 Paths (engine-local)
 // --------------------------
-const sassSrcFile = path.join(config.paths.src, config.paths.cssEntry);
-const sassOutDir = config.paths.dist;
+const paths = {
+  scssSrc: path.resolve(__dirname, 'scss'),
+  entry: path.resolve(__dirname, 'test/styles.scss'),
+  dist: path.resolve(__dirname, 'test'),
+  cssOutput: 'styles.css',
+};
+
+const sassSrcFile = paths.entry;
+const sassOutDir = paths.dist;
+
 const sassWatchDir = [
-  path.join(config.paths.src, '**/*.scss'),  // watch /scss and its partials
-  path.resolve(__dirname, 'test/**/*.scss'), // also watch experimental SCSS in /test
+  path.join(paths.scssSrc, '**/*.scss'),
+  path.resolve(__dirname, 'test/**/*.scss'),
 ];
+
 const htmlWatchDir = './test/**/*.html';
 
 // --------------------------
 // 🔍 Lint SCSS (non-blocking)
 // --------------------------
 gulp.task('lint-css-fix', function (done) {
-  const lintCmd = `node -e "require('./cascade-config').stylelint && console.log('✅ Loaded stylelint from cascade-config.js');" && npx stylelint "${config.paths.src}/**/*.scss" "test/**/*.scss" --fix --formatter string`;
+  const lintCmd = [
+    'npx stylelint',
+    `"${paths.scssSrc}/**/*.scss"`,
+    '"test/**/*.scss"',
+    '--fix',
+    '--formatter string',
+  ].join(' ');
+
   exec(lintCmd, function (err, stdout, stderr) {
     if (stdout) {
       const coloredOutput = stdout
@@ -50,9 +65,17 @@ gulp.task('lint-css-fix', function (done) {
     if (stderr) console.error(colors.red(stderr));
 
     if (err) {
-      console.log(colors.yellow('⚠️  Stylelint fixed some issues (non-blocking)'));
+      console.log(
+        colors.yellow(
+          '⚠️  Stylelint reported/fixed issues (non-blocking for build)',
+        ),
+      );
     } else {
-      console.log(colors.green('✅  Stylelint clean — all formatting issues resolved'));
+      console.log(
+        colors.green(
+          '✅  Stylelint clean — all formatting issues resolved',
+        ),
+      );
     }
 
     done();
@@ -63,42 +86,45 @@ gulp.task('lint-css-fix', function (done) {
 // 🧩 Build SCSS → CSS
 // --------------------------
 gulp.task('build-sass', async function () {
-  // Collect active PostCSS plugins from cascade-config
-  const activePlugins = Object.entries(config.postcss.plugins)
-    .filter(([_, options]) => options !== false)
-    .map(([name, options]) => {
-      try {
-        console.log(colors.dim(`↳ Using ${name}`));
-        return require(name)(options);
-      } catch (e) {
-        console.log(colors.yellow(`⚠️ Missing PostCSS plugin: ${name}`));
-        return null;
-      }
-    })
-    .filter(Boolean);
+  const postcssPlugins = [
+    postcssPxv({
+      writeVars: false,
+    }),
+  ];
 
   return await gulp
     .src(sassSrcFile)
     .pipe(sourcemaps.init())
     .pipe(plumber())
-    .pipe(gulpSass({ outputStyle: 'expanded' }).on('error', gulpSass.logError))
-    .pipe(postcss(activePlugins))
-    .pipe(gulpAutoprefixer())
+    .pipe(
+      gulpSass({ outputStyle: 'expanded' }).on(
+        'error',
+        gulpSass.logError,
+      ),
+    )
+    .pipe(postcss(postcssPlugins))
     .pipe(
       sourcemaps.write('./', {
         includeContent: true,
         sourceRoot: '../scss',
-      })
+      }),
     )
     .pipe(gulp.dest(sassOutDir))
     .pipe(browserSync.stream())
     .on('end', () => {
-      console.log(colors.green(`✅ Built ${config.paths.cssEntry} → ${sassOutDir}/${config.paths.cssOutput}`));
+      console.log(
+        colors.green(
+          `✅ Built test/styles.scss → ${path.join(
+            sassOutDir,
+            paths.cssOutput,
+          )}`,
+        ),
+      );
     });
 });
 
 // --------------------------
-// ⚙️ Serve + Watch
+// ⚙️ Serve + Watch (local dev)
 // --------------------------
 gulp.task(
   'serve',
@@ -109,14 +135,22 @@ gulp.task(
       notify: false,
     });
 
-    gulp.watch(sassWatchDir)
+    gulp
+      .watch(sassWatchDir)
       .on('change', (changedFile) => {
-        console.log(colors.cyan(`📂 File changed: ${path.relative(__dirname, changedFile)}`));
+        console.log(
+          colors.cyan(
+            `📂 File changed: ${path.relative(
+              __dirname,
+              changedFile,
+            )}`,
+          ),
+        );
       })
       .on('change', gulp.series('lint-css-fix', 'build-sass'));
 
     gulp.watch(htmlWatchDir).on('change', browserSync.reload);
-  })
+  }),
 );
 
 // --------------------------
