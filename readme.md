@@ -16,7 +16,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
   </thead>
   <tbody>
     <tr>
-      <td><strong>Revamped SCSS Boilerplate</strong></td>
+      <td><strong>SCSS Boilerplate</strong></td>
       <td>
         <ul>
           <li>Modern, layered structure that fixes inheritance issues</li>
@@ -35,23 +35,13 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
       </td>
     </tr>
     <tr>
-      <td><strong>PostCSS Pipeline</strong></td>
-      <td>
-        <ul>
-          <li><code>postcss-pxv</code> — our custom viewport unit plugin</li>
-          <li>Autoprefixer for cross-browser prefixes</li>
-          <li>CSSNano for production minification(?)</li>
-        </ul>
+      <td><strong>PostCSS PXV</strong></td>
+      <td>Our custom viewport unit plugin
       </td>
     </tr>
     <tr>
-      <td><strong>Shared Config.js (Lint + Format)</strong></td>
-      <td>
-        <ul>
-          <li>Centralized configs for Stylelint and Postcss</li>
-          <li>Enforces consistent formatting and linting across all projects</li>
-          <li>Shared rules easily imported into any boilerplate or environment</li>
-        </ul>
+      <td><strong>Stylelint config</strong></td>
+      <td>Centralized configs for Stylelint
       </td>
     </tr>
   </tbody>
@@ -66,7 +56,7 @@ scss/
 ├── 02-components/  # Reusable UI building blocks
 ├── 03-modules/     # Larger composite regions (header, hero, footer)
 ├── 04-pages/       # Page-specific overrides
-└── cascade.scss    # Public entry file for final CSS build
+└── styles.scss    # Public entry file for final CSS build
 ```
 
 ---
