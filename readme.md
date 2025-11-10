@@ -79,15 +79,12 @@ npm install
 
 # run local dev build
 npx gulp
-
-# compile & minify for production
-npx gulp build
 ```
 
 By default, **Gulp** runs:
 
 - `sass` → compile SCSS → CSS
-- `postcss` → apply pxv, autoprefixer, and minify
+- `postcss` → apply pxv
 - `stylelint` → lint & auto-fix code style
 - `browsersync` → live-reload for local development
 
