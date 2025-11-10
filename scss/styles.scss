@@ -1,4 +1,5 @@
-@use 'scss/' as *;
-
-// temporary
-@use '../test/styles.scss' as *;
+@use './00-config' as *;
+@use './01-base' as *;
+@use './02-components' as *;
+@use './03-modules' as *;
+@use './04-pages' as *;

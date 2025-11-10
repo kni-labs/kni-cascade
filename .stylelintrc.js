@@ -1,1 +1,38 @@
-module.exports = require('./cascade-config.js').stylelint;
+module.exports = {
+  extends: ['stylelint-config-standard-scss'],
+  ignoreFiles: [
+    '**/*.{js,mjs,jsx,ts,tsx,json,md,mdx}',
+    'test/*.{css,css.map}',
+  ],
+  rules: {
+    'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
+    'scss/at-import-no-partial-leading-underscore': null,
+    'custom-property-pattern': null,
+    'declaration-block-no-redundant-longhand-properties': null,
+    'function-no-unknown': null,
+    'function-name-case': null,
+    'keyframes-name-pattern': null,
+    'no-descending-specificity': null,
+    'property-no-vendor-prefix': null,
+    'selector-no-vendor-prefix': null,
+    'scss/no-global-function-names': null,
+    'scss/at-if-no-null': null,
+    'unit-no-unknown': [true, { ignoreUnits: ['pxv'] }],
+    'media-query-no-invalid': null,
+    'media-feature-range-notation': null,
+    'no-empty-source': null,
+    'max-nesting-depth': 4,
+    'declaration-no-important': null,
+    'selector-class-pattern': null,
+    'selector-id-pattern': null,
+    'selector-max-id': 2,
+    'scss/dollar-variable-colon-space-after': 'at-least-one-space',
+    'scss/dollar-variable-colon-space-before': 'never',
+  },
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
+};

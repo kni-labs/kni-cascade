@@ -1,6 +1,6 @@
 {
   "name": "kni-cascade",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "KNI Cascade — an opinionated SCSS engine and single source of truth for design scaling.",
   "main": "scss",
   "engines": {

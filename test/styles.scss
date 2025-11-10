@@ -1,5 +1,9 @@
 // @use '../scss/site' as *;
-@use '../scss/' as *;
+@use '../scss/00-config' as *;
+@use '../scss/01-base' as *;
+@use '../scss/02-components' as *;
+@use '../scss/03-modules' as *;
+@use '../scss/04-pages' as *;
 
 body {
   background: lavenderblush;
