@@ -43,10 +43,6 @@ $type-scale-breakpoint: $tm !default;
     --pxv-unit: 1px; // effectively disables fluid scaling
   }
 
-  // container settings:
-  --container-size: 1280pxv;
-  --mobile-gutters: 5%;
-
   // Fluid type primitives
   --font-max-clamp: 9999px; // no touch
   --font-size: 16pxv; // fluid-type base font size
