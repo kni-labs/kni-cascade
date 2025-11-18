@@ -22,10 +22,6 @@ $dxl: 1800 !default; // Desktop x-large
 
 $type-scale-breakpoint: $tm !default;
 
-// Container size
-$container-max: #{$ds};
-$mobile-gutters: 5%;
-
 :root {
   // pxv unit primitives
   --site-min: var(--mobile-min);
