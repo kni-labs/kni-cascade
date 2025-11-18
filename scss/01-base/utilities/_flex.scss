@@ -1,0 +1,124 @@
+@use '../../00-config' as *;
+
+.flex {
+  display: flex;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.wrap-mobile {
+    @include sm {
+      flex-wrap: wrap;
+    }
+  }
+
+  &.inline {
+    display: inline-flex;
+  }
+
+  &.inline-mobile {
+    @include sm {
+      display: inline-flex;
+    }
+  }
+
+  &.center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.j-sb {
+    justify-content: space-between;
+  }
+
+  &.j-c {
+    justify-content: center;
+  }
+
+  &.j-start {
+    justify-content: flex-start;
+  }
+
+  &.j-end {
+    justify-content: flex-end;
+  }
+
+  &.a-c {
+    align-items: center;
+  }
+
+  &.a-start {
+    align-items: flex-start;
+  }
+
+  &.a-baseline {
+    align-items: baseline;
+  }
+
+  &.a-end {
+    align-items: flex-end;
+  }
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.column-desktop {
+    @include lg {
+      flex-direction: column;
+    }
+  }
+
+  &.column-mobile {
+    @include sm {
+      flex-direction: column;
+    }
+  }
+
+  &.column-mobile-reverse {
+    @include sm {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &.row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.row-reverse-desktop {
+    @include lg {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.a-c-desktop {
+    @include lg {
+      align-items: center;
+    }
+  }
+
+  &.a-start-desktop {
+    @include lg {
+      align-items: flex-start;
+    }
+  }
+
+  &.j-c-desktop {
+    @include lg {
+      justify-content: center;
+    }
+  }
+
+  &.j-sb-desktop {
+    @include lg {
+      justify-content: space-between;
+    }
+  }
+
+  &.j-end-desktop {
+    @include lg {
+      justify-content: flex-end;
+    }
+  }
+}
