@@ -40,4 +40,8 @@ $type-scale: (
   --text-wrap: pretty; // default
   --letter-spacing: normal; // 0.01em etc - match figma
   --type-margin: 15pxv; // Bottom spacing under type elements todo: replace with spacing var
+
+  // container settings:
+  --container-size: 1280pxv;
+  --mobile-gutters: 5%;
 }

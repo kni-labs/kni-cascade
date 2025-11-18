@@ -1,0 +1,22 @@
+$white: #fff;
+$black: #000;
+
+.color {
+  &--white {
+    color: $white;
+  }
+
+  &--black {
+    color: $black;
+  }
+}
+
+.background {
+  &--white {
+    color: $white;
+  }
+
+  &--black {
+    color: $black;
+  }
+}

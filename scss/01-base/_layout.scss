@@ -26,3 +26,74 @@
 body {
   min-height: 100vh;
 }
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+
+  @include lg {
+    max-width: var(--container-size);
+  }
+
+  @include sm {
+    padding-left: var(--mobile-gutters);
+    padding-right: var(--mobile-gutters);
+  }
+}
+
+.desktop-only {
+  @include lg {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @include sm {
+    display: none;
+  }
+}
+
+#breakpoints {
+  display: none;
+  position: relative;
+  z-index: 2;
+
+  @include sm {
+    z-index: 1;
+  }
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.abs-full {
+  @include abs-full;
+}
+
+.fit-photo {
+  position: relative;
+
+  &.absolute {
+    position: absolute;
+  }
+
+  > img,
+  > video {
+    @include abs-full;
+  }
+
+  &.cover > img,
+  &.cover > video {
+    object-fit: cover;
+  }
+
+  &.contain > img,
+  &.contain > video {
+    object-fit: contain;
+  }
+}

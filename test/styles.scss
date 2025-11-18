@@ -7,12 +7,11 @@
 
 body {
   background: lavenderblush;
-  padding: 15pxv;
+  padding: 15pxv 0;
 
   @include lg {
     background: oldlayce;
     border: 12pxv solid cadetblue;
-    padding: 15pxv 300pxv;
   }
 
   @include max {
