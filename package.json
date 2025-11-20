@@ -1,6 +1,6 @@
 {
   "name": "kni-cascade",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "KNI Cascade — an opinionated SCSS engine and single source of truth for design scaling.",
   "main": "scss",
   "engines": {
@@ -29,7 +29,7 @@
     "gulp": "^4.0.2",
     "gulp-purge-sourcemaps": "^1.0.0",
     "gulp-rename": "^2.0.0",
-    "postcss-pxv": "^2.0.0"    
+    "postcss-pxv": "^2.0.0"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
