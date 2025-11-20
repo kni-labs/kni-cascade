@@ -21,6 +21,7 @@
     "prepare": "husky install && npm run husky:init",
     "husky:init": "test -f .husky/pre-commit || npm run husky:create",
     "husky:create": "npx husky add .husky/pre-commit \"npx lint-staged || { echo 'Commit failed: lint-staged errors'; exit 1; }\" && chmod +x .husky/pre-commit",
+    "prepublishOnly": "npm install && npm run build",
     "postinstall": "echo '\n✅ KNI Cascade ready — Husky & lint-staged configured!\n'"
   },
   "author": "Daniel Box",
