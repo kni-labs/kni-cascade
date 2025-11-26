@@ -49,5 +49,6 @@ $type-scale-breakpoint: $tm !default;
 
   // system font stacks
   --font-family-system: system-ui, helvetica, arial, sans-serif;
+  --font-family-heading: var(--font-family-system);
   --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
 }
