@@ -42,13 +42,13 @@ body {
 }
 
 .desktop-only {
-  @include lg {
+  @include sm {
     display: none;
   }
 }
 
 .mobile-only {
-  @include sm {
+  @include lg {
     display: none;
   }
 }
