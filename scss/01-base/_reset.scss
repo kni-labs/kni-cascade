@@ -47,16 +47,6 @@ picture {
   display: block;
 }
 
-// Inherit fonts for inputs and buttons
-input,
-button,
-textarea,
-select,
-fieldset,
-legend {
-  font: inherit;
-}
-
 // make hr not ugly
 hr {
   block-size: 1px;
