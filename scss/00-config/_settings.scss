@@ -4,12 +4,11 @@
 // Turn these knobs to adjust site behavior, type scales, or theme values.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// Where should the site stop scaling?
-$desktop-max: 1600;
 
 // Scale everything
 $enable-fluid-type: true !default;
 $enable-pxv: true !default;
+
 
 // Type scale map
 // Note: these values exist in Figma vars, edit per project. Add any as needed!!

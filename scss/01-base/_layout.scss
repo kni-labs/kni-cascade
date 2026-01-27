@@ -15,13 +15,16 @@
 @include wp-admin-bar;
 
 // Primary Media Query
-// @media (width >= 768px) {
-//   :root {
-//     --site-min: var(--desktop-min);
-//     --site-basis: var(--desktop-basis);
-//     --site-max: var(--desktop-max);
-//   }
-// }
+@media (width >= 768px) {
+  :root {
+    --active-basis-w: var(--desktop-basis-w);
+    --active-basis-h: var(--desktop-basis-h);
+    --active-min: var(--desktop-min);
+    --active-max: var(--desktop-max);
+    --active-squish: var(--desktop-squish);
+    --active-floor: var(--desktop-floor);
+  }
+}
 
 body {
   min-height: 100vh;
