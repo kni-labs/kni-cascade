@@ -28,6 +28,8 @@ $type-scale-breakpoint: $tm !default;
   --mobile-basis-h: 667;
   --mobile-min: 0;
   --mobile-max: 767;
+  --mobile-floor: 0;
+  --mobile-squish:0;
 
   // Desktop defaults
   --desktop-basis-w: 1440; // figma width
