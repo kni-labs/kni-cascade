@@ -62,14 +62,14 @@ $type-scale-breakpoint: $tm !default;
             calc(((1vw * 100 / var(--active-basis-w)) * (1 - var(--active-squish))) + ((var(--safe-vh) * var(--basis-aspect-ratio) * 100 / var(--active-basis-w)) * var(--active-squish))))));
   } @else {
   --pxv-unit: 1px; // effectively disables fluid scaling
-}
+  }
 
-// Fluid type primitives
---font-max-clamp: 9999px; // no touch
---font-size: 16pxv; // fluid-type base font size
+  // Fluid type primitives
+  --font-max-clamp: 9999px; // no touch
+  --font-size: 16pxv; // fluid-type base font size
 
-// system font stacks
---font-family-system: system-ui, helvetica,arial, sans-serif;
---font-family-heading: var(--font-family-system);
---font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
+  // system font stacks
+  --font-family-system: system-ui, helvetica,arial, sans-serif;
+  --font-family-heading: var(--font-family-system);
+  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
 }
