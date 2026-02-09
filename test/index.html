@@ -112,5 +112,101 @@
         </section>
       </main>
     </div>
+
+<div id="hud-container">
+  
+  <div class="control-group">
+    <label>Squish: <span id="val-squish">.5</span></label>
+    <input type="range" id="squish" min="0" max="1" step="0.01" value="0.5">
+  </div>
+
+  <div class="control-group">
+    <label>Floor: <span id="val-floor">400</span></label>
+    <input type="range" id="floor" min="0" max="1000" step="10" value="400">
+  </div>
+
+  <div class="control-group">
+    <label>Max: <span id="val-max">2000</span></label>
+    <input type="range" id="max" min="500" max="5000" step="50" value="2000">
+  </div>
+
+  <div class="control-group">
+    <label>Basis-H: <span id="val-basis-h">750</span></label>
+    <input type="range" id="basis-h" min="100" max="2000" step="10" value="750">
+  </div>
+</div>
+<script>
+const setupHUD = () => {
+  const settings = [
+    { id: 'squish', varName: '--active-squish' },
+    { id: 'floor', varName: '--active-floor' },
+    { id: 'max', varName: '--active-max' },
+    { id: 'basis-h', varName: '--active-basis-h' }
+  ];
+
+  settings.forEach(item => {
+    const slider = document.getElementById(item.id);
+    const display = document.getElementById(`val-${item.id}`);
+
+    slider.addEventListener('input', (e) => {
+      const value = e.target.value;
+      
+      // Update the CSS variable on the :root element
+      document.documentElement.style.setProperty(item.varName, value);
+      
+      // Update the number shown in the HUD
+      display.textContent = value;
+    });
+  });
+};
+
+// Initialize when the DOM is ready
+document.addEventListener('DOMContentLoaded', setupHUD);
+</script>
+<style>:root {
+  --active-squish: 0.5;
+  --active-floor: 400;
+  --active-max: 2000;
+  --active-basis-h: 750;
+}
+
+#hud-container {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 220px;
+  background: rgba(20, 20, 20, 0.9);
+  color: #00e5ff;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  z-index: 10000;
+  border: 1px solid #333;
+}
+
+.hud-header {
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.control-group {
+  margin-bottom: 12px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 5px;
+}
+
+.control-group input {
+  width: 100%;
+  accent-color: #00e5ff;
+}</style>
   </body>
 </html>

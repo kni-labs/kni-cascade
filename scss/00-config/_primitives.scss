@@ -23,32 +23,55 @@ $dxl: 1800 !default; // Desktop x-large
 $type-scale-breakpoint: $tm !default;
 
 :root {
-  // pxv unit primitives
-  --site-min: var(--mobile-min);
-  --site-basis: var(--mobile-basis);
-  --site-max: var(--mobile-max);
-
-  // pxv settings - Match figma
+  // mobile defaults
+  --mobile-basis-w: 375;
+  --mobile-basis-h: 667;
   --mobile-min: 0;
-  --mobile-basis: 375; // Figma mobile
   --mobile-max: 767;
-  --desktop-min: 768;
-  --desktop-basis: 1440; // Figma desktop
-  --desktop-max: #{$desktop-max}; // Edit this in settings
+  --mobile-floor: 0;
+  --mobile-squish:0;
 
-  // pxv unit
+  // Desktop defaults
+  --desktop-basis-w: 1440; // figma width
+  --desktop-basis-h: 750; // height at which you want site to scale vertically
+  --desktop-min: 768; 
+  --desktop-max: 2000;
+  --desktop-squish: 0.5; // amount to scale height at --desktop-basis
+  --desktop-floor: 500; // height at which to top scaling vertically
+
+    // default to mobile sizing
+  --active-basis-w: var(--mobile-basis-w);
+  --active-basis-h: var(--mobile-basis-h);
+  --active-min: var(--mobile-min);
+  --active-max: var(--mobile-max);
+  --active-squish: var(--mobile-squish);
+  --active-floor: var(--mobile-floor);
+
+  // aspect ratio used in pxv calculations
+  --basis-aspect-ratio: calc(var(--active-basis-w) / var(--active-basis-h));
+
+  // safe vh used in pxv calculations
+  --safe-vh: max(1vh, 1px * var(--active-floor) / 100);
+
+
+  // pxv unit - 
+  /* stylelint-disable */
   @if $enable-pxv {
-    --pxv-unit: clamp(calc(1px * var(--site-min) / var(--site-basis)), calc((100 / var(--site-basis)) * 1vw), calc(1px * var(--site-max) / var(--site-basis)));
+    --pxv-unit: max((var(--active-min) * 1px / var(--active-basis-w)),
+        min((var(--active-max) * 1px / var(--active-basis-w)),
+          min((1vw * 100 / var(--active-basis-w)),
+            calc(((1vw * 100 / var(--active-basis-w)) * (1 - var(--active-squish))) + ((var(--safe-vh) * var(--basis-aspect-ratio) * 100 / var(--active-basis-w)) * var(--active-squish))))));
   } @else {
-    --pxv-unit: 1px; // effectively disables fluid scaling
+  --pxv-unit: 1px; // effectively disables fluid scaling
   }
+  /* stylelint-enable */
 
   // Fluid type primitives
   --font-max-clamp: 9999px; // no touch
   --font-size: 16pxv; // fluid-type base font size
 
   // system font stacks
-  --font-family-system: system-ui, helvetica, arial, sans-serif;
+  --font-family-system: system-ui, helvetica,arial, sans-serif;
   --font-family-heading: var(--font-family-system);
   --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
 }
