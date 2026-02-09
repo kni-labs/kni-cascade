@@ -55,6 +55,7 @@ $type-scale-breakpoint: $tm !default;
 
 
   // pxv unit - 
+  /* stylelint-disable */
   @if $enable-pxv {
     --pxv-unit: max((var(--active-min) * 1px / var(--active-basis-w)),
         min((var(--active-max) * 1px / var(--active-basis-w)),
@@ -63,6 +64,7 @@ $type-scale-breakpoint: $tm !default;
   } @else {
   --pxv-unit: 1px; // effectively disables fluid scaling
   }
+  /* stylelint-enable */
 
   // Fluid type primitives
   --font-max-clamp: 9999px; // no touch
