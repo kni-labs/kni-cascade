@@ -1,0 +1,164 @@
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 📄 _button.scss
+// The Official KNI Button 
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+@use '../00-config' as *;
+@use "sass:map";
+@use "sass:string";
+@use "sass:meta";
+@use "sass:math"; // Added to fix unitless warning
+
+/* ==========================================================================
+   KNOBS - Tweak these
+   ========================================================================== */
+
+$btn-design: (
+  "radius":    999pxv,
+  "weight":    600,
+  "nudge":     .01em,            
+  "x-padding": 1.5em,
+  "y-padding": 0.875em,
+  "speed":     0.2s,
+  "theme-bg":  #001a3d,
+  "theme-tx":  #fff
+);
+
+/* ==========================================================================
+   THE ENGINE - Tread Carefully
+   ========================================================================== */
+
+[btn] {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-weight: map.get($btn-design, "weight");
+  line-height: 1;
+
+  /* VAR MAPPING */
+  $n-val: map.get($btn-design, "nudge");
+  
+  // FIX: math.is-unitless instead of unitless
+  --btn-nudge: #{if(math.is-unitless($n-val), $n-val + 0px, $n-val)};
+  --btn-theme-bg: #{map.get($btn-design, "theme-bg")};
+  --btn-theme-text: #{map.get($btn-design, "theme-tx")};
+  --btn-x-pad: #{map.get($btn-design, "x-padding")};
+  --btn-y-pad: #{map.get($btn-design, "y-padding")};
+
+  /* APPLICATION */
+  font-size: var(--btn-font-size);
+  background-color: var(--btn-theme-bg);
+  color: var(--btn-theme-text);
+  border: 1px solid var(--btn-theme-bg);
+  border-radius: map.get($btn-design, "radius");
+  transition: map.get($btn-design, "speed") ease-in-out;
+  padding: calc(var(--btn-y-pad) - var(--btn-nudge)) 
+           var(--btn-x-pad) 
+           calc(var(--btn-y-pad) + var(--btn-nudge)) 
+           var(--btn-x-pad);
+}
+
+/* Generate defaults from Type scale */
+@if meta.variable-exists(type-scale) {
+  @each $key, $font-data in $type-scale {
+    @if string.index($key, "btn-") == 1 {
+      $attr-name: string.slice($key, 5);
+
+      [btn~="#{$attr-name}"] {
+        --btn-font-size: #{map.get($font-data, "desktop")}pxv;
+
+        // FIX: map.get instead of map-get
+        --btn-font-mobile: #{map.get($font-data, "mobile")}pxv;
+      }
+      
+      @if $attr-name == "md" {
+        [btn] {
+          --btn-font-size: #{map.get($font-data, "desktop")}pxv;
+          --btn-font-mobile: #{map.get($font-data, "mobile")}pxv;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   MODIFIERS & INTERACTIONS
+   ========================================================================== */
+
+/* 1. THEME DEFINITIONS (Background & Text Colors) */
+[btn~="secondary"] {
+  --btn-theme-bg: #369;
+  --btn-theme-text: #fff;
+}
+
+[btn~="tertiary"] {
+  --btn-theme-bg: #69c; // Example: Add tertiary easily now
+  --btn-theme-text: #fff;
+}
+
+/* 2. STATE MODIFIERS (Order-Independent Variable Flipping) */
+
+// OUTLINE: Swaps background for transparency and uses the theme color for the stroke
+[btn~="outline"] {
+  background-color: transparent;
+  color: var(--btn-theme-bg);
+  border-color: currentcolor;
+}
+
+// INVERTED: Flips the theme background and text
+[btn~="inverted"] {
+  background-color: var(--btn-theme-text);
+  color: var(--btn-theme-bg);
+  border-color: var(--btn-theme-text);
+
+  // The "70% White" Logic: Applied to any non-primary theme
+  &:is([btn~="secondary"], [btn~="tertiary"]) {
+    background-color: var(--btn-theme-bg);
+    color: rgb(255 255 255 / 70%);
+    border-color: var(--btn-theme-bg);
+  }
+}
+
+/* SIZE MODIFIERS */
+[btn~="lg"] {
+  // add code here
+}
+
+[btn~="md"] {
+  // add code here
+}
+
+[btn~="sm"] {
+  // add code here
+}
+
+
+// INVERTED + OUTLINE COMBO: Refines the flip for transparent backgrounds
+[btn~="inverted"][btn~="outline"] {
+  background-color: transparent;
+  
+  &:is([btn~="secondary"], [btn~="tertiary"]) {
+    color: rgb(255 255 255 / 70%);
+    border-color: currentcolor;
+  }
+}
+
+/* 3. UTILITY & INTERACTIONS */
+[btn~="block"] {
+  display: flex;
+  width: 100%;
+}
+
+[btn]:hover {
+  filter: brightness(2);
+}
+
+
+[btn]:active {
+  transform: translateY(1px);
+}
