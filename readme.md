@@ -53,10 +53,10 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
 scss/
 ├── 00-config/      # Tokens, mixins, functions, no CSS output
 ├── 01-base/        # Resets, type, layout, and core utilities
-├── 02-components/  # Reusable UI building blocks
-├── 03-modules/     # Larger composite regions (header, hero, footer)
-├── 04-pages/       # Page-specific overrides
-└── styles.scss    # Public entry file for final CSS build
+├── 02-components/  # Globally-available UI elements (header, footer, buttons, etc.)
+├── 03-modules/     # Page body building blocks
+├── 04-pages/       # Template- and page-specific styles, intended to imported only into the relevant file
+└── styles.scss     # Public entry file for global CSS build
 ```
 
 ---
@@ -119,7 +119,8 @@ By default, **Gulp** runs:
 
 ## 🪄 Quick Philosophy
 
-> _“If it’s visual, it lives in base.  
-> If it’s reusable, it lives in components.  
-> If it’s page-specific, it lives in pages.  
-> And if it defines how the system works — it lives in config.”_
+> If it defines how the system works is a Sass function, mixin or variable, it lives in config.
+> If it’s a globally-used reset, type, or layout rule, it lives in base.
+> If it’s a globally-used element, it lives in components.
+> If it's a page body building block, it lives in modules.
+> If it’s page-specific, it lives in pages.
