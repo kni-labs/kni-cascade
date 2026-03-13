@@ -1,6 +1,10 @@
-@use 'settings' as *;
-@use 'primitives' as *;
 @use "sass:map";
+@use "./primitives" as *;
+@use "./settings" as *;
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 🎨 Mixins
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 // Powers all type-sizing - see settings map
 @mixin type-scale($token, $mq: $type-scale-breakpoint) {

@@ -1,5 +1,4 @@
-$white: #fff;
-$black: #000;
+@use "../../00-config" as *;
 
 .color {
   &--white {

@@ -1,1 +1,9 @@
-/* this is pages index */
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// ‼️ This directory is reserved for page- and template-level stylesheets. It
+// should not be used to combine stylesheets into a single file, as the purpose
+// of scoping styles to specific pages or templates is to optimize by allowing
+// them to be loaded only when needed.
+// Files in this directory should typically start with the following line to
+// access functions, mixins and variables from the global Sass config.
+// @use '../00-config' as *;
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
