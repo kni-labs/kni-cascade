@@ -12,7 +12,8 @@ $enable-fluid-type: true !default;
 $enable-pxv: true !default;
 
 // Type scale map
-// Note: these values exist in Figma vars, edit per project. Add any as needed!!
+// Note: these values exist in Figma vars, edit per project. 
+// You can AND should add any as needed, including for buttons.
 $type-scale: (
   heading-xxl: (desktop: 60, mobile: 34),
   heading-xl:  (desktop: 48, mobile: 30),
@@ -21,12 +22,15 @@ $type-scale: (
   heading-s:   (desktop: 26, mobile: 20),
   heading-xs:  (desktop: 20, mobile: 18),
   heading-xxs: (desktop: 18, mobile: 16),
-  body-l:     (desktop: 18, mobile: 16),
-  body-m:     (desktop: 16, mobile: 14),
-  body-s:     (desktop: 14, mobile: 12),
-  body-xs:    (desktop: 12, mobile: 11),
-  body-xxs:   (desktop: 11, mobile: 10),
-  body-xxxs:  (desktop: 10, mobile: 10)
+  body-l:      (desktop: 18, mobile: 16),
+  body-m:      (desktop: 16, mobile: 14),
+  body-s:      (desktop: 14, mobile: 12),
+  body-xs:     (desktop: 12, mobile: 11),
+  body-xxs:    (desktop: 11, mobile: 10),
+  body-xxxs:   (desktop: 10, mobile: 10),
+  btn-l:       (desktop: 18, mobile: 16),
+  btn-m:       (desktop: 16, mobile: 14),
+  btn-s:       (desktop: 14, mobile: 12)
 );
 
 // Colors

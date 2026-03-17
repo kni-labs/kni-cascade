@@ -27,6 +27,63 @@
 
       <h1 class="heading--xxl">KNI-Cascade</h1>
       <p>This is <a href="https://github.com/kni-labs/kni-cascade">how we CSS.</a></p>
+
+
+<section>
+        <h2>Dynamic Sizes</h2>
+        <p>Generated automatically from <code>$type-scale</code> tokens.</p>
+        <div class="grid">
+            <div>
+                <label>btn="lg"</label>
+                <a href="#" btn="lg outline">Large Action</a>
+            </div>
+            <div>
+                <label>btn="md" (Default)</label>
+                <button btn="md">Medium Action</button>
+            </div>
+            <div>
+                <label>btn="sm"</label>
+                <a href="#" btn="sm">Small Action</a>
+            </div>
+            <div>
+                <label>btn="xs"</label>
+                <button btn="xs">Extra Small</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Functional Modifiers</h2>
+        <div class="grid">
+            <div>
+                <label>btn="md outline"</label>
+                <button btn="md outline">Outline Style</button>
+            </div>
+            <div>
+                <label>Tag: &lt;a&gt; vs &lt;button&gt;</label>
+                <div style="display:flex; gap: 10px;">
+                    <a href="#" btn="md">Link Tag</a>
+                    <button btn="md">Button Tag</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section style="background: #222;">
+        <h2>Inverted (Dark Mode)</h2>
+        <div class="inverted-bg">
+            <button btn="md inverted">Inverted Solid</button>
+            <button btn="md outline inverted" style="color: white;">Inverted Outline</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Block Level</h2>
+        <label>btn="lg block"</label>
+        <button btn="lg block">Full Width Primary Call to Action</button>
+    </section>
       <div class="box">I'm a cool box</div>
       <main>
         <section id="typography">
@@ -173,7 +230,7 @@ document.addEventListener('DOMContentLoaded', setupHUD);
 #hud-container {
   position: fixed;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   width: 220px;
   background: rgba(20, 20, 20, 0.9);
   color: #00e5ff;
