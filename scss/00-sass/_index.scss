@@ -1,0 +1,11 @@
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// ‼️ This directory is reserved for all SCSS functions, mixins and variables.
+// It should not contain any CSS that gets generated, as the intention of it
+// is to provide a clean and importable file that can be used across the
+// project to provide access to shared functions, mixins and variables
+// without generating any CSS.
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+@forward 'variables';
+@forward 'functions';
+@forward 'mixins';

@@ -1,12 +1,8 @@
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-// ‼️ This directory is reserved for all SCSS functions, mixins and variables.
-// It should not contain any CSS that gets generated, as the intention of it
-// is to provide a clean and importable file that can be used across the
-// project to provide access to shared functions, mixins and variables
-// without generating any CSS.
+// ⏱️ Motion
+// Easing curves, transitions, and animation timing for interactive experiences
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@forward 'primitives';
-@forward 'settings';
-@forward 'functions';
-@forward 'mixins';
+:root {
+  --easing: cubic-bezier(0.23, 1, 0.32, 1); // Michael Jordan Magic Johnson
+}

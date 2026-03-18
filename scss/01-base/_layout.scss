@@ -1,6 +1,18 @@
-@use '../00-config' as *;
+@use '../00-sass' as *;
 
-// 🧩  Responsive Engine
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// 📐 Layout
+// Responsive grid systems, containers, and breakpoint management
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+// Layout Defaults
+:root {
+  --container-size: 1280pxv;
+  --mobile-gutters: 5%;
+  --border-radius: 5pxv;
+}
+
+//  Responsive Engine
 // -----------------------------------------------------------------------------
 // This is our magic "it just works" responsive engine but there are other
 // ways to set up a primary container. Todo: show examples
@@ -9,10 +21,6 @@
 // |--------------------|-------------------------------------------|-----------
 // | min:320    max:767 | min:768                          max:1800 |
 // |--------------------|-------------------------------------------|-----------
-
-// kill the wp-admin bar
-
-@include wp-admin-bar;
 
 // Primary Media Query
 @media (width >= 768px) {
@@ -25,6 +33,10 @@
     --active-floor: var(--desktop-floor);
   }
 }
+
+// kill the wp-admin bar
+@include wp-admin-bar;
+
 
 body {
   min-height: 100vh;

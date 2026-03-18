@@ -1,19 +1,25 @@
-@use '../00-config' as *;
+@use '../00-sass' as *;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 // 📄 _typography.scss
 // Type system + custom styles
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// Toggle fluid-type in settings.scss
-@if $enable-fluid-type {
-  @include fluid-type;
+// Default type settings
+:root {
+  --font-family-system: system-ui, helvetica,arial, sans-serif;
+  --font-family-heading: var(--font-family-system);
+  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-min-clamp: 11px;     // default min-size for all type
+  --line-height: 1.35;        // default line height
+  --text-wrap: pretty;        // default
+  --letter-spacing: normal;   // 0.01em etc - match figma
+  --type-margin: 15pxv;       // Bottom spacing under type elements todo: replace with spacing var
 }
 
-// edit me
-:root {
-  // --font-family-system: '<project font>';
-  // --font-family-heading: if headings use different font;
+// Toggle fluid-type in 00-sass/variables
+@if $enable-fluid-type {
+  @include fluid-type;
 }
 
 // Set top level rules
@@ -36,7 +42,11 @@ html {
 }
 
 // Make code look like code
-code, kbd, samp, pre, tt {
+code,
+kbd,
+samp,
+pre,
+tt {
   font-family: var(--font-family-monospace);
 }
 
@@ -65,19 +75,19 @@ code, kbd, samp, pre, tt {
   line-height: 1.2; // edit me
 }
 
-.heading--xl  {
+.heading--xl {
   @include type-scale(heading-xl);
 
   --font-min-clamp: 28px;
 }
 
-.heading--l  {
+.heading--l {
   @include type-scale(heading-l);
 
   --font-min-clamp: 24px;
 }
 
-.heading--m  {
+.heading--m {
   @include type-scale(heading-m);
 
   --font-min-clamp: 20px;
@@ -101,9 +111,13 @@ code, kbd, samp, pre, tt {
   --font-min-clamp: 14px;
 }
 
-.body--m { @include type-scale(body-m); }
+.body--m {
+  @include type-scale(body-m);
+}
 
-.body--s { @include type-scale(body-s);}
+.body--s {
+  @include type-scale(body-s);
+}
 
 .body--xs {
   @include type-scale(body-xs);
