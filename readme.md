@@ -20,7 +20,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
       <td>
         <ul>
           <li>Modern, layered structure that fixes inheritance issues</li>
-          <li>Clear separation of responsibility → <BR><code>00-config → 01-base → 02-components → 03-modules → 04-pages</code></li>
+          <li>Clear separation of responsibility → <BR><code>00-sass → 01-base → 02-components → 03-modules → 04-pages</code></li>
           <li>Config-first system — tokens, mixins, and primitives power everything downstream</li>
         </ul>
       </td>
@@ -51,7 +51,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
 
 ```plaintext
 scss/
-├── 00-config/      # Tokens, mixins, functions, no CSS output
+├── 00-sass/        # Settings, Sass vars, mixins, functions, no CSS output
 ├── 01-base/        # Resets, type, layout, and core utilities
 ├── 02-components/  # Globally-available UI elements (header, footer, buttons, etc.)
 ├── 03-modules/     # Page body building blocks
@@ -92,11 +92,10 @@ By default, **Gulp** runs:
 
 ## Design Principles
 
-1. **Settings-first** – All editable project values live in `_settings.scss`.
-2. **No CSS output in config** – Logic, not styling.
-3. **Token inheritance** – Everything flows from primitives to components.
-4. **Small overrides > big rewrites** – The cascade should always work with you.
-5. **Readable by default** – Comments are documentation.
+
+1. **No CSS output in 00-sass** – Logic, not styling.
+2. **Small overrides > big rewrites** – The cascade should always work with you.
+3. **Readable by default** – Comments are documentation.
 
 ---
 
@@ -119,7 +118,7 @@ By default, **Gulp** runs:
 
 ## 🪄 Quick Philosophy
 
-> If it defines how the system works is a Sass function, mixin or variable, it lives in config.
+> If it defines how the system works is a Sass function, mixin or variable, it lives in sass.
 > If it’s a globally-used reset, type, or layout rule, it lives in base.
 > If it’s a globally-used element, it lives in components.
 > If it's a page body building block, it lives in modules.

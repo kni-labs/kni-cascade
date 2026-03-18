@@ -1,9 +1,8 @@
-@use '../00-config' as *;
+@use '../00-sass' as *;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-// 📝 Primitives
-// System-level "physics" of the design system — how scaling, pxv units,
-// and fluid typography behave under the hood. You normally don’t edit this.
+// 📏 Scaling
+// Responsive engine powering sitewide scaling and pxv unit calculations.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 :root {
@@ -16,12 +15,12 @@
   --mobile-squish:0;
 
   // Desktop defaults
-  --desktop-basis-w: 1440; // figma width
-  --desktop-basis-h: 750; // height at which you want site to scale vertically
-  --desktop-min: 768; 
-  --desktop-max: 2000;
-  --desktop-squish: 0.5; // amount to scale height at --desktop-basis
-  --desktop-floor: 500; // height at which to top scaling vertically
+  --desktop-basis-w: 1440;    // Figma width
+  --desktop-basis-h: 750;     // height at which you want site to scale vertically
+  --desktop-min: 768;         // Desktop starts here 
+  --desktop-max: 2000;        // Desktop ends here
+  --desktop-squish: 1;        // amount to scale height at --desktop-basis
+  --desktop-floor: 500;       // height at which to top scaling vertically
 
     // default to mobile sizing
   --active-basis-w: var(--mobile-basis-w);
@@ -36,7 +35,6 @@
 
   // safe vh used in pxv calculations
   --safe-vh: max(1vh, 1px * var(--active-floor) / 100);
-
 
   // pxv unit - 
   /* stylelint-disable */
@@ -53,9 +51,4 @@
   // Fluid type primitives
   --font-max-clamp: 9999px; // no touch
   --font-size: 16pxv; // fluid-type base font size
-
-  // system font stacks
-  --font-family-system: system-ui, helvetica,arial, sans-serif;
-  --font-family-heading: var(--font-family-system);
-  --font-family-monospace: ui-monospace, sfmono-regular, menlo, monaco, consolas, 'Liberation Mono', 'Courier New', monospace;
-}
+  }

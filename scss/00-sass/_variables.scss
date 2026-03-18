@@ -1,5 +1,5 @@
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-// ⚙️ Settings
+// ⚙️ Variables
 // Project-level controls and design tokens — the file to edit.
 // Turn these knobs to adjust site behavior, type scales, or theme values.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -21,14 +21,30 @@ $type-scale: (
   heading-s:   (desktop: 26, mobile: 20),
   heading-xs:  (desktop: 20, mobile: 18),
   heading-xxs: (desktop: 18, mobile: 16),
-  body-l:     (desktop: 18, mobile: 16),
-  body-m:     (desktop: 16, mobile: 14),
-  body-s:     (desktop: 14, mobile: 12),
-  body-xs:    (desktop: 12, mobile: 11),
-  body-xxs:   (desktop: 11, mobile: 10),
-  body-xxxs:  (desktop: 10, mobile: 10)
+  body-l:      (desktop: 18, mobile: 16),
+  body-m:      (desktop: 16, mobile: 14),
+  body-s:      (desktop: 14, mobile: 12),
+  body-xs:     (desktop: 12, mobile: 11),
+  body-xxs:    (desktop: 11, mobile: 10),
+  body-xxxs:   (desktop: 10, mobile: 10)
 );
 
 // Colors
 $white: #fff;
 $black: #000;
+
+//  Breakpoints for Sassy mqs - see mixins
+$ms: 320 !default; // Mobile small
+$mm: 375 !default; // Mobile medium
+$ml: 500 !default; // Mobile large
+$ts: 600 !default; // Tablet small
+$tm: 768 !default; // Tablet medium
+$tl: 1024 !default; // Tablet large
+$dxs: $tl !default; // Desktop x-small
+$ds: 1280 !default; // Desktop small
+$dm: 1440 !default; // Desktop medium
+$dl: 1600 !default; // Desktop large
+$dxl: 1800 !default; // Desktop x-large
+
+$type-scale-breakpoint: $tm !default;
+
