@@ -20,7 +20,7 @@ It’s designed for **clarity, scalability, and minimal friction** — a single 
       <td>
         <ul>
           <li>Modern, layered structure that fixes inheritance issues</li>
-          <li>Clear separation of responsibility → <BR><code>00-config → 01-base → 02-components → 03-modules → 04-pages</code></li>
+          <li>Clear separation of responsibility → <BR><code>00-sass → 01-base → 02-components → 03-modules → 04-pages</code></li>
           <li>Config-first system — tokens, mixins, and primitives power everything downstream</li>
         </ul>
       </td>
