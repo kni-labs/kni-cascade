@@ -31,7 +31,7 @@ html {
 }
 
 // Rules for all text elements
-:where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, pre, figure) {
+:where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, pre, figure):not(:last-child) {
   margin-block-end: var(--type-margin);
 }
 
