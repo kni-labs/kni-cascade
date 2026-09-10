@@ -7,7 +7,7 @@
 
 :root {
   // mobile defaults
-  --mobile-basis-w: 375;
+  --mobile-basis-w: 390;
   --mobile-basis-h: 667;
   --mobile-min: 0;
   --mobile-max: 767;
@@ -15,12 +15,12 @@
   --mobile-squish:0;
 
   // Desktop defaults
-  --desktop-basis-w: 1440;    // Figma width
-  --desktop-basis-h: 750;     // height at which you want site to scale vertically
-  --desktop-min: 768;         // Desktop starts here 
-  --desktop-max: 2000;        // Desktop ends here
-  --desktop-squish: 1;        // amount to scale height at --desktop-basis
-  --desktop-floor: 500;       // height at which to top scaling vertically
+  --desktop-basis-w: 1440;        // Figma width
+  --desktop-basis-h: 750;         // height at which you want site to scale vertically
+  --desktop-min: 768;             // Desktop starts here 
+  --desktop-max: #{$desktop-max}; // Desktop ends here -- set in sass/variables.scss
+  --desktop-squish: 1;            // amount to scale height at --desktop-basis
+  --desktop-floor: 500;           // height at which to top scaling vertically
 
     // default to mobile sizing
   --active-basis-w: var(--mobile-basis-w);

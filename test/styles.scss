@@ -5,19 +5,46 @@
 @use '../scss/03-modules' as *;
 @use '../scss/04-pages' as *;
 
+:root {
+  --active-squish: 0.5;
+  --active-floor: 400;
+  --active-max: 1800;
+  --active-basis-h: 750;
+  --body-bg: lavenderblush;
+}
+
 body {
-  background: lavenderblush;
+  background: var(--body-bg);
   padding: 15pxv 0;
 
   @include lg {
-    background: oldlayce;
+    --body-bg: #FDF5E6;
+
     border: 12pxv solid cadetblue;
   }
 
   @include max {
-    background: lightyellow;
+    --body-bg: lightyellow;
+
     border: 25pxv solid black;
   }
+}
+
+
+main {
+  padding-bottom: 300px;
+}
+
+section {
+  margin-top: 50px;
+}
+
+#width {
+  position: sticky;
+  top: 0;
+  padding: 11px 0;
+  background: var(--body-bg);
+  border-bottom: 1px solid #ccc;
 }
 
 .box {
@@ -133,3 +160,92 @@ body {
     }
   }
 }
+
+#hud-container {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 220px;
+  background: rgb(20 20 20 / 90%);
+  color: #00e5ff;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 50%);
+  z-index: 10000;
+  border: 1px solid #333;
+}
+
+.hud-header {
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.control-group {
+  margin-bottom: 12px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 5px;
+}
+
+.control-group input {
+  width: 100%;
+  accent-color: #00e5ff;
+}
+
+.scrim-demo-row {
+  display: flex; 
+  gap: 10px;
+}
+
+.scrim-demo .wrapper { 
+  position: relative; 
+  width: 100%;
+  aspect-ratio: 16/10;
+  flex-shrink: 1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.scrim-demo figure { 
+  margin: 0; 
+  height: 100%; 
+  width: 100%; 
+}
+
+.scrim-demo figure img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 10px;
+}
+
+.scrim-demo article {
+  position: absolute;
+  bottom: 10px;
+  z-index: 2;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.scrim-demo article h2 {
+  color: white;
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+
+.scrim-demo .top-aligned {
+  top: 1px;
+  bottom: auto;
+}
+
+.scrim-demo .right { right: 5px; }
