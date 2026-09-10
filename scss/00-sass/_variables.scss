@@ -8,9 +8,6 @@
 $enable-fluid-type: true !default;
 $enable-pxv: true !default;
 
-// Where should the site stop scaling?
-$desktop-max: 2000;
-
 // Breakpoints for Sassy mqs - see mixins
 $ms: 320 !default; // Mobile small
 $mm: 375 !default; // Mobile medium
@@ -24,6 +21,8 @@ $dm: 1440 !default; // Desktop medium
 $dl: 1600 !default; // Desktop large
 $dxl: 1800 !default; // Desktop x-large
 
+// Where should the site stop scaling?
+$desktop-max: #{$dxl};
 $type-scale-breakpoint: $tm !default;
 
 // Type scale map
