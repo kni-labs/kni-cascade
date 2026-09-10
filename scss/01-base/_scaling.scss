@@ -18,7 +18,7 @@
   --desktop-basis-w: 1440;        // Figma width
   --desktop-basis-h: 750;         // height at which you want site to scale vertically
   --desktop-min: 768;             // Desktop starts here 
-  --desktop-max: #{$desktop-max}; // Desktop ends here -- set in variables.scsss
+  --desktop-max: #{$desktop-max}; // Desktop ends here -- set in sass/variables.scss
   --desktop-squish: 1;            // amount to scale height at --desktop-basis
   --desktop-floor: 500;           // height at which to top scaling vertically
 
