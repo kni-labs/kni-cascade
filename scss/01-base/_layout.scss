@@ -112,3 +112,16 @@ body {
     object-fit: contain;
   }
 }
+
+.clip-container {
+  clip-path: rect(0 auto auto 0);
+  pointer-events: none;
+
+  &__inner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateZ(0);
+  }
+}

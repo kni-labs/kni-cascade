@@ -1,0 +1,60 @@
+[scrim] {
+  position: relative;
+  overflow: hidden;
+  display: block;
+
+  --scrim-color: 0, 0, 0; 
+  --scrim-dir: 22.5deg;
+  --scrim-a: 1.0; 
+  --scrim-dist: 100%;
+}
+
+[scrim]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+  background-image: linear-gradient(
+    var(--scrim-dir),
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 1)) 0%,
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.852)) calc(var(--scrim-dist) * 0.12),
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.621)) calc(var(--scrim-dist) * 0.28),
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.385)) calc(var(--scrim-dist) * 0.46),
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.183)) calc(var(--scrim-dist) * 0.66),
+    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.054)) calc(var(--scrim-dist) * 0.85),
+    rgba(var(--scrim-color), 0) var(--scrim-dist)
+  );
+}
+
+/* Intermediate Directions */
+[scrim~="to-t-tr"] { --scrim-dir: 22.5deg; }
+[scrim~="to-r-tr"] { --scrim-dir: 67.5deg; }
+[scrim~="to-r-br"] { --scrim-dir: 112.5deg; }
+[scrim~="to-b-br"] { --scrim-dir: 157.5deg; }
+[scrim~="to-b-bl"] { --scrim-dir: 202.5deg; }
+[scrim~="to-l-bl"] { --scrim-dir: 247.5deg; }
+[scrim~="to-l-tl"] { --scrim-dir: 292.5deg; }
+[scrim~="to-t-tl"] { --scrim-dir: 337.5deg; }
+
+/* Cardinal/Ordinal Directions */
+[scrim~="to-t"]  { --scrim-dir: to top; }
+[scrim~="to-b"]  { --scrim-dir: to bottom; }
+[scrim~="to-l"]  { --scrim-dir: to left; }
+[scrim~="to-r"]  { --scrim-dir: to right; }
+[scrim~="to-tr"] { --scrim-dir: to top right; }
+[scrim~="to-tl"] { --scrim-dir: to top left; }
+[scrim~="to-br"] { --scrim-dir: to bottom right; }
+[scrim~="to-bl"] { --scrim-dir: to bottom left; }
+
+/* --- INTENSITY & DISTANCE (Stay as *= for flexibility) --- */
+[scrim*=".1"] { --scrim-a: 0.1; } [scrim*=".2"] { --scrim-a: 0.2; }
+[scrim*=".3"] { --scrim-a: 0.3; } [scrim*=".4"] { --scrim-a: 0.4; }
+[scrim*=".5"] { --scrim-a: 0.5; } [scrim*=".6"] { --scrim-a: 0.6; }
+[scrim*=".7"] { --scrim-a: 0.7; } [scrim*=".8"] { --scrim-a: 0.8; }
+[scrim*=".9"] { --scrim-a: 0.9; }
+
+[scrim*="10%"] { --scrim-dist: 10%; } [scrim*="25%"] { --scrim-dist: 25%; }
+[scrim*="33%"] { --scrim-dist: 33.3%; } [scrim*="50%"] { --scrim-dist: 50%; }
+[scrim*="66%"] { --scrim-dist: 66.6%; } [scrim*="75%"] { --scrim-dist: 75%; }

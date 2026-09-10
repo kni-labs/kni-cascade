@@ -4,36 +4,14 @@
 // Turn these knobs to adjust site behavior, type scales, or theme values.
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// Where should the site stop scaling?
-$desktop-max: 1600;
-
 // Scale everything
 $enable-fluid-type: true !default;
 $enable-pxv: true !default;
 
-// Type scale map
-// Note: these values exist in Figma vars, edit per project. Add any as needed!!
-$type-scale: (
-  heading-xxl: (desktop: 60, mobile: 34),
-  heading-xl:  (desktop: 48, mobile: 30),
-  heading-l:   (desktop: 38, mobile: 26),
-  heading-m:   (desktop: 32, mobile: 22),
-  heading-s:   (desktop: 26, mobile: 20),
-  heading-xs:  (desktop: 20, mobile: 18),
-  heading-xxs: (desktop: 18, mobile: 16),
-  body-l:      (desktop: 18, mobile: 16),
-  body-m:      (desktop: 16, mobile: 14),
-  body-s:      (desktop: 14, mobile: 12),
-  body-xs:     (desktop: 12, mobile: 11),
-  body-xxs:    (desktop: 11, mobile: 10),
-  body-xxxs:   (desktop: 10, mobile: 10)
-);
+// Where should the site stop scaling?
+$desktop-max: 2000;
 
-// Colors
-$white: #fff;
-$black: #000;
-
-//  Breakpoints for Sassy mqs - see mixins
+// Breakpoints for Sassy mqs - see mixins
 $ms: 320 !default; // Mobile small
 $mm: 375 !default; // Mobile medium
 $ml: 500 !default; // Mobile large
@@ -48,3 +26,25 @@ $dxl: 1800 !default; // Desktop x-large
 
 $type-scale-breakpoint: $tm !default;
 
+// Type scale map
+// Note: these values exist in Figma vars, edit per project. Add any as needed!!
+$type-scale: (
+  heading-xxxl: (desktop: 64, mobile: 38),
+  heading-xxl:  (desktop: 60, mobile: 34),
+  heading-xl:   (desktop: 48, mobile: 30),
+  heading-l:    (desktop: 38, mobile: 26),
+  heading-m:    (desktop: 32, mobile: 22),
+  heading-s:    (desktop: 26, mobile: 20),
+  heading-xs:   (desktop: 20, mobile: 18),
+  heading-xxs:  (desktop: 18, mobile: 16),
+  body-l:       (desktop: 18, mobile: 16),
+  body-m:       (desktop: 16, mobile: 14),
+  body-s:       (desktop: 14, mobile: 12),
+  body-xs:      (desktop: 12, mobile: 11),
+  body-xxs:     (desktop: 11, mobile: 10),
+  body-xxxs:    (desktop: 10, mobile: 10)
+);
+
+// Colors
+$white: #fff;
+$black: #000;
