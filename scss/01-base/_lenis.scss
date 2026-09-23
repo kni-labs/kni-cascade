@@ -1,11 +1,3 @@
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
 .lenis:not(.lenis-autoToggle).lenis-stopped {
   overflow: clip;
 }
