@@ -38,7 +38,7 @@ html {
 }
 
 // Heading specific styles
-:where(h1, h2, h3, h4, h5, h6, .heading-xxxl, .heading-xxl, .heading-xl, .heading-l, .heading--m, .heading--s, .heading--xs, .heading--xxs) {
+:where(h1, h2, h3, h4, h5, h6, .heading--xxxl, .heading--xxl, .heading--xl, .heading--l, .heading--m, .heading--s, .heading--xs, .heading--xxs) {
   line-height: 1.2;
   font-family: var(--font-family-heading);
 }
