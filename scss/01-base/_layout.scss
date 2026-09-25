@@ -114,7 +114,7 @@ body {
 }
 
 .clip-container {
-  clip-path: rect(0 auto auto 0);
+  clip-path: inset(0);
   pointer-events: none;
 
   &__inner {
