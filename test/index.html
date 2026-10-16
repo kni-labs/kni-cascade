@@ -130,6 +130,14 @@
         <section id="shadows">
           <h2 class="heading--m">Shadows</h2>
           <p><a href="https://codepen.io/dbox/pen/emdzLLe" target="_blank" rel="noopener noreferrer">Explore the shadow CodePen</a></p>
+          <p>Like scrim, shadow accepts space-separated options: <strong>elevation, intensity, and optional color</strong>. For example, <code>shadow="20 .1 blue"</code> creates a low blue shadow. Options can appear in any order.</p>
+          <ul>
+            <li><strong>Elevation:</strong> <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, or <code>50</code>, from a tight shadow to a broad, lifted shadow. These are preset names, not pixel measurements.</li>
+            <li><strong>Intensity:</strong> <code>.1</code> through <code>.9</code>, from lighter to darker. This sets the base opacity; individual shadow layers also apply weights, so it is not the final combined opacity.</li>
+            <li><strong>Color:</strong> black by default. Add <code>blue</code> for the blue preset, or set <code>style="--shadow-color: 120, 40, 90;"</code> for a custom RGB color.</li>
+            <li><strong>Hover only:</strong> use <code>shadow-hover="30 .1"</code>. It also activates on keyboard focus for buttons and links.</li>
+            <li><strong>Resting and hover:</strong> combine <code>shadow="20 .1"</code> with <code>shadow-hover="50 .2"</code>. Hover settings override only the options supplied; omitted options retain the resting values.</li>
+          </ul>
           <p>Use shadow for a persistent shadow. Elevation presets run from 10 (tight) to 50 (broad). Bare shadow defaults to elevation 30 with intensity 0.08.</p>
           <h3 class="heading--s">Elevation — same .1 intensity</h3>
           <div class="shadow-demo-grid">
@@ -157,6 +165,13 @@
           <div class="shadow-demo-grid">
             <button type="button" class="shadow-demo-card" shadow-hover><strong>Default interaction</strong><code>shadow-hover</code></button>
             <button type="button" class="shadow-demo-card" shadow-hover="20 .2 blue"><strong>Blue interaction</strong><code>shadow-hover="20 .2 blue"</code></button>
+          </div>
+          <h3 class="heading--s">Resting shadow → hover shadow</h3>
+          <p>These buttons already have a shadow. Hover or Tab to them to change elevation, intensity, and optionally color; move away to restore the resting settings.</p>
+          <div class="shadow-demo-grid">
+            <button type="button" class="shadow-demo-card" shadow="20 .1" shadow-hover="50 .2"><strong>20 .1 → 50 .2</strong><code>shadow="20 .1" shadow-hover="50 .2"</code></button>
+            <button type="button" class="shadow-demo-card" shadow="50 .2 blue" shadow-hover="10 .1"><strong>50 .2 → 10 .1</strong><code>shadow="50 .2 blue" shadow-hover="10 .1"</code></button>
+            <button type="button" class="shadow-demo-card" shadow="20 .1" shadow-hover="30 .2 blue"><strong>Black → blue</strong><code>shadow="20 .1" shadow-hover="30 .2 blue"</code></button>
           </div>
         </section>
         <section class="scrim-demo">

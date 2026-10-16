@@ -10,7 +10,7 @@
   --active-floor: 400;
   --active-max: 1800;
   --active-basis-h: 750;
-  --body-bg: lavenderblush;
+  --body-bg: #fefefe;
 }
 
 body {
@@ -164,7 +164,7 @@ section {
 #hud-container {
   position: fixed;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   width: 220px;
   background: rgb(20 20 20 / 90%);
   color: #00e5ff;
