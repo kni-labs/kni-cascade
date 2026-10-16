@@ -332,7 +332,8 @@ section {
   summary {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 10px;
     padding: 10px 8px;
     list-style: none;
     border-radius: 6px;
@@ -521,8 +522,15 @@ section {
 .demo-content .type-example-label {
   width: fit-content;
   margin-block: 28px 12px;
-  padding: 5px 10px;
-  border-color: #d0d0d0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  code {
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: #f1edf0;
+  }
 }
 
 .demo-nav-group > a {
@@ -690,6 +698,10 @@ section {
   color: #41464b;
   font-size: 18pxv;
   line-height: 1.6;
+
+  p {
+    font-size: inherit;
+  }
 }
 
 .demo-github {
@@ -1041,5 +1053,29 @@ section {
   &:hover,
   &:focus-visible {
     filter: brightness(1.2);
+  }
+}
+
+.type-example-row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  padding-block: 28px;
+  border-bottom: 1px solid #e3e6e9;
+
+  .type-example-preview {
+    min-width: 0;
+  }
+}
+
+.demo-content .type-example-row .type-example-label {
+  margin: 0;
+}
+
+@media (width < 900px) {
+  .type-example-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 }
