@@ -23,6 +23,8 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Install release npm version
+        run: npm install --global npm@11.21.1
       - run: npm ci
       - run: npm run check
       - run: npm run build
@@ -78,7 +80,7 @@ jobs:
           node-version: '22'
           cache: npm
       - name: Install npm with trusted publishing support
-        run: npm install --global npm@11
+        run: npm install --global npm@11.21.1
       - name: Check whether this version needs publishing
         id: release
         run: node scripts/release-status.cjs
