@@ -6,9 +6,7 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 
 ### Added
 
-- `[flex]` attribute utilities that share declarations with the existing `.flex` classes. All legacy modifiers and responsive variants remain supported.
-- Compact flex tokens: `row-rev`, `wrap-m`, `inline-m`, `col-m`, `col-m-rev`, `col-d`, `row-rev-d`, `a-c-d`, `a-start-d`, `j-c-d`, `j-sb-d`, and `j-end-d`.
-- Flex options for space-around/space-evenly distribution, growth/shrink control, and individual self-alignment, available in both class and attribute syntax.
+- Flex options for space-around/space-evenly distribution, growth/shrink control, and individual self-alignment, available as `.flex` modifier classes.
 - `[shadow]` and `[shadow-hover]` utilities, included in the global utilities entry point, with elevation presets `10`–`50`, intensity tokens `.1`–`.9`, a blue preset, and custom RGB colors through `--shadow-color`.
 - Default shadows use black, elevation `30`, and base opacity `0.08`. Intensity tokens set base alpha; individual layers apply additional weights.
 - Combined resting and interaction shadows, such as `shadow="20 .1" shadow-hover="50 .2"`. Hover options apply only during hover or visible keyboard focus; omitted options retain the resting values.
@@ -32,6 +30,5 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 ### Validation
 
 - Rebuilt demo CSS and ran targeted Stylelint and whitespace checks during implementation.
-- Verified all 25 legacy flex rules remain unchanged and have matching attribute declarations and media queries.
 - Checked compiled shadow rules for resting/interaction states, restoration, lower hover elevations, and hover-only visibility.
 - Browser visual, keyboard-interaction, and performance verification remains outstanding; local preview access was restricted during this work.

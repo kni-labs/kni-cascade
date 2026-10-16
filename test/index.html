@@ -44,7 +44,7 @@
           <summary>Utilities</summary>
           <ul class="demo-subnav">
             <li><a href="#utilities">Overview</a></li>
-            <li><a href="#flex">[flex]</a></li>
+            <li><a href="#flex">flex</a></li>
             <li><a href="#shadows">[shadow]</a></li>
             <li><a href="#scrim">[scrim]</a></li>
             <li><a href="#layout-utilities">Layout &amp; visibility</a></li>
@@ -291,52 +291,51 @@
 <span class="code-attr">@forward</span> <span class="code-string">'spacing'</span>;
 <span class="code-comment">// @forward 'scrim';</span>
 <span class="code-comment">// @forward 'shadow';</span></code></pre>
-          <p>Attribute selectors keep a utility's options together instead of mixing them into a long class list. For example, <code>flex="j-sb a-c col-m"</code> describes the layout, while <code>shadow="20 .1"</code> controls its shadow. Each utility reads whitespace-separated options, leaving <code>class</code> for your component names and other helpers. These are ordinary CSS selectors, so no JavaScript is needed.</p>
+          <p>Attribute selectors keep a utility's options together instead of mixing them into a long class list. For example, <code>shadow="20 .1"</code> controls elevation and intensity, while <code>scrim="to-t .5 75%"</code> groups overlay options. Flex layouts use class utilities such as <code>class="flex j-sb a-c"</code>. The attribute-based utilities read whitespace-separated options; flex uses modifier classes. These are ordinary CSS selectors, so no JavaScript is needed.</p>
         <section id="flex">
-          <h3 class="heading--s">[flex]</h3>
-          <p><a href="https://codepen.io/dbox/pen/MYjEpRX" target="_blank" rel="noopener noreferrer">Explore the flex CodePen</a></p>
-          <p>Use bare <code>flex</code> for a flex container, or combine whitespace-separated options such as <code>flex="j-sb a-c col-m wrap"</code>. Existing <code>class="flex j-sb a-c column-mobile wrap"</code> markup still works.</p>
-          <p>Justification follows the main axis; alignment follows the cross axis. These axes swap when using a column. Options ending in <code>-m</code> apply below the shared tablet breakpoint; <code>-d</code> options apply at and above it.</p>
+          <h3 class="heading--s">.flex</h3>
+          <p>Use <code>class="flex"</code> to create a flex container, then add modifier classes such as <code>class="flex j-sb a-c column-mobile wrap"</code>.</p>
+          <p>Justification follows the main axis; alignment follows the cross axis. These axes swap when using a column. Modifiers ending in <code>-mobile</code> apply below the shared tablet breakpoint; <code>-desktop</code> modifiers apply at and above it.</p>
           <h4 class="heading--xs">Justification</h4>
-          <p><code>flex="j-start"</code></p><div class="flex-demo" flex="j-start"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-c"</code></p><div class="flex-demo" flex="j-c"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-end"</code></p><div class="flex-demo" flex="j-end"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-sb"</code></p><div class="flex-demo" flex="j-sb"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-sa"</code></p><div class="flex-demo" flex="j-sa"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-se"</code></p><div class="flex-demo" flex="j-se"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-start"</code></p><div class="flex-demo flex j-start"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-c"</code></p><div class="flex-demo flex j-c"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-end"</code></p><div class="flex-demo flex j-end"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-sb"</code></p><div class="flex-demo flex j-sb"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-sa"</code></p><div class="flex-demo flex j-sa"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-se"</code></p><div class="flex-demo flex j-se"><span>One</span><span>Two</span><span>Three</span></div>
           <h4 class="heading--xs">Alignment</h4>
-          <p><code>flex="a-start"</code></p><div class="flex-demo flex-demo-tall" flex="a-start"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
-          <p><code>flex="a-c"</code></p><div class="flex-demo flex-demo-tall" flex="a-c"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
-          <p><code>flex="a-end"</code></p><div class="flex-demo flex-demo-tall" flex="a-end"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
-          <p><code>flex="a-baseline"</code></p><div class="flex-demo flex-demo-tall" flex="a-baseline"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
-          <p><code>flex="center"</code></p><div class="flex-demo flex-demo-tall" flex="center"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>class="flex a-start"</code></p><div class="flex-demo flex-demo-tall flex a-start"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>class="flex a-c"</code></p><div class="flex-demo flex-demo-tall flex a-c"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>class="flex a-end"</code></p><div class="flex-demo flex-demo-tall flex a-end"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>class="flex a-baseline"</code></p><div class="flex-demo flex-demo-tall flex a-baseline"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>class="flex center"</code></p><div class="flex-demo flex-demo-tall flex center"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
           <h4 class="heading--xs">Direction, wrapping, and inline display</h4>
-          <p><code>flex="column"</code></p><div class="flex-demo flex-demo-flow" flex="column"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="row-rev"</code></p><div class="flex-demo flex-demo-flow" flex="row-rev"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="wrap"</code></p><div class="flex-demo flex-demo-flow" flex="wrap"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="inline"</code></p><div class="flex-demo flex-demo-flow" flex="inline"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex column"</code></p><div class="flex-demo flex-demo-flow flex column"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex row-reverse"</code></p><div class="flex-demo flex-demo-flow flex row-reverse"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex wrap"</code></p><div class="flex-demo flex-demo-flow flex wrap"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex inline"</code></p><div class="flex-demo flex-demo-flow flex inline"><span>One</span><span>Two</span><span>Three</span></div>
           <h4 class="heading--xs">Responsive options — resize the window</h4>
-          <p>All responsive tokens: <code>wrap-m inline-m col-m col-m-rev col-d row-rev-d a-c-d a-start-d j-c-d j-sb-d j-end-d</code>.</p>
-          <p><code>flex="wrap-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="wrap-m"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="inline-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="inline-m"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="col-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-m"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="col-m-rev"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-m-rev"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="col-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="row-rev-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="row-rev-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="a-c-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="a-c-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="a-start-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="a-start-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-c-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-c-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-sb-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-sb-d"><span>One</span><span>Two</span><span>Three</span></div>
-          <p><code>flex="j-end-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-end-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p>Responsive modifier classes: <code>wrap-mobile inline-mobile column-mobile column-mobile-reverse column-desktop row-reverse-desktop a-c-desktop a-start-desktop j-c-desktop j-sb-desktop j-end-desktop</code>.</p>
+          <p><code>class="flex wrap-mobile"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex wrap-mobile"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex inline-mobile"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex inline-mobile"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex column-mobile"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex column-mobile"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex column-mobile-reverse"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex column-mobile-reverse"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex column-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex column-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex row-reverse-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex row-reverse-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex a-c-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex a-c-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex a-start-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex a-start-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-c-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex j-c-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-sb-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex j-sb-desktop"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>class="flex j-end-desktop"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow flex j-end-desktop"><span>One</span><span>Two</span><span>Three</span></div>
           <h4 class="heading--xs">Item options — apply to the child</h4>
-          <p><code>grow</code> fills available space, <code>grow-0</code> disables growth, and <code>no-shrink</code> prevents shrinking. Each child with a flex attribute also becomes a flex container.</p>
-          <div class="flex-demo" flex><span flex="grow-0">Fixed</span><span flex="grow">grow</span></div>
-          <div class="flex-demo flex-demo-flow" flex><span>Can shrink</span><span flex="no-shrink">no-shrink</span></div>
+          <p><code>grow</code> fills available space, <code>grow-0</code> disables growth, and <code>no-shrink</code> prevents shrinking. Use these modifiers with <code>class="flex"</code> on the child; it also becomes a flex container.</p>
+          <div class="flex-demo flex"><span class="flex grow-0">Fixed</span><span class="flex grow">grow</span></div>
+          <div class="flex-demo flex-demo-flow flex"><span>Can shrink</span><span class="flex no-shrink">no-shrink</span></div>
           <p><code>a-self-start a-self-c a-self-end</code> position individual children.</p>
-          <div class="flex-demo flex-demo-tall" flex><span flex="a-self-start">Start</span><span flex="a-self-c">Center</span><span flex="a-self-end">End</span></div>
-          <h4 class="heading--xs">Existing classes — same behavior</h4>
+          <div class="flex-demo flex-demo-tall flex"><span class="flex a-self-start">Start</span><span class="flex a-self-c">Center</span><span class="flex a-self-end">End</span></div>
+          <h4 class="heading--xs">Combine modifiers</h4>
           <p><code>class="flex j-sb a-c column-mobile"</code></p>
-          <div class="flex-demo flex j-sb a-c column-mobile"><span>One</span><span>Two</span><span>Three</span></div>
+          <div class="flex-demo j-sb a-c column-mobile flex"><span>One</span><span>Two</span><span>Three</span></div>
         </section>
         <section id="shadows">
           <h3 class="heading--s">[shadow]</h3>

@@ -1,190 +1,157 @@
 @use '../../00-sass' as *;
 
-// Class and attribute syntax share declarations; use whitespace-separated tokens.
-.flex,
-[flex] {
+// Flex containers and modifiers use class utilities.
+.flex {
   display: flex;
 }
 
-.flex.wrap,
-[flex~="wrap"] {
+.flex.wrap {
   flex-wrap: wrap;
 }
 
-.flex.wrap-mobile,
-[flex~="wrap-m"] {
+.flex.wrap-mobile {
   @include sm {
     flex-wrap: wrap;
   }
 }
 
-.flex.inline,
-[flex~="inline"] {
+.flex.inline {
   display: inline-flex;
 }
 
-.flex.inline-mobile,
-[flex~="inline-m"] {
+.flex.inline-mobile {
   @include sm {
     display: inline-flex;
   }
 }
 
-.flex.center,
-[flex~="center"] {
+.flex.center {
   align-items: center;
   justify-content: center;
 }
 
-.flex.j-sb,
-[flex~="j-sb"] {
+.flex.j-sb {
   justify-content: space-between;
 }
 
-.flex.j-c,
-[flex~="j-c"] {
+.flex.j-c {
   justify-content: center;
 }
 
-.flex.j-start,
-[flex~="j-start"] {
+.flex.j-start {
   justify-content: flex-start;
 }
 
-.flex.j-end,
-[flex~="j-end"] {
+.flex.j-end {
   justify-content: flex-end;
 }
 
-.flex.a-c,
-[flex~="a-c"] {
+.flex.a-c {
   align-items: center;
 }
 
-.flex.a-start,
-[flex~="a-start"] {
+.flex.a-start {
   align-items: flex-start;
 }
 
-.flex.a-baseline,
-[flex~="a-baseline"] {
+.flex.a-baseline {
   align-items: baseline;
 }
 
-.flex.a-end,
-[flex~="a-end"] {
+.flex.a-end {
   align-items: flex-end;
 }
 
-.flex.column,
-[flex~="column"] {
+.flex.column {
   flex-direction: column;
 }
 
-.flex.column-desktop,
-[flex~="col-d"] {
+.flex.column-desktop {
   @include lg {
     flex-direction: column;
   }
 }
 
-.flex.column-mobile,
-[flex~="col-m"] {
+.flex.column-mobile {
   @include sm {
     flex-direction: column;
   }
 }
 
-.flex.column-mobile-reverse,
-[flex~="col-m-rev"] {
+.flex.column-mobile-reverse {
   @include sm {
     flex-direction: column-reverse;
   }
 }
 
-.flex.row-reverse,
-[flex~="row-rev"] {
+.flex.row-reverse {
   flex-direction: row-reverse;
 }
 
-.flex.row-reverse-desktop,
-[flex~="row-rev-d"] {
+.flex.row-reverse-desktop {
   @include lg {
     flex-direction: row-reverse;
   }
 }
 
-.flex.a-c-desktop,
-[flex~="a-c-d"] {
+.flex.a-c-desktop {
   @include lg {
     align-items: center;
   }
 }
 
-.flex.a-start-desktop,
-[flex~="a-start-d"] {
+.flex.a-start-desktop {
   @include lg {
     align-items: flex-start;
   }
 }
 
-.flex.j-c-desktop,
-[flex~="j-c-d"] {
+.flex.j-c-desktop {
   @include lg {
     justify-content: center;
   }
 }
 
-.flex.j-sb-desktop,
-[flex~="j-sb-d"] {
+.flex.j-sb-desktop {
   @include lg {
     justify-content: space-between;
   }
 }
 
-.flex.j-end-desktop,
-[flex~="j-end-d"] {
+.flex.j-end-desktop {
   @include lg {
     justify-content: flex-end;
   }
 }
 
-.flex.j-sa,
-[flex~="j-sa"] {
+.flex.j-sa {
   justify-content: space-around;
 }
 
-.flex.j-se,
-[flex~="j-se"] {
+.flex.j-se {
   justify-content: space-evenly;
 }
 
-.flex.grow,
-[flex~="grow"] {
+.flex.grow {
   flex-grow: 1;
 }
 
-.flex.grow-0,
-[flex~="grow-0"] {
+.flex.grow-0 {
   flex-grow: 0;
 }
 
-.flex.no-shrink,
-[flex~="no-shrink"] {
+.flex.no-shrink {
   flex-shrink: 0;
 }
 
-.flex.a-self-start,
-[flex~="a-self-start"] {
+.flex.a-self-start {
   align-self: flex-start;
 }
 
-.flex.a-self-c,
-[flex~="a-self-c"] {
+.flex.a-self-c {
   align-self: center;
 }
 
-.flex.a-self-end,
-[flex~="a-self-end"] {
+.flex.a-self-end {
   align-self: flex-end;
 }
