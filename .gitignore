@@ -2,5 +2,4 @@ node_modules
 .DS_Store
 test/*.css
 test/*.css.map
-test/version.js
 WARP.md

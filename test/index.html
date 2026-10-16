@@ -6,14 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KNI CSS</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="version.js" defer></script>
   </head>
 
-  <body class="test">
+  <body id="top" class="test">
+      <header class="demo-header">
+        <div class="demo-brand">
+      <h1 class="heading--xxl"><a href="#top">kni-cascade</a></h1>
+      <a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=cb3837" alt="kni-cascade version published on npm" height="20" /></a>
+        </div>
+        <div class="demo-actions">
+
+      <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
+        </div>
+      </header>
     <div class="demo-layout">
       <aside class="demo-sidebar">
       <nav class="demo-nav" aria-label="Demo features">
-        <strong>KNI Cascade <span id="demo-version" aria-label="Package version"></span></strong>
+        <details class="demo-nav-group" name="demo-sections">
+          <summary>Scaling</summary>
+          <ul class="demo-subnav">
+            <li><a href="#scaling">Overview</a></li>
+            <li><a href="#pxv">pxv</a></li>
+            <li><a href="#scaling-controls">Controls</a></li>
+          </ul>
+        </details>
         <details class="demo-nav-group" name="demo-sections">
           <summary>Typography</summary>
           <ul class="demo-subnav">
@@ -37,20 +53,92 @@
             <li><a href="#color-utilities">Colors</a></li>
           </ul>
         </details>
-        <a href="#scaling-controls">Scaling controls</a>
+
       </nav>
       <div class="demo-size-helpers">
         <div id="dev-config--width" aria-label="Active breakpoint"></div>
         <span id="demo-viewport"></span>
       </div>
+
       </aside>
     <div class="container demo-content">
-      <h1 class="heading--xxl">KNI-Cascade</h1>
       <p class="demo-description">KNI's shared CSS foundation: responsive typography, fluid scaling, and composable utilities for consistent builds across projects.</p>
+
       <main>
+        <section id="scaling">
+          <h2 class="heading--m">Scaling</h2>
+          <p>Cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
+          <section id="pxv">
+            <h3 class="heading--s">pxv</h3>
+            <p>Think of pxv as a design-reference pixel. Write the size from your design, and Cascade scales it using the viewport and the active mobile or desktop settings.</p>
+            <pre class="code-block"><code><span class="code-tag">.card</span> {
+  <span class="code-attr">width</span>: <span class="code-string">300pxv</span>;
+  <span class="code-attr">padding</span>: <span class="code-string">24pxv</span>;
+}</code></pre>
+            <p>The PostCSS plugin converts <code>24pxv</code> to <code>calc(24 * var(--pxv-unit))</code>. One shared unit keeps every pxv value in proportion. Standard <code>px</code> values stay fixed.</p>
+            <p>The reference width defaults to 390 on mobile and 1440 on desktop. With width-only scaling, 100pxv equals 100px at the reference width and 80px at 80% of that width, before minimum and maximum limits apply.</p>
+            <dl class="docs-reference">
+              <dt>Height influence</dt><dd>Squish lets short viewports reduce the width-based scale. At 0, scaling follows width alone; at 1, the full height constraint applies.</dd>
+              <dt>Floor</dt><dd>A minimum viewport height for the height calculation, so short windows do not keep shrinking the scale indefinitely.</dd>
+              <dt>Maximum width</dt><dd>Caps the scale calculation. It does not change the layout breakpoint.</dd>
+              <dt>Reference height</dt><dd>The design height used by the height constraint. It matters when squish is above zero.</dd>
+            </dl>
+            <p>Use pxv for sizes that should scale with the composition. Keep fixed pixels where appropriate, such as a 1px border, and use percentages or layout tools for flexible structure. Typography also applies minimum font-size clamps for readability.</p>
+          </section>
+          <section id="scaling-controls">
+          <h3 class="heading--s">Scaling controls</h3>
+          <p>Adjust squish, floor, maximum width, and reference height to explore how the demo scales.</p>
+<div id="hud-container">
+
+  <div class="control-group">
+    <label for="squish">Squish: <span id="val-squish">.5</span></label>
+    <input type="range" id="squish" min="0" max="1" step="0.01" value="0.5">
+  </div>
+
+  <div class="control-group">
+    <label for="floor">Floor: <span id="val-floor">400</span></label>
+    <input type="range" id="floor" min="0" max="1000" step="10" value="400">
+  </div>
+
+  <div class="control-group">
+    <label for="max">Max: <span id="val-max">1800</span></label>
+    <input type="range" id="max" min="500" max="5000" step="50" value="1800">
+  </div>
+
+  <div class="control-group">
+    <label for="basis-h">Basis-H: <span id="val-basis-h">750</span></label>
+    <input type="range" id="basis-h" min="100" max="2000" step="10" value="750">
+  </div>
+</div>
+          <div class="box">Scaling preview</div>
+          </section>
+        </section>
         <section id="typography">
           <h2 class="heading--m">Typography</h2>
           <p>The Sass <code>type-scale()</code> mixin powers every heading and body size from one shared <code>$type-scale</code> map. Each token defines a mobile and desktop size; updating those values updates every class or component that uses that token.</p>
+          <p>Start here: update <code>$type-scale</code> in <code>scss/00-sass/_variables.scss</code> to match your project's Figma typography variables. Cascade handles mobile/desktop sizes and viewport scaling for every matching class or mixin. These are the default reference sizes, before scaling and font-size clamps.</p>
+          <div class="type-scale-table-wrap">
+            <table class="type-scale-table">
+              <caption>Default type scale — desktop and mobile reference sizes</caption>
+              <thead><tr><th scope="col">Token</th><th scope="col">Desktop</th><th scope="col">Mobile</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>heading-xxxl</code></th><td>64</td><td>38</td></tr>
+                <tr><th scope="row"><code>heading-xxl</code></th><td>60</td><td>34</td></tr>
+                <tr><th scope="row"><code>heading-xl</code></th><td>48</td><td>30</td></tr>
+                <tr><th scope="row"><code>heading-l</code></th><td>38</td><td>26</td></tr>
+                <tr><th scope="row"><code>heading-m</code></th><td>32</td><td>22</td></tr>
+                <tr><th scope="row"><code>heading-s</code></th><td>26</td><td>20</td></tr>
+                <tr><th scope="row"><code>heading-xs</code></th><td>20</td><td>18</td></tr>
+                <tr><th scope="row"><code>heading-xxs</code></th><td>18</td><td>16</td></tr>
+                <tr><th scope="row"><code>body-l</code></th><td>18</td><td>16</td></tr>
+                <tr><th scope="row"><code>body-m</code></th><td>16</td><td>14</td></tr>
+                <tr><th scope="row"><code>body-s</code></th><td>14</td><td>12</td></tr>
+                <tr><th scope="row"><code>body-xs</code></th><td>12</td><td>11</td></tr>
+                <tr><th scope="row"><code>body-xxs</code></th><td>11</td><td>10</td></tr>
+                <tr><th scope="row"><code>body-xxxs</code></th><td>10</td><td>10</td></tr>
+              </tbody>
+            </table>
+          </div>
           <section id="type-headers">
             <h3 class="heading--s">Headers</h3>
           <pre class="type-example-label"><code>heading--xxxl</code></pre>
@@ -330,7 +418,7 @@
                 <h2>Change "to-t" to try dif directions.</h2>
               </article>
             </div>
-          
+
             <div class="wrapper">
               <figure scrim>
                 <img src="https://picsum.photos/401/301" alt="">
@@ -339,7 +427,7 @@
                 <h2>default value is to-t-tr</h2>
               </article>
             </div>
-          
+
             <div class="wrapper">
               <figure scrim="to-br">
                 <img src="https://picsum.photos/402/301" alt="">
@@ -348,7 +436,7 @@
                 <h2>to-br</h2>
               </article>
             </div>
-          
+
             <div class="wrapper third">
               <figure scrim="to-bl 50%" style="--scrim-color:0,20,72">
                 <img src="https://picsum.photos/404/301" alt="">
@@ -417,33 +505,6 @@
 
         </section>
         </section>
-        <section id="scaling-controls">
-          <h2 class="heading--m">Scaling controls</h2>
-          <p>Adjust squish, floor, maximum width, and reference height to explore how the demo scales.</p>
-<div id="hud-container">
-  
-  <div class="control-group">
-    <label for="squish">Squish: <span id="val-squish">.5</span></label>
-    <input type="range" id="squish" min="0" max="1" step="0.01" value="0.5">
-  </div>
-
-  <div class="control-group">
-    <label for="floor">Floor: <span id="val-floor">400</span></label>
-    <input type="range" id="floor" min="0" max="1000" step="10" value="400">
-  </div>
-
-  <div class="control-group">
-    <label for="max">Max: <span id="val-max">1800</span></label>
-    <input type="range" id="max" min="500" max="5000" step="50" value="1800">
-  </div>
-
-  <div class="control-group">
-    <label for="basis-h">Basis-H: <span id="val-basis-h">750</span></label>
-    <input type="range" id="basis-h" min="100" max="2000" step="10" value="750">
-  </div>
-</div>
-          <div class="box">Scaling preview</div>
-        </section>
       </main>
     </div>
     </div>
@@ -464,10 +525,10 @@ const setupHUD = () => {
 
     slider.addEventListener('input', (e) => {
       const value = e.target.value;
-      
+
       // Update the CSS variable on the :root element
       document.documentElement.style.setProperty(item.varName, value);
-      
+
       // Update the number shown in the HUD
       display.textContent = value;
     });
@@ -505,9 +566,14 @@ const setupNavigation = () => {
   };
   const update = () => {
     let current = targets[0];
+    let latestTop = -Infinity;
     targets.forEach(target => {
-      if (target.getBoundingClientRect().top <= 100 &&
-          target.getBoundingClientRect().top >= current.getBoundingClientRect().top) current = target;
+      const top = target.getBoundingClientRect().top;
+      const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+      if (top <= offset + 2 && top >= latestTop) {
+        current = target;
+        latestTop = top;
+      }
     });
     links.forEach(link => {
       const active = link.hash === `#${current.id}`;

@@ -15,7 +15,7 @@
 
 body {
   background: var(--body-bg);
-  padding: 15pxv 0;
+  padding: 0;
 
 }
 
@@ -310,7 +310,8 @@ section {
   position: relative;
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
-  gap: 48px;
+  padding-top: 24px;
+  gap: 72px;
   padding-inline: 24px 48px;
 
   &::before {
@@ -326,7 +327,7 @@ section {
 }
 
 .demo-nav {
-  max-height: calc(100svh - 48px);
+  max-height: calc(100svh - 112px);
   overflow-y: auto;
 
   summary {
@@ -434,12 +435,14 @@ section {
   }
 
   #utilities > section,
-  #typography > section {
+  #typography > section,
+  #scaling > section {
     margin-top: 48px;
   }
 
   #utilities > section > h3,
-  #typography > section > h3 {
+  #typography > section > h3,
+  #scaling > section > h3 {
     font-size: 26px;
     line-height: 1.25;
     margin-bottom: 20px;
@@ -455,7 +458,7 @@ section {
   min-width: 0;
 
   section[id] {
-    scroll-margin-top: 64px;
+    scroll-margin-top: 112px;
   }
 }
 
@@ -680,13 +683,7 @@ section {
   }
 }
 
-#demo-version {
-  margin-left: 4px;
-  color: #737980;
-  font-size: 12px;
-  font-weight: 400;
-  white-space: nowrap;
-}
+
 
 .demo-description {
   max-width: 60ch;
@@ -696,10 +693,42 @@ section {
   line-height: 1.6;
 }
 
+.demo-github {
+  display: inline-flex;
+  align-items: center;
+
+  img {
+    width: auto;
+    height: 20px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0061c7;
+    outline-offset: 4px;
+  }
+}
+
+.demo-npm {
+  display: inline-flex;
+  margin-left: 0;
+  vertical-align: middle;
+
+  img {
+    width: auto;
+    height: 20px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0061c7;
+    outline-offset: 4px;
+  }
+}
+
 
 .demo-sidebar {
   position: sticky;
-  top: 24px;
+  top: 60px;
+  margin-top: -12px;
   align-self: start;
 
 }
@@ -785,5 +814,115 @@ section {
 @media (width < 900px) {
   .text-helper-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.demo-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 48px;
+  padding: 6px 24px;
+  background: #222;
+  color: #fff;
+
+  h1 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    a {
+      color: inherit;
+      font-size: inherit;
+      text-decoration: none;
+
+      &:focus-visible {
+        outline: 2px solid currentcolor;
+        outline-offset: 4px;
+      }
+    }
+  }
+
+  .demo-description {
+    margin: 4px 0 0;
+    max-width: none;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+.demo-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (width < 768px) {
+  .demo-header {
+    gap: 12px;
+    padding-inline: 16px;
+
+    h1 {
+      font-size: 16px;
+    }
+
+    .demo-description {
+      display: none;
+    }
+  }
+
+  .demo-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+}
+
+
+.demo-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.type-scale-table-wrap {
+  max-width: 680px;
+  margin-block: 24px 40px;
+  overflow-x: auto;
+}
+
+.type-scale-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+
+  caption {
+    padding-bottom: 12px;
+    color: #606872;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e3e6e9;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  thead th {
+    background: #edf0f3;
+    font-weight: 600;
+  }
+
+  tbody th {
+    font-weight: 400;
   }
 }
