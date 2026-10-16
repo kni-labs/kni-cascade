@@ -24,6 +24,8 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 
 ### Fixed
 
+- Derived the scaling switch and mobile/desktop limits from `$tm`, keeping them synchronized with layout helpers and the default typography breakpoint when customized.
+
 - Prevented hover shadow settings from overriding resting settings before interaction, including when hover elevation is lower than resting elevation.
 - Corrected the Gulp build task to return its stream directly, so task completion waits for the build stream instead of an immediately resolved async return.
 
