@@ -200,6 +200,12 @@ section {
   accent-color: #00e5ff;
 }
 
+.quote-demo {
+  max-width: 38rem;
+  margin-block: 1.5rem;
+  border-inline-start: 1px solid cadetblue;
+}
+
 .scrim-demo-row {
   display: flex; 
   gap: 10px;

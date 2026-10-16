@@ -109,6 +109,24 @@
           <p class="negative">i have a negative margin</p>
           <div id="dev-config--width"></div>
         </section>
+        <section id="hanging-quotes">
+          <h2 class="heading--m">Hanging quotes</h2>
+          <p>Opening quotes hang outside the alignment guide. Browsers without native support use the configurable first-line indent.</p>
+          <div class="quote-demo">
+            <p class="hanging-quote body--l">“Good typography lets the words do the talking. This longer quote wraps onto another line so you can compare the opening punctuation with the text below it.”</p>
+          </div>
+          <p>Custom offset for a different font:</p>
+          <div class="quote-demo" style="font-family: Georgia, serif; --quote-hang: -0.4em;">
+            <p class="hanging-quote body--l">“Each typeface draws quotation marks differently. Adjust the fallback offset to match the font used by your project.”</p>
+          </div>
+          <p>Disabled: native hanging set to none, fallback offset set to zero.</p>
+          <div class="quote-demo" style="--hanging-punctuation: none; --quote-hang: 0;">
+            <p class="hanging-quote body--l">“This opening quote stays inside the alignment guide.”</p>
+          </div>
+          <div class="quote-demo">
+            <p class="body--l">Ordinary text has no fallback indent. Only text marked with the hanging-quote class receives it.</p>
+          </div>
+        </section>
         <section class="scrim-demo">
           <h4 class="heading--m">Scrim</h4>
           <div class="scrim-demo-row">
