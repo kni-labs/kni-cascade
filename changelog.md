@@ -12,6 +12,10 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 
 - Added a strict validation command, removed dependency reinstalling from the prepublish hook, and allowed npm 11 for OIDC publishing.
 
+### Fixed
+
+- Restored missing platform-specific optional dependencies in the lockfile and pinned validation and publishing to the same npm version, preventing a clean-install failure in the release job.
+
 ## 1.5.0 — 2026-10-16
 
 ### Added
