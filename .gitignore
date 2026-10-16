@@ -1,5 +1,5 @@
 node_modules
 .DS_Store
-test/*.css
-test/*.css.map
+demo/*.css
+demo/*.css.map
 WARP.md

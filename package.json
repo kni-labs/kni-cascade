@@ -1,6 +1,6 @@
 {
   "name": "kni-cascade",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "KNI Cascade — an opinionated SCSS engine and single source of truth for design scaling.",
   "main": "scss",
   "engines": {
@@ -8,7 +8,7 @@
     "npm": ">=8 <=10"
   },
   "directories": {
-    "test": "test"
+    "example": "demo"
   },
   "scripts": {
     "build": "npm run gulp-build",
@@ -16,7 +16,7 @@
     "gulp": "gulp",
     "gulp-build": "gulp build-sass",
     "http-server": "http-server",
-    "serve": "cd test && npm run http-server",
+    "serve": "cd demo && npm run http-server",
     "stylelint": "npx stylelint \"**/*.{css,sass,scss}\"",
     "prepare": "husky install && npm run husky:init",
     "husky:init": "test -f .husky/pre-commit || npm run husky:create",

@@ -15,6 +15,8 @@
   --text-wrap: pretty;        // default
   --letter-spacing: normal;   // 0.01em etc - match figma
   --type-margin: 15pxv;       // Bottom spacing under type elements todo: replace with spacing var
+  --hanging-punctuation: first allow-end last;
+  --quote-hang: -0.45em; // Font-dependent fallback; set to 0 to disable
 }
 
 // Toggle fluid-type in 00-sass/variables
@@ -28,6 +30,19 @@ html {
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
   text-wrap: var(--text-wrap);
+  hanging-punctuation: var(--hanging-punctuation);
+}
+
+// Apply to the text element beginning with a quote, not its wrapper.
+// Native hanging is inherited globally; this also permits local overrides.
+.hanging-quote {
+  hanging-punctuation: var(--hanging-punctuation);
+}
+
+@supports not (hanging-punctuation: first) {
+  .hanging-quote {
+    text-indent: var(--quote-hang);
+  }
 }
 
 // Rules for all text elements
@@ -142,6 +157,14 @@ tt {
   letter-spacing: 0.05em;
 }
 
+.w--100 {
+  font-weight: 100;
+}
+
+.w--200 {
+  font-weight: 200;
+}
+
 .w--300 {
   font-weight: 300;
 }
@@ -164,6 +187,10 @@ tt {
 
 .w--800 {
   font-weight: 800;
+}
+
+.w--900 {
+  font-weight: 900;
 }
 
 .wrap-pretty {
