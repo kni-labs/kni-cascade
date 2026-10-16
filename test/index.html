@@ -127,8 +127,41 @@
             <p class="body--l">Ordinary text has no fallback indent. Only text marked with the hanging-quote class receives it.</p>
           </div>
         </section>
+        <section id="shadows">
+          <h2 class="heading--m">Shadows</h2>
+          <p><a href="https://codepen.io/dbox/pen/emdzLLe" target="_blank" rel="noopener noreferrer">Explore the shadow CodePen</a></p>
+          <p>Use shadow for a persistent shadow. Elevation presets run from 10 (tight) to 50 (broad). Bare shadow defaults to elevation 30 with intensity 0.08.</p>
+          <h3 class="heading--s">Elevation — same .1 intensity</h3>
+          <div class="shadow-demo-grid">
+            <div class="shadow-demo-card" shadow="10 .1"><strong>Elevation 10</strong><code>shadow="10 .1"</code></div>
+            <div class="shadow-demo-card" shadow="20 .1"><strong>Elevation 20</strong><code>shadow="20 .1"</code></div>
+            <div class="shadow-demo-card" shadow="30 .1"><strong>Elevation 30</strong><code>shadow="30 .1"</code></div>
+            <div class="shadow-demo-card" shadow="40 .1"><strong>Elevation 40</strong><code>shadow="40 .1"</code></div>
+            <div class="shadow-demo-card" shadow="50 .1"><strong>Elevation 50</strong><code>shadow="50 .1"</code></div>
+          </div>
+          <h3 class="heading--s">Intensity — same elevation 20</h3>
+          <p>Tokens .1 through .9 set the base alpha directly; each shadow layer also applies its own weight.</p>
+          <div class="shadow-demo-grid">
+            <div class="shadow-demo-card" shadow="20 .1"><strong>Intensity .1</strong><code>shadow="20 .1"</code></div>
+            <div class="shadow-demo-card" shadow="20 .3"><strong>Intensity .3</strong><code>shadow="20 .3"</code></div>
+            <div class="shadow-demo-card" shadow="20 .5"><strong>Intensity .5</strong><code>shadow="20 .5"</code></div>
+          </div>
+          <h3 class="heading--s">Defaults and color</h3>
+          <div class="shadow-demo-grid">
+            <div class="shadow-demo-card" shadow><strong>Default</strong><code>shadow</code></div>
+            <div class="shadow-demo-card" shadow="20 .2 blue"><strong>Blue preset</strong><code>shadow="20 .2 blue"</code></div>
+            <div class="shadow-demo-card" shadow="20 .2" style="--shadow-color: 120, 40, 90;"><strong>Custom color</strong><code>--shadow-color: 120, 40, 90</code></div>
+          </div>
+          <h3 class="heading--s">Hover or keyboard focus</h3>
+          <p>Hover these buttons or reach them with Tab. Their shadows fade in without changing layout. Reduced-motion settings disable the transition.</p>
+          <div class="shadow-demo-grid">
+            <button type="button" class="shadow-demo-card" shadow-hover><strong>Default interaction</strong><code>shadow-hover</code></button>
+            <button type="button" class="shadow-demo-card" shadow-hover="20 .2 blue"><strong>Blue interaction</strong><code>shadow-hover="20 .2 blue"</code></button>
+          </div>
+        </section>
         <section class="scrim-demo">
           <h4 class="heading--m">Scrim</h4>
+          <p><a href="https://codepen.io/editor/dbox/pen/01a141ca-43cc-7778-aa08-2f78ee8aece5" target="_blank" rel="noopener noreferrer">Explore the scrim preview on CodePen</a></p>
           <div class="scrim-demo-row">
             <div class="wrapper">
               <figure scrim="to-t .9 75% ">
