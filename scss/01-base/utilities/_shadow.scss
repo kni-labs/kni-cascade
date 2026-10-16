@@ -8,7 +8,7 @@
   --shadow-spread: -1px;
   --shadow-active: 0;
 
-  transition: box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 0.4s var(--easing);
   box-shadow:
     0 calc(var(--shadow-elevation) * 1px) calc(var(--shadow-elevation) * 2px) 0
       rgba(var(--shadow-color), calc(var(--shadow-opacity) * var(--shadow-weight) * 0.4 * var(--shadow-active))),
@@ -18,9 +18,10 @@
       rgba(var(--shadow-color), calc(var(--shadow-opacity) * var(--shadow-weight) * 0.2 * var(--shadow-active))),
     0 calc(var(--shadow-elevation) * 8px) calc(var(--shadow-elevation) * 16px) var(--shadow-spread)
       rgba(var(--shadow-color), calc(var(--shadow-opacity) * var(--shadow-weight) * 0.1 * var(--shadow-active))),
-    0 calc(var(--shadow-elevation) * 16px) calc(var(--shadow-elevation) * 32px) var(--shadow-spread)
+    // Keep the faint outer layers close to the main shadow to limit paint area.
+    0 calc(var(--shadow-elevation) * 10px) calc(var(--shadow-elevation) * 20px) var(--shadow-spread)
       rgba(var(--shadow-color), calc(var(--shadow-opacity) * var(--shadow-weight) * 0.05 * var(--shadow-active))),
-    0 calc(var(--shadow-elevation) * 32px) calc(var(--shadow-elevation) * 64px) var(--shadow-spread)
+    0 calc(var(--shadow-elevation) * 12px) calc(var(--shadow-elevation) * 24px) var(--shadow-spread)
       rgba(var(--shadow-color), calc(var(--shadow-opacity) * var(--shadow-weight) * 0.02 * var(--shadow-active)));
 }
 
@@ -30,87 +31,87 @@
 }
 
 [shadow~="10"],
-[shadow-hover~="10"] {
+[shadow-hover~="10"]:is(:hover, :focus-visible) {
   --shadow-elevation: 1.5;
   --shadow-weight: 0.8;
   --shadow-spread: 0px;
 }
 
 [shadow~="20"],
-[shadow-hover~="20"] {
+[shadow-hover~="20"]:is(:hover, :focus-visible) {
   --shadow-elevation: 4;
   --shadow-weight: 1;
   --shadow-spread: 0px;
 }
 
 [shadow~="30"],
-[shadow-hover~="30"] {
+[shadow-hover~="30"]:is(:hover, :focus-visible) {
   --shadow-elevation: 12;
   --shadow-weight: 1.3;
   --shadow-spread: -1px;
 }
 
 [shadow~="40"],
-[shadow-hover~="40"] {
+[shadow-hover~="40"]:is(:hover, :focus-visible) {
   --shadow-elevation: 28;
   --shadow-weight: 1.8;
   --shadow-spread: -4px;
 }
 
 [shadow~="50"],
-[shadow-hover~="50"] {
+[shadow-hover~="50"]:is(:hover, :focus-visible) {
   --shadow-elevation: 52;
   --shadow-weight: 2.8;
   --shadow-spread: -10px;
 }
 
 [shadow~=".1"],
-[shadow-hover~=".1"] {
+[shadow-hover~=".1"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.1;
 }
 
 [shadow~=".2"],
-[shadow-hover~=".2"] {
+[shadow-hover~=".2"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.2;
 }
 
 [shadow~=".3"],
-[shadow-hover~=".3"] {
+[shadow-hover~=".3"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.3;
 }
 
 [shadow~=".4"],
-[shadow-hover~=".4"] {
+[shadow-hover~=".4"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.4;
 }
 
 [shadow~=".5"],
-[shadow-hover~=".5"] {
+[shadow-hover~=".5"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.5;
 }
 
 [shadow~=".6"],
-[shadow-hover~=".6"] {
+[shadow-hover~=".6"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.6;
 }
 
 [shadow~=".7"],
-[shadow-hover~=".7"] {
+[shadow-hover~=".7"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.7;
 }
 
 [shadow~=".8"],
-[shadow-hover~=".8"] {
+[shadow-hover~=".8"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.8;
 }
 
 [shadow~=".9"],
-[shadow-hover~=".9"] {
+[shadow-hover~=".9"]:is(:hover, :focus-visible) {
   --shadow-opacity: 0.9;
 }
 
 [shadow~="blue"],
-[shadow-hover~="blue"] {
+[shadow-hover~="blue"]:is(:hover, :focus-visible) {
   --shadow-color: 0, 20, 190;
 }
 

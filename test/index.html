@@ -1,66 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <link rel="icon" type="image/ico" href="https://www.kurtnoble.com/img/favicon.ico" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KNI CSS</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="version.js" defer></script>
   </head>
 
   <body class="test">
-    <div class="container">
-      <div id="width" class="body--xxs caps">
-        Current width: <span class="currentWidth"></span>
+    <div class="demo-layout">
+      <aside class="demo-sidebar">
+      <nav class="demo-nav" aria-label="Demo features">
+        <strong>KNI Cascade <span id="demo-version" aria-label="Package version"></span></strong>
+        <details class="demo-nav-group" name="demo-sections">
+          <summary>Typography</summary>
+          <ul class="demo-subnav">
+            <li><a href="#typography">Overview</a></li>
+            <li><a href="#type-headers">Headers</a></li>
+            <li><a href="#type-body">Body</a></li>
+            <li><a href="#type-caps">Caps</a></li>
+            <li><a href="#hanging-quotes">Hanging quotes</a></li>
+            <li><a href="#text-helpers">Text helpers</a></li>
+          </ul>
+        </details>
+        <details class="demo-nav-group" name="demo-sections">
+          <summary>Utilities</summary>
+          <ul class="demo-subnav">
+            <li><a href="#utilities">Overview</a></li>
+            <li><a href="#flex">[flex]</a></li>
+            <li><a href="#shadows">[shadow]</a></li>
+            <li><a href="#scrim">[scrim]</a></li>
+            <li><a href="#layout-utilities">Layout &amp; visibility</a></li>
+            <li><a href="#media-utilities">Images &amp; positioning</a></li>
+            <li><a href="#color-utilities">Colors</a></li>
+          </ul>
+        </details>
+        <a href="#scaling-controls">Scaling controls</a>
+      </nav>
+      <div class="demo-size-helpers">
+        <div id="dev-config--width" aria-label="Active breakpoint"></div>
+        <span id="demo-viewport"></span>
       </div>
-      <script>
-        const width = document.querySelector('#width span.currentWidth');
-
-        window.onload = function () {
-          width.textContent = window.innerWidth;
-        };
-        window.onresize = function () {
-          width.textContent = window.innerWidth;
-        };
-      </script>
-
+      </aside>
+    <div class="container demo-content">
       <h1 class="heading--xxl">KNI-Cascade</h1>
-      <p>This is <a href="https://github.com/kni-labs/kni-cascade">how we CSS.</a></p>
-      <div class="box">I'm a cool box</div>
+      <p class="demo-description">KNI's shared CSS foundation: responsive typography, fluid scaling, and composable utilities for consistent builds across projects.</p>
       <main>
         <section id="typography">
-          <h4 class="heading--m">Typography</h4>
-          <hr />
-          <br />
+          <h2 class="heading--m">Typography</h2>
+          <p>The Sass <code>type-scale()</code> mixin powers every heading and body size from one shared <code>$type-scale</code> map. Each token defines a mobile and desktop size; updating those values updates every class or component that uses that token.</p>
+          <section id="type-headers">
+            <h3 class="heading--s">Headers</h3>
+          <pre class="type-example-label"><code>heading--xxxl</code></pre>
+          <h1 class="heading--xxxl">A shared foundation for every design</h1>
+          <pre class="type-example-label"><code>heading--xxl</code></pre>
           <h1 class="heading--xxl">Fluid grids jump quickly when pixel boundaries fade</h1>
           <p>here's a paragraph</p>
+          <pre class="type-example-label"><code>heading--xl</code></pre>
           <h2 class="heading--xl">Bold layers of type mix sharp quartz and new glyphs</h2>
           <p>here's a paragraph</p>
+          <pre class="type-example-label"><code>heading--l</code></pre>
           <h3 class="heading--l">Jazzy mockups bring quirky UX flow and crisp detail</h3>
           <p>here's a paragraph</p>
+          <pre class="type-example-label"><code>heading--m</code></pre>
           <h4 class="heading--m">Quick designers juggle hazy fonts, warm color, and depth</h4>
           <p>here's a paragraph</p>
+          <pre class="type-example-label"><code>heading--s</code></pre>
           <h5 class="heading--s">Twelve bright panels form a just-in-time CSS layout</h5>
           <p>here's a paragraph</p>
+          <pre class="type-example-label"><code>heading--xs</code></pre>
           <h6 class="heading--xs">Dynamic boxes flex through jumpy scroll and radiant hue</h6>
-          <p class="body-l">
+          <pre class="type-example-label"><code>heading--xxs</code></pre>
+          <h6 class="heading--xxs">Small headings keep the hierarchy clear</h6>
+          </section>
+          <section id="type-body">
+            <h3 class="heading--s">Body</h3>
+          <pre class="type-example-label"><code>body--l</code></pre>
+          <p class="body--l">
             Alex, Brianna, Charlie, Danielle, Elijah, Fiona, Gabriel, Harper, Isaac, Jasmine, Kieran, Lillian, Mateo,
             Nadia, Oliver, Penelope, Quinn, Rafael, Sophia, Tristan, Ursula, Victor, Willow, Xavier, Yasmine, and Zachary
             gathered in the quirky old library, flipping through dusty books while exchanging jokes.
           </p>
+          <pre class="type-example-label"><code>body--l longform</code></pre>
           <p class="body--l longform">
             From the highest shelf, an ancient volume tumbled, making Jasmine yelp and Quinn laugh. “Unexpected surprises
             keep things exciting!” Xavier quipped, adjusting his glasses, amazed by the bizarre discovery.
           </p>
+          <pre class="type-example-label"><code>body--m</code></pre>
           <p class="body--m">
             The efficient officer shuffled swiftly through the artificial lights, affixing a final note to the affable
             florist’s door. He studied an old encyclopædia and an œuvre on mediæval craftsmanship while enjoying a hors
             d’œuvre on the café’s terrace in the straße
           </p>
+          <pre class="type-example-label"><code>body--m longform</code></pre>
           <p class="body--m longform">
             AVoid wavy kerning! Typographers often fix TA, WA, To, and VA pairs while refining ‘tight’ and ‘loose’ spaces.
             “It’s tricky!” Xavier joked, adjusting 7.9° of alignment.
           </p>
+          <pre class="type-example-label"><code>body--s</code></pre>
           <p class="body--s">
             Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome is
             increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial activation,
@@ -68,6 +107,7 @@
             mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease remain
             undefined.
           </p>
+          <pre class="type-example-label"><code>body--xs</code></pre>
           <p class="body--xs">
             Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome is
             increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial activation,
@@ -75,6 +115,7 @@
             mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease remain
             undefined.
           </p>
+          <pre class="type-example-label"><code>body--xxs</code></pre>
           <p class="body--xxs">
             Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome is
             increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial activation,
@@ -82,6 +123,7 @@
             mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease remain
             undefined.
           </p>
+          <pre class="type-example-label"><code>body--xxxs</code></pre>
           <p class="body--xxxs">
             Mapping Cellular Networks for Microbiome Contributions to Neurodegeneration. The gut microbiome is
             increasingly implicated in neurodegenerative diseases, with links to amyloid pathology, microglial activation,
@@ -89,28 +131,37 @@
             mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease remain
             undefined.
           </p>
+          <pre class="type-example-label"><code>color-test body--s</code></pre>
           <div class=" color-test body--s">
             <p>asdfasdf</p>
             <ul>
               <li>asdfasdf</li>
             </ul>
           </div>
+          </section>
+          <section id="type-caps">
+            <h3 class="heading--s">Caps</h3>
+          <pre class="type-example-label"><code>body--l caps</code></pre>
           <p class="body--l caps">Harvard medical school</p>
+          <pre class="type-example-label"><code>body--m caps</code></pre>
           <p class="body--m caps">Harvard medical school</p>
+          <pre class="type-example-label"><code>body--s caps</code></pre>
           <p class="body--s caps">Harvard medical school</p>
+          <pre class="type-example-label"><code>body--xs caps</code></pre>
           <p class="body--xs caps">Harvard medical school</p>
+          <pre class="type-example-label"><code>body--xxs caps</code></pre>
           <p class="body--xxs caps">Harvard medical school</p>
+          <pre class="type-example-label"><code>body--xxs caps</code></pre>
           <p class="body--xxs caps">Harvard medical school</p>
+          </section>
           <div>
-            <pre><code>this is some code</code></pre>
+            <pre class="code-block"><code>this is some code</code></pre>
           </div>
           <button>i'm a button</button>
 
           <p class="negative">i have a negative margin</p>
-          <div id="dev-config--width"></div>
-        </section>
-        <section id="hanging-quotes">
-          <h2 class="heading--m">Hanging quotes</h2>
+          <section id="hanging-quotes">
+          <h3 class="heading--s">Hanging quotes</h3>
           <p>Opening quotes hang outside the alignment guide. Browsers without native support use the configurable first-line indent.</p>
           <div class="quote-demo">
             <p class="hanging-quote body--l">“Good typography lets the words do the talking. This longer quote wraps onto another line so you can compare the opening punctuation with the text below it.”</p>
@@ -126,20 +177,112 @@
           <div class="quote-demo">
             <p class="body--l">Ordinary text has no fallback indent. Only text marked with the hanging-quote class receives it.</p>
           </div>
+          </section>
+          <section id="text-helpers">
+            <h3 class="heading--s">Text helpers</h3>
+            <h4>Alignment</h4>
+            <p>Apply alignment to a text element or its container.</p>
+            <div class="text-helper-grid">
+              <div><p><code>Default (left)</code></p><div class="text-helper-sample">Good typography makes room for every word.</div></div>
+              <div><p><code>.text-center</code></p><div class="text-helper-sample text-center">Good typography makes room for every word.</div></div>
+              <div><p><code>.text-right</code></p><div class="text-helper-sample text-right">Good typography makes room for every word.</div></div>
+            </div>
+            <h4>Wrapping</h4>
+            <p>Compare the same headline at equal widths. Balance aims for similar line lengths; pretty improves line breaks, including short last lines. Results depend on the font, available width, and browser support.</p>
+            <div class="text-helper-grid">
+              <div><p><code>Normal</code></p><div class="text-helper-sample text-helper-headline ">Thoughtful typography brings clarity to every screen and every story.</div></div>
+              <div><p><code>.wrap-pretty</code></p><div class="text-helper-sample text-helper-headline wrap-pretty">Thoughtful typography brings clarity to every screen and every story.</div></div>
+              <div><p><code>.wrap-balance</code></p><div class="text-helper-sample text-helper-headline wrap-balance">Thoughtful typography brings clarity to every screen and every story.</div></div>
+            </div>
+            <h4>Longform reading</h4>
+            <p>Use <code>.longform</code> to increase line-height to 1.5 for longer passages.</p>
+            <div class="text-helper-grid text-helper-pair">
+              <div><p><code>Default — 1.35</code></p><div class="text-helper-sample ">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
+              <div><p><code>.longform — 1.5</code></p><div class="text-helper-sample longform">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
+            </div>
+          <h4>Font weight</h4>
+          <p>Font-weight classes run from <code>.w--100</code> through <code>.w--900</code> in increments of 100. Load matching font weights for accurate results.</p>
+          <p class="w--100"><code>.w--100</code> — Thin text</p>
+          <p class="w--200"><code>.w--200</code> — Extra-light text</p>
+          <p class="w--300"><code>.w--300</code> — Light text</p>
+          <p class="w--400"><code>.w--400</code> — Regular text</p>
+          <p class="w--500"><code>.w--500</code> — Medium text</p>
+          <p class="w--600"><code>.w--600</code> — Semibold text</p>
+          <p class="w--700"><code>.w--700</code> — Bold text</p>
+          <p class="w--800"><code>.w--800</code> — Extra-bold text</p>
+          <p class="w--900"><code>.w--900</code> — Black text</p>
+          </section>
+        </section>
+        <section id="utilities">
+          <h2 class="heading--m">Utilities</h2>
+          <p>Only include what you need. In your project's copy of <code>scss/01-base/utilities/_index.scss</code>, comment out unused utilities and rebuild to remove their CSS from the output:</p>
+          <pre class="code-block"><code><span class="code-attr">@forward</span> <span class="code-string">'dev'</span>;
+<span class="code-attr">@forward</span> <span class="code-string">'display'</span>;
+<span class="code-attr">@forward</span> <span class="code-string">'flex'</span>;
+<span class="code-attr">@forward</span> <span class="code-string">'spacing'</span>;
+<span class="code-comment">// @forward 'scrim';</span>
+<span class="code-comment">// @forward 'shadow';</span></code></pre>
+          <p>Attribute selectors keep a utility's options together instead of mixing them into a long class list. For example, <code>flex="j-sb a-c col-m"</code> describes the layout, while <code>shadow="20 .1"</code> controls its shadow. Each utility reads whitespace-separated options, leaving <code>class</code> for your component names and other helpers. These are ordinary CSS selectors, so no JavaScript is needed.</p>
+        <section id="flex">
+          <h3 class="heading--s">[flex]</h3>
+          <p><a href="https://codepen.io/dbox/pen/MYjEpRX" target="_blank" rel="noopener noreferrer">Explore the flex CodePen</a></p>
+          <p>Use bare <code>flex</code> for a flex container, or combine whitespace-separated options such as <code>flex="j-sb a-c col-m wrap"</code>. Existing <code>class="flex j-sb a-c column-mobile wrap"</code> markup still works.</p>
+          <p>Justification follows the main axis; alignment follows the cross axis. These axes swap when using a column. Options ending in <code>-m</code> apply below the shared tablet breakpoint; <code>-d</code> options apply at and above it.</p>
+          <h4 class="heading--xs">Justification</h4>
+          <p><code>flex="j-start"</code></p><div class="flex-demo" flex="j-start"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-c"</code></p><div class="flex-demo" flex="j-c"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-end"</code></p><div class="flex-demo" flex="j-end"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-sb"</code></p><div class="flex-demo" flex="j-sb"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-sa"</code></p><div class="flex-demo" flex="j-sa"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-se"</code></p><div class="flex-demo" flex="j-se"><span>One</span><span>Two</span><span>Three</span></div>
+          <h4 class="heading--xs">Alignment</h4>
+          <p><code>flex="a-start"</code></p><div class="flex-demo flex-demo-tall" flex="a-start"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>flex="a-c"</code></p><div class="flex-demo flex-demo-tall" flex="a-c"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>flex="a-end"</code></p><div class="flex-demo flex-demo-tall" flex="a-end"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>flex="a-baseline"</code></p><div class="flex-demo flex-demo-tall" flex="a-baseline"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <p><code>flex="center"</code></p><div class="flex-demo flex-demo-tall" flex="center"><span>One</span><span class="flex-demo-large">Two</span><span>Three</span></div>
+          <h4 class="heading--xs">Direction, wrapping, and inline display</h4>
+          <p><code>flex="column"</code></p><div class="flex-demo flex-demo-flow" flex="column"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="row-rev"</code></p><div class="flex-demo flex-demo-flow" flex="row-rev"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="wrap"</code></p><div class="flex-demo flex-demo-flow" flex="wrap"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="inline"</code></p><div class="flex-demo flex-demo-flow" flex="inline"><span>One</span><span>Two</span><span>Three</span></div>
+          <h4 class="heading--xs">Responsive options — resize the window</h4>
+          <p>All responsive tokens: <code>wrap-m inline-m col-m col-m-rev col-d row-rev-d a-c-d a-start-d j-c-d j-sb-d j-end-d</code>.</p>
+          <p><code>flex="wrap-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="wrap-m"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="inline-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="inline-m"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="col-m"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-m"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="col-m-rev"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-m-rev"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="col-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="col-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="row-rev-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="row-rev-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="a-c-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="a-c-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="a-start-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="a-start-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-c-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-c-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-sb-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-sb-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <p><code>flex="j-end-d"</code></p><div class="flex-demo flex-demo-tall flex-demo-flow" flex="j-end-d"><span>One</span><span>Two</span><span>Three</span></div>
+          <h4 class="heading--xs">Item options — apply to the child</h4>
+          <p><code>grow</code> fills available space, <code>grow-0</code> disables growth, and <code>no-shrink</code> prevents shrinking. Each child with a flex attribute also becomes a flex container.</p>
+          <div class="flex-demo" flex><span flex="grow-0">Fixed</span><span flex="grow">grow</span></div>
+          <div class="flex-demo flex-demo-flow" flex><span>Can shrink</span><span flex="no-shrink">no-shrink</span></div>
+          <p><code>a-self-start a-self-c a-self-end</code> position individual children.</p>
+          <div class="flex-demo flex-demo-tall" flex><span flex="a-self-start">Start</span><span flex="a-self-c">Center</span><span flex="a-self-end">End</span></div>
+          <h4 class="heading--xs">Existing classes — same behavior</h4>
+          <p><code>class="flex j-sb a-c column-mobile"</code></p>
+          <div class="flex-demo flex j-sb a-c column-mobile"><span>One</span><span>Two</span><span>Three</span></div>
         </section>
         <section id="shadows">
-          <h2 class="heading--m">Shadows</h2>
+          <h3 class="heading--s">[shadow]</h3>
           <p><a href="https://codepen.io/dbox/pen/emdzLLe" target="_blank" rel="noopener noreferrer">Explore the shadow CodePen</a></p>
-          <p>Like scrim, shadow accepts space-separated options: <strong>elevation, intensity, and optional color</strong>. For example, <code>shadow="20 .1 blue"</code> creates a low blue shadow. Options can appear in any order.</p>
-          <ul>
-            <li><strong>Elevation:</strong> <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, or <code>50</code>, from a tight shadow to a broad, lifted shadow. These are preset names, not pixel measurements.</li>
-            <li><strong>Intensity:</strong> <code>.1</code> through <code>.9</code>, from lighter to darker. This sets the base opacity; individual shadow layers also apply weights, so it is not the final combined opacity.</li>
-            <li><strong>Color:</strong> black by default. Add <code>blue</code> for the blue preset, or set <code>style="--shadow-color: 120, 40, 90;"</code> for a custom RGB color.</li>
-            <li><strong>Hover only:</strong> use <code>shadow-hover="30 .1"</code>. It also activates on keyboard focus for buttons and links.</li>
-            <li><strong>Resting and hover:</strong> combine <code>shadow="20 .1"</code> with <code>shadow-hover="50 .2"</code>. Hover settings override only the options supplied; omitted options retain the resting values.</li>
-          </ul>
+          <p>Combine elevation, intensity, and an optional color. Options can appear in any order.</p>
+          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">shadow</span><span class="code-punctuation">=</span><span class="code-string">"20 .1 blue"</span><span class="code-punctuation">&gt;</span>A low blue shadow<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre>
+          <dl class="docs-reference">
+            <dt>Elevation</dt><dd><code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, or <code>50</code>, from a tight shadow to a broad, lifted shadow. These are preset names, not pixel measurements.</dd>
+            <dt>Intensity</dt><dd><code>.1</code> through <code>.9</code>, from lighter to darker. This sets the base opacity; individual shadow layers also apply weights, so it is not the final combined opacity.</dd>
+            <dt>Color</dt><dd>black by default. Add <code>blue</code> for the blue preset, or set <code>style="--shadow-color: 120, 40, 90;"</code> for a custom RGB color.</dd>
+            <dt>Hover only</dt><dd>use <code>shadow-hover="30 .1"</code>. It also activates on keyboard focus for buttons and links.</dd>
+            <dt>Resting and hover</dt><dd>combine <code>shadow="20 .1"</code> with <code>shadow-hover="50 .2"</code>. Hover settings override only the options supplied; omitted options retain the resting values.</dd>
+          </dl>
           <p>Use shadow for a persistent shadow. Elevation presets run from 10 (tight) to 50 (broad). Bare shadow defaults to elevation 30 with intensity 0.08.</p>
-          <h3 class="heading--s">Elevation — same .1 intensity</h3>
+          <h4 class="heading--xs">Elevation — same .1 intensity</h4>
           <div class="shadow-demo-grid">
             <div class="shadow-demo-card" shadow="10 .1"><strong>Elevation 10</strong><code>shadow="10 .1"</code></div>
             <div class="shadow-demo-card" shadow="20 .1"><strong>Elevation 20</strong><code>shadow="20 .1"</code></div>
@@ -147,26 +290,26 @@
             <div class="shadow-demo-card" shadow="40 .1"><strong>Elevation 40</strong><code>shadow="40 .1"</code></div>
             <div class="shadow-demo-card" shadow="50 .1"><strong>Elevation 50</strong><code>shadow="50 .1"</code></div>
           </div>
-          <h3 class="heading--s">Intensity — same elevation 20</h3>
+          <h4 class="heading--xs">Intensity — same elevation 20</h4>
           <p>Tokens .1 through .9 set the base alpha directly; each shadow layer also applies its own weight.</p>
           <div class="shadow-demo-grid">
             <div class="shadow-demo-card" shadow="20 .1"><strong>Intensity .1</strong><code>shadow="20 .1"</code></div>
             <div class="shadow-demo-card" shadow="20 .3"><strong>Intensity .3</strong><code>shadow="20 .3"</code></div>
             <div class="shadow-demo-card" shadow="20 .5"><strong>Intensity .5</strong><code>shadow="20 .5"</code></div>
           </div>
-          <h3 class="heading--s">Defaults and color</h3>
+          <h4 class="heading--xs">Defaults and color</h4>
           <div class="shadow-demo-grid">
             <div class="shadow-demo-card" shadow><strong>Default</strong><code>shadow</code></div>
             <div class="shadow-demo-card" shadow="20 .2 blue"><strong>Blue preset</strong><code>shadow="20 .2 blue"</code></div>
             <div class="shadow-demo-card" shadow="20 .2" style="--shadow-color: 120, 40, 90;"><strong>Custom color</strong><code>--shadow-color: 120, 40, 90</code></div>
           </div>
-          <h3 class="heading--s">Hover or keyboard focus</h3>
+          <h4 class="heading--xs">Hover or keyboard focus</h4>
           <p>Hover these buttons or reach them with Tab. Their shadows fade in without changing layout. Reduced-motion settings disable the transition.</p>
           <div class="shadow-demo-grid">
             <button type="button" class="shadow-demo-card" shadow-hover><strong>Default interaction</strong><code>shadow-hover</code></button>
             <button type="button" class="shadow-demo-card" shadow-hover="20 .2 blue"><strong>Blue interaction</strong><code>shadow-hover="20 .2 blue"</code></button>
           </div>
-          <h3 class="heading--s">Resting shadow → hover shadow</h3>
+          <h4 class="heading--xs">Resting shadow → hover shadow</h4>
           <p>These buttons already have a shadow. Hover or Tab to them to change elevation, intensity, and optionally color; move away to restore the resting settings.</p>
           <div class="shadow-demo-grid">
             <button type="button" class="shadow-demo-card" shadow="20 .1" shadow-hover="50 .2"><strong>20 .1 → 50 .2</strong><code>shadow="20 .1" shadow-hover="50 .2"</code></button>
@@ -174,8 +317,9 @@
             <button type="button" class="shadow-demo-card" shadow="20 .1" shadow-hover="30 .2 blue"><strong>Black → blue</strong><code>shadow="20 .1" shadow-hover="30 .2 blue"</code></button>
           </div>
         </section>
-        <section class="scrim-demo">
-          <h4 class="heading--m">Scrim</h4>
+        <section id="scrim" class="scrim-demo">
+          <h3 class="heading--s">[scrim]</h3>
+          <p>A scrim is a gradient overlay that darkens part of an image and fades to transparent. Use it behind text on photos, hero images, or cards to improve readability while keeping the image visible. Choose a direction that puts the darkest area behind your text, and check contrast against the actual image.</p>
           <p><a href="https://codepen.io/editor/dbox/pen/01a141ca-43cc-7778-aa08-2f78ee8aece5" target="_blank" rel="noopener noreferrer">Explore the scrim preview on CodePen</a></p>
           <div class="scrim-demo-row">
             <div class="wrapper">
@@ -215,31 +359,96 @@
             </div>
           </div>
         </section>
-      </main>
-    </div>
+        <section id="layout-utilities">
+          <h3 class="heading--s">Layout &amp; visibility</h3>
+          <dl class="docs-reference">
+            <dt><code>.container</code></dt><dd>Centers content with mobile gutters and a desktop maximum width set by <code>--container-size</code>.</dd>
+            <dt><code>.desktop-only</code></dt><dd>Visible at and above the tablet breakpoint.</dd>
+            <dt><code>.mobile-only</code></dt><dd>Visible below the tablet breakpoint.</dd>
+          </dl>
+          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"container"</span><span class="code-punctuation">&gt;</span>Centered content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"desktop-only"</span><span class="code-punctuation">&gt;</span>Desktop only<span class="code-tag">&lt;/p</span><span class="code-punctuation">&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"mobile-only"</span><span class="code-punctuation">&gt;</span>Mobile only<span class="code-tag">&lt;/p</span><span class="code-punctuation">&gt;</span></code></pre>
+          <div class="docs-sample"><p class="desktop-only">You are seeing the desktop-only example.</p><p class="mobile-only">You are seeing the mobile-only example.</p></div>
+          <p>Hidden examples use <code>display: none</code>, so do not put essential information exclusively in one variant. The helpers switch at the shared tablet breakpoint (768px by default).</p>
+        </section>
+        <section id="media-utilities">
+          <h3 class="heading--s">Images &amp; positioning</h3>
+          <div class="docs-topic">
+            <h4>Image fitting</h4>
+            <p>Give the frame a height or aspect ratio, then choose how the image fills it.</p>
+            <div class="docs-media-row">
+              <div class="docs-media-example"><h5>Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
+              <div class="docs-media-example"><h5>Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
+            </div>
+            <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"fit-photo cover"</span> <span class="code-attr">style</span><span class="code-punctuation">=</span><span class="code-string">"aspect-ratio: 16 / 9;"</span><span class="code-punctuation">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">src</span><span class="code-punctuation">=</span><span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span><span class="code-punctuation">=</span><span class="code-string">"Describe the image"</span><span class="code-punctuation">&gt;</span>
+<span class="code-tag">&lt;/figure</span><span class="code-punctuation">&gt;</span></code></pre>
+            <p class="docs-note">Use <code>.fit-photo.contain</code> instead of <code>.fit-photo.cover</code> to preserve the entire image. Both work with direct child images and videos.</p>
+          </div>
+          <div class="docs-topic">
+            <h4>Positioning</h4>
+            <dl class="docs-reference">
+              <dt><code>.relative</code></dt><dd>Establishes a positioned parent.</dd>
+              <dt><code>.absolute</code></dt><dd>Positions an element relative to its positioned ancestor.</dd>
+              <dt><code>.abs-full</code></dt><dd>Fills a positioned parent with an absolutely positioned element.</dd>
+            </dl>
+          </div>
+          <div class="docs-topic">
+            <h4>Clipping</h4>
+            <p>A decorative layer clipped to its wrapper, with a fixed, viewport-height inner layer.</p>
+            <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container"</span><span class="code-punctuation">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container__inner"</span><span class="code-punctuation">&gt;</span>Decorative content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
+<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre>
+            <p class="docs-note">The wrapper disables pointer events. Keep interactive content outside it.</p>
+          </div>
+        </section>
+        <section id="color-utilities">
+          <h3 class="heading--s">Colors</h3>
+          <h4>Color</h4>
+          <dl class="docs-reference">
+            <dt><code>.color--white</code></dt><dd>White text.</dd>
+            <dt><code>.color--black</code></dt><dd>Black text.</dd>
+            <dt><code>.background--white</code></dt><dd>White background.</dd>
+            <dt><code>.background--black</code></dt><dd>Black background.</dd>
+          </dl>
+          <div class="docs-sample background--black color--white">background--black color--white</div>
+          <div class="docs-sample background--white color--black">background--white color--black</div>
 
+        </section>
+        </section>
+        <section id="scaling-controls">
+          <h2 class="heading--m">Scaling controls</h2>
+          <p>Adjust squish, floor, maximum width, and reference height to explore how the demo scales.</p>
 <div id="hud-container">
   
   <div class="control-group">
-    <label>Squish: <span id="val-squish">.5</span></label>
+    <label for="squish">Squish: <span id="val-squish">.5</span></label>
     <input type="range" id="squish" min="0" max="1" step="0.01" value="0.5">
   </div>
 
   <div class="control-group">
-    <label>Floor: <span id="val-floor">400</span></label>
+    <label for="floor">Floor: <span id="val-floor">400</span></label>
     <input type="range" id="floor" min="0" max="1000" step="10" value="400">
   </div>
 
   <div class="control-group">
-    <label>Max: <span id="val-max">2000</span></label>
-    <input type="range" id="max" min="500" max="5000" step="50" value="2000">
+    <label for="max">Max: <span id="val-max">1800</span></label>
+    <input type="range" id="max" min="500" max="5000" step="50" value="1800">
   </div>
 
   <div class="control-group">
-    <label>Basis-H: <span id="val-basis-h">750</span></label>
+    <label for="basis-h">Basis-H: <span id="val-basis-h">750</span></label>
     <input type="range" id="basis-h" min="100" max="2000" step="10" value="750">
   </div>
 </div>
+          <div class="box">Scaling preview</div>
+        </section>
+      </main>
+    </div>
+    </div>
+
+
 <script>
 const setupHUD = () => {
   const settings = [
@@ -267,6 +476,61 @@ const setupHUD = () => {
 
 // Initialize when the DOM is ready
 document.addEventListener('DOMContentLoaded', setupHUD);
+
+const setupNavigation = () => {
+  const viewport = document.getElementById('demo-viewport');
+  const updateViewport = () => {
+    viewport.textContent = `${window.innerWidth}px × ${window.innerHeight}px`;
+  };
+  window.addEventListener('resize', updateViewport);
+  updateViewport();
+  const nav = document.querySelector('.demo-nav');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  nav.querySelectorAll('details').forEach(group => {
+    const summary = group.querySelector('summary');
+    const overview = group.querySelector('a[href^="#"]');
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      group.open = true;
+      overview.click();
+    });
+  });
+  const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+  const openHash = () => {
+    const link = links.find(item => item.hash === window.location.hash);
+    if (link) {
+      const group = link.closest('details');
+      if (group) group.open = true;
+    }
+  };
+  const update = () => {
+    let current = targets[0];
+    targets.forEach(target => {
+      if (target.getBoundingClientRect().top <= 100 &&
+          target.getBoundingClientRect().top >= current.getBoundingClientRect().top) current = target;
+    });
+    links.forEach(link => {
+      const active = link.hash === `#${current.id}`;
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    nav.querySelectorAll('details').forEach(group => {
+      group.classList.toggle('has-current', !!group.querySelector('[aria-current]'));
+    });
+  };
+  let queued = false;
+  window.addEventListener('scroll', () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(() => { update(); queued = false; });
+    }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  window.addEventListener('hashchange', () => { openHash(); update(); });
+  openHash();
+  update();
+};
+document.addEventListener('DOMContentLoaded', setupNavigation);
 </script>
   </body>
 </html>

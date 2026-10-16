@@ -18,6 +18,7 @@ const browserSync = require('browser-sync').create();
 const { exec } = require('child_process');
 const colors = require('ansi-colors');
 const path = require('path');
+const fs = require('fs');
 const postcssPxv = require('postcss-pxv');
 
 // --------------------------
@@ -85,14 +86,21 @@ gulp.task('lint-css-fix', function (done) {
 // --------------------------
 // 🧩 Build SCSS → CSS
 // --------------------------
-gulp.task('build-sass', async function () {
+gulp.task('build-sass', function () {
+  const { version } = JSON.parse(
+    fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'),
+  );
+  fs.writeFileSync(
+    path.join(paths.dist, 'version.js'),
+    `document.getElementById('demo-version').textContent = ${JSON.stringify(`v${version}`)};\n`,
+  );
   const postcssPlugins = [
     postcssPxv({
       writeVars: false,
     }),
   ];
 
-  return await gulp
+  return gulp
     .src(sassSrcFile)
     .pipe(sourcemaps.init())
     .pipe(plumber())
@@ -150,6 +158,13 @@ gulp.task(
       .on('change', gulp.series('lint-css-fix', 'build-sass'));
 
     gulp.watch(htmlWatchDir).on('change', browserSync.reload);
+    gulp.watch(path.join(__dirname, 'package.json'), gulp.series(
+      'build-sass',
+      function reloadVersion(done) {
+        browserSync.reload();
+        done();
+      },
+    ));
   }),
 );
 

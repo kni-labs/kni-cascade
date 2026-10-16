@@ -1,124 +1,190 @@
 @use '../../00-sass' as *;
 
-.flex {
+// Class and attribute syntax share declarations; use whitespace-separated tokens.
+.flex,
+[flex] {
   display: flex;
+}
 
-  &.wrap {
+.flex.wrap,
+[flex~="wrap"] {
+  flex-wrap: wrap;
+}
+
+.flex.wrap-mobile,
+[flex~="wrap-m"] {
+  @include sm {
     flex-wrap: wrap;
   }
+}
 
-  &.wrap-mobile {
-    @include sm {
-      flex-wrap: wrap;
-    }
-  }
+.flex.inline,
+[flex~="inline"] {
+  display: inline-flex;
+}
 
-  &.inline {
+.flex.inline-mobile,
+[flex~="inline-m"] {
+  @include sm {
     display: inline-flex;
   }
+}
 
-  &.inline-mobile {
-    @include sm {
-      display: inline-flex;
-    }
-  }
+.flex.center,
+[flex~="center"] {
+  align-items: center;
+  justify-content: center;
+}
 
-  &.center {
-    align-items: center;
-    justify-content: center;
-  }
+.flex.j-sb,
+[flex~="j-sb"] {
+  justify-content: space-between;
+}
 
-  &.j-sb {
-    justify-content: space-between;
-  }
+.flex.j-c,
+[flex~="j-c"] {
+  justify-content: center;
+}
 
-  &.j-c {
-    justify-content: center;
-  }
+.flex.j-start,
+[flex~="j-start"] {
+  justify-content: flex-start;
+}
 
-  &.j-start {
-    justify-content: flex-start;
-  }
+.flex.j-end,
+[flex~="j-end"] {
+  justify-content: flex-end;
+}
 
-  &.j-end {
-    justify-content: flex-end;
-  }
+.flex.a-c,
+[flex~="a-c"] {
+  align-items: center;
+}
 
-  &.a-c {
-    align-items: center;
-  }
+.flex.a-start,
+[flex~="a-start"] {
+  align-items: flex-start;
+}
 
-  &.a-start {
-    align-items: flex-start;
-  }
+.flex.a-baseline,
+[flex~="a-baseline"] {
+  align-items: baseline;
+}
 
-  &.a-baseline {
-    align-items: baseline;
-  }
+.flex.a-end,
+[flex~="a-end"] {
+  align-items: flex-end;
+}
 
-  &.a-end {
-    align-items: flex-end;
-  }
+.flex.column,
+[flex~="column"] {
+  flex-direction: column;
+}
 
-  &.column {
+.flex.column-desktop,
+[flex~="col-d"] {
+  @include lg {
     flex-direction: column;
   }
+}
 
-  &.column-desktop {
-    @include lg {
-      flex-direction: column;
-    }
+.flex.column-mobile,
+[flex~="col-m"] {
+  @include sm {
+    flex-direction: column;
   }
+}
 
-  &.column-mobile {
-    @include sm {
-      flex-direction: column;
-    }
+.flex.column-mobile-reverse,
+[flex~="col-m-rev"] {
+  @include sm {
+    flex-direction: column-reverse;
   }
+}
 
-  &.column-mobile-reverse {
-    @include sm {
-      flex-direction: column-reverse;
-    }
-  }
+.flex.row-reverse,
+[flex~="row-rev"] {
+  flex-direction: row-reverse;
+}
 
-  &.row-reverse {
+.flex.row-reverse-desktop,
+[flex~="row-rev-d"] {
+  @include lg {
     flex-direction: row-reverse;
   }
+}
 
-  &.row-reverse-desktop {
-    @include lg {
-      flex-direction: row-reverse;
-    }
+.flex.a-c-desktop,
+[flex~="a-c-d"] {
+  @include lg {
+    align-items: center;
   }
+}
 
-  &.a-c-desktop {
-    @include lg {
-      align-items: center;
-    }
+.flex.a-start-desktop,
+[flex~="a-start-d"] {
+  @include lg {
+    align-items: flex-start;
   }
+}
 
-  &.a-start-desktop {
-    @include lg {
-      align-items: flex-start;
-    }
+.flex.j-c-desktop,
+[flex~="j-c-d"] {
+  @include lg {
+    justify-content: center;
   }
+}
 
-  &.j-c-desktop {
-    @include lg {
-      justify-content: center;
-    }
+.flex.j-sb-desktop,
+[flex~="j-sb-d"] {
+  @include lg {
+    justify-content: space-between;
   }
+}
 
-  &.j-sb-desktop {
-    @include lg {
-      justify-content: space-between;
-    }
+.flex.j-end-desktop,
+[flex~="j-end-d"] {
+  @include lg {
+    justify-content: flex-end;
   }
+}
 
-  &.j-end-desktop {
-    @include lg {
-      justify-content: flex-end;
-    }
-  }
+.flex.j-sa,
+[flex~="j-sa"] {
+  justify-content: space-around;
+}
+
+.flex.j-se,
+[flex~="j-se"] {
+  justify-content: space-evenly;
+}
+
+.flex.grow,
+[flex~="grow"] {
+  flex-grow: 1;
+}
+
+.flex.grow-0,
+[flex~="grow-0"] {
+  flex-grow: 0;
+}
+
+.flex.no-shrink,
+[flex~="no-shrink"] {
+  flex-shrink: 0;
+}
+
+.flex.a-self-start,
+[flex~="a-self-start"] {
+  align-self: flex-start;
+}
+
+.flex.a-self-c,
+[flex~="a-self-c"] {
+  align-self: center;
+}
+
+.flex.a-self-end,
+[flex~="a-self-end"] {
+  align-self: flex-end;
 }
