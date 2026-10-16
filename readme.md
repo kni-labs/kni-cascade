@@ -131,3 +131,23 @@ Run `npx gulp` to preview changes with live reload. Use `npm run build` for a on
 > If it’s a globally-used element, it lives in components.
 > If it's a page body building block, it lives in modules.
 > If it’s page-specific, it lives in pages.
+
+## Automated npm releases
+
+`.github/workflows/publish.yml` validates PRs targeting `main`. After a PR merges, it checks for a teammate's approval of the final PR commit, validates the merged code, and publishes an unpublished stable package version to npm. Re-runs skip versions already on npm; registry lookup errors fail the release instead of attempting a publish. Version numbers remain an explicit PR change, not an automatic bump. Do not merge releases out of version order.
+
+### One-time npm setup
+
+In the `kni-cascade` package settings on npm, add a GitHub Actions **Trusted Publisher** with:
+
+| Field | Value |
+| --- | --- |
+| Organization or user | `kni-labs` |
+| Repository | `kni-cascade` |
+| Workflow filename | `publish.yml` |
+| Environment | Leave blank |
+| Allowed actions | Allow direct publishing with `npm publish` |
+
+No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. Publishing independently checks an approval from an owner, organization member, or collaborator on the final PR commit. The workflow uses Node 22 and npm 11 for npm's OIDC support.
+
+Merge the workflow through the normal review process. Until the trusted publisher is configured, publishing will fail with an authentication error. Once configured, a merged PR with a new stable version and matching lockfile publishes automatically. Check the **Validate and publish** workflow under GitHub Actions for the result. An existing version is safely skipped; publishing is never attempted from an unmerged PR.

@@ -5,7 +5,7 @@
   "main": "scss",
   "engines": {
     "node": ">=18 <=22",
-    "npm": ">=8 <=10"
+    "npm": ">=8 <12"
   },
   "directories": {
     "example": "demo"
@@ -21,8 +21,9 @@
     "prepare": "husky install && npm run husky:init",
     "husky:init": "test -f .husky/pre-commit || npm run husky:create",
     "husky:create": "npx husky add .husky/pre-commit \"npx lint-staged || { echo 'Commit failed: lint-staged errors'; exit 1; }\" && chmod +x .husky/pre-commit",
-    "prepublishOnly": "npm install && npm run build",
-    "postinstall": "echo '\n✅ KNI Cascade ready — Husky & lint-staged configured!\n'"
+    "prepublishOnly": "npm run check && npm run build",
+    "postinstall": "echo '\n✅ KNI Cascade ready — Husky & lint-staged configured!\n'",
+    "check": "npm run stylelint && node -e \"require('sass').compile('demo/styles.scss')\""
   },
   "author": "Daniel Box",
   "license": "ISC",
@@ -55,5 +56,9 @@
     "*.{scss,css}": [
       "stylelint --fix"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kni-labs/kni-cascade.git"
   }
 }
