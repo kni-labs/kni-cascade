@@ -6,27 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KNI CSS</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      html.lenis,
+      html.lenis body {
+        height: auto;
+      }
+
+      html.lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+    </style>
   </head>
 
   <body id="top" class="test">
-      <header class="demo-header">
-        <div class="demo-brand">
-      <h1 class="heading--xxl"><a href="#top">kni-cascade</a></h1>
-      <a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=cb3837" alt="kni-cascade version published on npm" height="20" /></a>
-        </div>
+    <div id="demo-hero" class="demo-hero" scrim="to-t .8 75%">
+      <img src="images/cascade-waterfall.png" alt="Japanese woodblock-inspired waterfalls flowing through a misty mountain landscape" width="2172" height="724" fetchpriority="high" />
+      <div class="demo-hero-brand">
+        <h1 class="demo-hero-title"><a href="#top">kni-cascade</a></h1>
         <div class="demo-actions">
-
-      <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
+<a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=cb3837" alt="kni-cascade version published on npm" height="20" /></a>
+<a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
         </div>
-      </header>
+      </div>
+    </div>
+
     <div class="demo-layout">
       <aside class="demo-sidebar">
-      <nav class="demo-nav" aria-label="Demo features">
+      <nav class="demo-nav" aria-label="Demo features" data-lenis-prevent>
         <details class="demo-nav-group" name="demo-sections">
           <summary>Scaling</summary>
           <ul class="demo-subnav">
             <li><a href="#scaling">Overview</a></li>
-            <li><a href="#pxv">pxv</a></li>
+            <li><a href="#pxv">postcss-pxv</a></li>
             <li><a href="#scaling-controls">Controls</a></li>
           </ul>
         </details>
@@ -68,14 +79,18 @@
           <h2 class="heading--m">Scaling</h2>
           <p>Cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
           <section id="pxv">
-            <h3 class="heading--s">pxv</h3>
+            <h3 class="heading--s">postcss-pxv</h3>
+            <div class="demo-actions">
+              <a class="demo-github" href="https://github.com/kni-labs/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-postcss--pxv-24292f?logo=github&amp;logoColor=white" alt="View postcss-pxv on GitHub" height="20" /></a>
+              <a class="demo-npm" href="https://www.npmjs.com/package/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/postcss-pxv?label=npm&amp;color=cb3837" alt="postcss-pxv version published on npm" height="20" /></a>
+            </div>
             <p>Think of pxv as a design-reference pixel. Write the size from your design, and Cascade scales it using the viewport and the active mobile or desktop settings.</p>
             <pre class="code-block"><code><span class="code-tag">.card</span> {
   <span class="code-attr">width</span>: <span class="code-string">300pxv</span>;
   <span class="code-attr">padding</span>: <span class="code-string">24pxv</span>;
 }</code></pre>
             <p>The PostCSS plugin converts <code>24pxv</code> to <code>calc(24 * var(--pxv-unit))</code>. One shared unit keeps every pxv value in proportion. Standard <code>px</code> values stay fixed.</p>
-            <p>The reference width defaults to 390 on mobile and 1440 on desktop. With width-only scaling, 100pxv equals 100px at the reference width and 80px at 80% of that width, before minimum and maximum limits apply.</p>
+            <p>The reference width defaults to <code>390px</code> on mobile and <code>1440px</code> on desktop. With width-only scaling, <code>100pxv</code> equals <code>100px</code> at the reference width and <code>80px</code> at <code>80%</code> of that width, before minimum and maximum limits apply.</p>
             <dl class="docs-reference">
               <dt>Height influence</dt><dd>Squish lets short viewports reduce the width-based scale. At 0, scaling follows width alone; at 1, the full height constraint applies.</dd>
               <dt>Floor</dt><dd>A minimum viewport height for the height calculation, so short windows do not keep shrinking the scale indefinitely.</dd>
@@ -490,7 +505,63 @@
     </div>
 
 
+<script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
 <script>
+// Demo-only enhancement; native scrolling remains available if the CDN fails.
+const setupSmoothScroll = () => {
+  if (typeof window.Lenis !== 'function') return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let lenis;
+  const sync = () => {
+    if (reducedMotion.matches) {
+      if (lenis) lenis.destroy();
+      lenis = null;
+    } else if (!lenis) {
+      lenis = new window.Lenis({
+        autoRaf: true,
+        anchors: true,
+        smoothWheel: true,
+        syncTouch: false,
+        lerp: 0.1,
+        prevent: node => node.classList?.contains('code-block'),
+      });
+    }
+  };
+  reducedMotion.addEventListener('change', sync);
+  sync();
+};
+document.addEventListener('DOMContentLoaded', setupSmoothScroll);
+
+const setupStickyHero = () => {
+  const hero = document.getElementById('demo-hero');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const update = () => {
+    const height = hero.offsetHeight;
+    const stripHeight = 64;
+    const travel = Math.max(0, height - stripHeight);
+    const progress = Math.min(Math.max(0, window.scrollY), travel);
+    hero.style.setProperty('--hero-height', `${height}px`);
+    const fraction = travel > 0 ? progress / travel : 1;
+    hero.style.setProperty('--hero-progress', reducedMotion.matches ? (fraction >= 1 ? 1 : 0) : fraction);
+    hero.style.setProperty('--hero-parallax', `${reducedMotion.matches ? 0 : progress * 0.5}px`);
+    hero.classList.toggle('is-compact', window.scrollY >= height - stripHeight - 1);
+  };
+  let queued = false;
+  const schedule = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(() => { update(); queued = false; });
+    }
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  reducedMotion.addEventListener('change', schedule);
+  window.addEventListener('pageshow', update);
+  new ResizeObserver(schedule).observe(hero);
+  update();
+};
+document.addEventListener('DOMContentLoaded', setupStickyHero);
+
 const setupHUD = () => {
   const settings = [
     { id: 'squish', varName: '--active-squish' },

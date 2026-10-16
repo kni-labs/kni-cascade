@@ -326,7 +326,7 @@ section {
 }
 
 .demo-nav {
-  max-height: calc(100svh - 112px);
+  max-height: calc(100svh - 128px);
   overflow-y: auto;
 
   summary {
@@ -726,7 +726,7 @@ section {
 
 .demo-sidebar {
   position: sticky;
-  top: 60px;
+  top: 88px;
   margin-top: -12px;
   align-self: start;
 
@@ -817,7 +817,9 @@ section {
 }
 
 .demo-header {
-  position: sticky;
+  position: fixed;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 20;
   display: flex;
@@ -829,7 +831,7 @@ section {
   background: #222;
   color: #fff;
 
-  h1 {
+  .demo-site-title {
     margin: 0;
     font-size: 20pxv;
     line-height: 1.2;
@@ -867,7 +869,7 @@ section {
     gap: 12px;
     padding-inline: 16px;
 
-    h1 {
+    .demo-site-title {
       font-size: 16pxv;
     }
 
@@ -947,5 +949,97 @@ section {
   p {
     margin: 0;
     font-size: inherit;
+  }
+}
+
+.demo-hero {
+  --hero-title-start: 80pxv;
+  --hero-left: 36px; // 24px page gutter + 4px nav padding + 8px label padding
+
+  position: sticky;
+  top: calc(64px - var(--hero-height, 33.333vw));
+  z-index: 20;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  min-height: 240px;
+  isolation: isolate;
+
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    transform: translate3d(0, var(--hero-parallax, 0), 0);
+  }
+
+  .demo-hero-title {
+    margin: 0;
+    color: #fff;
+    font-size: calc(var(--hero-title-start) + (32pxv - var(--hero-title-start)) * var(--hero-progress, 0));
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+
+    a {
+      color: inherit;
+      font-size: inherit;
+      text-decoration: none;
+
+      &:focus-visible {
+        outline: 2px solid currentcolor;
+        outline-offset: 4px;
+      }
+    }
+  }
+
+}
+
+.demo-hero-brand {
+  position: absolute;
+  z-index: 2;
+  left: var(--hero-left);
+  right: 24px;
+  bottom: calc(24px - 4px * var(--hero-progress, 0));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 24px;
+}
+
+@media (width < 768px) {
+  .demo-hero {
+    --hero-title-start: 36pxv;
+    --hero-left: 20px;
+  }
+
+  .demo-hero-brand {
+    gap: 16px;
+  }
+}
+
+
+.demo-header[hidden] {
+  display: none;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-hero .demo-hero-title {
+    transition: none;
+  }
+}
+
+
+
+
+.demo-github,
+.demo-npm {
+  transition: filter 0.2s var(--easing);
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.2);
   }
 }
