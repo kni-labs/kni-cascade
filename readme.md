@@ -109,6 +109,14 @@ By default, **Gulp** runs:
 
 ## 🧑‍💻 Contributing
 
+### Demo & Reference
+
+The Demo & Reference page lives in `demo/index.html`, with demo styles in `demo/styles.scss`. It is both a living reference and a visual test page.
+
+Every new feature or behavior change must include a working example in the demo. Show the default, available options, and relevant responsive or interaction states. For bug fixes, include an example that makes the corrected behavior easy to verify. Check the examples at mobile and desktop widths and with keyboard navigation where applicable.
+
+Run `npx gulp` to preview changes with live reload. Use `npm run build` for a one-time CSS build. Visual examples complement automated checks; they do not replace them.
+
 1. Clone this repo
 2. Create a new branch
 3. Run `npx gulp` and make your changes

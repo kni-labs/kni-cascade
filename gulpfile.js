@@ -2,9 +2,9 @@
  * 🧠 KNI Cascade — Gulpfile
  * Local dev / test harness for the Cascade engine.
  *
- * - test/styles.scss is the entry for local testing
- * - test/styles.scss should `@use '../scss/styles' as *;`
- * - Compiles test/styles.scss -> test/styles.css
+ * - demo/styles.scss is the entry for local testing
+ * - demo/styles.scss should `@use '../scss/styles' as *;`
+ * - Compiles demo/styles.scss -> demo/styles.css
  * - Applies postcss-pxv
  * - Uses .stylelintrc.cjs for linting (auto-resolved by Stylelint)
  */
@@ -25,8 +25,8 @@ const postcssPxv = require('postcss-pxv');
 // --------------------------
 const paths = {
   scssSrc: path.resolve(__dirname, 'scss'),
-  entry: path.resolve(__dirname, 'test/styles.scss'),
-  dist: path.resolve(__dirname, 'test'),
+  entry: path.resolve(__dirname, 'demo/styles.scss'),
+  dist: path.resolve(__dirname, 'demo'),
   cssOutput: 'styles.css',
 };
 
@@ -35,10 +35,10 @@ const sassOutDir = paths.dist;
 
 const sassWatchDir = [
   path.join(paths.scssSrc, '**/*.scss'),
-  path.resolve(__dirname, 'test/**/*.scss'),
+  path.resolve(__dirname, 'demo/**/*.scss'),
 ];
 
-const htmlWatchDir = './test/**/*.html';
+const htmlWatchDir = './demo/**/*.html';
 
 // --------------------------
 // 🔍 Lint SCSS (non-blocking)
@@ -47,7 +47,7 @@ gulp.task('lint-css-fix', function (done) {
   const lintCmd = [
     'npx stylelint',
     `"${paths.scssSrc}/**/*.scss"`,
-    '"test/**/*.scss"',
+    '"demo/**/*.scss"',
     '--fix',
     '--formatter string',
   ].join(' ');
@@ -114,7 +114,7 @@ gulp.task('build-sass', function () {
     .on('end', () => {
       console.log(
         colors.green(
-          `✅ Built test/styles.scss → ${path.join(
+          `✅ Built demo/styles.scss → ${path.join(
             sassOutDir,
             paths.cssOutput,
           )}`,
@@ -130,7 +130,7 @@ gulp.task(
   'serve',
   gulp.series('lint-css-fix', 'build-sass', function () {
     browserSync.init({
-      server: { baseDir: './test' },
+      server: { baseDir: './demo' },
       open: false,
       notify: false,
     });
