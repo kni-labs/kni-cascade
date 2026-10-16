@@ -37,7 +37,6 @@
             <li><a href="#type-headers">Headers</a></li>
             <li><a href="#type-body">Body</a></li>
             <li><a href="#type-caps">Caps</a></li>
-            <li><a href="#hanging-quotes">Hanging quotes</a></li>
             <li><a href="#text-helpers">Text helpers</a></li>
           </ul>
         </details>
@@ -83,7 +82,7 @@
               <dt>Maximum width</dt><dd>Caps the scale calculation. It does not change the layout breakpoint.</dd>
               <dt>Reference height</dt><dd>The design height used by the height constraint. It matters when squish is above zero.</dd>
             </dl>
-            <p>Use pxv for sizes that should scale with the composition. Keep fixed pixels where appropriate, such as a 1px border, and use percentages or layout tools for flexible structure. Typography also applies minimum font-size clamps for readability.</p>
+            <aside class="demo-note" aria-label="Scaling tip"><strong>When to use pxv</strong><p>Basically always! Use pxv for sizes that should scale with the composition. Keep fixed pixels where appropriate, such as a 1px border, and use percentages or layout tools for flexible structure. Typography also applies minimum font-size clamps for readability.</p></aside>
           </section>
           <section id="scaling-controls">
           <h3 class="heading--s">Scaling controls</h3>
@@ -248,24 +247,6 @@
           <button>i'm a button</button>
 
           <p class="negative">i have a negative margin</p>
-          <section id="hanging-quotes">
-          <h3 class="heading--s">Hanging quotes</h3>
-          <p>Opening quotes hang outside the alignment guide. Browsers without native support use the configurable first-line indent.</p>
-          <div class="quote-demo">
-            <p class="hanging-quote body--l">“Good typography lets the words do the talking. This longer quote wraps onto another line so you can compare the opening punctuation with the text below it.”</p>
-          </div>
-          <p>Custom offset for a different font:</p>
-          <div class="quote-demo" style="font-family: Georgia, serif; --quote-hang: -0.4em;">
-            <p class="hanging-quote body--l">“Each typeface draws quotation marks differently. Adjust the fallback offset to match the font used by your project.”</p>
-          </div>
-          <p>Disabled: native hanging set to none, fallback offset set to zero.</p>
-          <div class="quote-demo" style="--hanging-punctuation: none; --quote-hang: 0;">
-            <p class="hanging-quote body--l">“This opening quote stays inside the alignment guide.”</p>
-          </div>
-          <div class="quote-demo">
-            <p class="body--l">Ordinary text has no fallback indent. Only text marked with the hanging-quote class receives it.</p>
-          </div>
-          </section>
           <section id="text-helpers">
             <h3 class="heading--s">Text helpers</h3>
             <h4>Alignment</h4>

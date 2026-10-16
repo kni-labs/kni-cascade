@@ -152,13 +152,12 @@ section {
   width: 100%;
   max-width: 480px;
   margin-block: 24px;
-  background: rgb(20 20 20 / 90%);
-  color: #00e5ff;
+  background: #fff;
+  color: #41464b;
   padding: 15px;
   border-radius: 10px;
   font-family: 'Courier New', monospace;
-  box-shadow: 0 4px 15px rgb(0 0 0 / 50%);
-  border: 1px solid #333;
+  border: 1px solid #dedede;
 }
 
 .hud-header {
@@ -182,7 +181,7 @@ section {
 
 .control-group input {
   width: 100%;
-  accent-color: #00e5ff;
+  accent-color: #dd1694;
 }
 
 .quote-demo {
@@ -924,5 +923,29 @@ section {
 
   tbody th {
     font-weight: 400;
+  }
+}
+
+.demo-note {
+  max-width: 65ch;
+  margin-block: 24px;
+  padding: 20px 24px;
+  border-left: 3px solid #dd1694;
+  border-radius: 0 6px 6px 0;
+  background: #f4eff3;
+  color: #41464b;
+  font-size: 16px;
+  line-height: 1.65;
+
+  strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #24292f;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0;
+    font-size: inherit;
   }
 }
