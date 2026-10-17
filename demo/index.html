@@ -21,8 +21,9 @@
   <body id="top" class="demo">
     <div id="demo-hero" class="demo-hero" scrim="to-t .8 75%">
       <img src="images/cascade-waterfall.png" alt="Japanese woodblock-inspired waterfalls flowing through a misty mountain landscape" width="2172" height="724" fetchpriority="high" />
+      <span class="demo-hero-size-probe heading--m" aria-hidden="true"></span>
       <div class="demo-hero-brand">
-        <h1 class="demo-hero-title"><a href="#top">kni-cascade</a></h1>
+        <h1 class="demo-hero-title heading--xxxl"><a href="#top">kni-cascade</a><span class="demo-hero-baseline" aria-hidden="true"></span></h1>
         <div class="demo-actions">
 <a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=cb3837" alt="kni-cascade version published on npm" height="20" /></a>
 <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
@@ -74,9 +75,9 @@
       </aside>
     <div class="container demo-content">
       <div class="demo-description">
-        <p>A modern front-end architecture creating a single source of truth for all our CSS — across <strong>WordPress</strong>, <strong>React</strong>, <strong>static</strong>, or any future builds.</p>
+        <p>A modern front-end architecture creating a single source of truth for all our CSS — across WordPress, React, static, or any future builds.</p>
         <p>KNI Cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.</p>
-        <p>It’s designed for <strong>clarity, scalability, and minimal friction</strong> — a single shared foundation that powers every KNI build.</p>
+        <p>It’s designed for clarity, scalability, and minimal friction — a single shared foundation that powers every KNI build.</p>
       </div>
 
       <main>
@@ -119,7 +120,7 @@
               </table>
             </div>
             <p>Projects default to scaling all the way to <code>1800px</code>. Change this limit with the <code>$desktop-max</code> variable in <code>00-sass/_variables.scss</code>.</p>
-            <h4>Named layout breakpoints</h4>
+            <h4 class="heading--xs">Named layout breakpoints</h4>
             <p>Use these Sass values for layout changes when needed. They are optional layout thresholds, not additional scaling modes.</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
@@ -376,27 +377,27 @@
           <p class="negative">i have a negative margin</p>
           <section id="text-helpers">
             <h3 class="heading--s">Text helpers</h3>
-            <h4>Alignment</h4>
+            <h4 class="heading--xs">Alignment</h4>
             <p>Apply alignment to a text element or its container.</p>
             <div class="text-helper-grid">
               <div><p><code>Default (left)</code></p><div class="text-helper-sample">Good typography makes room for every word.</div></div>
               <div><p><code>.text-center</code></p><div class="text-helper-sample text-center">Good typography makes room for every word.</div></div>
               <div><p><code>.text-right</code></p><div class="text-helper-sample text-right">Good typography makes room for every word.</div></div>
             </div>
-            <h4>Wrapping</h4>
+            <h4 class="heading--xs">Wrapping</h4>
             <p>Compare the same headline at equal widths. Balance aims for similar line lengths; pretty improves line breaks, including short last lines. Results depend on the font, available width, and browser support.</p>
             <div class="text-helper-grid">
               <div><p><code>Normal</code></p><div class="text-helper-sample text-helper-headline ">Thoughtful typography brings clarity to every screen and every story.</div></div>
               <div><p><code>.wrap-pretty</code></p><div class="text-helper-sample text-helper-headline wrap-pretty">Thoughtful typography brings clarity to every screen and every story.</div></div>
               <div><p><code>.wrap-balance</code></p><div class="text-helper-sample text-helper-headline wrap-balance">Thoughtful typography brings clarity to every screen and every story.</div></div>
             </div>
-            <h4>Longform reading</h4>
+            <h4 class="heading--xs">Longform reading</h4>
             <p>Use <code>.longform</code> to increase line-height to 1.5 for longer passages.</p>
             <div class="text-helper-grid text-helper-pair">
               <div><p><code>Default — 1.35</code></p><div class="text-helper-sample ">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
               <div><p><code>.longform — 1.5</code></p><div class="text-helper-sample longform">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
             </div>
-          <h4>Font weight</h4>
+          <h4 class="heading--xs">Font weight</h4>
           <p>Font-weight classes run from <code>.w--100</code> through <code>.w--900</code> in increments of 100. Load matching font weights for accurate results.</p>
           <p class="w--100"><code>.w--100</code> — Thin text</p>
           <p class="w--200"><code>.w--200</code> — Extra-light text</p>
@@ -523,7 +524,7 @@
                   <img src="https://picsum.photos/400/300" alt="">
                 </figure>
                 <article>
-                  <h2>Change "to-t" to try dif directions.</h2>
+                  <h2 class="heading--xs">Change "to-t" to try dif directions.</h2>
                 </article>
               </div>
               <p><code>scrim="to-t .9 75%"</code></p>
@@ -534,7 +535,7 @@
                   <img src="https://picsum.photos/401/301" alt="">
                 </figure>
                 <article>
-                  <h2>default value is to-t-tr</h2>
+                  <h2 class="heading--xs">default value is to-t-tr</h2>
                 </article>
               </div>
               <p><code>scrim</code></p>
@@ -545,7 +546,7 @@
                   <img src="https://picsum.photos/402/301" alt="">
                 </figure>
                 <article class="top-aligned">
-                  <h2>to-br</h2>
+                  <h2 class="heading--xs">to-br</h2>
                 </article>
               </div>
               <p><code>scrim="to-br"</code></p>
@@ -556,7 +557,7 @@
                   <img src="https://picsum.photos/404/301" alt="">
                 </figure>
                 <article class="top-aligned right">
-                  <h2>x</h2>
+                  <h2 class="heading--xs">x</h2>
                 </article>
               </div>
               <p><code>scrim="to-bl 50%" style="--scrim-color:0,20,72"</code></p>
@@ -579,11 +580,11 @@
         <section id="media-utilities">
           <h3 class="heading--s">Images &amp; positioning</h3>
           <div class="docs-topic">
-            <h4>Image fitting</h4>
+            <h4 class="heading--xs">Image fitting</h4>
             <p>Give the frame a height or aspect ratio, then choose how the image fills it.</p>
             <div class="docs-media-row">
-              <div class="docs-media-example"><h5>Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
-              <div class="docs-media-example"><h5>Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
+              <div class="docs-media-example"><h5 class="heading--xxs">Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
+              <div class="docs-media-example"><h5 class="heading--xxs">Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
             </div>
             <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"fit-photo cover"</span> <span class="code-attr">style</span><span class="code-punctuation">=</span><span class="code-string">"aspect-ratio: 16 / 9;"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;img</span> <span class="code-attr">src</span><span class="code-punctuation">=</span><span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span><span class="code-punctuation">=</span><span class="code-string">"Describe the image"</span><span class="code-punctuation">&gt;</span>
@@ -591,7 +592,7 @@
             <p class="docs-note">Use <code>.fit-photo.contain</code> instead of <code>.fit-photo.cover</code> to preserve the entire image. Both work with direct child images and videos.</p>
           </div>
           <div class="docs-topic">
-            <h4>Positioning</h4>
+            <h4 class="heading--xs">Positioning</h4>
             <dl class="docs-reference">
               <dt><code>.relative</code></dt><dd>Establishes a positioned parent.</dd>
               <dt><code>.absolute</code></dt><dd>Positions an element relative to its positioned ancestor.</dd>
@@ -599,7 +600,7 @@
             </dl>
           </div>
           <div class="docs-topic">
-            <h4>Clipping</h4>
+            <h4 class="heading--xs">Clipping</h4>
             <p>A decorative layer clipped to its wrapper, with a fixed, viewport-height inner layer.</p>
             <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container__inner"</span><span class="code-punctuation">&gt;</span>Decorative content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
@@ -609,7 +610,7 @@
         </section>
         <section id="color-utilities">
           <h3 class="heading--s">Colors</h3>
-          <h4>Color</h4>
+          <h4 class="heading--xs">Color</h4>
           <dl class="docs-reference">
             <dt><code>.color--white</code></dt><dd>White text.</dd>
             <dt><code>.color--black</code></dt><dd>Black text.</dd>
@@ -629,10 +630,10 @@
 <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
 <script>
 // Demo-only enhancement; native scrolling remains available if the CDN fails.
+let lenis;
 const setupSmoothScroll = () => {
   if (typeof window.Lenis !== 'function') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let lenis;
   const sync = () => {
     if (reducedMotion.matches) {
       if (lenis) lenis.destroy();
@@ -651,21 +652,41 @@ const setupSmoothScroll = () => {
   reducedMotion.addEventListener('change', sync);
   sync();
 };
-document.addEventListener('DOMContentLoaded', setupSmoothScroll);
+// Temporarily disabled to isolate scrolling behavior while nav groups open.
+// document.addEventListener('DOMContentLoaded', setupSmoothScroll);
 
 const setupStickyHero = () => {
   const hero = document.getElementById('demo-hero');
+  const title = hero.querySelector('.demo-hero-title');
+  const actions = hero.querySelector('.demo-actions');
+  const baseline = hero.querySelector('.demo-hero-baseline');
+  const sizeProbe = hero.querySelector('.demo-hero-size-probe');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let height;
+  let stripHeight;
+  let lastProgress;
+  const measure = () => {
+    height = hero.offsetHeight;
+    const titleSize = parseFloat(getComputedStyle(title).fontSize);
+    const endSize = parseFloat(getComputedStyle(sizeProbe).fontSize);
+    hero.style.setProperty('--hero-title-end-scale', endSize / titleSize);
+    hero.style.setProperty('--hero-height', `${height}px`);
+    stripHeight = height + parseFloat(getComputedStyle(hero).top);
+    hero.style.setProperty('--hero-title-baseline', `${baseline.offsetTop}px`);
+    hero.style.setProperty('--hero-title-descent', `${title.offsetHeight - baseline.offsetTop}px`);
+    const inlineActions = actions.offsetLeft > title.offsetLeft;
+    hero.style.setProperty('--hero-title-width', `${inlineActions ? title.offsetWidth : 0}px`);
+    lastProgress = undefined;
+  };
   const update = () => {
-    const height = hero.offsetHeight;
-    const stripHeight = 64;
     const travel = Math.max(0, height - stripHeight);
     const progress = Math.min(Math.max(0, window.scrollY), travel);
-    hero.style.setProperty('--hero-height', `${height}px`);
     const fraction = travel > 0 ? progress / travel : 1;
+    if (progress === lastProgress) return;
+    lastProgress = progress;
     hero.style.setProperty('--hero-progress', reducedMotion.matches ? (fraction >= 1 ? 1 : 0) : fraction);
     hero.style.setProperty('--hero-parallax', `${reducedMotion.matches ? 0 : progress * 0.5}px`);
-    hero.classList.toggle('is-compact', window.scrollY >= height - stripHeight - 1);
+    hero.classList.toggle('is-compact', window.scrollY >= travel - 1);
   };
   let queued = false;
   const schedule = () => {
@@ -675,10 +696,12 @@ const setupStickyHero = () => {
     }
   };
   window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  reducedMotion.addEventListener('change', schedule);
-  window.addEventListener('pageshow', update);
-  new ResizeObserver(schedule).observe(hero);
+  const refresh = () => { measure(); schedule(); };
+  window.addEventListener('resize', refresh);
+  reducedMotion.addEventListener('change', refresh);
+  window.addEventListener('pageshow', refresh);
+  new ResizeObserver(refresh).observe(hero);
+  measure();
   update();
 };
 document.addEventListener('DOMContentLoaded', setupStickyHero);
@@ -718,13 +741,65 @@ const setupNavigation = () => {
   window.addEventListener('resize', updateViewport);
   updateViewport();
   const nav = document.querySelector('.demo-nav');
+  const content = document.querySelector('.demo-content');
+  const layout = document.querySelector('.demo-layout');
+  const alignSectionRules = () => {
+    const contentBounds = content.querySelector('main').getBoundingClientRect();
+    const layoutBounds = layout.getBoundingClientRect();
+    const mobile = window.matchMedia('(width < 768px)').matches;
+    const rail = layoutBounds.left + parseFloat(getComputedStyle(layout, '::before').left);
+    content.style.setProperty('--section-rule-left', `${(mobile ? layoutBounds.left : rail) - contentBounds.left}px`);
+    content.style.setProperty('--section-rule-right', `${contentBounds.right - layoutBounds.right}px`);
+  };
+  new ResizeObserver(alignSectionRules).observe(content);
+  window.addEventListener('resize', alignSectionRules);
+  alignSectionRules();
   const links = [...nav.querySelectorAll('a[href^="#"]')];
+  let navigating = false;
+  let navigationId = 0;
+  let currentId;
+  const resumeTracking = () => {
+    navigating = false;
+    requestAnimationFrame(() => nav.classList.remove('is-jumping'));
+  };
+  links.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const target = document.getElementById(link.hash.slice(1));
+      const id = ++navigationId;
+      currentId = target.id;
+      navigating = true;
+      nav.classList.add('is-jumping');
+      const group = link.closest('details');
+      nav.querySelectorAll('details').forEach(item => {
+        item.open = item === group;
+        item.classList.toggle('has-current', item === group);
+      });
+      links.forEach(item => {
+        if (item === link) item.setAttribute('aria-current', 'location');
+        else item.removeAttribute('aria-current');
+      });
+      history.pushState(null, '', link.hash);
+      // Commit the immediate nav state before starting the page scroll.
+      void nav.offsetHeight;
+      const complete = () => {
+        if (id === navigationId) resumeTracking();
+      };
+      if (lenis) {
+        const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+        lenis.scrollTo(target, { offset: -offset, onComplete: complete });
+      } else {
+        target.scrollIntoView({ behavior: 'instant' });
+        complete();
+      }
+    });
+  });
   nav.querySelectorAll('details').forEach(group => {
     const summary = group.querySelector('summary');
     const overview = group.querySelector('a[href^="#"]');
     summary.addEventListener('click', event => {
       event.preventDefault();
-      group.open = true;
       overview.click();
     });
   });
@@ -737,7 +812,8 @@ const setupNavigation = () => {
     }
   };
   const update = () => {
-    let current = targets[0];
+    if (navigating) return;
+    let current = null;
     let latestTop = -Infinity;
     targets.forEach(target => {
       const top = target.getBoundingClientRect().top;
@@ -747,17 +823,26 @@ const setupNavigation = () => {
         latestTop = top;
       }
     });
+    const nextId = current ? current.id : null;
+    if (nextId === currentId) return;
+    currentId = nextId;
     links.forEach(link => {
-      const active = link.hash === `#${current.id}`;
+      const active = current !== null && link.hash === `#${current.id}`;
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
     nav.querySelectorAll('details').forEach(group => {
-      group.classList.toggle('has-current', !!group.querySelector('[aria-current]'));
+      const hasCurrent = !!group.querySelector('[aria-current]');
+      group.classList.toggle('has-current', hasCurrent);
+      if (hasCurrent) group.open = true;
+      else if (!current) group.open = false;
     });
   };
   let queued = false;
   window.addEventListener('scroll', () => {
+    if (navigating) {
+      return;
+    }
     if (!queued) {
       queued = true;
       requestAnimationFrame(() => { update(); queued = false; });
