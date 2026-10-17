@@ -72,6 +72,8 @@ $btn-sizes: (
   l: (desktop: 16, mobile: 14, padding-x: 1.5em, padding-y: 0.75em)
 ) !default;
 
+// Optional named button palettes; empty by default.
+$btn-themes: () !default;
 
 // Native form controls. Typography and text color inherit from the page.
 $form-design: (

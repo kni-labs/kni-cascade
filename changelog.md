@@ -2,11 +2,11 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
-## Unreleased
+## 1.7.0 — 2026-10-17
 
 ### Added
 
-- Optional native form styles with project appearance settings, inherited CSS variables, font-relative sizing, native select arrows, focus/disabled/read-only/error states, and demo examples.
+- Optional native form styles with project appearance settings, inherited CSS variables, font-relative sizing, custom closed-select arrows with native dropdown menus, focus/disabled/read-only/error states, and demo examples.
 
 ## 1.6.1 — 2026-10-17
 
