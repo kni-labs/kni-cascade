@@ -6,6 +6,7 @@
 @use '../scss/04-pages' as *;
 
 :root {
+  --font-family-monospace: 'Geist Mono', ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace;
   --font-min-clamp: 12px;
   --active-squish: 0.5;
   --active-floor: 400;
@@ -57,10 +58,6 @@ section {
   }
 }
 
-.color-test {
-  color: rgb(38 95 51);
-  font-size: 99pxv;
-}
 
 #dev-config--width {
   position: static;
@@ -500,12 +497,16 @@ section {
     }
   }
 
+  #getting-started > section,
+  #components > section,
   #utilities > section,
   #typography > section,
   #scaling > section {
     margin-top: 48pxv;
   }
 
+  #getting-started > section > h3,
+  #components > section > h3,
   #utilities > section > h3,
   #typography > section > h3,
   #scaling > section > h3 {
@@ -513,6 +514,8 @@ section {
     margin-bottom: 20pxv;
   }
 
+  #getting-started h4,
+  #components h4,
   #utilities h4,
   .docs-topic h4 {
     margin-block: 32pxv 12pxv;
@@ -591,13 +594,13 @@ section {
   }
 }
 
-// Inline code stays quiet; standalone labels retain the pink badge treatment.
+// Inline code uses pink with a subtle tinted background.
 .demo-content code {
   font-weight: 500;
   padding: 2pxv 5pxv;
   border-radius: 3pxv;
   color: #dd1694;
-  background: #f1edf0;
+  background: #f4eff3;
   font-size: 13pxv;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -629,7 +632,7 @@ section {
   code {
     padding: 2pxv 5pxv;
     border-radius: 3pxv;
-    background: #f1edf0;
+    background: #f4eff3;
   }
 }
 
@@ -1226,4 +1229,184 @@ section {
   position: absolute;
   visibility: hidden;
   pointer-events: none;
+}
+
+.btn-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20pxv;
+  padding: 24pxv;
+  margin-block: 16pxv 24pxv;
+  border: 1px solid #e3e6e9;
+  border-radius: 8pxv;
+
+  > div {
+    display: grid;
+    justify-items: start;
+    gap: 10pxv;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.btn-demo-dark {
+  background: #172332;
+}
+
+
+.btn-demo-block {
+  max-width: 72ch;
+  margin-block: 24pxv;
+}
+
+.btn-demo-configured {
+  --btn-bg: #752b67;
+  --btn-hover-bg: #5c2051;
+  --btn-radius: 6pxv;
+  --btn-weight: 500;
+}
+
+.btn-demo-reveal {
+  --btn-bg: #172332;
+  --btn-hover-bg: #172332;
+  --btn-hover-border: #172332;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #7c3aed;
+    transform: translateX(-101%);
+    transition: transform 350ms var(--easing);
+  }
+
+
+  &:where(:not(:disabled, [aria-disabled='true'])):focus-visible {
+    &::before {
+      transform: translateX(0);
+    }
+
+  }
+
+  @media (hover: hover) {
+    &:where(:not(:disabled, [aria-disabled='true'])):hover {
+      &::before {
+        transform: translateX(0);
+      }
+
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+.btn-demo-size-only {
+  @include btn-size(m);
+
+  appearance: none;
+  background: #fff;
+  color: #172332;
+  border: 1px dashed currentcolor;
+  border-radius: 4pxv;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+
+  &:hover {
+    background: #edf0f3;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0061c7;
+    outline-offset: 3px;
+  }
+}
+
+// Usage labels stay secondary to the visual button examples.
+#buttons .btn-demo-row > div > p code,
+#buttons .btn-demo-label code {
+  padding: 0;
+  color: #68717e;
+  background: transparent;
+  font-size: 12pxv;
+  font-weight: 400;
+}
+
+#buttons .btn-demo-dark > div > p code { color: #b6c2d2; }
+
+#buttons .btn-demo-row {
+  align-items: flex-start;
+  gap: 28pxv;
+}
+
+
+.btn-demo-source {
+  margin-block: 16pxv 28pxv;
+
+  > summary {
+    width: fit-content;
+    cursor: pointer;
+    color: #172332;
+    font-size: var(--body-m);
+    padding-block: 8pxv;
+
+    &:focus-visible {
+      outline: 2px solid #0061c7;
+      outline-offset: 3px;
+    }
+  }
+
+  > p { margin-top: 12pxv; }
+}
+
+// Show the intended small type sizes without the documentation's 12px floor.
+:is(#type-body, #type-caps) .type-example-preview :is(.body--xs, .body--xxs, .body--xxxs) {
+  --font-min-clamp: 0px;
+}
+
+.demo-content .type-example-sizes {
+  margin: 10pxv 0 0;
+  color: #68717e;
+  font-size: 12pxv;
+  line-height: 1.6;
+}
+
+// Documentation links share the coral accents without affecting button links.
+.demo-content :is(p, dd, td, li) a:not([btn]) {
+  color: #27313b;
+  text-decoration-line: underline;
+  text-decoration-color: #fc7f71;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+
+  &:hover {
+    color: #963a30;
+    text-decoration-color: #fc7f71;
+    text-decoration-thickness: 2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fc7f71;
+    outline-offset: 3px;
+    border-radius: 2pxv;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }

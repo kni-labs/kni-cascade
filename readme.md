@@ -1,9 +1,30 @@
-# KNI Cascade
+# kni-cascade
 
 A modern front-end architecture creating a single source of truth for all our CSS — across **WordPress**, **React**, **static**, or any future builds.
 
-KNI Cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.  
+kni-cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.\
 It’s designed for **clarity, scalability, and minimal friction** — a single shared foundation that powers every KNI build.
+
+## Getting started in a KNI project
+
+KNI’s [WordPress](https://github.com/kni-labs/kni-wp-bp),
+[Eleventy](https://github.com/kni-labs/kni-11ty), and [Next.js](https://github.com/kni-labs/kni-next-cascade) boilerplates seed your project’s `scss`
+directory with the latest version of kni-cascade during setup. From there, those files
+belong to your project—customize them freely. Existing projects don’t automatically
+receive future kni-cascade updates. Configure the shared foundation first, then build
+on it using your project’s existing development workflow.
+
+1. Match `$type-scale` in `scss/00-sass/_variables.scss` to your Figma typography.
+2. Check mobile/desktop reference dimensions in `scss/01-base/_scaling.scss`.
+   Set `$desktop-max` in `_variables.scss` if you need a different scaling limit.
+3. Customize component defaults, such as `$btn-design` and `$btn-sizes`, and omit
+   unused components and utilities through their index files.
+4. Build with `pxv`, shared typography, and your own project styles. Verify mobile,
+   desktop, intermediate widths, and interaction states.
+
+See [Getting started in the demo](demo/index.html#getting-started) for the folder
+responsibilities and links to each part of the foundation. The local build commands
+below are for working on kni-cascade itself, rather than setting up a KNI project.
 
 ## What We Package
 
@@ -65,13 +86,13 @@ scss/
 
 - **Fluid Typography** – Scales seamlessly across breakpoints using `$type-scale` maps
 - **Viewport-Based Units (`pxv`)** – Uniform responsive sizing with fallback support
-- **Token-Driven Architecture** – Edit `_settings.scss` to update a project globally
-- **Predictable Cascade** – Each layer builds safely on the one before it
+- **Token-Driven Architecture** – Edit `scss/00-sass/_variables.scss` to update a project globally
+- **Predictable cascade** – Each layer builds safely on the one before it
 - **Framework-Agnostic** – Single source of truth across any kni boilerplate
 
 ---
 
-## ⚙️ Local Build Setup
+## ⚙️ Developing kni-cascade locally
 
 ```bash
 # install dependencies
@@ -101,9 +122,9 @@ By default, **Gulp** runs:
 
 ## 🧰 Requirements
 
-- Node v18+
+- Node 18–22 (matching the package engine range)
 - npm or pnpm
-- Gulp CLI (global)
+- Use the local Gulp installation through `npx gulp`
 
 ---
 
@@ -151,3 +172,86 @@ In the `kni-cascade` package settings on npm, add a GitHub Actions **Trusted Pub
 No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. Publishing independently checks an approval from an owner, organization member, or collaborator on the final PR commit. The workflow uses Node 22 and npm 11 for npm's OIDC support.
 
 Merge the workflow through the normal review process. Until the trusted publisher is configured, publishing will fail with an authentication error. Once configured, a merged PR with a new stable version and matching lockfile publishes automatically. Check the **Validate and publish** workflow under GitHub Actions for the result. An existing version is safely skipped; publishing is never attempted from an unmerged PR.
+
+
+## Components
+
+Components are customizable starting points for complete interface elements.
+Include only the ones your project needs: comment out unused forwards in
+`scss/02-components/_index.scss` and rebuild to omit their CSS.
+
+### Buttons
+
+`[btn]` is a starting point for consistent button sizing across projects, with a
+modest default appearance. Build on it freely with project-specific styles, hover
+effects, and animation. Extend `[btn]` with a project class, or use `btn-size()`
+for sizing alone when creating a completely custom button:
+
+```html
+<button type="button" btn>Medium by default</button>
+<button type="button" btn="s outline">Small outline</button>
+<a href="/contact" btn="l">Contact us</a>
+<button type="button" btn="m" class="project-button">Custom project hover</button>
+```
+
+Use `xs`, `s`, `m`, and `l` for size. One color palette is provided by default.
+`outline`, `inverted`, and `block` control treatment and layout. Inverted swaps
+background/text colors and derives a subtle hover tint from the existing palette. Native `disabled` and
+`aria-disabled="true"` receive disabled styling; ARIA alone does not suppress
+activation, so remove a disabled link's `href` or prevent the action in your app.
+
+Project defaults live in `scss/00-sass/_variables.scss`: `$btn-design`,
+`$btn-themes` and `$btn-sizes` (font sizes and padding). Component
+classes can override `--btn-bg`, `--btn-color`, `--btn-hover-bg`,
+`--btn-hover-color`, `--btn-border`, `--btn-hover-border`, `--btn-radius`,
+`--btn-weight`, `--btn-gap`, `--btn-speed`, and `--btn-focus`. Set these overrides
+on the button itself; the component declares its defaults there, so parent-level
+values do not override them. Labels follow the global
+`--font-min-clamp` minimum. Sizes grow with the clamped
+font using `em` padding. By default, `$btn-scale-up: false` caps labels at
+their mobile/desktop reference size in actual pixels, so they scale down but not
+up. Set it to `true` to allow upward scaling, or override `--btn-font-max` on a
+specific component to set a different cap. The global minimum takes precedence
+if it exceeds the cap. Supply a single size token.
+
+For custom art direction, keep `[btn]` and add a project class. The foundation
+does not reserve transforms or pseudo-elements. To adopt only dimensions:
+
+```scss
+@use 'kni-cascade/scss/00-sass' as *;
+
+.project-button {
+  @include btn-size(m);
+  // Supply your own appearance, layout, focus, and disabled behavior.
+}
+```
+
+To exclude button CSS, omit `@forward 'button'` from the components entry point.
+See the [Demo & Reference](demo/index.html#buttons) for sizes, treatments, disabled
+states, link examples, and a project hover effect.
+
+`$btn-themes` is empty by default. Uncomment the secondary example or add a named
+entry with `background`, `text`, `hover-background`, and `hover-text` when needed.
+The component automatically generates its solid, outline, and inverted variants;
+no selector changes are needed.
+
+Button labels in `$btn-sizes` start one step below body sizes: `l` 16/14, `m`
+14/12, `s` 12/11, and `xs` 11/10 (desktop/mobile reference pixels).
+The global minimum still applies; padding distinguishes sizes when labels clamp.
+
+
+Button sizing defaults are configured in one place:
+
+```scss
+$btn-scale-up: false !default; // Allow growth beyond the mobile/desktop font sizes.
+$btn-sizes: (
+  xs: (desktop: 11, mobile: 10, padding-x: 1.5em, padding-y: 0.5em),
+  s: (desktop: 12, mobile: 11, padding-x: 1.5em, padding-y: 0.625em),
+  m: (desktop: 14, mobile: 12, padding-x: 1.5em, padding-y: 0.75em),
+  l: (desktop: 16, mobile: 14, padding-x: 1.5em, padding-y: 0.75em)
+) !default;
+```
+
+Font-size values are reference pixels processed through kni-cascade scaling.
+`padding-x` and `padding-y` follow the clamped font size. Filled buttons have a
+1px border matching the background, keeping their dimensions aligned with outlines.

@@ -113,3 +113,43 @@
     }
   }
 }
+
+// Responsive button label sizing, shared by the component and sizing mixin.
+@mixin btn-type($size: m) {
+  $type: map.get($btn-sizes, $size);
+
+  @if $type == null {
+    @error 'Unknown button type size: #{$size}. Add it to $btn-sizes.';
+  }
+
+  --btn-font-size: #{map.get($type, mobile)}pxv;
+  --btn-font-max: #{map.get($type, mobile)}px;
+
+  @media (min-width: #{$type-scale-breakpoint}px) {
+    --btn-font-size: #{map.get($type, desktop)}pxv;
+    --btn-font-max: #{map.get($type, desktop)}px;
+  }
+
+  @if not $btn-scale-up {
+    font-size: clamp(var(--font-min-clamp, 11px), var(--btn-font-size), var(--btn-font-max));
+  } @else {
+    font-size: max(var(--font-min-clamp, 11px), var(--btn-font-size));
+  }
+}
+
+// Reuse just the responsive button dimensions in custom project components.
+@mixin btn-size($size: m) {
+  $dimensions: map.get($btn-sizes, $size);
+
+  @if $dimensions == null {
+    @error 'Unknown button size: #{$size}. Add it to $btn-sizes.';
+  }
+
+  @include btn-type($size);
+
+  --btn-x-pad: #{map.get($dimensions, padding-x)};
+  --btn-y-pad: #{map.get($dimensions, padding-y)};
+
+  padding: calc(var(--btn-y-pad) - var(--btn-nudge, 0em)) var(--btn-x-pad)
+    calc(var(--btn-y-pad) + var(--btn-nudge, 0em));
+}
