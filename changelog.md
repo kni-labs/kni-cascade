@@ -2,7 +2,7 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
-## Unreleased
+## 1.6.1 — 2026-10-17
 
 ### Added
 
@@ -12,7 +12,7 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 
 ### Changed
 
-- Updated test / docs.
+- Expanded getting-started and component documentation, added button customization examples, and refined demo navigation, typography, and code styling.
 
 ## 1.5.1 — 2026-10-16
 
