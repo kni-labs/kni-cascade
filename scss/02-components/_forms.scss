@@ -1,0 +1,279 @@
+@use '../00-sass' as *;
+@use 'sass:map';
+
+// Edit project defaults in scss/00-sass/_variables.scss ($form-design).
+// Declare defaults once; forms and individual controls can override them.
+:root {
+  --form-radius: #{map.get($form-design, radius)};
+  --form-padding-x: #{map.get($form-design, padding-x)};
+  --form-padding-y: #{map.get($form-design, padding-y)};
+  --form-bg: #{map.get($form-design, background)};
+  --form-border: #{map.get($form-design, border)};
+  --form-muted: #{map.get($form-design, muted)};
+  --form-accent: #{map.get($form-design, accent)};
+  --form-focus: #{map.get($form-design, focus)};
+  --form-error: #{map.get($form-design, error)};
+}
+
+// Text-like controls only. Preserve specialized native inputs and button styles.
+$text-controls: "input:not([type]), input[type='text'], input[type='email'], input[type='tel'], input[type='url'], input[type='password'], input[type='search'], input[type='number'], input[type='date'], input[type='datetime-local'], input[type='month'], input[type='week'], input[type='time'], select, textarea";
+
+:where(#{$text-controls}) {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: var(--form-padding-y) var(--form-padding-x);
+  font: inherit;
+
+  // Keep editable text readable when the surrounding typography scales down.
+  font-size: max(1em, 16px);
+  line-height: 1.5;
+  color: inherit;
+  background-color: var(--form-bg);
+  border: 1px solid var(--form-border);
+  border-radius: var(--form-radius);
+
+  &::placeholder {
+    color: var(--form-muted);
+    opacity: 1;
+  }
+
+  &:read-only:not(select) {
+    background-color: color-mix(in srgb, var(--form-bg) 94%, currentcolor);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--form-error);
+  }
+
+  &:focus {
+    border-color: var(--form-focus);
+    outline: none;
+  }
+}
+
+:where(textarea) {
+  resize: vertical;
+}
+
+// Replace only the closed control's arrow; the option picker remains native.
+:where(select:not([multiple], [size])),
+:where(select[size='1']:not([multiple])) {
+  appearance: none;
+  padding-inline-end: calc(var(--form-padding-x) + 1.5em);
+  background-image: var(--form-select-arrow, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2368717e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"));
+  background-repeat: no-repeat;
+  background-position: right var(--form-padding-x) center;
+  background-size: 1em 1em;
+}
+
+:where(select:dir(rtl)) {
+  background-position: left var(--form-padding-x) center;
+}
+
+// List boxes need row spacing rather than the padding of a closed select.
+:where(select[multiple], select[size]:not([size='1'])) {
+  padding: 0;
+
+  option {
+    padding: 0.375em 0.625em;
+  }
+}
+
+:where(input[type='checkbox'], input[type='radio']) {
+  appearance: none;
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 1.375em;
+  height: 1.375em;
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  font: inherit;
+  background: var(--form-bg);
+  border: 1px solid var(--form-border);
+  border-radius: 0.1em;
+  cursor: pointer;
+  vertical-align: -0.125em;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &::before {
+    content: '';
+    font-size: inherit;
+    width: 0.825em;
+    height: 0.825em;
+    background: var(--form-check-color, #fff);
+    clip-path: polygon(12% 44%, 38% 70%, 88% 16%, 100% 28%, 38% 94%, 0 56%);
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+
+  &:checked {
+    border-color: var(--form-accent);
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+}
+
+:where(input[type='checkbox']:checked, input[type='checkbox']:indeterminate) {
+  background-color: var(--form-accent);
+  border-color: var(--form-accent);
+}
+
+:where(input[type='checkbox']:indeterminate)::before {
+  clip-path: inset(42% 8%);
+  transform: scale(1);
+}
+
+:where(input[type='radio']) {
+  border-radius: 50%;
+
+  &::before {
+    width: 0.6875em;
+    height: 0.6875em;
+    border-radius: 50%;
+    background: var(--form-accent);
+    clip-path: none;
+  }
+}
+
+:where(input[type='range'], progress) {
+  accent-color: var(--form-accent);
+}
+
+// Keep a generous interaction area around the thin track.
+:where(input[type='range']) {
+  appearance: none;
+  width: 100%;
+  height: 1.75em;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 0.1875em;
+    border-radius: 999pxv;
+    background: linear-gradient(to right,
+      var(--form-accent) 0 var(--form-range-fill, 0%),
+      var(--form-border) var(--form-range-fill, 0%) 100%);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.375em;
+    height: 1.375em;
+    margin-top: calc((0.1875em - 1.375em) / 2);
+    border: 0;
+    border-radius: 50%;
+    background: var(--form-accent);
+  }
+
+  &::-moz-range-track {
+    height: 0.1875em;
+    border-radius: 999pxv;
+    background: var(--form-border);
+  }
+
+  &::-moz-range-progress {
+    height: 0.1875em;
+    border-radius: 999pxv;
+    background: var(--form-accent);
+  }
+
+  &::-moz-range-thumb {
+    width: 1.375em;
+    height: 1.375em;
+    border: 0;
+    border-radius: 50%;
+    background: var(--form-accent);
+  }
+}
+
+:where(input[type='checkbox'], input[type='radio'])[aria-invalid='true'] {
+  border-color: var(--form-error);
+}
+
+:where(input[type='checkbox'], input[type='radio'], input[type='range'], input[type='color'], input[type='file']):where(:focus-visible) {
+  outline: 2px solid var(--form-focus);
+  outline-offset: 3px;
+}
+
+:where(input:not([type='hidden']), select, textarea):where(:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+:where(label, legend) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(label) {
+  display: inline-block;
+  margin-block-end: 0.5em;
+}
+
+// Align choice controls with the first line, including wrapped labels.
+:where(label:has(> input[type='checkbox'], > input[type='radio'])) {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  line-height: 1.5;
+
+  > :where(input) {
+    flex-shrink: 0;
+    margin: 0;
+    margin-block-start: 0.0625em;
+  }
+}
+
+:where(fieldset) {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:where(legend) {
+  padding: 0;
+  margin-block-end: 0.5em;
+}
+
+:where(.form-help, .form-error) {
+  margin-block: 0.5em 0;
+  font-size: 0.875em;
+  line-height: 1.5;
+  color: var(--form-muted);
+}
+
+:where(.form-error) {
+  color: var(--form-error);
+}
+
+@media (forced-colors: active) {
+  :where(input[type='checkbox'], input[type='radio']) {
+    appearance: auto;
+
+    &::before { display: none; }
+  }
+
+  :where(select:not([multiple], [size])),
+  :where(select[size='1']:not([multiple])) {
+    appearance: auto;
+    background-image: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(input[type='checkbox'], input[type='radio']) {
+    transition: none;
+
+    &::before { transition: none; }
+  }
+}

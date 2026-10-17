@@ -1410,3 +1410,60 @@ section {
     transition: none;
   }
 }
+
+// Form preview layout belongs to the demo, not the component.
+.form-demo {
+  padding: 28pxv;
+  margin-block: 24pxv;
+  border: 1px solid #dedede;
+  border-radius: 8pxv;
+  font-size: max(16px, 16pxv);
+  color: #172332;
+
+  > [btn] { margin-top: 24pxv; }
+}
+
+.form-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24pxv;
+}
+
+.form-demo-full { grid-column: 1 / -1; }
+
+.form-demo-choice {
+  display: flex;
+  align-items: flex-start;
+  width: fit-content;
+  line-height: 1.5;
+
+  input { flex-shrink: 0; }
+}
+
+.form-demo-custom {
+  --form-bg: #fff9f7;
+  --form-border: #963a30;
+  --form-radius: 0;
+  --form-accent: #963a30;
+  --form-focus: #963a30;
+
+  > .form-demo-choice { margin-top: 24pxv; }
+}
+
+@media (width < 768px) {
+  .form-demo-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.form-demo :is(input[type='range'], input[type='file'], progress, meter) {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  font: inherit;
+}
+
+.form-demo input[type='color'] {
+  display: block;
+  width: 3em;
+  height: 2em;
+}
+

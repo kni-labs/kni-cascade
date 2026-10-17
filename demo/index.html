@@ -69,6 +69,7 @@
           <ul class="demo-subnav">
             <li><a href="#components">Overview</a></li>
             <li><a href="#buttons">[btn]</a></li>
+            <li><a href="#forms">Forms</a></li>
           </ul>
         </details>
         <details class="demo-nav-group" name="demo-sections">
@@ -471,7 +472,8 @@
           <p>Components provide reusable starting points for complete interface elements, with consistent sizing, appearance, and interaction states. Customize them for your project and build on top of them.</p>
           <p>Only include what you need. In your project's copy of <code>scss/02-components/_index.scss</code>, comment out unused components and rebuild to remove their CSS from the output:</p>
           <pre class="code-block"><code><span class="code-comment">// Comment out this line if your project does not use kni-cascade buttons.</span>
-<span class="code-attr">@forward</span> <span class="code-string">'button'</span>;</code></pre>
+<span class="code-attr">@forward</span> <span class="code-string">'button'</span>;
+<span class="code-attr">@forward</span> <span class="code-string">'forms'</span>;</code></pre>
         <section id="buttons">
           <h3 class="heading--s">[btn]</h3>
           <p>A shared starting point for consistent button sizing across projects. Make the appearance your own with project colors, spacing, hover effects, and animation. Extend <code>[btn]</code>, or take just the sizing and build your own.</p>
@@ -604,6 +606,106 @@
   @include btn-size(m);
   // Add your project appearance and interaction styles.
 <span class="code-punctuation">}</span></code></pre>
+        </section>
+        <section id="forms">
+          <h3 class="heading--s">Forms</h3>
+          <p>Sensible defaults for native form elements. Include <code>@forward 'forms'</code> in <code>scss/02-components/_index.scss</code> to use them, or comment it out to omit them. No styling attribute or JavaScript replacement is needed.</p>
+          <h4 class="heading--xs">Make it yours</h4>
+          <p>Edit <code>$form-design</code> in <code>scss/00-sass/_variables.scss</code> for project-wide appearance. Font family, weight, and text color inherit from the surrounding content. Controls use at least <code>16px</code> text with font-relative padding; borders stay <code>1px</code>. Layout and spacing between fields belong to your project.</p>
+          <pre class="code-block"><code><span class="code-comment">// scss/00-sass/_variables.scss</span>
+<span class="code-attr">$form-design</span>: (
+  radius: <span class="code-string">4pxv</span>,
+  padding-x: <span class="code-string">0.875em</span>,
+  padding-y: <span class="code-string">0.4375em</span>,
+  background: <span class="code-string">#fff</span>,
+  border: <span class="code-string">#c5cbd1</span>,
+  muted: <span class="code-string">#68717e</span>,
+  accent: <span class="code-string">#001a3d</span>,
+  focus: <span class="code-string">#0061c7</span>,
+  error: <span class="code-string">#b42318</span>
+) !default;</code></pre>
+          <h4 class="heading--xs">Everyday controls</h4>
+          <p>Inputs and selects share sizing. Textareas resize vertically. Checkboxes and radios use thin borders and a subtle 0.2-second selection animation, while keeping native keyboard and selection behavior. These examples are previews and do not send data.</p>
+          <form class="form-demo" aria-label="Contact form preview" onsubmit="event.preventDefault()">
+            <div class="form-demo-grid">
+              <div><label for="form-name">Name</label><input id="form-name" name="name" type="text" autocomplete="name" placeholder="Your name"></div>
+              <div><label for="form-email">Email</label><input id="form-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" aria-describedby="form-email-help"><p id="form-email-help" class="form-help">Use your work email.</p></div>
+              <div><label for="form-interest">Interested in</label><select id="form-interest" name="interest"><option value="">Choose an option</option><option value="website">A new website</option><option value="brand">Brand development</option><option value="other">Something else</option></select></div>
+              <div><label for="form-phone">Phone <span class="form-help">(optional)</span></label><input id="form-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number"></div>
+              <div class="form-demo-full"><label for="form-message">Message</label><textarea id="form-message" name="message" rows="4" placeholder="Tell us about your project"></textarea></div>
+              <fieldset><legend>Preferred contact</legend><label class="form-demo-choice"><input type="radio" name="contact-method" value="email" checked> Email</label><label class="form-demo-choice"><input type="radio" name="contact-method" value="phone"> Phone</label></fieldset>
+              <fieldset><legend>Stay in touch</legend><label class="form-demo-choice"><input type="checkbox" name="newsletter"> Send occasional project updates</label></fieldset>
+            </div>
+            <button type="button" btn>Get in touch</button>
+          </form>
+          <details class="btn-demo-source"><summary>View form markup</summary>
+          <pre class="code-block"><code><span class="code-tag">&lt;form</span> <span class="code-attr">class</span>=<span class="code-string">"contact-form"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;label</span> <span class="code-attr">for</span>=<span class="code-string">"email"</span><span class="code-tag">&gt;</span>Email<span class="code-tag">&lt;/label&gt;</span>
+  <span class="code-tag">&lt;input</span> <span class="code-attr">id</span>=<span class="code-string">"email"</span> <span class="code-attr">name</span>=<span class="code-string">"email"</span> <span class="code-attr">type</span>=<span class="code-string">"email"</span>
+         <span class="code-attr">autocomplete</span>=<span class="code-string">"email"</span> <span class="code-attr">aria-describedby</span>=<span class="code-string">"email-help"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;p</span> <span class="code-attr">id</span>=<span class="code-string">"email-help"</span> <span class="code-attr">class</span>=<span class="code-string">"form-help"</span><span class="code-tag">&gt;</span>Use your work email.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"submit"</span> <span class="code-attr">btn</span><span class="code-tag">&gt;</span>Get in touch<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/form&gt;</span></code></pre></details>
+          <h4 class="heading--xs">States</h4>
+          <p>Use native <code>disabled</code> and <code>readonly</code> attributes. Mark an error with <code>aria-invalid="true"</code>, explain it in text, and connect that message using <code>aria-describedby</code>. Validation timing and submission behavior remain your application's responsibility.</p>
+          <div class="form-demo form-demo-grid">
+            <div><label for="form-error-email">Email with an error</label><input id="form-error-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="form-error-message"><p id="form-error-message" class="form-error">Enter a complete email address, such as you@company.com.</p></div>
+            <div><label for="form-readonly">Read-only reference</label><input id="form-readonly" type="text" value="KNI-2026-014" readonly></div>
+            <div><label for="form-disabled">Disabled input</label><input id="form-disabled" type="text" value="Not available" disabled></div>
+            <div><label for="form-disabled-select">Disabled select</label><select id="form-disabled-select" disabled><option>Not available</option></select></div>
+            <fieldset disabled><legend>Disabled group</legend><label class="form-demo-choice"><input type="checkbox" checked> Updates enabled</label><label class="form-demo-choice"><input type="radio" name="disabled-method" checked> Email</label></fieldset>
+          </div>
+          <h4 class="heading--xs" id="form-gallery">More native controls</h4>
+          <p>Try these controls directly. Range, color, file, and date pickers retain their browser behavior. Their exact appearance can vary by browser and operating system.</p>
+          <div class="form-demo form-demo-grid">
+            <div><label for="form-range">Range — <output id="form-range-value" for="form-range">50</output>%</label><input id="form-range" type="range" min="0" max="100" value="50" aria-describedby="form-range-help"><p id="form-range-help" class="form-help">Drag the thumb or use the arrow keys.</p></div>
+            <div><label for="form-range-disabled">Disabled range</label><input id="form-range-disabled" type="range" min="0" max="100" value="35" disabled></div>
+            <div><label for="form-file">File upload</label><input id="form-file" type="file" aria-describedby="form-file-help"><p id="form-file-help" class="form-help">Local preview only. Selected files are not uploaded.</p></div>
+            <div><label for="form-color">Color picker</label><input id="form-color" type="color" value="#001a3d"></div>
+            <div><label for="form-number">Number</label><input id="form-number" type="number" min="1" max="20" step="1" value="3"></div>
+            <div><label for="form-search">Search</label><input id="form-search" type="search" placeholder="Search projects"></div>
+            <div><label for="form-password">Password</label><input id="form-password" type="password" autocomplete="new-password" placeholder="Enter a password"></div>
+            <div><label for="form-url">Website URL</label><input id="form-url" type="url" placeholder="https://example.com"></div>
+            <div><label for="form-date">Date</label><input id="form-date" type="date" value="2026-10-17"></div>
+            <div><label for="form-time">Time</label><input id="form-time" type="time" value="09:30"></div>
+            <div><label for="form-datetime">Date and time</label><input id="form-datetime" type="datetime-local" value="2026-10-17T09:30"></div>
+            <div><label for="form-month">Month</label><input id="form-month" type="month" value="2026-10"></div>
+            <div><label for="form-week">Week</label><input id="form-week" type="week" value="2026-W42"></div>
+            <div><label for="form-datalist">Input with suggestions</label><input id="form-datalist" type="text" list="form-services" placeholder="Choose or type a service"><datalist id="form-services"><option value="Design"></option><option value="Development"></option><option value="Strategy"></option></datalist></div>
+            <div><label for="form-multiple">Multiple select</label><select id="form-multiple" multiple size="4" aria-describedby="form-multiple-help"><option selected>Design</option><option>Development</option><option>Strategy</option><option>Content</option></select><p id="form-multiple-help" class="form-help">Desktop: use Command or Control to select more than one.</p></div>
+            <div><label for="form-listbox">Single-select list box</label><select id="form-listbox" size="4"><option selected>Design</option><option>Development</option><option>Strategy</option><option>Content</option></select></div>
+            <div><label for="form-progress">Progress</label><progress id="form-progress" value="60" max="100">60%</progress></div>
+            <div><label for="form-meter">Meter</label><meter id="form-meter" min="0" max="100" low="25" high="80" optimum="60" value="60">60 out of 100</meter></div>
+          </div>
+          <h4 class="heading--xs">Choice-control edge cases</h4>
+          <div class="form-demo form-demo-grid">
+            <div><label class="form-demo-choice"><input id="form-indeterminate" type="checkbox"> Partially selected</label><p class="form-help">The mixed state is set through the native <code>indeterminate</code> property. Click to select or clear it.</p></div>
+            <div><label class="form-demo-choice"><input type="checkbox"> A longer label that wraps onto another line so you can judge the spacing and alignment alongside the control.</label></div>
+            <div><label class="form-demo-choice"><input id="form-invalid-checkbox" type="checkbox" aria-invalid="true" aria-describedby="form-checkbox-error"> I agree to the terms (required)</label><p id="form-checkbox-error" class="form-error">Please agree to the terms to continue.</p></div>
+            <fieldset><legend>Choose a contact method (required)</legend><label class="form-demo-choice"><input type="radio" name="invalid-contact" value="email" aria-invalid="true" aria-describedby="form-radio-error"> Email</label><label class="form-demo-choice"><input type="radio" name="invalid-contact" value="phone" aria-invalid="true" aria-describedby="form-radio-error"> Phone</label><p id="form-radio-error" class="form-error">Choose one contact method.</p></fieldset>
+          </div>
+          <h4 class="heading--xs">Required fields and browser validation</h4>
+          <p>Try submitting this preview empty, then fill it in. Native validation handles required fields and email format. Real projects supply submission and server-side validation; nothing here is sent.</p>
+          <form class="form-demo" id="form-validation-preview">
+            <div class="form-demo-grid"><div><label for="form-required-name">Name (required)</label><input id="form-required-name" name="name" type="text" autocomplete="name" required></div><div><label for="form-required-email">Email (required)</label><input id="form-required-email" name="email" type="email" autocomplete="email" required></div></div>
+            <button type="submit" btn>Try validation</button>
+            <p class="form-help" id="form-validation-status" role="status"></p>
+          </form>
+          <h4 class="heading--xs">One form, a different look</h4>
+          <p>Override inherited <code>--form-*</code> variables on a form or wrapper. Low-specificity selectors make ordinary CSS overrides easy. The select's dropdown stays native; only its closed box is styled.</p>
+          <form class="form-demo form-demo-custom" aria-label="Custom form appearance preview" onsubmit="event.preventDefault()">
+            <div class="form-demo-grid"><div><label for="form-custom-name">Name</label><input id="form-custom-name" type="text" autocomplete="name" placeholder="Your name"></div><div><label for="form-custom-service">Service</label><select id="form-custom-service"><option>Choose a service</option><option>Design</option><option>Development</option></select></div></div>
+            <label class="form-demo-choice"><input type="checkbox"> Keep me in the loop</label>
+          </form>
+          <pre class="code-block"><code><span class="code-tag">.contact-form</span> {
+  color: <span class="code-string">#172332</span>;
+  <span class="code-attr">--form-bg</span>: <span class="code-string">#fff9f7</span>;
+  <span class="code-attr">--form-border</span>: <span class="code-string">#963a30</span>;
+  <span class="code-attr">--form-radius</span>: <span class="code-string">0</span>;
+  <span class="code-attr">--form-accent</span>: <span class="code-string">#963a30</span>;
+  <span class="code-attr">--form-focus</span>: <span class="code-string">#963a30</span>;
+}</code></pre>
+          <p>Color, date, range, and file inputs keep their specialized native UI; this component does not replace browser pickers. Use <code>--form-select-arrow</code> to supply a different arrow image if needed.</p>
         </section>
         </section>
         <section id="utilities">
@@ -1051,6 +1153,28 @@ const setupNavigation = () => {
   update();
 };
 document.addEventListener('DOMContentLoaded', setupNavigation);
+
+// Demo-only interactions: native control state, no network submission.
+// Chromium/WebKit need a CSS variable for the filled track; Firefox has a native progress pseudo-element.
+document.querySelectorAll('input[type="range"]').forEach(range => {
+  const updateFill = () => {
+    const min = range.min === '' ? 0 : Number(range.min);
+    const max = range.max === '' ? 100 : Number(range.max);
+    const percent = max > min ? Math.max(0, Math.min(100, (Number(range.value) - min) / (max - min) * 100)) : 0;
+    range.style.setProperty('--form-range-fill', `${percent}%`);
+  };
+  range.addEventListener('input', updateFill);
+  updateFill();
+});
+const rangePreview = document.getElementById('form-range');
+rangePreview.addEventListener('input', () => {
+  document.getElementById('form-range-value').value = rangePreview.value;
+});
+document.getElementById('form-indeterminate').indeterminate = true;
+document.getElementById('form-validation-preview').addEventListener('submit', event => {
+  event.preventDefault();
+  document.getElementById('form-validation-status').textContent = 'Validation passed. This preview does not send data.';
+});
 </script>
   </body>
 </html>
