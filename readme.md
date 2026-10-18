@@ -316,3 +316,40 @@ document.querySelectorAll('input[type="range"]').forEach(range => {
 
 Call the updater after programmatic value changes or form resets as needed.
 The input's dragging and keyboard behavior remain native without this helper.
+
+## Utility mixins
+
+Shadow and scrim utilities work through attributes or Sass mixins. Importing the
+Sass helpers alone produces no CSS; each include generates styles for its selector.
+The attribute utilities use these same implementations.
+
+```scss
+@use 'kni-cascade/scss/00-sass' as *;
+
+.news-card {
+  @include shadow(20, 0.1);
+  @include shadow-hover(30, 0.2);
+}
+
+.hero-image {
+  @include scrim(to-t, 0.6, 75%, (0, 20, 72));
+}
+```
+
+`shadow($elevation: 30, $opacity: 0.08, $color: null)` accepts the existing
+10–50 elevation presets. Color is an optional RGB channel list, such as
+`(0, 20, 190)`. `shadow-hover()` accepts the same arguments, all optional;
+omitted values retain the resting settings. It also activates on keyboard focus
+and disables transitions for reduced motion. A hover-only shadow starts invisible.
+
+`scrim($direction: to-t-tr, $opacity: 1, $distance: 100%, $color: (0, 0, 0))`
+accepts the same direction names as the attribute, with arbitrary opacity and
+percentage distance values. It positions the host, clips overflow, and reserves
+`::before` for the overlay. Set text above the overlay in your component layout.
+
+Commenting out utility forwards removes the attribute CSS while keeping these
+mixins available through `00-sass`.
+
+Scrims use an eased, multi-stop gradient for a more gradual fade into the image
+than a standard two-stop gradient. Read [Easing Linear Gradients on CSS-Tricks](https://css-tricks.com/easing-linear-gradients/)
+for the technique behind this approach.

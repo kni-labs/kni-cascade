@@ -1,0 +1,56 @@
+@use 'sass:map';
+
+$scrim-directions: (
+  to-t-tr: 22.5deg,
+  to-r-tr: 67.5deg,
+  to-r-br: 112.5deg,
+  to-b-br: 157.5deg,
+  to-b-bl: 202.5deg,
+  to-l-bl: 247.5deg,
+  to-l-tl: 292.5deg,
+  to-t-tl: 337.5deg,
+  to-t: to top,
+  to-b: to bottom,
+  to-l: to left,
+  to-r: to right,
+  to-tr: to top right,
+  to-tl: to top left,
+  to-br: to bottom right,
+  to-bl: to bottom left,
+);
+
+@mixin scrim($direction: to-t-tr, $opacity: 1, $distance: 100%, $color: (0, 0, 0)) {
+  $angle: map.get($scrim-directions, $direction);
+
+  @if $angle == null {
+    @error 'Unknown scrim direction: #{$direction}.';
+  }
+
+  position: relative;
+  overflow: hidden;
+  display: block;
+
+  --scrim-color: #{$color};
+  --scrim-dir: #{$angle};
+  --scrim-a: #{$opacity};
+  --scrim-dist: #{$distance};
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    background-image: linear-gradient(
+      var(--scrim-dir),
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 1)) 0%,
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 0.852)) calc(var(--scrim-dist) * 0.12),
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 0.621)) calc(var(--scrim-dist) * 0.28),
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 0.385)) calc(var(--scrim-dist) * 0.46),
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 0.183)) calc(var(--scrim-dist) * 0.66),
+      rgba(var(--scrim-color), calc(var(--scrim-a) * 0.054)) calc(var(--scrim-dist) * 0.85),
+      rgba(var(--scrim-color), 0) var(--scrim-dist)
+    );
+  }
+}

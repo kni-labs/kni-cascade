@@ -810,10 +810,27 @@
             <button type="button" class="shadow-demo-card" shadow="50 .2 blue" shadow-hover="10 .1"><strong>50 .2 → 10 .1</strong><code>shadow="50 .2 blue" shadow-hover="10 .1"</code></button>
             <button type="button" class="shadow-demo-card" shadow="20 .1" shadow-hover="30 .2 blue"><strong>Black → blue</strong><code>shadow="20 .1" shadow-hover="30 .2 blue"</code></button>
           </div>
+          <h4 id="shadow-mixins" class="heading--xs">Build shadows into a component</h4>
+          <p>Use attributes for individual elements, or include the same styling in a component class. Import <code>scss/00-sass</code> for mixins without generating utility CSS. Omitted hover arguments retain the resting settings.</p>
+          <div class="shadow-demo-grid">
+            <button type="button" class="shadow-demo-card mixin-shadow-card"><strong>Component shadow</strong><code>20 .1 → 30 .2</code></button>
+            <button type="button" class="shadow-demo-card mixin-shadow-hover"><strong>Hover or keyboard focus</strong><code>Mixin only; no attributes</code></button>
+          </div>
+          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+
+.mixin-shadow-card {
+  <span class="code-attr">@include</span> shadow(<span class="code-string">20, 0.1</span>);
+  <span class="code-attr">@include</span> shadow-hover(<span class="code-string">30, 0.2</span>);
+}
+
+.mixin-shadow-hover {
+  <span class="code-attr">@include</span> shadow-hover(<span class="code-string">20, 0.2, (0, 20, 190)</span>);
+}</code></pre>
         </section>
         <section id="scrim" class="scrim-demo">
           <h3 class="heading--s">[scrim]</h3>
           <p>A scrim is a gradient overlay that darkens part of an image and fades to transparent. Use it behind text on photos, hero images, or cards to improve readability while keeping the image visible. Choose a direction that puts the darkest area behind your text, and check contrast against the actual image.</p>
+          <p>Scrims use an eased, multi-stop gradient for a more gradual fade into the image than a standard two-stop gradient. Learn more in <a href="https://css-tricks.com/easing-linear-gradients/" target="_blank" rel="noopener noreferrer">Easing Linear Gradients on CSS-Tricks</a>.</p>
           <p><a href="https://codepen.io/editor/dbox/pen/01a141ca-43cc-7778-aa08-2f78ee8aece5" target="_blank" rel="noopener noreferrer">Explore the scrim preview on CodePen</a></p>
           <div class="scrim-demo-row">
             <div class="scrim-demo-item">
@@ -861,6 +878,22 @@
               <p><code>scrim="to-bl 50%" style="--scrim-color:0,20,72"</code></p>
             </div>
           </div>
+          <h4 id="scrim-mixin" class="heading--xs">Build a scrim into a component</h4>
+          <p>When every image in a component needs the same treatment, include <code>scrim()</code> on its class instead of repeating the attribute. Arguments are direction, opacity, fade distance, and an optional RGB channel list. The effect reserves <code>::before</code>.</p>
+          <div class="scrim-demo-row">
+            <div class="scrim-demo-item">
+              <div class="wrapper">
+                <figure class="mixin-scrim-image"><img src="images/cascade-waterfall.png" alt="Waterfalls in a misty mountain landscape"></figure>
+                <article><h2 class="heading--xs">One class, shared treatment</h2></article>
+              </div>
+              <p><code>class="mixin-scrim-image"</code> — no scrim attribute</p>
+            </div>
+          </div>
+          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+
+.mixin-scrim-image {
+  <span class="code-attr">@include</span> scrim(<span class="code-string">to-t, 0.6, 75%, (0, 20, 72)</span>);
+}</code></pre>
         </section>
         <section id="layout-utilities">
           <h3 class="heading--s">Layout &amp; visibility</h3>
