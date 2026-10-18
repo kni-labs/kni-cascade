@@ -353,3 +353,44 @@ mixins available through `00-sass`.
 Scrims use an eased, multi-stop gradient for a more gradual fade into the image
 than a standard two-stop gradient. Read [Easing Linear Gradients on CSS-Tricks](https://css-tricks.com/easing-linear-gradients/)
 for the technique behind this approach.
+
+## Inset border
+
+`inset-border` adds an inward-growing border on hover or keyboard focus. It is
+invisible at rest and does not change layout. Disabled controls and elements with
+`aria-disabled="true"` do not activate it. Reduced motion disables the transition.
+
+```html
+<a class="news-card" inset-border href="/story">Read the story</a>
+```
+
+```scss
+.news-card {
+  border-radius: 12pxv;
+  --inset-border-color: #2a649c;
+  --inset-border-width: 5pxv;
+  --inset-border-speed: 350ms;
+}
+```
+
+Or use the shared mixin without the attribute:
+
+```scss
+@use 'kni-cascade/scss/00-sass' as *;
+
+.news-card {
+  @include inset-border(5pxv, #2a649c, 350ms);
+  border-radius: 12pxv;
+}
+```
+
+Arguments are width, color, and speed; defaults are `5pxv`, `currentColor`, and
+`350ms`. The effect reserves `::after`, inherits the host's radius, and ignores
+pointer events. It draws above normal child content while leaving the host's
+`box-shadow` free. Children with their own higher stacking levels may cover it.
+Use a block or inline-block host and keep an accessible keyboard focus indicator.
+The utility sets `position: relative`; apply any absolute, fixed, or sticky
+positioning after the include, or override the attribute selector as needed.
+
+Comment out `@forward 'inset-border';` in the utilities entry to omit attribute
+CSS; the mixin remains available from `00-sass`, with no CSS generated on import.

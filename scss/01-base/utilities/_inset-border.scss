@@ -1,0 +1,5 @@
+@use '../../00-sass/inset-border' as *;
+
+[inset-border] {
+  @include inset-border;
+}

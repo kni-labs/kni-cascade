@@ -1037,6 +1037,11 @@ section {
   overflow-x: auto;
 }
 
+#pxv .type-scale-table-wrap {
+  max-width: 72ch;
+  font-size: 16pxv;
+}
+
 .type-scale-table {
   width: 100%;
 
@@ -1480,4 +1485,64 @@ section {
 
 .mixin-scrim-image {
   @include scrim(to-t, 0.6, 75%, (0, 20, 72));
+}
+
+.inset-demo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 160pxv;
+  padding: 0;
+  border: 1px solid #dedede;
+  border-radius: 12pxv;
+  background: #fff;
+  color: #172332;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+
+  --inset-border-color: #2a649c;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 140pxv;
+    object-fit: cover;
+    border-radius: 12pxv 12pxv 0 0;
+  }
+
+  span {
+    padding: 24pxv;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0061c7;
+    outline-offset: 4px;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+  }
+}
+
+.inset-demo-mixin {
+  @include inset-border(5pxv, #a5106f);
+}
+
+.inset-demo-example {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16pxv;
+
+  .inset-demo-card {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+.inset-demo-grid {
+  padding: 0;
+  margin-block: 24pxv;
 }

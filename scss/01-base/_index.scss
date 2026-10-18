@@ -1,4 +1,6 @@
-/* this is base index */
+// Keep the foundation your project needs; comment out unused forwards.
+// Scaling supports pxv values; typography supplies the shared type styles.
+// Comment out utilities to omit all utility CSS, or choose features in utilities/_index.scss.
 @forward 'scaling';
 @forward 'motion';
 @forward 'reset';

@@ -51,6 +51,7 @@
             <li><a href="#scaling">Overview</a></li>
             <li><a href="#pxv">postcss-pxv</a></li>
             <li><a href="#scaling-breakpoints">Breakpoints</a></li>
+            <li><a href="#advanced-scaling">Advanced scaling settings</a></li>
             <!-- <li><a href="#scaling-controls">Controls</a></li> -->
           </ul>
         </details>
@@ -79,6 +80,7 @@
             <li><a href="#flex">flex</a></li>
             <li><a href="#shadows">[shadow]</a></li>
             <li><a href="#scrim">[scrim]</a></li>
+            <li><a href="#inset-border">[inset-border]</a></li>
             <li><a href="#layout-utilities">Layout &amp; visibility</a></li>
             <li><a href="#media-utilities">Images &amp; positioning</a></li>
             <li><a href="#color-utilities">Colors</a></li>
@@ -94,9 +96,10 @@
       </aside>
     <div class="container demo-content">
       <div class="demo-description">
-        <p>A modern front-end architecture creating a single source of truth for all our CSS — across WordPress, React, static, or any future builds.</p>
-        <p>kni-cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.</p>
-        <p>It’s designed for clarity, scalability, and minimal friction — a single shared foundation that powers every KNI build.</p>
+        <p><a href="https://github.com/kni-labs/kni-cascade">kni-cascade</a> is a shared CSS foundation for building responsive websites. It gives every project a familiar folder structure, so developers know where settings, base styles, components, and page styles belong.</p>
+        <p>At its core is a scaling system that preserves the relationships between typography, spacing, and dimensions as the viewport changes. It helps carry a design across screen sizes with less repetitive adjustment and fewer media queries.</p>
+        <p>Alongside that system are the foundations projects repeatedly need: typography, buttons, forms, layout helpers, and visual effects. Use what helps, leave out what doesn’t, and build on top of it.</p>
+        <p>kni-cascade is a starting point you own. Customize the defaults, extend what’s useful, and change what the project needs. It should help you build your design, never limit what you can do.</p>
       </div>
 
       <main>
@@ -108,7 +111,7 @@
             <p>Before building pages, set the project’s typography, scaling, and component defaults to match the Figma design. The settings below show where to make those changes.</p>
             <dl class="docs-reference">
               <dt>Typography</dt><dd>Match <code>$type-scale</code> in <code>scss/00-sass/_variables.scss</code> to the desktop and mobile typography variables in Figma.</dd>
-              <dt>Scaling</dt><dd>Check the mobile and desktop reference dimensions in <code>scss/01-base/_scaling.scss</code>. They default to <code>390px</code> and <code>1440px</code> wide. Set <code>$desktop-max</code> in <code>_variables.scss</code> if the design needs a different scaling limit; the default is <code>1800px</code>.</dd>
+              <dt>Scaling</dt><dd>Check the mobile and desktop reference dimensions in <code>scss/01-base/_scaling.scss</code>. They default to <code>390px</code> and <code>1440px</code> wide.</dd>
               <dt>Components</dt><dd>Set shared appearance and sizing once, then extend each component as needed. For buttons, use <code>$btn-design</code> and <code>$btn-sizes</code>.</dd>
               <dt>Only what you need</dt><dd>Comment out unused forwards in the components and utilities entry files, then rebuild to omit their CSS.</dd>
             </dl>
@@ -140,37 +143,63 @@
               <a class="demo-npm" href="https://www.npmjs.com/package/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/postcss-pxv?label=npm&amp;color=2B7190" alt="postcss-pxv version published on npm" height="20" /></a>
             </div>
             <p>Think of pxv as a design-reference pixel. Write the size from your design, and kni-cascade scales it using the viewport and the active mobile or desktop settings.</p>
+            <h4 class="heading--xs">You write</h4>
             <pre class="code-block"><code><span class="code-tag">.card</span> {
-  <span class="code-attr">width</span>: <span class="code-string">300pxv</span>;
   <span class="code-attr">padding</span>: <span class="code-string">24pxv</span>;
 }</code></pre>
-            <p>The PostCSS plugin converts <code>24pxv</code> to <code>calc(24 * var(--pxv-unit))</code>. One shared unit keeps every pxv value in proportion. Standard <code>px</code> values stay fixed.</p>
-            <p>The reference width defaults to <code>390px</code> on mobile and <code>1440px</code> on desktop. With width-only scaling, <code>100pxv</code> equals <code>100px</code> at the reference width and <code>80px</code> at <code>80%</code> of that width, before minimum and maximum limits apply.</p>
-            <dl class="docs-reference">
-              <dt>Height influence</dt><dd>Squish lets short viewports reduce the width-based scale. At 0, scaling follows width alone; at 1, the full height constraint applies.</dd>
-              <dt>Floor</dt><dd>A minimum viewport height for the height calculation, so short windows do not keep shrinking the scale indefinitely.</dd>
-              <dt>Maximum width</dt><dd>Caps the scale calculation. It does not change the layout breakpoint.</dd>
-              <dt>Reference height</dt><dd>The design height used by the height constraint. It matters when squish is above zero.</dd>
-            </dl>
-            <aside class="demo-note" aria-label="Scaling tip"><strong>When to use pxv</strong><p>Basically always! Use pxv for sizes that should scale with the composition. Keep fixed pixels where appropriate, such as a 1px border, and use percentages or layout tools for flexible structure. Typography also applies minimum font-size clamps for readability.</p></aside>
+            <h4 class="heading--xs">PostCSS outputs</h4>
+            <pre class="code-block"><code><span class="code-tag">.card</span> {
+  <span class="code-attr">padding</span>: calc(<span class="code-string">24</span> * var(<span class="code-string">--pxv-unit</span>));
+}</code></pre>
+            <p>One shared unit keeps every pxv value in proportion. The browser calculates the final size as the viewport changes. Here’s what that padding becomes at a few desktop widths:</p>
+            <div class="type-scale-table-wrap">
+              <table class="type-scale-table">
+                <caption>Computed padding using the default 1440px desktop reference width, with enough viewport height for width to determine the scale</caption>
+                <thead><tr><th scope="col">Viewport width</th><th scope="col">Computed padding</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">1280px</th><td>21.33px</td></tr>
+                  <tr><th scope="row">1440px (desktop basis)</th><td>24px</td></tr>
+                  <tr><th scope="row">1600px</th><td>26.67px</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Values are rounded to two decimal places. Standard <code>px</code> values stay fixed.</p>
+            <aside class="demo-note" aria-label="Scaling tip"><strong>When to use pxv</strong><p>Basically always! If you find yourself reaching for px, you probably want pxv. Use fixed pixels for details that should stay a consistent thickness or size, such as borders, dividers, outlines, and small optical adjustments. Typography applies minimum font-size clamps for readability.</p></aside>
           </section>
           <section id="scaling-breakpoints">
             <h3 class="heading--s">Breakpoints</h3>
-            <p>Most builds use two primary ranges: <code>mobile</code> below <code>768px</code> and <code>desktop</code> from <code>768px</code> upward. The shared pxv unit handles scaling within each range; you do not need a separate layout at every named breakpoint.</p>
+            <h4 class="heading--xs">One simple media query</h4>
+            <p>One simple media query switches the site-basis settings that power scaling in kni-cascade. The site starts with its mobile basis settings, including a reference width of <code>390px</code>. At <code>$tm</code> (<code>768px</code> by default), the query activates the desktop basis settings, including a reference width of <code>1440px</code>. Typography switches between its mobile and desktop sizes at the same threshold by default.</p>
+            <p>That media query switches the design basis; pxv handles the sizes in between. Spacing, dimensions, and other pxv values scale together as the viewport changes, while typography follows its configured scaling and readability limits. Instead of repeatedly adjusting individual values across tablet, laptop, and desktop widths, you define the mobile and desktop compositions and let the shared scaling system carry them through each range.</p>
+            <p>Use <code>@include sm</code> and <code>@include lg</code> for structural changes at that same switch. With the defaults, <code>sm</code> applies below <code>768px</code> and <code>lg</code> applies from <code>768px</code> upward. For example, stack a feature on mobile and place its image and text side by side on desktop:</p>
+            <pre class="code-block"><code><span class="code-tag">.feature</span> {
+  <span class="code-attr">display</span>: <span class="code-string">grid</span>;
+  <span class="code-attr">gap</span>: <span class="code-string">24pxv</span>;
+
+  <span class="code-comment">// Mobile: stack the image and text.</span>
+  <span class="code-tag">@include</span> <span class="code-string">sm</span> {
+    <span class="code-attr">grid-template-columns</span>: <span class="code-string">1fr</span>;
+  }
+
+  <span class="code-comment">// Desktop: show two equal columns.</span>
+  <span class="code-tag">@include</span> <span class="code-string">lg</span> {
+    <span class="code-attr">grid-template-columns</span>: <span class="code-string">repeat(2, minmax(0, 1fr))</span>;
+  }
+}</code></pre>
+            <p>The layout changes once, while the <code>24pxv</code> gap scales within each range. Use the same mixins to change navigation or rearrange content, and add other media queries when the content needs them.</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
-                <caption>Primary ranges and the current default scaling cap</caption>
+                <caption>Primary scaling ranges</caption>
                 <thead><tr><th scope="col">Mode</th><th scope="col">Width</th><th scope="col">Behavior</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Mobile</th><td>Below <code>768px</code></td><td>Mobile reference dimensions and type sizes.</td></tr>
                   <tr><th scope="row">Desktop</th><td><code>768px</code> and above</td><td>Desktop reference dimensions and type sizes.</td></tr>
-                  <tr><th scope="row">Scaling cap</th><td><code>1800px</code> equivalent width</td><td>Caps the pxv scale; the page remains in desktop mode. Height influence can keep the scale below this cap.</td></tr>
                 </tbody>
               </table>
             </div>
-            <p>Projects default to scaling all the way to <code>1800px</code>. Change this limit with the <code>$desktop-max</code> variable in <code>00-sass/_variables.scss</code>.</p>
-            <h4 class="heading--xs">Named layout breakpoints</h4>
-            <p>Use these Sass values for layout changes when needed. They are optional layout thresholds, not additional scaling modes.</p>
+            <details class="button-code-details">
+              <summary>Additional breakpoint references</summary>
+            <p>These Sass values provide convenient names for reference widths. They are not a checklist of media queries to add: the scaling system handles sizing between widths, and most layouts only need <code>sm</code> and <code>lg</code>. Reach for an additional named value only when the content needs a specific layout adjustment.</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
                 <caption>Defaults in scss/00-sass/_variables.scss</caption>
@@ -190,7 +219,20 @@
                 </tbody>
               </table>
             </div>
-            <p><code>@include sm</code> applies below <code>$tm</code>, <code>@include lg</code> at and above <code>$tm</code>, and <code>@include max</code> at and above <code>$desktop-max</code>. kni-cascade uses the shared tablet breakpoint (<code>768px</code>) to switch between mobile and desktop scaling, typography, and layout.</p>
+            </details>
+          </section>
+          <section id="advanced-scaling">
+            <h3 class="heading--s">Advanced scaling settings</h3>
+            <p>These defaults should work for most projects without adjustment. If you’re feeling ambitious, here’s what’s happening under the hood—and how to fine-tune the scaling for your design.</p>
+            <p>Edit the mobile and desktop CSS custom properties in <code>scss/01-base/_scaling.scss</code>; the primary media query activates the appropriate set.</p>
+            <dl class="docs-reference">
+              <dt>Reference dimensions</dt><dd><code>--mobile-basis-w</code> and <code>--desktop-basis-w</code> match the design widths: <code>390</code> and <code>1440</code> by default. Their height counterparts, <code>--mobile-basis-h</code> and <code>--desktop-basis-h</code>, default to <code>667</code> and <code>750</code>. Reference height affects scaling only when squish is above zero. Enter these dimensions as unitless numbers.</dd>
+              <dt>Desktop squish</dt><dd><code>--desktop-squish</code> defaults to <code>1</code>. Normally, pxv scales from viewport width. When a desktop window is wide but short, width alone can make the composition too large for the available height. Squish lets the calculation switch to a viewport-height-based scale when that produces a smaller result. This helps a hero's typography, spacing, and imagery stay in proportion in a short laptop window.</dd>
+              <dt>How the switch works</dt><dd>At <code>1</code>, the calculation uses whichever scale is smaller: viewport width relative to the reference width, or viewport height relative to the reference height. With the default desktop basis of <code>1440 × 750</code>, a <code>1440 × 600</code> window produces a height-based scale of <code>0.8</code>, so <code>100pxv</code> becomes <code>80px</code>. At <code>0</code>, height has no influence and that same value stays <code>100px</code>. Values between zero and one soften the height influence. Mobile defaults to width-only scaling.</dd>
+              <dt>Floor</dt><dd><code>--desktop-floor</code> defaults to <code>500</code>. Below that viewport height, the height calculation continues using <code>500px</code>, preventing short windows from shrinking the composition indefinitely. This does not set a minimum page height. The mobile floor defaults to <code>0</code> and has no effect while mobile squish is zero.</dd>
+              <dt>Scaling limits</dt><dd>The active minimum and maximum clamp the scale to equivalent viewport widths. Mobile uses <code>0</code> through <code>$tm - 1</code>; desktop starts at <code>$tm</code> and caps at <code>$desktop-max</code>, which defaults to <code>1800</code>. Set <code>$desktop-max</code> in <code>scss/00-sass/_variables.scss</code> to change that cap. Height influence can keep the scale below it. These limits constrain sizing without changing the layout breakpoint.</dd>
+            </dl>
+            <p>For example, reduce <code>--desktop-squish</code> if a wide, short window makes the composition feel too small. Raise <code>--desktop-floor</code> if you want the height-based shrinking to stop sooner. Use <code>@include max</code> for layout rules at and above <code>$desktop-max</code>.</p>
           </section>
           <!-- Scaling controls temporarily hidden.
           <section id="scaling-controls">
@@ -710,14 +752,24 @@
         </section>
         <section id="utilities">
           <h2 class="heading--m">Utilities</h2>
+          <p>kni-cascade ships with helpful utility classes for layout, alignment, and visibility, plus visual effects such as shadows, scrims, and animated inset borders. Use them to handle common styling tasks while keeping your project's design and component structure your own.</p>
+          <p>Apply layout helpers through classes, such as <code>&lt;div class="flex j-sb a-c"&gt;...&lt;/div&gt;</code>. Add visual effects to individual elements with attributes, or use their Sass mixins to build the same treatment into a component class. Both approaches share the same implementation; choose whichever fits the way you're building.</p>
           <p>Only include what you need. In your project's copy of <code>scss/01-base/utilities/_index.scss</code>, comment out unused utilities and rebuild to remove their CSS from the output:</p>
           <pre class="code-block"><code><span class="code-attr">@forward</span> <span class="code-string">'dev'</span>;
 <span class="code-attr">@forward</span> <span class="code-string">'display'</span>;
 <span class="code-attr">@forward</span> <span class="code-string">'flex'</span>;
 <span class="code-attr">@forward</span> <span class="code-string">'spacing'</span>;
 <span class="code-comment">// @forward 'scrim';</span>
-<span class="code-comment">// @forward 'shadow';</span></code></pre>
-          <p>Attribute selectors keep a utility's options together instead of mixing them into a long class list. For example, <code>shadow="20 .1"</code> controls elevation and intensity, while <code>scrim="to-t .5 75%"</code> groups overlay options. Flex layouts use class utilities such as <code>class="flex j-sb a-c"</code>. The attribute-based utilities read whitespace-separated options; flex uses modifier classes. These are ordinary CSS selectors, so no JavaScript is needed.</p>
+<span class="code-comment">// @forward 'shadow';</span>
+<span class="code-comment">// @forward 'inset-border';</span></code></pre>
+          <p>Visual effects use custom <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes" target="_blank" rel="noopener noreferrer">HTML attributes</a> alongside your component classes. CSS attribute selectors match these attributes and their space-separated options, keeping each effect's settings together in your markup.</p>
+          <p>This card gets a shadow with elevation <code>20</code> and intensity <code>.1</code>:</p>
+          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">shadow</span>=<span class="code-string">"20 .1"</span><span class="code-tag">&gt;</span>Card content<span class="code-tag">&lt;/div&gt;</span></code></pre>
+          <p>This image gets a scrim that fades toward the top, with <code>.5</code> opacity and a <code>75%</code> fade distance:</p>
+          <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span>=<span class="code-string">"hero-image"</span> <span class="code-attr">scrim</span>=<span class="code-string">"to-t .5 75%"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span>=<span class="code-string">"Mountain landscape"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/figure&gt;</span></code></pre>
+          <p>Your component class still controls the rest of its design. If every instance needs the same effect, use its Sass mixin in the component class instead. Mixins remain available through <code>scss/00-sass</code> even when their attribute utilities are omitted.</p>
         <section id="flex">
           <h3 class="heading--s">.flex</h3>
           <p>Use <code>class="flex"</code> to create a flex container, then add modifier classes such as <code>class="flex j-sb a-c column-mobile wrap"</code>.</p>
@@ -894,6 +946,41 @@
 .mixin-scrim-image {
   <span class="code-attr">@include</span> scrim(<span class="code-string">to-t, 0.6, 75%, (0, 20, 72)</span>);
 }</code></pre>
+        </section>
+        <section id="inset-border">
+          <h3 class="heading--s">[inset-border]</h3>
+          <p>An inset border grows inward on hover or keyboard focus, over images and other content without changing layout. Use the attribute on individual elements or the mixin on a component class. The effect is invisible at rest.</p>
+          <div class="shadow-demo-grid inset-demo-grid">
+            <div class="inset-demo-example">
+              <a class="inset-demo-card" inset-border href="#inset-border"><img src="https://picsum.photos/800/400" alt=""><span>Attribute on an image card</span></a>
+              <code>inset-border</code>
+            </div>
+            <div class="inset-demo-example">
+              <button type="button" class="inset-demo-card inset-demo-mixin"><span>Mixin on a component class</span></button>
+              <code>@include inset-border(5pxv, #a5106f);</code>
+            </div>
+            <div class="inset-demo-example">
+              <button type="button" class="inset-demo-card" inset-border disabled><span>Disabled — no effect</span></button>
+              <code>inset-border disabled</code>
+            </div>
+          </div>
+          <pre class="code-block"><code><span class="code-tag">&lt;a</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">inset-border href</span>=<span class="code-string">"/story"</span><span class="code-tag">&gt;</span>Read the story<span class="code-tag">&lt;/a&gt;</span></code></pre>
+          <p>Set color, thickness, and duration on your component class. Defaults are <code>currentColor</code>, <code>5pxv</code>, and <code>350ms</code>. The overlay inherits the element's corner radius.</p>
+          <pre class="code-block"><code>.news-card {
+  border-radius: <span class="code-string">12pxv</span>;
+  <span class="code-attr">--inset-border-color</span>: <span class="code-string">#2a649c</span>;
+  <span class="code-attr">--inset-border-width</span>: <span class="code-string">5pxv</span>;
+  <span class="code-attr">--inset-border-speed</span>: <span class="code-string">350ms</span>;
+}</code></pre>
+          <h4 class="heading--xs">Build it into a component</h4>
+          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+
+.news-card {
+  <span class="code-attr">@include</span> inset-border(<span class="code-string">5pxv, #2a649c, 350ms</span>);
+  border-radius: <span class="code-string">12pxv</span>;
+}</code></pre>
+          <p>The effect reserves <code>::after</code> and sets <code>position: relative</code>. Set your own positioning after the mixin or override the attribute rule if the host needs absolute, fixed, or sticky positioning. Use a block or inline-block host. The overlay ignores pointer events, preserves the host's own shadow, and disables its transition for reduced motion. Keep an accessible focus indicator; this decorative effect does not replace it.</p>
+          <p>To omit the attribute CSS, comment out <code>@forward 'inset-border';</code> in <code>scss/01-base/utilities/_index.scss</code>. The mixin remains available through <code>00-sass</code>.</p>
         </section>
         <section id="layout-utilities">
           <h3 class="heading--s">Layout &amp; visibility</h3>

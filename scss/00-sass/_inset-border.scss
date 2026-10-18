@@ -1,0 +1,35 @@
+// Reserves ::after. Set any absolute/sticky positioning after the include.
+@mixin inset-border($width: 5pxv, $color: currentColor, $speed: 350ms) {
+  position: relative;
+
+  --inset-border-width: #{$width};
+  --inset-border-color: #{$color};
+  --inset-border-speed: #{$speed};
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 0 var(--inset-border-color);
+    transition: box-shadow var(--inset-border-speed) var(--easing, ease);
+  }
+
+  @media (hover: hover) {
+    &:where(:not(:disabled, [aria-disabled='true'])):hover::after {
+      box-shadow: inset 0 0 0 var(--inset-border-width) var(--inset-border-color);
+    }
+  }
+
+  &:where(:not(:disabled, [aria-disabled='true'])):focus-visible::after {
+    box-shadow: inset 0 0 0 var(--inset-border-width) var(--inset-border-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: none;
+    }
+  }
+}
