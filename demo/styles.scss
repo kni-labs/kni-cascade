@@ -1174,10 +1174,25 @@ section {
 @media (width < 768px) {
   .demo-hero {
     --hero-left: 20pxv;
+
+    top: calc(104pxv - var(--hero-height, 33.333vw));
+  }
+
+  .demo-hero .demo-hero-title {
+    font-size: 28pxv;
+    transform: none;
   }
 
   .demo-hero-brand {
-    gap: 16pxv;
+    bottom: 16pxv;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10pxv;
+    transform: none;
+
+    .demo-actions {
+      transform: none;
+    }
   }
 }
 
@@ -1545,4 +1560,132 @@ section {
 .inset-demo-grid {
   padding: 0;
   margin-block: 24pxv;
+}
+
+// A deliberately wide example demonstrates the scrolling wrapper on mobile.
+#tables .table-scroll-frame {
+  margin-block: 24pxv;
+}
+
+#tables .table-scroll {
+  > table {
+    min-width: 40rem;
+  }
+}
+
+// Demo-only mobile cue for long code examples; keep the overlay outside the scroller.
+.demo-code-scroll {
+  position: relative;
+  max-width: 72ch;
+  min-width: 0;
+  margin-block: 16pxv 24pxv;
+  font-size: 16pxv;
+
+  > .code-block {
+    margin-block: 0;
+  }
+
+  @include sm {
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block: 1px;
+      right: 1px;
+      width: 2.5em;
+      border-radius: 0 8pxv 8pxv 0;
+      background: linear-gradient(to left, #0f172a, transparent);
+      pointer-events: none;
+    }
+  }
+}
+
+.demo-content #tables .table-usage {
+  max-width: none;
+  width: 100%;
+}
+
+// Demo-only mobile drawer; desktop and mobile share one navigation tree.
+.demo-menu-toggle {
+  display: none;
+}
+
+.demo-mobile-nav {
+  @include shadow(40, 0.15);
+
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(85vw, 360px);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 88px 20px 32px;
+  border: 0;
+  background: #fdfdfd;
+  color: #343b43;
+  overflow-y: auto;
+
+  &::backdrop {
+    background: rgb(0 0 0 / 20%);
+  }
+
+  .demo-nav {
+    display: block;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .demo-nav summary {
+    padding-block: 16px;
+    font-size: 18px;
+  }
+}
+
+.demo-menu-close {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 6px;
+  background: #eee;
+  color: #343b43;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.demo-menu-open {
+  overflow: hidden;
+}
+
+.demo-menu-toggle:focus-visible,
+.demo-menu-close:focus-visible {
+  outline: 2px solid #dd1694;
+  outline-offset: 4px;
+}
+
+@include sm {
+  .demo-menu-toggle {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    background: rgb(0 0 0 / 45%);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+
+.demo-menu-toggle > span,
+.demo-menu-close > span {
+  font-size: inherit;
+  line-height: 1;
 }

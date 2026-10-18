@@ -2,6 +2,19 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
+## 1.10.0 — 2026-10-18
+
+### Added
+
+- Opt-in minimal, bordered, and zebra table treatments with shared Sass settings, inherited CSS variables, captions, and a horizontal scrolling wrapper.
+- Optional CSS-only mobile table overflow scrim, enabled by default through the table settings when using its frame wrapper.
+
+### Changed
+
+- Added table examples and customization documentation, full-width highlighted usage snippets, and mobile scroll cues for wide demo code blocks.
+- Reused the documentation navigation in an accessible mobile drawer with a fixed menu button, native dialog focus handling, and the shared shadow mixin.
+- Corrected mobile header spacing so the title and badges remain visible.
+
 ## 1.9.0 — 2026-10-18
 
 ### Added

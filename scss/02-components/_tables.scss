@@ -1,0 +1,92 @@
+@use 'sass:map';
+@use '../00-sass' as *;
+
+// Edit project defaults in scss/00-sass/_variables.scss ($table-design).
+// Variables inherit, so a section or individual table can customize them.
+:root {
+  @each $setting, $value in $table-design {
+    @if $setting != mobile-overflow-scrim {
+      --table-#{$setting}: #{$value};
+    }
+  }
+}
+
+:where(.table-min, .table-bordered, .table-zebra) {
+  width: 100%;
+  border-collapse: collapse;
+  font: inherit;
+  color: inherit;
+
+  // Direct children keep an outer table's treatment out of nested tables.
+  > caption {
+    padding-block-end: 0.75em;
+    text-align: start;
+  }
+
+  > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+    padding: var(--table-padding-y) var(--table-padding-x);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  > :is(thead, tbody, tfoot) > tr > th {
+    font-weight: var(--table-heading-weight);
+  }
+}
+
+.table-min > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+  border-bottom: 1px solid var(--table-border);
+}
+
+.table-bordered > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+  border: 1px solid var(--table-border);
+}
+
+.table-bordered > thead > tr > :is(th, td) {
+  background: var(--table-heading-background);
+}
+
+.table-zebra > thead > tr > :is(th, td) {
+  border-bottom: 1px solid var(--table-border);
+}
+
+.table-zebra > tbody > tr:nth-child(even) > :is(th, td) {
+  background: var(--table-stripe-background);
+}
+
+// Preserve the native table layout on small screens; scroll when needed.
+.table-scroll {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+
+  &:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 4px;
+  }
+}
+
+// Optional mobile cue for tables known to overflow. No JavaScript required.
+.table-scroll-frame {
+  position: relative;
+  min-width: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: var(--table-scroll-fade-width);
+    pointer-events: none;
+    background: linear-gradient(to left, var(--table-scroll-background), transparent);
+    opacity: 0;
+  }
+
+  @if map.get($table-design, mobile-overflow-scrim) {
+    @include sm {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -34,6 +34,13 @@
       </div>
     </div>
 
+        <button class="demo-menu-toggle" type="button" aria-label="Open navigation" aria-haspopup="dialog" aria-controls="demo-mobile-nav" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+
+    <dialog id="demo-mobile-nav" class="demo-mobile-nav" aria-label="Documentation navigation">
+      <button class="demo-menu-close" type="button" aria-label="Close navigation"><span aria-hidden="true">×</span></button>
+      <div class="demo-mobile-nav-content"></div>
+    </dialog>
+
     <div class="demo-layout">
       <aside class="demo-sidebar">
       <nav class="demo-nav" aria-label="Demo features" data-lenis-prevent>
@@ -70,6 +77,7 @@
           <ul class="demo-subnav">
             <li><a href="#components">Overview</a></li>
             <li><a href="#buttons">[btn]</a></li>
+            <li><a href="#tables">Tables</a></li>
             <li><a href="#forms">Forms</a></li>
           </ul>
         </details>
@@ -165,6 +173,7 @@
             </div>
             <p>Values are rounded to two decimal places. Standard <code>px</code> values stay fixed.</p>
             <aside class="demo-note" aria-label="Scaling tip"><strong>When to use pxv</strong><p>Basically always! If you find yourself reaching for px, you probably want pxv. Use fixed pixels for details that should stay a consistent thickness or size, such as borders, dividers, outlines, and small optical adjustments. Typography applies minimum font-size clamps for readability.</p></aside>
+
           </section>
           <section id="scaling-breakpoints">
             <h3 class="heading--s">Breakpoints</h3>
@@ -172,7 +181,7 @@
             <p>One simple media query switches the site-basis settings that power scaling in kni-cascade. The site starts with its mobile basis settings, including a reference width of <code>390px</code>. At <code>$tm</code> (<code>768px</code> by default), the query activates the desktop basis settings, including a reference width of <code>1440px</code>. Typography switches between its mobile and desktop sizes at the same threshold by default.</p>
             <p>That media query switches the design basis; pxv handles the sizes in between. Spacing, dimensions, and other pxv values scale together as the viewport changes, while typography follows its configured scaling and readability limits. Instead of repeatedly adjusting individual values across tablet, laptop, and desktop widths, you define the mobile and desktop compositions and let the shared scaling system carry them through each range.</p>
             <p>Use <code>@include sm</code> and <code>@include lg</code> for structural changes at that same switch. With the defaults, <code>sm</code> applies below <code>768px</code> and <code>lg</code> applies from <code>768px</code> upward. For example, stack a feature on mobile and place its image and text side by side on desktop:</p>
-            <pre class="code-block"><code><span class="code-tag">.feature</span> {
+            <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">.feature</span> {
   <span class="code-attr">display</span>: <span class="code-string">grid</span>;
   <span class="code-attr">gap</span>: <span class="code-string">24pxv</span>;
 
@@ -185,7 +194,7 @@
   <span class="code-tag">@include</span> <span class="code-string">lg</span> {
     <span class="code-attr">grid-template-columns</span>: <span class="code-string">repeat(2, minmax(0, 1fr))</span>;
   }
-}</code></pre>
+}</code></pre></div>
             <p>The layout changes once, while the <code>24pxv</code> gap scales within each range. Use the same mixins to change navigation or rearrange content, and add other media queries when the content needs them.</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
@@ -513,15 +522,16 @@
           <h2 class="heading--m">Components</h2>
           <p>Components provide reusable starting points for complete interface elements, with consistent sizing, appearance, and interaction states. Customize them for your project and build on top of them.</p>
           <p>Only include what you need. In your project's copy of <code>scss/02-components/_index.scss</code>, comment out unused components and rebuild to remove their CSS from the output:</p>
-          <pre class="code-block"><code><span class="code-comment">// Comment out this line if your project does not use kni-cascade buttons.</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-comment">// Comment out this line if your project does not use kni-cascade buttons.</span>
 <span class="code-attr">@forward</span> <span class="code-string">'button'</span>;
-<span class="code-attr">@forward</span> <span class="code-string">'forms'</span>;</code></pre>
+<span class="code-attr">@forward</span> <span class="code-string">'forms'</span>;
+<span class="code-attr">@forward</span> <span class="code-string">'tables'</span>;</code></pre></div>
         <section id="buttons">
           <h3 class="heading--s">[btn]</h3>
           <p>A shared starting point for consistent button sizing across projects. Make the appearance your own with project colors, spacing, hover effects, and animation. Extend <code>[btn]</code>, or take just the sizing and build your own.</p>
           <h4 class="heading--xs">Make it yours</h4>
           <p>Set your project’s colors, corners, and spacing in <code>scss/00-sass/_variables.scss</code>. <code>$btn-design</code> controls appearance; <code>$btn-sizes</code> keeps responsive label sizes and padding together. Start with these defaults and adapt them to your design.</p>
-          <pre class="code-block"><code><span class="code-comment">// Allow labels to grow beyond their configured mobile/desktop font sizes.</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-comment">// Allow labels to grow beyond their configured mobile/desktop font sizes.</span>
 <span class="code-attr">$btn-scale-up</span>: <span class="code-string">false</span> !default;
 
 <span class="code-attr">$btn-design</span>: (
@@ -535,19 +545,19 @@
   <span class="code-attr">hover-background</span>: <span class="code-string">#123456</span>,   <span class="code-comment">// Hover and pressed background</span>
   <span class="code-attr">hover-text</span>: <span class="code-string">#fff</span>,            <span class="code-comment">// Hover and pressed label color</span>
   <span class="code-attr">focus</span>: <span class="code-string">#0061c7</span>               <span class="code-comment">// Keyboard focus ring</span>
-) !default;</code></pre>
+) !default;</code></pre></div>
           <p>Adjust horizontal and vertical padding for each size separately. Height follows the label, line-height, and padding; no fixed or minimum button height is applied.</p>
-          <pre class="code-block"><code><span class="code-comment">// padding-x = left/right; padding-y = top/bottom. Both follow the label size.</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-comment">// padding-x = left/right; padding-y = top/bottom. Both follow the label size.</span>
 <span class="code-attr">$btn-sizes</span>: (
   <span class="code-attr">xs</span>: (<span class="code-attr">desktop</span>: <span class="code-string">11</span>, <span class="code-attr">mobile</span>: <span class="code-string">10</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.5em</span>),
   <span class="code-attr">s</span>: (<span class="code-attr">desktop</span>: <span class="code-string">12</span>, <span class="code-attr">mobile</span>: <span class="code-string">11</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.625em</span>),
   <span class="code-attr">m</span>: (<span class="code-attr">desktop</span>: <span class="code-string">14</span>, <span class="code-attr">mobile</span>: <span class="code-string">12</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.75em</span>),
   <span class="code-attr">l</span>: (<span class="code-attr">desktop</span>: <span class="code-string">16</span>, <span class="code-attr">mobile</span>: <span class="code-string">14</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.75em</span>)
-) !default;</code></pre>
+) !default;</code></pre></div>
 
           <h4 class="heading--xs">Usage</h4>
           <p>Bare <code>btn</code> defaults to medium. Add size and treatment tokens as needed.</p>
-          <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;s&quot;</span><span class="code-punctuation">&gt;</span>Small action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;s&quot;</span><span class="code-punctuation">&gt;</span>Small action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre></div>
           <h4 class="heading--xs">Sizes</h4>
           <p>Use <code>xs</code>, <code>s</code>, <code>m</code>, or <code>l</code>. Each size controls typography and padding together. Labels use the desktop and mobile values in <code>$btn-sizes</code>, using the global <code>--font-min-clamp</code> minimum (<code>12px</code> in this demo). Button tokens start one step below their corresponding body tokens. The global minimum can make the smallest labels render at the same size; their padding still differs. By default, labels scale down but stop growing at their active mobile or desktop reference size. Set <code>$btn-scale-up: true</code> in settings to allow upward scaling.</p>
           <div class="btn-demo-row">
@@ -572,7 +582,7 @@
             <div><a href="#scaling" btn="outline">Explore scaling</a><p class="btn-demo-label"><code>btn=&quot;outline&quot;</code></p></div>
           </div>
           <div class="btn-demo-block"><button type="button" btn="l block">Full-width action</button><p class="btn-demo-label"><code>btn="l block"</code></p></div>
-          <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;l block&quot;</span><span class="code-punctuation">&gt;</span>Full-width action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;l block&quot;</span><span class="code-punctuation">&gt;</span>Full-width action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre></div>
           <h4 class="heading--xs">Focus and disabled states</h4>
           <p>Tab to the examples to check the focus ring. Native <code>disabled</code> buttons cannot be activated and keep their disabled appearance on hover or press. <code>aria-disabled="true"</code> provides the same styling but does not prevent an action: projects must disable the underlying behavior too. This disabled link has no <code>href</code>.</p>
           <div class="btn-demo-row">
@@ -589,10 +599,10 @@
           <details class="btn-demo-source">
             <summary>View custom hover code</summary>
             <p>Add this project class to <code>btn="m"</code>. The foundation supplies sizing, focus, and disabled states; this class adds the purple fill animation.</p>
-            <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;m&quot;</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">&quot;btn-demo-reveal&quot;</span><span class="code-punctuation">&gt;</span>
+            <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;m&quot;</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">&quot;btn-demo-reveal&quot;</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;span</span><span class="code-punctuation">&gt;</span>Explore the details<span class="code-tag">&lt;/span</span><span class="code-punctuation">&gt;</span>
-<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
-            <pre class="code-block"><code><span class="code-tag">.btn-demo-reveal</span> <span class="code-punctuation">{</span>
+<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre></div>
+            <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">.btn-demo-reveal</span> <span class="code-punctuation">{</span>
   <span class="code-attr">--btn-bg</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
   <span class="code-attr">--btn-hover-bg</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
   <span class="code-attr">--btn-hover-border</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
@@ -634,7 +644,7 @@
       <span class="code-attr">transition</span><span class="code-punctuation">:</span> none<span class="code-punctuation">;</span>
     <span class="code-punctuation">}</span>
   <span class="code-punctuation">}</span>
-<span class="code-punctuation">}</span></code></pre>
+<span class="code-punctuation">}</span></code></pre></div>
           </details>
           <h4 class="heading--xs">Build on the foundation</h4>
           <p>Add a project class to override properties such as <code>--btn-bg</code>, <code>--btn-hover-bg</code>, <code>--btn-radius</code>, and <code>--btn-weight</code>. Or use the sizing mixin alone for a completely custom component.</p>
@@ -642,12 +652,79 @@
           <p>To omit button CSS entirely, comment out <code>@forward 'button'</code> in <code>scss/02-components/_index.scss</code>.</p>
           <p>Additional color themes are optional. Add an entry to <code>$btn-themes</code> only when the project needs another palette; the default empty map generates no extra theme selectors.</p>
           <p>For a completely custom button, <code>@include btn-size(m)</code> supplies just font size and padding. Your component owns its appearance and interaction states.</p>
-          <pre class="code-block"><code>@use <span class="code-string">&#x27;kni-cascade/scss/00-sass&#x27;</span> as *;
+          <div class="demo-code-scroll"><pre class="code-block"><code>@use <span class="code-string">&#x27;kni-cascade/scss/00-sass&#x27;</span> as *;
 
 .custom-button <span class="code-punctuation">{</span>
   @include btn-size(m);
   // Add your project appearance and interaction styles.
-<span class="code-punctuation">}</span></code></pre>
+<span class="code-punctuation">}</span></code></pre></div>
+        </section>
+        <section id="tables">
+          <h3 class="heading--s">Tables</h3>
+          <p>Three starting points for native HTML tables. Add one class to choose a treatment; font and text color inherit from the surrounding content.</p>
+          <h4 class="heading--xs">Minimal</h4>
+          <p>Horizontal separators keep rows easy to follow.</p>
+          <div class="table-scroll-frame">
+          <div class="table-scroll" role="region" aria-label="Minimal project schedule, scroll horizontally if needed" tabindex="0">
+            <table class="table-min">
+              <caption>Project schedule</caption>
+              <thead><tr><th scope="col">Phase</th><th scope="col">Service</th><th scope="col">Includes</th><th scope="col">Duration</th></tr></thead>
+              <tbody>
+                <tr><td>01</td><th scope="row">Brand strategy</th><td>Discovery, positioning, and messaging</td><td>2 weeks</td></tr>
+                <tr><td>02</td><th scope="row">Visual identity</th><td>Typography, color, and art direction</td><td>3 weeks</td></tr>
+                <tr><td>03</td><th scope="row">Website</th><td>Design, development, and launch</td><td>6 weeks</td></tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <pre class="code-block table-usage"><code><span class="code-tag">&lt;table</span> <span class="code-attr">class</span>=<span class="code-string">"table-min"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/table&gt;</span></code></pre>
+          <h4 class="heading--xs">Bordered</h4>
+          <p>A full cell grid with a lightly shaded header.</p>
+          <div class="table-scroll-frame">
+          <div class="table-scroll" role="region" aria-label="Bordered project schedule, scroll horizontally if needed" tabindex="0">
+            <table class="table-bordered">
+              <caption>Project schedule</caption>
+              <thead><tr><th scope="col">Phase</th><th scope="col">Service</th><th scope="col">Includes</th><th scope="col">Duration</th></tr></thead>
+              <tbody>
+                <tr><td>01</td><th scope="row">Brand strategy</th><td>Discovery, positioning, and messaging</td><td>2 weeks</td></tr>
+                <tr><td>02</td><th scope="row">Visual identity</th><td>Typography, color, and art direction</td><td>3 weeks</td></tr>
+                <tr><td>03</td><th scope="row">Website</th><td>Design, development, and launch</td><td>6 weeks</td></tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <pre class="code-block table-usage"><code><span class="code-tag">&lt;table</span> <span class="code-attr">class</span>=<span class="code-string">"table-bordered"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/table&gt;</span></code></pre>
+          <h4 class="heading--xs">Zebra</h4>
+          <p>Alternating body rows help you scan across columns.</p>
+          <div class="table-scroll-frame">
+          <div class="table-scroll" role="region" aria-label="Zebra project schedule, scroll horizontally if needed" tabindex="0">
+            <table class="table-zebra">
+              <caption>Project schedule</caption>
+              <thead><tr><th scope="col">Phase</th><th scope="col">Service</th><th scope="col">Includes</th><th scope="col">Duration</th></tr></thead>
+              <tbody>
+                <tr><td>01</td><th scope="row">Brand strategy</th><td>Discovery, positioning, and messaging</td><td>2 weeks</td></tr>
+                <tr><td>02</td><th scope="row">Visual identity</th><td>Typography, color, and art direction</td><td>3 weeks</td></tr>
+                <tr><td>03</td><th scope="row">Website</th><td>Design, development, and launch</td><td>6 weeks</td></tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <pre class="code-block table-usage"><code><span class="code-tag">&lt;table</span> <span class="code-attr">class</span>=<span class="code-string">"table-zebra"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/table&gt;</span></code></pre>
+          <h4 class="heading--xs">Make it yours</h4>
+          <p>Edit <code>$table-design</code> in <code>scss/00-sass/_variables.scss</code> for project defaults. Override inherited CSS variables on a section or table for a local treatment. Padding uses em so it follows the table’s font size.</p>
+          <pre class="code-block"><code><span class="code-tag">.pricing</span> {
+  <span class="code-attr">--table-padding-y</span>: <span class="code-string">1em</span>;
+  <span class="code-attr">--table-scroll-background</span>: <span class="code-string">#fff</span>;
+  <span class="code-attr">--table-border</span>: <span class="code-string">#bac8d3</span>;
+  <span class="code-attr">--table-stripe-background</span>: <span class="code-string">#f0f5f8</span>;
+}</code></pre>
+          <h4 class="heading--xs">On smaller screens</h4>
+          <p>Wrap wide tables in <code>.table-scroll</code> to keep columns intact and allow horizontal scrolling. The examples above use the same wrapper. A focusable, labeled region lets keyboard users scroll it too. The CSS-only right-edge fade is enabled by default with <code>mobile-overflow-scrim: true</code> in <code>$table-design</code>. Set it to <code>false</code> to disable it. Wrap the scroller in <code>.table-scroll-frame</code> to apply the fade on mobile. It stays visible at the scroll end; omit the frame for tables that fit without scrolling. The fade defaults to 5% black; override <code>--table-scroll-background</code> to change its color. <code>--table-scroll-fade-width</code> controls its width.</p>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"table-scroll"</span> <span class="code-attr">role</span>=<span class="code-string">"region"</span>
+     <span class="code-attr">aria-label</span>=<span class="code-string">"Project schedule"</span> <span class="code-attr">tabindex</span>=<span class="code-string">"0"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;table</span> <span class="code-attr">class</span>=<span class="code-string">"table-min"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/table&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code></pre></div>
+          <p>Include <code>@forward 'tables';</code> in <code>scss/02-components/_index.scss</code> when the project needs these styles. Unclassed tables keep their existing appearance.</p>
         </section>
         <section id="forms">
           <h3 class="heading--s">Forms</h3>
@@ -681,13 +758,13 @@
             <button type="button" btn>Get in touch</button>
           </form>
           <details class="btn-demo-source"><summary>View form markup</summary>
-          <pre class="code-block"><code><span class="code-tag">&lt;form</span> <span class="code-attr">class</span>=<span class="code-string">"contact-form"</span><span class="code-tag">&gt;</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;form</span> <span class="code-attr">class</span>=<span class="code-string">"contact-form"</span><span class="code-tag">&gt;</span>
   <span class="code-tag">&lt;label</span> <span class="code-attr">for</span>=<span class="code-string">"email"</span><span class="code-tag">&gt;</span>Email<span class="code-tag">&lt;/label&gt;</span>
   <span class="code-tag">&lt;input</span> <span class="code-attr">id</span>=<span class="code-string">"email"</span> <span class="code-attr">name</span>=<span class="code-string">"email"</span> <span class="code-attr">type</span>=<span class="code-string">"email"</span>
          <span class="code-attr">autocomplete</span>=<span class="code-string">"email"</span> <span class="code-attr">aria-describedby</span>=<span class="code-string">"email-help"</span><span class="code-tag">&gt;</span>
   <span class="code-tag">&lt;p</span> <span class="code-attr">id</span>=<span class="code-string">"email-help"</span> <span class="code-attr">class</span>=<span class="code-string">"form-help"</span><span class="code-tag">&gt;</span>Use your work email.<span class="code-tag">&lt;/p&gt;</span>
   <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"submit"</span> <span class="code-attr">btn</span><span class="code-tag">&gt;</span>Get in touch<span class="code-tag">&lt;/button&gt;</span>
-<span class="code-tag">&lt;/form&gt;</span></code></pre></details>
+<span class="code-tag">&lt;/form&gt;</span></code></pre></div></details>
           <h4 class="heading--xs">States</h4>
           <p>Use native <code>disabled</code> and <code>readonly</code> attributes. Mark an error with <code>aria-invalid="true"</code>, explain it in text, and connect that message using <code>aria-describedby</code>. Validation timing and submission behavior remain your application's responsibility.</p>
           <div class="form-demo form-demo-grid">
@@ -764,11 +841,11 @@
 <span class="code-comment">// @forward 'inset-border';</span></code></pre>
           <p>Visual effects use custom <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes" target="_blank" rel="noopener noreferrer">HTML attributes</a> alongside your component classes. CSS attribute selectors match these attributes and their space-separated options, keeping each effect's settings together in your markup.</p>
           <p>This card gets a shadow with elevation <code>20</code> and intensity <code>.1</code>:</p>
-          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">shadow</span>=<span class="code-string">"20 .1"</span><span class="code-tag">&gt;</span>Card content<span class="code-tag">&lt;/div&gt;</span></code></pre>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">shadow</span>=<span class="code-string">"20 .1"</span><span class="code-tag">&gt;</span>Card content<span class="code-tag">&lt;/div&gt;</span></code></pre></div>
           <p>This image gets a scrim that fades toward the top, with <code>.5</code> opacity and a <code>75%</code> fade distance:</p>
-          <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span>=<span class="code-string">"hero-image"</span> <span class="code-attr">scrim</span>=<span class="code-string">"to-t .5 75%"</span><span class="code-tag">&gt;</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span>=<span class="code-string">"hero-image"</span> <span class="code-attr">scrim</span>=<span class="code-string">"to-t .5 75%"</span><span class="code-tag">&gt;</span>
   <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span>=<span class="code-string">"Mountain landscape"</span><span class="code-tag">&gt;</span>
-<span class="code-tag">&lt;/figure&gt;</span></code></pre>
+<span class="code-tag">&lt;/figure&gt;</span></code></pre></div>
           <p>Your component class still controls the rest of its design. If every instance needs the same effect, use its Sass mixin in the component class instead. Mixins remain available through <code>scss/00-sass</code> even when their attribute utilities are omitted.</p>
         <section id="flex">
           <h3 class="heading--s">.flex</h3>
@@ -819,7 +896,7 @@
           <h3 class="heading--s">[shadow]</h3>
           <p><a href="https://codepen.io/dbox/pen/emdzLLe" target="_blank" rel="noopener noreferrer">Explore the shadow CodePen</a></p>
           <p>Combine elevation, intensity, and an optional color. Options can appear in any order.</p>
-          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">shadow</span><span class="code-punctuation">=</span><span class="code-string">"20 .1 blue"</span><span class="code-punctuation">&gt;</span>A low blue shadow<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">shadow</span><span class="code-punctuation">=</span><span class="code-string">"20 .1 blue"</span><span class="code-punctuation">&gt;</span>A low blue shadow<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre></div>
           <dl class="docs-reference">
             <dt>Elevation</dt><dd><code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, or <code>50</code>, from a tight shadow to a broad, lifted shadow. These are preset names, not pixel measurements.</dd>
             <dt>Intensity</dt><dd><code>.1</code> through <code>.9</code>, from lighter to darker. This sets the base opacity; individual shadow layers also apply weights, so it is not the final combined opacity.</dd>
@@ -868,7 +945,7 @@
             <button type="button" class="shadow-demo-card mixin-shadow-card"><strong>Component shadow</strong><code>20 .1 → 30 .2</code></button>
             <button type="button" class="shadow-demo-card mixin-shadow-hover"><strong>Hover or keyboard focus</strong><code>Mixin only; no attributes</code></button>
           </div>
-          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
 
 .mixin-shadow-card {
   <span class="code-attr">@include</span> shadow(<span class="code-string">20, 0.1</span>);
@@ -877,7 +954,7 @@
 
 .mixin-shadow-hover {
   <span class="code-attr">@include</span> shadow-hover(<span class="code-string">20, 0.2, (0, 20, 190)</span>);
-}</code></pre>
+}</code></pre></div>
         </section>
         <section id="scrim" class="scrim-demo">
           <h3 class="heading--s">[scrim]</h3>
@@ -941,11 +1018,11 @@
               <p><code>class="mixin-scrim-image"</code> — no scrim attribute</p>
             </div>
           </div>
-          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
 
 .mixin-scrim-image {
   <span class="code-attr">@include</span> scrim(<span class="code-string">to-t, 0.6, 75%, (0, 20, 72)</span>);
-}</code></pre>
+}</code></pre></div>
         </section>
         <section id="inset-border">
           <h3 class="heading--s">[inset-border]</h3>
@@ -964,7 +1041,7 @@
               <code>inset-border disabled</code>
             </div>
           </div>
-          <pre class="code-block"><code><span class="code-tag">&lt;a</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">inset-border href</span>=<span class="code-string">"/story"</span><span class="code-tag">&gt;</span>Read the story<span class="code-tag">&lt;/a&gt;</span></code></pre>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;a</span> <span class="code-attr">class</span>=<span class="code-string">"news-card"</span> <span class="code-attr">inset-border href</span>=<span class="code-string">"/story"</span><span class="code-tag">&gt;</span>Read the story<span class="code-tag">&lt;/a&gt;</span></code></pre></div>
           <p>Set color, thickness, and duration on your component class. Defaults are <code>currentColor</code>, <code>5pxv</code>, and <code>350ms</code>. The overlay inherits the element's corner radius.</p>
           <pre class="code-block"><code>.news-card {
   border-radius: <span class="code-string">12pxv</span>;
@@ -973,12 +1050,12 @@
   <span class="code-attr">--inset-border-speed</span>: <span class="code-string">350ms</span>;
 }</code></pre>
           <h4 class="heading--xs">Build it into a component</h4>
-          <pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-attr">@use</span> <span class="code-string">'../scss/00-sass'</span> as *;
 
 .news-card {
   <span class="code-attr">@include</span> inset-border(<span class="code-string">5pxv, #2a649c, 350ms</span>);
   border-radius: <span class="code-string">12pxv</span>;
-}</code></pre>
+}</code></pre></div>
           <p>The effect reserves <code>::after</code> and sets <code>position: relative</code>. Set your own positioning after the mixin or override the attribute rule if the host needs absolute, fixed, or sticky positioning. Use a block or inline-block host. The overlay ignores pointer events, preserves the host's own shadow, and disables its transition for reduced motion. Keep an accessible focus indicator; this decorative effect does not replace it.</p>
           <p>To omit the attribute CSS, comment out <code>@forward 'inset-border';</code> in <code>scss/01-base/utilities/_index.scss</code>. The mixin remains available through <code>00-sass</code>.</p>
         </section>
@@ -989,9 +1066,9 @@
             <dt><code>.desktop-only</code></dt><dd>Visible at and above the tablet breakpoint.</dd>
             <dt><code>.mobile-only</code></dt><dd>Visible below the tablet breakpoint.</dd>
           </dl>
-          <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"container"</span><span class="code-punctuation">&gt;</span>Centered content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
+          <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"container"</span><span class="code-punctuation">&gt;</span>Centered content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
 <span class="code-tag">&lt;p</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"desktop-only"</span><span class="code-punctuation">&gt;</span>Desktop only<span class="code-tag">&lt;/p</span><span class="code-punctuation">&gt;</span>
-<span class="code-tag">&lt;p</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"mobile-only"</span><span class="code-punctuation">&gt;</span>Mobile only<span class="code-tag">&lt;/p</span><span class="code-punctuation">&gt;</span></code></pre>
+<span class="code-tag">&lt;p</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"mobile-only"</span><span class="code-punctuation">&gt;</span>Mobile only<span class="code-tag">&lt;/p</span><span class="code-punctuation">&gt;</span></code></pre></div>
           <div class="docs-sample"><p class="desktop-only">You are seeing the desktop-only example.</p><p class="mobile-only">You are seeing the mobile-only example.</p></div>
           <p>Hidden examples use <code>display: none</code>, so do not put essential information exclusively in one variant. The helpers switch at the shared tablet breakpoint (768px by default).</p>
         </section>
@@ -1004,9 +1081,9 @@
               <div class="docs-media-example"><h5 class="heading--xxs">Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
               <div class="docs-media-example"><h5 class="heading--xxs">Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
             </div>
-            <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"fit-photo cover"</span> <span class="code-attr">style</span><span class="code-punctuation">=</span><span class="code-string">"aspect-ratio: 16 / 9;"</span><span class="code-punctuation">&gt;</span>
+            <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"fit-photo cover"</span> <span class="code-attr">style</span><span class="code-punctuation">=</span><span class="code-string">"aspect-ratio: 16 / 9;"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;img</span> <span class="code-attr">src</span><span class="code-punctuation">=</span><span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span><span class="code-punctuation">=</span><span class="code-string">"Describe the image"</span><span class="code-punctuation">&gt;</span>
-<span class="code-tag">&lt;/figure</span><span class="code-punctuation">&gt;</span></code></pre>
+<span class="code-tag">&lt;/figure</span><span class="code-punctuation">&gt;</span></code></pre></div>
             <p class="docs-note">Use <code>.fit-photo.contain</code> instead of <code>.fit-photo.cover</code> to preserve the entire image. Both work with direct child images and videos.</p>
           </div>
           <div class="docs-topic">
@@ -1020,9 +1097,9 @@
           <div class="docs-topic">
             <h4 class="heading--xs">Clipping</h4>
             <p>A decorative layer clipped to its wrapper, with a fixed, viewport-height inner layer.</p>
-            <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container"</span><span class="code-punctuation">&gt;</span>
+            <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container__inner"</span><span class="code-punctuation">&gt;</span>Decorative content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
-<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre>
+<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre></div>
             <p class="docs-note">The wrapper disables pointer events. Keep interactive content outside it.</p>
           </div>
         </section>
@@ -1218,6 +1295,7 @@ const setupNavigation = () => {
     const summary = group.querySelector('summary');
     const overview = group.querySelector('a[href^="#"]');
     summary.addEventListener('click', event => {
+      if (nav.closest('dialog')) return;
       event.preventDefault();
       overview.click();
     });
@@ -1296,5 +1374,41 @@ document.getElementById('form-validation-preview').addEventListener('submit', ev
   document.getElementById('form-validation-status').textContent = 'Validation passed. This preview does not send data.';
 });
 </script>
-  </body>
+
+
+<script>
+// Demo navigation only; reuse the same nav and native dialog focus handling.
+const mobileNavDialog = document.getElementById('demo-mobile-nav');
+const mobileNavSlot = mobileNavDialog.querySelector('.demo-mobile-nav-content');
+const sharedNav = document.querySelector('.demo-nav');
+const sidebar = document.querySelector('.demo-sidebar');
+const menuToggle = document.querySelector('.demo-menu-toggle');
+const mobileNavMedia = matchMedia('(max-width: 767px)');
+const syncNavigation = () => {
+  if (!mobileNavMedia.matches && mobileNavDialog.open) mobileNavDialog.close();
+  (mobileNavMedia.matches ? mobileNavSlot : sidebar).prepend(sharedNav);
+};
+menuToggle.addEventListener('click', () => {
+  mobileNavDialog.showModal();
+  menuToggle.setAttribute('aria-expanded', 'true');
+  document.documentElement.classList.add('demo-menu-open');
+});
+mobileNavDialog.querySelector('.demo-menu-close').addEventListener('click', () => mobileNavDialog.close());
+mobileNavDialog.addEventListener('click', (event) => {
+  if (event.target === mobileNavDialog) {
+    const bounds = mobileNavDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right) mobileNavDialog.close();
+  }
+});
+sharedNav.addEventListener('click', (event) => {
+  if (event.target.closest('a') && mobileNavDialog.open) mobileNavDialog.close();
+}, { capture: true });
+mobileNavDialog.addEventListener('close', () => {
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.documentElement.classList.remove('demo-menu-open');
+});
+mobileNavMedia.addEventListener('change', syncNavigation);
+syncNavigation();
+</script>
+</body>
 </html>

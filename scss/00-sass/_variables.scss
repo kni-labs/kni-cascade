@@ -87,3 +87,16 @@ $form-design: (
   focus: #0061c7,
   error: #b42318
 ) !default;
+
+// Opt-in table treatments. Font and text color inherit from the page.
+$table-design: (
+  padding-x: 1em,
+  padding-y: 0.75em,
+  border: #d1d5db,
+  heading-weight: 600,
+  heading-background: #f8f9fa,
+  stripe-background: #f1f3f5,
+  mobile-overflow-scrim: true,
+  scroll-background: rgb(0 0 0 / 5%),
+  scroll-fade-width: 2em
+) !default;
