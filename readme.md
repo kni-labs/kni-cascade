@@ -155,7 +155,7 @@ Run `npx gulp` to preview changes with live reload. Use `npm run build` for a on
 
 ## Automated npm releases
 
-`.github/workflows/publish.yml` validates PRs targeting `main`. After a PR merges, it checks for a teammate's approval of the final PR commit, validates the merged code, and publishes an unpublished stable package version to npm. Re-runs skip versions already on npm; registry lookup errors fail the release instead of attempting a publish. Version numbers remain an explicit PR change, not an automatic bump. Do not merge releases out of version order.
+`.github/workflows/publish.yml` validates PRs targeting `main`. After a PR merges, it validates the merged code and publishes an unpublished stable package version to npm. Re-runs skip versions already on npm; registry lookup errors fail the release instead of attempting a publish. Version numbers remain an explicit PR change, not an automatic bump. Do not merge releases out of version order.
 
 ### One-time npm setup
 
@@ -169,7 +169,7 @@ In the `kni-cascade` package settings on npm, add a GitHub Actions **Trusted Pub
 | Environment | Leave blank |
 | Allowed actions | Allow direct publishing with `npm publish` |
 
-No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. Publishing independently checks an approval from an owner, organization member, or collaborator on the final PR commit. The workflow uses Node 22 and npm 11 for npm's OIDC support.
+No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. PR approval is enforced by the repository’s merge rules rather than checked again during publishing. The workflow uses Node 22 and npm 11 for npm's OIDC support.
 
 Merge the workflow through the normal review process. Until the trusted publisher is configured, publishing will fail with an authentication error. Once configured, a merged PR with a new stable version and matching lockfile publishes automatically. Check the **Validate and publish** workflow under GitHub Actions for the result. An existing version is safely skipped; publishing is never attempted from an unmerged PR.
 
