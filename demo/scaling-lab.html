@@ -70,6 +70,7 @@ header { display: flex; flex-wrap: wrap; align-items: center; justify-content: s
 .controls { padding: 20px; display: grid; gap: 14px; }
 .row-label { display: grid; grid-template-columns: minmax(0, 1fr) 64px; align-items: center; gap: 12px; margin: 0; font-size: 13px; }
 .setting-label { font-size: 14px; white-space: nowrap; }
+.setting-label small { font-size: 11px; color: #68717e; }
 .setting-label code { display: block; margin-top: 4px; font-size: 11px; color: #68717e; }
 .row-label output { text-align: right; padding: 6px 8px; }
 input[type=number] { width: 64px; border: 1px solid #cbd1db; border-radius: 5px; padding: 5px 6px; font-size: 14px; }
@@ -201,7 +202,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px 
 <section class="panel">
 <div class="controls">
 <div class="controls-heading"><h2>Scaling settings</h2><button class="reset" id="reset">Reset</button></div>
-<div><label class="row-label" for="squish"><span class="setting-label">Desktop squish<code>--desktop-squish</code></span><output id="squish-value">0.75</output></label><input id="squish" type="range" min="0" max="1" step="0.05" value="0.75"></div>
+<div><label class="row-label" for="squish"><span class="setting-label">Desktop squish <small>(1 is default)</small><code>--desktop-squish</code></span><output id="squish-value">0.75</output></label><input id="squish" type="range" min="0" max="1" step="0.05" value="0.75"></div>
 <label class="row-label" for="basis-w"><span class="setting-label">Desktop reference width<code>--desktop-basis-w</code></span><input id="basis-w" type="number" min="800" max="2400" value="1440"></label>
 <label class="row-label" for="basis-h"><span class="setting-label">Desktop reference height<code>--desktop-basis-h</code></span><input id="basis-h" type="number" min="300" max="1400" value="750"></label>
 <label class="row-label" for="floor"><span class="setting-label">Desktop height floor<code>--desktop-floor</code></span><input id="floor" type="number" min="0" max="1200" step="10" value="500"></label>
