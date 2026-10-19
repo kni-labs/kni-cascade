@@ -8,6 +8,7 @@ This changelog starts with 1.5.0 and covers changes since 1.4.1, including work 
 
 - Opt-in minimal, bordered, and zebra table treatments with shared Sass settings, inherited CSS variables, captions, and a horizontal scrolling wrapper.
 - Optional CSS-only mobile table overflow scrim, enabled by default through the table settings when using its frame wrapper.
+- Permanent interactive scaling demo with a resizable sample site, editable settings, reference/floor/site-max guides, live pxv measurements, highlighted calculation, and a plain-language explanation. Linked from the documentation header and scaling overview.
 
 ### Changed
 

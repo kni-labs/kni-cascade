@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kni-cascade pxv demo</title>
+<style>
+* { box-sizing: border-box; }
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #172332; background: #f8f8fa; }
+body { margin: 0; padding: 28px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+h1 { font-size: 28px; letter-spacing: -.04em; margin: 0 0 8px; }
+h2 { font-size: 16px; margin: 0; }
+p { line-height: 1.6; margin: 0; }
+code, output, .number { font-family: ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+.subtle { color: #68717e; font-size: 14px; }
+.shell { max-width: 1500px; margin: auto; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.panel { background: white; border: 1px solid #e0e3e8; border-radius: 12px; overflow: hidden; }
+.toolbar { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #e0e3e8; }
+.toolbar { flex-wrap: wrap; }
+.badge { font-size: 12px; background: #f4eff3; color: #a5106f; padding: 5px 8px; border-radius: 4px; }
+.canvas { height: 490px; padding: 28px; display: grid; align-items: center; justify-items: center; background: radial-gradient(#d8dce2 1px, transparent 1px); background-size: 16px 16px; }
+.frame { border-radius: 10px; position: relative; width: 100%; border: 1px solid #cbd1db; background: #fff; }
+.frame-bar { border-radius: 9px 9px 0 0; height: 34px; background: #eef0f4; display: flex; align-items: center; gap: 4px; padding: 0 9px; border-bottom: 1px solid #d9dde4; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: #acb4c0; }
+.frame-dimensions { margin-left: auto; display: flex; align-items: center; gap: 4px; min-width: 0; color: #68717e; font-size: 13px; }
+.frame-dimensions input[type=number] { width: 58px; min-width: 0; padding: 3px; border: 1px solid transparent; border-radius: 3px; background: transparent; color: inherit; text-align: right; font: inherit; appearance: textfield; }
+.frame-dimensions input:hover { background: white; border-color: #cbd1db; }
+.frame-dimensions input::-webkit-inner-spin-button, .frame-dimensions input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.viewport { border-radius: 0 0 9px 9px; position: relative; overflow: hidden; background: #fffaf7; }
+.stage { position: absolute; top: 0; left: 0; transform-origin: top left; overflow: hidden; }
+.hero { max-width: calc(1400 * var(--u)); margin-inline: auto; padding: calc(70 * var(--u)); display: grid; grid-template-columns: minmax(0, 1fr) calc(600 * var(--u)); gap: calc(60 * var(--u)); align-items: center; }
+.hero-copy { min-width: 0; }
+.eyebrow { color: #a5106f; font-weight: 600; font-size: max(12px, calc(16 * var(--u))); letter-spacing: .08em; margin-bottom: calc(24 * var(--u)); }
+.hero h3 { font-size: max(32px, calc(68 * var(--u))); letter-spacing: -.05em; line-height: 1.05; margin: 0 0 calc(28 * var(--u)); }
+.hero p { max-width: 32ch; font-size: max(16px, calc(24 * var(--u))); line-height: 1.5; margin-bottom: calc(32 * var(--u)); }
+.fake-button { display: inline-block; font-size: max(14px, calc(20 * var(--u))); padding: .8em 1.4em; color: white; background: #172332; border-radius: .3em; }
+.art { width: 100%; justify-self: end; height: calc(600 * var(--u)); background: #333; border-radius: calc(12 * var(--u)); position: relative; overflow: hidden; }
+.image-width-label { position: absolute; bottom: 10px; left: 10px; z-index: 2; padding: 5px 8px; border-radius: 4px; background: transparent; color: #fff; font: 14px ui-monospace, monospace; white-space: pre; }
+.art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.stage.mobile .hero { padding: calc(24 * var(--u)); grid-template-columns: 1fr; gap: calc(24 * var(--u)); }
+.stage.mobile .hero h3 { font-size: max(28px, calc(38 * var(--u))); margin-bottom: calc(16 * var(--u)); }
+.stage.mobile .hero p { font-size: max(14px, calc(16 * var(--u))); margin-bottom: calc(20 * var(--u)); }
+.stage.mobile .eyebrow { font-size: max(10px, calc(11 * var(--u))); margin-bottom: calc(16 * var(--u)); }
+.stage.mobile .fake-button { font-size: max(12px, calc(14 * var(--u))); }
+.stage.mobile .art { width: 100%; height: calc(190 * var(--u)); }
+.site-max-guide { position: absolute; top: 34px; border-inline: 1.5px dashed rgb(104 113 126 / 30%); z-index: 2; pointer-events: none; }
+.site-max-guide span { position: absolute; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 5px 2px; background: #fffaf7; color: #949ba5; font-size: 11px; white-space: nowrap; }
+.site-max-left { left: -22px; }
+.site-max-right { right: -22px; }
+.squish-line { position: absolute; left: 0; right: 0; top: 34px; border: 1.5px dashed #2b7190; z-index: 3; pointer-events: none; }
+.squish-line span { position: absolute; left: 8px; bottom: 5px; padding: 3px 6px; border-radius: 3px; background: #fff; color: #2b7190; font-size: 12px; white-space: nowrap; }
+.floor-line { position: absolute; left: 0; right: 0; border-top: 1.5px dashed #a5106f; z-index: 3; pointer-events: none; }
+.floor-line span { position: absolute; right: 8px; bottom: 5px; padding: 3px 6px; border-radius: 3px; background: #fff; color: #a5106f; font-size: 12px; white-space: nowrap; }
+.floor-line.reached { border-top-color: #172332; }
+.floor-line.reached span { color: #172332; }
+.squish-rail { position: absolute; top: 34px; right: -56px; width: 40px; display: flex; align-items: center; justify-content: center; background: #eef0f2; color: #68717e; pointer-events: none; }
+.squish-rail span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 13px; white-space: nowrap; }
+.squish-rail.active { background: #f4eff3; color: #a5106f; }
+.handle { position: absolute; right: -12px; bottom: -12px; width: 28px; height: 28px; border: 2px solid white; border-radius: 7px; background: #dd1694; color: white; touch-action: none; cursor: nwse-resize; z-index: 2; font-size: 16px; }
+.live-summary { padding: 14px 20px; border-top: 1px solid #e0e3e8; color: #a5106f; font-size: 14px; }
+.hint { padding: 12px 20px; border-top: 1px solid #e0e3e8; font-size: 13px; color: #68717e; }
+.controls-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.controls { padding: 20px; display: grid; gap: 14px; }
+.row-label { display: grid; grid-template-columns: minmax(0, 1fr) 64px; align-items: center; gap: 12px; margin: 0; font-size: 13px; }
+.setting-label { font-size: 14px; white-space: nowrap; }
+.setting-label code { display: block; margin-top: 4px; font-size: 11px; color: #68717e; }
+.row-label output { text-align: right; padding: 6px 8px; }
+input[type=number] { width: 64px; border: 1px solid #cbd1db; border-radius: 5px; padding: 5px 6px; font-size: 14px; }
+input[type=range] { width: 100%; accent-color: #dd1694; }
+.toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+button.reset { background: white; border: 1px solid #cbd1db; padding: 8px 12px; border-radius: 6px; }
+.note { font-size: 13px; color: #68717e; }
+.rule { padding: 16px 20px; border-bottom: 1px solid #e5e7eb; border-left: 3px solid transparent; }
+.rule:last-child { border-bottom: 0; }
+.rule.active { border-left-color: #dd1694; background: #fff7fc; }
+.rule-title { font-size: 13px; margin-bottom: 8px; color: #68717e; }
+.rule output { font: 15px/1.6 system-ui, sans-serif; display: block; }
+.status { font-size: 16px; font-weight: 600; line-height: 1.5; padding: 20px; border-bottom: 1px solid #e0e3e8; }
+.result { background: #172332; color: white; padding: 20px; }
+.result .big { font-size: 28px; margin: 8px 0; }
+.result p { font-size: 13px; color: #c7d1dd; }
+.trace { margin-top: 24px; }
+.formula-explained { margin-top: 12px; }
+.formula-explained-content { max-width: 70ch; padding: 0 20px 20px; font-size: 14px; line-height: 1.65; }
+.formula-explained-content ol { padding-left: 22px; margin-block: 16px; }
+.formula-explained-content li { padding-left: 4px; margin-block: 14px; }
+.formula-explained-content code { background: #f4eff3; color: #a5106f; border-radius: 3px; padding: 1px 4px; }
+.formula-explained-content p + p { margin-top: 12px; }
+.trace summary, .formula-explained summary { cursor: pointer; padding: 16px 20px; font-size: 14px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; padding: 20px; background: #0f172a; color: #cbd5e1; font-size: 13px; line-height: 1.7; overflow-x: auto; }
+.changed { color: #7dd3fc; }
+.token-property { color: #f472b6; }
+.token-function { color: #c4b5fd; }
+.token-number { color: #cbd5e1; }
+.token-width { color: #7dd3fc; }
+.token-height { color: #f9a8d4; }
+.formula-key { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; }
+.formula-key .width { color: #2b7190; }
+.formula-key .height { color: #a5106f; }
+.formula-key .settings { color: #68717e; }
+.token-updated { border-radius: 3px; animation: value-change 900ms ease-out; }
+@keyframes value-change { from { background: color-mix(in srgb, currentColor 28%, transparent); } to { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .token-updated { animation: none; } }
+.token-comment { color: #94a3b8; }
+details.settings { border-top: 1px solid #e0e3e8; padding-top: 16px; }
+.settings summary { cursor: pointer; font-size: 14px; margin-bottom: 12px; }
+.setting-grid { border-top: 1px solid #e0e3e8; padding-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.setting-grid label { font-size: 12px; display: grid; gap: 6px; }
+.setting-grid input { width: 100%; }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid #0061c7; outline-offset: 4px; }
+@media(max-width: 1000px) { .layout { grid-template-columns: 1fr; } .canvas { height: 400px; } body { padding: 16px; } }
+/* Generated from kni-cascade: @include scrim(to-t, 0.7, 60%); */
+.art {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  --scrim-color: 0, 0, 0;
+  --scrim-dir: to top;
+  --scrim-a: 0.7;
+  --scrim-dist: 60%;
+}
+.art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+  background-image: linear-gradient(var(--scrim-dir), rgba(var(--scrim-color), calc(var(--scrim-a) * 1)) 0%, rgba(var(--scrim-color), calc(var(--scrim-a) * 0.852)) calc(var(--scrim-dist) * 0.12), rgba(var(--scrim-color), calc(var(--scrim-a) * 0.621)) calc(var(--scrim-dist) * 0.28), rgba(var(--scrim-color), calc(var(--scrim-a) * 0.385)) calc(var(--scrim-dist) * 0.46), rgba(var(--scrim-color), calc(var(--scrim-a) * 0.183)) calc(var(--scrim-dist) * 0.66), rgba(var(--scrim-color), calc(var(--scrim-a) * 0.054)) calc(var(--scrim-dist) * 0.85), rgba(var(--scrim-color), 0) var(--scrim-dist));
+}
+/* Generated from kni-cascade: @include shadow(20, 0.06); */
+.frame {
+  transition: box-shadow 0.4s var(--easing);
+  box-shadow: 0 calc(var(--shadow-elevation, 12) * 1px) calc(var(--shadow-elevation, 12) * 2px) 0 rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.4 * var(--shadow-active, 0))), 0 calc(var(--shadow-elevation, 12) * 2px) calc(var(--shadow-elevation, 12) * 4px) 0 rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.3 * var(--shadow-active, 0))), 0 calc(var(--shadow-elevation, 12) * 4px) calc(var(--shadow-elevation, 12) * 8px) 0 rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.2 * var(--shadow-active, 0))), 0 calc(var(--shadow-elevation, 12) * 8px) calc(var(--shadow-elevation, 12) * 16px) var(--shadow-spread, -1px) rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.1 * var(--shadow-active, 0))), 0 calc(var(--shadow-elevation, 12) * 10px) calc(var(--shadow-elevation, 12) * 20px) var(--shadow-spread, -1px) rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.05 * var(--shadow-active, 0))), 0 calc(var(--shadow-elevation, 12) * 12px) calc(var(--shadow-elevation, 12) * 24px) var(--shadow-spread, -1px) rgba(var(--shadow-color, 0, 0, 0), calc(var(--shadow-opacity, 0.08) * var(--shadow-weight, 1.3) * 0.02 * var(--shadow-active, 0)));
+}
+@media (prefers-reduced-motion: reduce) {
+  .frame {
+    transition: none;
+  }
+}
+.frame {
+  --shadow-elevation: 4;
+  --shadow-weight: 1;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.06;
+  --shadow-active: 1;
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="layout">
+<div>
+<section class="panel" aria-label="Resizable composition preview">
+<div class="toolbar"><h2>kni-cascade pxv demo</h2><span class="badge" id="mode">Desktop basis</span></div>
+<div class="canvas" id="canvas">
+<div class="frame" id="frame">
+<div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><div class="frame-dimensions"><input id="preview-width" type="number" min="240" max="2000" step="1" aria-label="Preview width" title="Preview width"><span aria-hidden="true">×</span><input id="preview-height" type="number" min="200" max="1600" step="1" aria-label="Preview height" title="Preview height"></div></div>
+<div class="viewport" id="viewport"><div class="stage" id="stage"><div class="hero"><div class="hero-copy"><div class="eyebrow">SAMPLE WEBSITE</div><h3>A little room<br>to grow.</h3><p>An adaptable foundation for ideas of every size. Thoughtfully proportioned, with the flexibility to grow and the space to make it your own.</p></div><div class="art"><output class="image-width-label" id="image-width-label" aria-label="Image width"></output><img src="https://picsum.photos/1100/880" alt=""></div></div></div></div>
+<div class="site-max-guide" id="site-max-guide"><span class="site-max-left" id="site-max-label"></span><span class="site-max-right" id="site-max-label-right"></span></div>
+<div class="squish-line" id="squish-line"><span id="squish-label"></span></div>
+<div class="floor-line" id="floor-line"><span id="floor-label"></span></div>
+<div class="squish-rail" id="squish-rail"><span id="preview-squish"></span></div>
+<button class="handle" id="handle" aria-label="Resize preview; use arrow keys to adjust width and height">↘</button>
+</div>
+</div>
+</section>
+<section class="panel trace"><div class="toolbar"><h2><output id="preview-result" aria-live="polite"></output></h2></div><pre><code id="formula"></code></pre>
+
+</section>
+<details class="formula-explained">
+<summary>How this formula works</summary>
+<div class="formula-explained-content">
+<p>The equation asks: <strong>how many screen pixels should one pxv equal right now?</strong> It works from the inside out:</p>
+<ol>
+<li><strong>Compare the window’s width with the design’s reference width.</strong> A <code>1440px</code> window against a <code>1440px</code> design gives a width-based size of <code>1px</code> per pxv.</li>
+<li><strong>Decide which height to use.</strong> Use the actual window height unless it’s below the configured height floor. With a <code>500px</code> floor, a <code>400px</code>-tall window is treated as <code>500px</code> tall for this calculation.</li>
+<li><strong>Compare that usable height with the design’s reference height.</strong> A usable height of <code>600px</code> against a <code>750px</code> reference gives a height-based size of <code>0.8px</code> per pxv. The aspect-ratio multiplication in the formula converts height into the same sizing terms as width; algebraically, it reduces to this comparison.</li>
+<li><strong>Blend the width-based and height-based sizes according to squish.</strong> At zero squish, use width alone. At full squish, use the height-based size. At <code>75%</code> squish, combine <code>25%</code> of the width-based size with <code>75%</code> of the height-based size. In this example, that produces <code>0.85px</code>.</li>
+<li><strong>Choose whichever is smaller: the width-based size or the blended size.</strong> This lets short windows reduce sizing, while preventing tall windows from making things larger than their width calls for.</li>
+<li><strong>Stop the result from exceeding the maximum scale.</strong> The library’s default maximum is <code>1800 ÷ 1440</code>, or <code>1.25px</code> per pxv.</li>
+<li><strong>Stop the result from falling below the minimum scale.</strong> In desktop mode, the library’s default minimum is <code>768 ÷ 1440</code>, or about <code>0.533px</code> per pxv.</li>
+<li><strong>Use that final value everywhere pxv appears.</strong> If one pxv equals <code>0.85px</code>, then <code>100pxv</code> renders as <code>85px</code>.</li>
+</ol>
+<p>The nested <code>min()</code> functions choose smaller values to enforce ceilings. The <code>max()</code> functions choose larger values to enforce floors. The arithmetic inside them calculates the sizes those functions are choosing between.</p>
+<p class="note">These examples use fixed numbers to explain the process. The formula above uses your current demo settings.</p>
+</div>
+</details>
+</div>
+<aside>
+<section class="panel">
+<div class="controls">
+<div class="controls-heading"><h2>Scaling settings</h2><button class="reset" id="reset">Reset</button></div>
+<div><label class="row-label" for="squish"><span class="setting-label">Desktop squish<code>--desktop-squish</code></span><output id="squish-value">0.75</output></label><input id="squish" type="range" min="0" max="1" step="0.05" value="0.75"></div>
+<label class="row-label" for="basis-w"><span class="setting-label">Desktop reference width<code>--desktop-basis-w</code></span><input id="basis-w" type="number" min="800" max="2400" value="1440"></label>
+<label class="row-label" for="basis-h"><span class="setting-label">Desktop reference height<code>--desktop-basis-h</code></span><input id="basis-h" type="number" min="300" max="1400" value="750"></label>
+<label class="row-label" for="floor"><span class="setting-label">Desktop height floor<code>--desktop-floor</code></span><input id="floor" type="number" min="0" max="1200" step="10" value="500"></label>
+<label class="row-label" for="cap"><span class="setting-label">Site max<code>$desktop-max</code></span><input id="cap" type="number" min="1200" max="3200" step="10" value="1800"></label>
+<label class="row-label" for="mobile-w"><span class="setting-label">Mobile reference width<code>--mobile-basis-w</code></span><input id="mobile-w" type="number" min="240" max="600" value="390"></label>
+<label class="row-label" for="breakpoint"><span class="setting-label">Mobile / desktop switch<code>$tm</code></span><input id="breakpoint" type="number" min="601" max="1200" value="768"></label>
+</div>
+</section>
+<section class="panel" style="margin-top:20px" aria-label="Live scaling calculation">
+<div class="rule" id="width-rule"><div class="rule-title">1 · Start with width</div><output id="width-result"></output></div>
+<div class="rule" id="height-rule"><div class="rule-title">2 · Check height</div><output id="height-result"></output></div>
+<div class="rule" id="choose-rule"><div class="rule-title">3 · Apply limits</div><output id="choose-result"></output></div>
+
+</section>
+</aside>
+</div>
+</div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const settings = ['squish','floor','basis-w','basis-h','mobile-w','breakpoint','cap'];
+const defaults = [0.75,500,1440,750,390,768,1800];
+let w = 1440, h = 900, fit = 1, dragging = false;
+let previousFormulaValues = null, previousFormulaKey = null;
+const num = id => Number($(id).value);
+const fmt = n => Number(n.toFixed(3)).toString();
+const widthLimit = () => Math.max(2000,num('cap')+200);
+const bound = (n,a,b) => Math.max(a,Math.min(b,n));
+function render() {
+ const bp = num('breakpoint'), mobile = w < bp;
+ const bw = mobile ? num('mobile-w') : num('basis-w');
+ const bh = mobile ? 667 : num('basis-h');
+ const sq = mobile ? 0 : num('squish');
+ const floor = mobile ? 0 : num('floor');
+ const lo = mobile ? 0 : bp, hi = mobile ? bp-1 : num('cap');
+ const usableH = Math.max(h,floor), width = w/bw, height = usableH/bh;
+ const squishStarts = width*bh;
+ const showSquishLine = !mobile;
+
+ const blend = width*(1-sq)+height*sq;
+ const chosen = Math.min(width,blend);
+ const unit = Math.max(lo/bw,Math.min(hi/bw,chosen));
+ const referenceW = bw*unit, referenceH = bh*unit;
+ const guideHeight = Math.max(h,floor,showSquishLine ? referenceH : 0);
+ const capped = chosen > hi/bw + 1e-8, minimum = chosen < lo/bw - 1e-8;
+ const heightWins = blend < width-1e-8;
+ const floored = h < floor && sq > 0;
+ const squishSetting = num('squish');
+ const squishLabel = squishSetting === 0 ? 'No squish' : squishSetting === 1 ? 'Full height influence' : `${Math.round(squishSetting*100)}% height influence`;
+ $('squish-value').value = fmt(squishSetting);
+ $('preview-squish').textContent = mobile ? 'Width controls sizing' : squishSetting === 0 ? 'No height-based shrinking' : capped || minimum ? (capped ? 'Maximum scale reached' : 'Minimum scale reached') : !heightWins ? 'Width controls sizing' : floored ? 'Height floor reached' : `Shrinking with height · ${squishSetting === 1 ? 'full strength' : `${Math.round(squishSetting*100)}% strength`}`;
+ $('mode').textContent = mobile ? 'Mobile basis · width only' : 'Desktop basis';
+ $('preview-width').max = widthLimit();
+ if (document.activeElement !== $('preview-width')) $('preview-width').value = w;
+ if (document.activeElement !== $('preview-height')) $('preview-height').value = h;
+ const pct = n => `${Number((n*100).toFixed(1))}%`;
+ $('width-result').value = `This window is ${pct(width)} of the ${bw}px reference width.`;
+ $('height-result').value = mobile ? 'Mobile uses width-only scaling.'
+   : sq === 0 ? 'Squish is off, so height does not change the size.'
+   : heightWins ? `At ${Math.round(sq*100)}% squish, the shorter window reduces sizing from ${pct(width)} to ${pct(chosen)}.${floored ? ` The ${floor}px height floor prevents further height-based shrinking.` : ''}`
+   : 'There’s enough height, so no shrinking is needed.';
+ $('choose-result').value = capped ? `Site max caps sizing at ${pct(unit)}.`
+   : minimum ? `The minimum scale holds sizing at ${pct(unit)}.`
+   : `Within the limits—sizing stays at ${pct(unit)}.`;
+ $('preview-result').value = `1pxv = ${fmt(unit)}px`;
+ ['width','height','choose'].forEach(x=>$(x+'-rule').classList.remove('active'));
+ $(capped || minimum ? 'choose-rule' : heightWins ? 'height-rule' : 'width-rule').classList.add('active');
+ const values = { width: `${fmt(w/100)}px`, height: `${fmt(h/100)}px`, minimum: lo, maximum: hi, basisWidth: bw, basisHeight: bh, squish: sq, floor };
+ const names = { width: 'Window width ÷ 100 (1vw)', height: 'Window height ÷ 100 (1vh)', minimum: 'Minimum scaling width', maximum: 'Maximum scaling width', basisWidth: 'Reference width', basisHeight: 'Reference height', squish: 'Squish', floor: 'Height floor' };
+ const formula = `--pxv-unit: max(\n  (@@minimum@@ * 1px / @@basisWidth@@),\n  min(\n    (@@maximum@@ * 1px / @@basisWidth@@),\n    min(\n      (@@width@@ * 100 / @@basisWidth@@),\n      calc(\n        ((@@width@@ * 100 / @@basisWidth@@) * (1 - @@squish@@)) +\n        ((max(@@height@@, 1px * @@floor@@ / 100)\n          * (@@basisWidth@@ / @@basisHeight@@) * 100 / @@basisWidth@@) * @@squish@@)\n      )\n    )\n  )\n);\n\n/* Result: ${fmt(unit)}px */`;
+ const formulaKey = JSON.stringify([values,fmt(unit)]);
+ if (formulaKey !== previousFormulaKey) {
+   $('formula').innerHTML = formula.replace(/\s+/g,' ').replace(/(@@[a-zA-Z]+@@|\/\*.*?\*\/|--pxv-unit|\b(?:max|min|calc)(?=\()|\d*\.?\d+(?:px)?)/g, token => {
+     if (token.startsWith('@@')) {
+       const key = token.slice(2,-2);
+       const type = key === 'width' || key === 'height' ? key : 'number';
+       const changed = previousFormulaValues && previousFormulaValues[key] !== values[key];
+       return `<span class="token-${type}${changed ? ' token-updated' : ''}" title="${names[key]}">${values[key]}</span>`;
+     }
+     const type = token.startsWith('/*') ? 'comment' : token.startsWith('--') ? 'property' : /^(max|min|calc)$/.test(token) ? 'function' : 'number';
+     return `<span class="token-${type}">${token}</span>`;
+   });
+   previousFormulaValues = values;
+   previousFormulaKey = formulaKey;
+ }
+
+ const canvas = $('canvas');
+ if (!dragging) fit = Math.min((canvas.clientWidth-128)/widthLimit(),0.75);
+ canvas.style.height = `${Math.max(innerWidth <= 1000 ? 400 : 490, guideHeight*fit+84)}px`;
+ // Keep the display factor stable during a drag; otherwise fit the simulated window to the available space.
+ $('frame').style.width = `${w*fit}px`;
+ $('frame').style.marginRight = '56px';
+ $('squish-rail').style.height = `${(showSquishLine ? referenceH : h)*fit}px`;
+ $('squish-rail').style.left = `${w*fit+16}px`;
+ $('squish-rail').style.right = 'auto';
+ $('squish-rail').classList.toggle('active',heightWins && !capped && !minimum);
+ $('frame').style.marginBottom = `${Math.max(0,(guideHeight-h)*fit)}px`;
+ $('squish-line').hidden = !showSquishLine;
+ $('squish-line').style.height = `${referenceH*fit}px`;
+ $('squish-line').style.width = `${referenceW*fit}px`;
+ $('squish-line').style.right = 'auto';
+ $('squish-label').textContent = `Reference proportions · ${bw} × ${bh} · ${Number((bw/bh).toFixed(2))}:1`;
+ $('floor-line').hidden = mobile || floor === 0;
+ $('floor-line').style.top = `${34 + floor*fit}px`;
+ $('floor-line').classList.toggle('reached',floored);
+ $('floor-label').textContent = `Height floor · ${floor}px${floored ? ' · reached' : ''}`;
+ $('viewport').style.height = `${h*fit}px`;
+ $('stage').style.width = `${w}px`; $('stage').style.height = `${h}px`;
+ $('stage').style.transform = `scale(${fit})`;
+ $('stage').style.setProperty('--u',`${unit}px`);
+ const contentW = mobile ? w : Math.min(w,hi);
+ const gutter = (w-contentW)/2;
+ $('stage').querySelector('.hero').style.width = `${contentW}px`;
+ $('stage').style.background = '#fffaf7';
+ $('site-max-guide').hidden = mobile || w < hi;
+ $('site-max-guide').style.left = `${gutter*fit}px`;
+ $('site-max-guide').style.width = `${contentW*fit}px`;
+ $('site-max-guide').style.height = `${h*fit}px`;
+ $('site-max-label').textContent = `Site max · ${hi}px`;
+ $('site-max-label-right').textContent = `Site max · ${hi}px`;
+ $('squish-line').style.left = `${Math.max(0,(w-referenceW)/2)*fit}px`;
+ $('stage').classList.toggle('mobile',mobile);
+ const imageWidth = $('stage').querySelector('.art').getBoundingClientRect().width / fit;
+ $('image-width-label').value = `${mobile ? bw-48 : 600}pxv = ${Math.round(imageWidth)}px`;
+ $('image-width-label').style.fontSize = `${12/fit}px`;
+ $('image-width-label').style.padding = `${4/fit}px ${6/fit}px`;
+}
+
+['preview-width','preview-height'].forEach(id => {
+ const update = () => {
+   if ($(id).value === '' || !$(id).checkValidity()) return;
+   if (id === 'preview-width') w = bound(num(id),240,widthLimit());
+   else h = bound(num(id),200,1600);
+   render();
+ };
+ $(id).addEventListener('input',update);
+ $(id).addEventListener('change',update);
+ $(id).addEventListener('blur',()=>{ $(id).value = id === 'preview-width' ? w : h; });
+});
+settings.forEach(id=>$(id).addEventListener('input',()=>{
+ if($(id).value==='' || !$(id).checkValidity()) return;
+ render();
+}));
+$('reset').addEventListener('click',()=>{settings.forEach((id,i)=>$(id).value=defaults[i]);w=1440;h=900;render();});
+const handle=$('handle'); let origin;
+handle.addEventListener('pointerdown',e=>{dragging=true;origin={x:e.clientX,y:e.clientY,w,h,fit};handle.setPointerCapture(e.pointerId);});
+handle.addEventListener('pointermove',e=>{if(!dragging)return;w=Math.round(bound(origin.w+(e.clientX-origin.x)/origin.fit,240,widthLimit()));h=Math.round(bound(origin.h+(e.clientY-origin.y)/origin.fit,200,1600));render();});
+const end=()=>{dragging=false;};handle.addEventListener('pointerup',end);handle.addEventListener('pointercancel',end);
+handle.addEventListener('keydown',e=>{const changes={ArrowRight:[10,0],ArrowLeft:[-10,0],ArrowUp:[0,-10],ArrowDown:[0,10]};if(!changes[e.key])return;e.preventDefault();w=bound(w+changes[e.key][0],240,widthLimit());h=bound(h+changes[e.key][1],200,1600);render();});
+new ResizeObserver(()=>render()).observe($('canvas'));
+addEventListener('resize',render);
+render();
+})();
+</script>
+</body>
+</html>

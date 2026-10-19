@@ -31,6 +31,7 @@
 <a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=2B7190" alt="kni-cascade version published on npm" height="20" /></a>
 <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
         </div>
+        <a class="demo-scaling-link" href="scaling-lab.html" target="_blank" rel="noopener">Scaling demo <span aria-hidden="true">↗</span></a>
       </div>
     </div>
 
@@ -144,6 +145,7 @@
         <section id="scaling">
           <h2 class="heading--m">Scaling</h2>
           <p>kni-cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
+          <p><a href="scaling-lab.html">Open the interactive scaling demo</a> to resize a sample site and explore squish, reference proportions, the height floor, and scaling limits. The demo starts at 75% squish to make the effect easier to explore; the library default is 100%.</p>
           <section id="pxv">
             <h3 class="heading--s">postcss-pxv</h3>
             <div class="demo-actions">
@@ -159,6 +161,7 @@
             <pre class="code-block"><code><span class="code-tag">.card</span> {
   <span class="code-attr">padding</span>: calc(<span class="code-string">24</span> * var(<span class="code-string">--pxv-unit</span>));
 }</code></pre>
+            <h4 class="heading--xs">Browser computes</h4>
             <p>One shared unit keeps every pxv value in proportion. The browser calculates the final size as the viewport changes. Here’s what that padding becomes at a few desktop widths:</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
