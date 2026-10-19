@@ -2,6 +2,18 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
+## 1.6.1 — 2026-10-17
+
+### Added
+
+- `[btn]` button foundation with responsive `xs`, `s`, `m`, and `l` sizes, medium defaults, configurable color themes, outline/inverted treatments, full-width layout, keyboard focus, and disabled states.
+- Button label sizes scale down but are capped at their active reference sizes by default, configurable with `$btn-scale-up`.
+- Project button settings and a reusable `btn-size()` Sass mixin for custom components that need consistent dimensions without the default appearance.
+
+### Changed
+
+- Expanded getting-started and component documentation, added button customization examples, and refined demo navigation, typography, and code styling.
+
 ## 1.5.1 — 2026-10-16
 
 ### Added

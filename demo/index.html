@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>kni-cascade — Demo &amp; Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&amp;display=swap" />
     <link rel="stylesheet" href="styles.css" />
     <style>
       html.lenis,
@@ -21,10 +24,11 @@
   <body id="top" class="demo">
     <div id="demo-hero" class="demo-hero" scrim="to-t .8 75%">
       <img src="images/cascade-waterfall.png" alt="Japanese woodblock-inspired waterfalls flowing through a misty mountain landscape" width="2172" height="724" fetchpriority="high" />
+      <span class="demo-hero-size-probe heading--m" aria-hidden="true"></span>
       <div class="demo-hero-brand">
-        <h1 class="demo-hero-title"><a href="#top">kni-cascade</a></h1>
+        <h1 class="demo-hero-title heading--xxxl"><a href="#top">kni-cascade</a><span class="demo-hero-baseline" aria-hidden="true"></span></h1>
         <div class="demo-actions">
-<a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=cb3837" alt="kni-cascade version published on npm" height="20" /></a>
+<a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=2B7190" alt="kni-cascade version published on npm" height="20" /></a>
 <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
         </div>
       </div>
@@ -34,12 +38,20 @@
       <aside class="demo-sidebar">
       <nav class="demo-nav" aria-label="Demo features" data-lenis-prevent>
         <details class="demo-nav-group" name="demo-sections">
+          <summary>Getting started</summary>
+          <ul class="demo-subnav">
+            <li><a href="#getting-started">Overview</a></li>
+            <li><a href="#project-settings">Configuration</a></li>
+            <li><a href="#project-structure">Folder structure</a></li>
+          </ul>
+        </details>
+        <details class="demo-nav-group" name="demo-sections">
           <summary>Scaling</summary>
           <ul class="demo-subnav">
             <li><a href="#scaling">Overview</a></li>
             <li><a href="#pxv">postcss-pxv</a></li>
             <li><a href="#scaling-breakpoints">Breakpoints</a></li>
-            <li><a href="#scaling-controls">Controls</a></li>
+            <!-- <li><a href="#scaling-controls">Controls</a></li> -->
           </ul>
         </details>
         <details class="demo-nav-group" name="demo-sections">
@@ -50,6 +62,13 @@
             <li><a href="#type-body">Body</a></li>
             <li><a href="#type-caps">Caps</a></li>
             <li><a href="#text-helpers">Text helpers</a></li>
+          </ul>
+        </details>
+        <details class="demo-nav-group" name="demo-sections">
+          <summary>Components</summary>
+          <ul class="demo-subnav">
+            <li><a href="#components">Overview</a></li>
+            <li><a href="#buttons">[btn]</a></li>
           </ul>
         </details>
         <details class="demo-nav-group" name="demo-sections">
@@ -74,22 +93,52 @@
       </aside>
     <div class="container demo-content">
       <div class="demo-description">
-        <p>A modern front-end architecture creating a single source of truth for all our CSS — across <strong>WordPress</strong>, <strong>React</strong>, <strong>static</strong>, or any future builds.</p>
-        <p>KNI Cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.</p>
-        <p>It’s designed for <strong>clarity, scalability, and minimal friction</strong> — a single shared foundation that powers every KNI build.</p>
+        <p>A modern front-end architecture creating a single source of truth for all our CSS — across WordPress, React, static, or any future builds.</p>
+        <p>kni-cascade unifies structure, tooling, and logic into a maintainable, portable system for all front-end projects.</p>
+        <p>It’s designed for clarity, scalability, and minimal friction — a single shared foundation that powers every KNI build.</p>
       </div>
 
       <main>
+        <section id="getting-started">
+          <h2 class="heading--m">Getting started</h2>
+          <p>KNI’s <a href="https://github.com/kni-labs/kni-wp-bp">WordPress</a>, <a href="https://github.com/kni-labs/kni-11ty">Eleventy</a>, and <a href="https://github.com/kni-labs/kni-next-cascade">Next.js</a> boilerplates seed your project’s <code>scss</code> directory with the latest version of kni-cascade during setup. From there, those files belong to your project—customize them freely. Existing projects don’t automatically receive future kni-cascade updates.</p>
+          <section id="project-settings">
+            <h3 class="heading--s">Configuration</h3>
+            <p>Before building pages, set the project’s typography, scaling, and component defaults to match the Figma design. The settings below show where to make those changes.</p>
+            <dl class="docs-reference">
+              <dt>Typography</dt><dd>Match <code>$type-scale</code> in <code>scss/00-sass/_variables.scss</code> to the desktop and mobile typography variables in Figma.</dd>
+              <dt>Scaling</dt><dd>Check the mobile and desktop reference dimensions in <code>scss/01-base/_scaling.scss</code>. They default to <code>390px</code> and <code>1440px</code> wide. Set <code>$desktop-max</code> in <code>_variables.scss</code> if the design needs a different scaling limit; the default is <code>1800px</code>.</dd>
+              <dt>Components</dt><dd>Set shared appearance and sizing once, then extend each component as needed. For buttons, use <code>$btn-design</code> and <code>$btn-sizes</code>.</dd>
+              <dt>Only what you need</dt><dd>Comment out unused forwards in the components and utilities entry files, then rebuild to omit their CSS.</dd>
+            </dl>
+          </section>
+          <section id="project-structure">
+            <h3 class="heading--s">Folder structure</h3>
+            <p>Each layer builds on the one before it. Keep shared decisions near the top and project-specific styling in the layer that owns it.</p>
+            <div class="type-scale-table-wrap">
+              <table class="type-scale-table">
+                <thead><tr><th scope="col">Folder</th><th scope="col">What belongs here</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row"><code>00-sass</code></th><td>Settings, variables, functions, and mixins. This layer produces no CSS on its own.</td></tr>
+                  <tr><th scope="row"><code>01-base</code></th><td>Global resets, typography, scaling, layout, and utilities.</td></tr>
+                  <tr><th scope="row"><code>02-components</code></th><td>Reusable interface elements, such as buttons, with shared appearance and states.</td></tr>
+                  <tr><th scope="row"><code>03-modules</code></th><td>Page sections composed from those foundations and components.</td></tr>
+                  <tr><th scope="row"><code>04-pages</code></th><td>Styles specific to a page or template.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
         <section id="scaling">
           <h2 class="heading--m">Scaling</h2>
-          <p>Cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
+          <p>kni-cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
           <section id="pxv">
             <h3 class="heading--s">postcss-pxv</h3>
             <div class="demo-actions">
               <a class="demo-github" href="https://github.com/kni-labs/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-postcss--pxv-24292f?logo=github&amp;logoColor=white" alt="View postcss-pxv on GitHub" height="20" /></a>
-              <a class="demo-npm" href="https://www.npmjs.com/package/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/postcss-pxv?label=npm&amp;color=cb3837" alt="postcss-pxv version published on npm" height="20" /></a>
+              <a class="demo-npm" href="https://www.npmjs.com/package/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/postcss-pxv?label=npm&amp;color=2B7190" alt="postcss-pxv version published on npm" height="20" /></a>
             </div>
-            <p>Think of pxv as a design-reference pixel. Write the size from your design, and Cascade scales it using the viewport and the active mobile or desktop settings.</p>
+            <p>Think of pxv as a design-reference pixel. Write the size from your design, and kni-cascade scales it using the viewport and the active mobile or desktop settings.</p>
             <pre class="code-block"><code><span class="code-tag">.card</span> {
   <span class="code-attr">width</span>: <span class="code-string">300pxv</span>;
   <span class="code-attr">padding</span>: <span class="code-string">24pxv</span>;
@@ -119,7 +168,7 @@
               </table>
             </div>
             <p>Projects default to scaling all the way to <code>1800px</code>. Change this limit with the <code>$desktop-max</code> variable in <code>00-sass/_variables.scss</code>.</p>
-            <h4>Named layout breakpoints</h4>
+            <h4 class="heading--xs">Named layout breakpoints</h4>
             <p>Use these Sass values for layout changes when needed. They are optional layout thresholds, not additional scaling modes.</p>
             <div class="type-scale-table-wrap">
               <table class="type-scale-table">
@@ -140,8 +189,9 @@
                 </tbody>
               </table>
             </div>
-            <p><code>@include sm</code> applies below <code>$tm</code>, <code>@include lg</code> at and above <code>$tm</code>, and <code>@include max</code> at and above <code>$desktop-max</code>. Cascade uses the shared tablet breakpoint (<code>768px</code>) to switch between mobile and desktop scaling, typography, and layout.</p>
+            <p><code>@include sm</code> applies below <code>$tm</code>, <code>@include lg</code> at and above <code>$tm</code>, and <code>@include max</code> at and above <code>$desktop-max</code>. kni-cascade uses the shared tablet breakpoint (<code>768px</code>) to switch between mobile and desktop scaling, typography, and layout.</p>
           </section>
+          <!-- Scaling controls temporarily hidden.
           <section id="scaling-controls">
           <h3 class="heading--s">Scaling controls</h3>
           <p>Adjust squish, floor, maximum width, and reference height to explore how the demo scales.</p>
@@ -169,11 +219,12 @@
 </div>
           <div class="box">Scaling preview</div>
           </section>
+          -->
         </section>
         <section id="typography">
           <h2 class="heading--m">Typography</h2>
           <p>The Sass <code>type-scale()</code> mixin powers every heading and body size from one shared <code>$type-scale</code> map. Each token defines a mobile and desktop size; updating those values updates every class or component that uses that token.</p>
-          <p>Start here: update <code>$type-scale</code> in <code>scss/00-sass/_variables.scss</code> to match your project's Figma typography variables. Cascade handles mobile/desktop sizes and viewport scaling for every matching class or mixin. These are the default reference sizes, before scaling and font-size clamps.</p>
+          <p>Start here: update <code>$type-scale</code> in <code>scss/00-sass/_variables.scss</code> to match your project's Figma typography variables. kni-cascade handles mobile/desktop sizes and viewport scaling for every matching class or mixin. These are the default reference sizes, before scaling and font-size clamps.</p>
           <div class="type-scale-table-wrap">
             <table class="type-scale-table">
               <caption>Default type scale — desktop and mobile reference sizes</caption>
@@ -202,48 +253,56 @@
             <pre class="type-example-label"><code>heading--xxxl</code></pre>
             <div class="type-example-preview">
               <h1 class="heading--xxxl">A shared foundation for every design</h1>
+              <p class="type-example-sizes">Desktop: 64px · Mobile: 38px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--xxl</code></pre>
             <div class="type-example-preview">
               <h1 class="heading--xxl">Fluid grids jump quickly when pixel boundaries fade</h1>
+              <p class="type-example-sizes">Desktop: 60px · Mobile: 34px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--xl</code></pre>
             <div class="type-example-preview">
               <h2 class="heading--xl">Bold layers of type mix sharp quartz and new glyphs</h2>
+              <p class="type-example-sizes">Desktop: 48px · Mobile: 30px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--l</code></pre>
             <div class="type-example-preview">
               <h3 class="heading--l">Jazzy mockups bring quirky UX flow and crisp detail</h3>
+              <p class="type-example-sizes">Desktop: 38px · Mobile: 26px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--m</code></pre>
             <div class="type-example-preview">
               <h4 class="heading--m">Quick designers juggle hazy fonts, warm color, and depth</h4>
+              <p class="type-example-sizes">Desktop: 32px · Mobile: 22px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--s</code></pre>
             <div class="type-example-preview">
               <h5 class="heading--s">Twelve bright panels form a just-in-time CSS layout</h5>
+              <p class="type-example-sizes">Desktop: 26px · Mobile: 20px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--xs</code></pre>
             <div class="type-example-preview">
               <h6 class="heading--xs">Dynamic boxes flex through jumpy scroll and radiant hue</h6>
+              <p class="type-example-sizes">Desktop: 20px · Mobile: 18px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>heading--xxs</code></pre>
             <div class="type-example-preview">
               <h6 class="heading--xxs">Small headings keep the hierarchy clear</h6>
+              <p class="type-example-sizes">Desktop: 18px · Mobile: 16px</p>
             </div>
           </div>
           </section>
@@ -257,6 +316,7 @@
             Nadia, Oliver, Penelope, Quinn, Rafael, Sophia, Tristan, Ursula, Victor, Willow, Xavier, Yasmine, and Zachary
             gathered in the quirky old library, flipping through dusty books while exchanging jokes.
           </p>
+              <p class="type-example-sizes">Desktop: 18px · Mobile: 16px</p>
             </div>
           </div>
           <div class="type-example-row">
@@ -266,6 +326,7 @@
             From the highest shelf, an ancient volume tumbled, making Jasmine yelp and Quinn laugh. “Unexpected surprises
             keep things exciting!” Xavier quipped, adjusting his glasses, amazed by the bizarre discovery.
           </p>
+              <p class="type-example-sizes">Desktop: 18px · Mobile: 16px</p>
             </div>
           </div>
           <div class="type-example-row">
@@ -276,6 +337,7 @@
             florist’s door. He studied an old encyclopædia and an œuvre on mediæval craftsmanship while enjoying a hors
             d’œuvre on the café’s terrace in the straße
           </p>
+              <p class="type-example-sizes">Desktop: 16px · Mobile: 14px</p>
             </div>
           </div>
           <div class="type-example-row">
@@ -285,24 +347,28 @@
             AVoid wavy kerning! Typographers often fix TA, WA, To, and VA pairs while refining ‘tight’ and ‘loose’ spaces.
             “It’s tricky!” Xavier joked, adjusting 7.9° of alignment.
           </p>
+              <p class="type-example-sizes">Desktop: 16px · Mobile: 14px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--s</code></pre>
             <div class="type-example-preview">
               <p class="body--s">Great ideas rarely arrive fully formed. They start as a question, a sketch on the nearest scrap of paper, or a conversation that runs a little longer than expected. We make room for that messy beginning, then bring enough care and craft to turn a promising thought into something people want to use.</p>
+              <p class="type-example-sizes">Desktop: 14px · Mobile: 12px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--xs</code></pre>
             <div class="type-example-preview">
               <p class="body--xs">Somewhere between the first draft and the final detail, a good project finds its rhythm. The pieces start talking to each other. The unnecessary falls away. What remains feels clear, useful, and just a little unexpected—the kind of work that makes you stop scrolling and lean in.</p>
+              <p class="type-example-sizes">Desktop: 12px · Mobile: 11px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--xxs</code></pre>
             <div class="type-example-preview">
               <p class="body--xxs">A small detail can change the whole experience: a label that answers the right question, a transition that gives you your bearings, or a sentence that sounds like a person wrote it. None of these moments needs to shout. Together, they make something worth coming back to.</p>
+              <p class="type-example-sizes">Desktop: 11px · Mobile: 10px</p>
             </div>
           </div>
           <div class="type-example-row">
@@ -315,88 +381,79 @@
             mechanisms underlying how the gut microbiota influences core symptoms of neurodegenerative disease remain
             undefined.
           </p>
-            </div>
-          </div>
-          <div class="type-example-row">
-            <pre class="type-example-label"><code>color-test body--s</code></pre>
-            <div class="type-example-preview">
-              <div class=" color-test body--s">
-            <p>asdfasdf</p>
-            <ul>
-              <li>asdfasdf</li>
-            </ul>
-          </div>
+              <p class="type-example-sizes">Desktop: 10px · Mobile: 10px</p>
             </div>
           </div>
           </section>
           <section id="type-caps">
             <h3 class="heading--s">Caps</h3>
+            <p>Caps inherit their sizes from the corresponding body tokens in the shared <code>type-scale()</code> mixin. Combine <code>caps</code> with a body class such as <code>body--m</code>; update the body values in <code>$type-scale</code> to change both.</p>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--l caps</code></pre>
             <div class="type-example-preview">
               <p class="body--l caps">Featured story</p>
+              <p class="type-example-sizes">Desktop: 18px · Mobile: 16px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--m caps</code></pre>
             <div class="type-example-preview">
               <p class="body--m caps">Research &amp; insights</p>
+              <p class="type-example-sizes">Desktop: 16px · Mobile: 14px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--s caps</code></pre>
             <div class="type-example-preview">
               <p class="body--s caps">Our approach</p>
+              <p class="type-example-sizes">Desktop: 14px · Mobile: 12px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--xs caps</code></pre>
             <div class="type-example-preview">
               <p class="body--xs caps">Behind the work</p>
+              <p class="type-example-sizes">Desktop: 12px · Mobile: 11px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--xxs caps</code></pre>
             <div class="type-example-preview">
               <p class="body--xxs caps">Latest updates</p>
+              <p class="type-example-sizes">Desktop: 11px · Mobile: 10px</p>
             </div>
           </div>
           <div class="type-example-row">
             <pre class="type-example-label"><code>body--xxs caps</code></pre>
             <div class="type-example-preview">
               <p class="body--xxs caps">Explore the collection</p>
+              <p class="type-example-sizes">Desktop: 11px · Mobile: 10px</p>
             </div>
           </div>
           </section>
-          <div>
-            <pre class="code-block"><code>this is some code</code></pre>
-          </div>
-          <button>i'm a button</button>
-
-          <p class="negative">i have a negative margin</p>
           <section id="text-helpers">
             <h3 class="heading--s">Text helpers</h3>
-            <h4>Alignment</h4>
+            <h4 class="heading--xs">Alignment</h4>
             <p>Apply alignment to a text element or its container.</p>
             <div class="text-helper-grid">
               <div><p><code>Default (left)</code></p><div class="text-helper-sample">Good typography makes room for every word.</div></div>
               <div><p><code>.text-center</code></p><div class="text-helper-sample text-center">Good typography makes room for every word.</div></div>
               <div><p><code>.text-right</code></p><div class="text-helper-sample text-right">Good typography makes room for every word.</div></div>
             </div>
-            <h4>Wrapping</h4>
+            <h4 class="heading--xs">Wrapping</h4>
             <p>Compare the same headline at equal widths. Balance aims for similar line lengths; pretty improves line breaks, including short last lines. Results depend on the font, available width, and browser support.</p>
             <div class="text-helper-grid">
               <div><p><code>Normal</code></p><div class="text-helper-sample text-helper-headline ">Thoughtful typography brings clarity to every screen and every story.</div></div>
               <div><p><code>.wrap-pretty</code></p><div class="text-helper-sample text-helper-headline wrap-pretty">Thoughtful typography brings clarity to every screen and every story.</div></div>
               <div><p><code>.wrap-balance</code></p><div class="text-helper-sample text-helper-headline wrap-balance">Thoughtful typography brings clarity to every screen and every story.</div></div>
             </div>
-            <h4>Longform reading</h4>
+            <h4 class="heading--xs">Longform reading</h4>
             <p>Use <code>.longform</code> to increase line-height to 1.5 for longer passages.</p>
             <div class="text-helper-grid text-helper-pair">
               <div><p><code>Default — 1.35</code></p><div class="text-helper-sample ">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
               <div><p><code>.longform — 1.5</code></p><div class="text-helper-sample longform">Good typography makes a long story easier to follow. A little more space between lines helps readers keep their place as they move from one thought to the next. Compare how the same words feel in each example.</div></div>
             </div>
-          <h4>Font weight</h4>
+          <h4 class="heading--xs">Font weight</h4>
           <p>Font-weight classes run from <code>.w--100</code> through <code>.w--900</code> in increments of 100. Load matching font weights for accurate results.</p>
           <p class="w--100"><code>.w--100</code> — Thin text</p>
           <p class="w--200"><code>.w--200</code> — Extra-light text</p>
@@ -408,6 +465,146 @@
           <p class="w--800"><code>.w--800</code> — Extra-bold text</p>
           <p class="w--900"><code>.w--900</code> — Black text</p>
           </section>
+        </section>
+        <section id="components">
+          <h2 class="heading--m">Components</h2>
+          <p>Components provide reusable starting points for complete interface elements, with consistent sizing, appearance, and interaction states. Customize them for your project and build on top of them.</p>
+          <p>Only include what you need. In your project's copy of <code>scss/02-components/_index.scss</code>, comment out unused components and rebuild to remove their CSS from the output:</p>
+          <pre class="code-block"><code><span class="code-comment">// Comment out this line if your project does not use kni-cascade buttons.</span>
+<span class="code-attr">@forward</span> <span class="code-string">'button'</span>;</code></pre>
+        <section id="buttons">
+          <h3 class="heading--s">[btn]</h3>
+          <p>A shared starting point for consistent button sizing across projects. Make the appearance your own with project colors, spacing, hover effects, and animation. Extend <code>[btn]</code>, or take just the sizing and build your own.</p>
+          <h4 class="heading--xs">Make it yours</h4>
+          <p>Set your project’s colors, corners, and spacing in <code>scss/00-sass/_variables.scss</code>. <code>$btn-design</code> controls appearance; <code>$btn-sizes</code> keeps responsive label sizes and padding together. Start with these defaults and adapt them to your design.</p>
+          <pre class="code-block"><code><span class="code-comment">// Allow labels to grow beyond their configured mobile/desktop font sizes.</span>
+<span class="code-attr">$btn-scale-up</span>: <span class="code-string">false</span> !default;
+
+<span class="code-attr">$btn-design</span>: (
+  <span class="code-attr">radius</span>: <span class="code-string">999pxv</span>,              <span class="code-comment">// Corner radius; 999pxv creates a pill</span>
+  <span class="code-attr">weight</span>: <span class="code-string">600</span>,                 <span class="code-comment">// Label font weight</span>
+  <span class="code-attr">nudge</span>: <span class="code-string">0.01em</span>,               <span class="code-comment">// Optical vertical label adjustment</span>
+  <span class="code-attr">gap</span>: <span class="code-string">0.5em</span>,                  <span class="code-comment">// Space between label and icon</span>
+  <span class="code-attr">speed</span>: <span class="code-string">0.2s</span>,                 <span class="code-comment">// Color transition duration</span>
+  <span class="code-attr">background</span>: <span class="code-string">#001a3d</span>,         <span class="code-comment">// Default background and outline color</span>
+  <span class="code-attr">text</span>: <span class="code-string">#fff</span>,                  <span class="code-comment">// Default label color</span>
+  <span class="code-attr">hover-background</span>: <span class="code-string">#123456</span>,   <span class="code-comment">// Hover and pressed background</span>
+  <span class="code-attr">hover-text</span>: <span class="code-string">#fff</span>,            <span class="code-comment">// Hover and pressed label color</span>
+  <span class="code-attr">focus</span>: <span class="code-string">#0061c7</span>               <span class="code-comment">// Keyboard focus ring</span>
+) !default;</code></pre>
+          <p>Adjust horizontal and vertical padding for each size separately. Height follows the label, line-height, and padding; no fixed or minimum button height is applied.</p>
+          <pre class="code-block"><code><span class="code-comment">// padding-x = left/right; padding-y = top/bottom. Both follow the label size.</span>
+<span class="code-attr">$btn-sizes</span>: (
+  <span class="code-attr">xs</span>: (<span class="code-attr">desktop</span>: <span class="code-string">11</span>, <span class="code-attr">mobile</span>: <span class="code-string">10</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.5em</span>),
+  <span class="code-attr">s</span>: (<span class="code-attr">desktop</span>: <span class="code-string">12</span>, <span class="code-attr">mobile</span>: <span class="code-string">11</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.625em</span>),
+  <span class="code-attr">m</span>: (<span class="code-attr">desktop</span>: <span class="code-string">14</span>, <span class="code-attr">mobile</span>: <span class="code-string">12</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.75em</span>),
+  <span class="code-attr">l</span>: (<span class="code-attr">desktop</span>: <span class="code-string">16</span>, <span class="code-attr">mobile</span>: <span class="code-string">14</span>, <span class="code-attr">padding-x</span>: <span class="code-string">1.5em</span>, <span class="code-attr">padding-y</span>: <span class="code-string">0.75em</span>)
+) !default;</code></pre>
+
+          <h4 class="heading--xs">Usage</h4>
+          <p>Bare <code>btn</code> defaults to medium. Add size and treatment tokens as needed.</p>
+          <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;s&quot;</span><span class="code-punctuation">&gt;</span>Small action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
+          <h4 class="heading--xs">Sizes</h4>
+          <p>Use <code>xs</code>, <code>s</code>, <code>m</code>, or <code>l</code>. Each size controls typography and padding together. Labels use the desktop and mobile values in <code>$btn-sizes</code>, using the global <code>--font-min-clamp</code> minimum (<code>12px</code> in this demo). Button tokens start one step below their corresponding body tokens. The global minimum can make the smallest labels render at the same size; their padding still differs. By default, labels scale down but stop growing at their active mobile or desktop reference size. Set <code>$btn-scale-up: true</code> in settings to allow upward scaling.</p>
+          <div class="btn-demo-row">
+            <div><button type="button" btn="xs">Extra-small action</button><p><code>btn="xs"</code></p></div>
+            <div><button type="button" btn="s">Small action</button><p><code>btn="s"</code></p></div>
+            <div><button type="button" btn>Default action</button><p><code>btn</code></p></div>
+            <div><button type="button" btn="l">Large action</button><p><code>btn="l"</code></p></div>
+          </div>
+          <h4 class="heading--xs">Treatments</h4>
+          <p>Set your button colors once. <code>outline</code> uses its background color for the stroke and label. <code>inverted</code> swaps background and text colors for dark surfaces, with a subtle hover tint derived from the same palette. Combine both treatments in either order; neither needs a separate settings map.</p>
+          <div class="btn-demo-row">
+            <div><button type="button" btn>Default button</button><p class="btn-demo-label"><code>btn</code></p></div>
+            <div><button type="button" btn="outline">Outline</button><p class="btn-demo-label"><code>btn=&quot;outline&quot;</code></p></div>
+          </div>
+          <div class="btn-demo-row btn-demo-dark">
+            <div><button type="button" btn="inverted">Inverted</button><p class="btn-demo-label"><code>btn=&quot;inverted&quot;</code></p></div>
+            <div><button type="button" btn="inverted outline">Inverted outline</button><p class="btn-demo-label"><code>btn=&quot;inverted outline&quot;</code></p></div>
+          </div>
+          <h4 class="heading--xs">Links and full width</h4>
+          <p>Use a real <code>button</code> for an action and an <code>a</code> with an <code>href</code> for navigation. Set <code>type="button"</code> for buttons that should not submit a form.</p>
+          <div class="btn-demo-row">
+            <div><a href="#scaling" btn="outline">Explore scaling</a><p class="btn-demo-label"><code>btn=&quot;outline&quot;</code></p></div>
+          </div>
+          <div class="btn-demo-block"><button type="button" btn="l block">Full-width action</button><p class="btn-demo-label"><code>btn="l block"</code></p></div>
+          <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;l block&quot;</span><span class="code-punctuation">&gt;</span>Full-width action<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
+          <h4 class="heading--xs">Focus and disabled states</h4>
+          <p>Tab to the examples to check the focus ring. Native <code>disabled</code> buttons cannot be activated and keep their disabled appearance on hover or press. <code>aria-disabled="true"</code> provides the same styling but does not prevent an action: projects must disable the underlying behavior too. This disabled link has no <code>href</code>.</p>
+          <div class="btn-demo-row">
+            <div><button type="button" btn>Keyboard focus</button><p class="btn-demo-label"><code>btn</code></p></div>
+            <div><button type="button" btn disabled>Unavailable action</button><p class="btn-demo-label"><code>btn disabled</code></p></div>
+            <div><a btn="outline" role="link" aria-disabled="true" tabindex="-1">Unavailable link</a><p class="btn-demo-label"><code>btn=&quot;outline&quot; aria-disabled=&quot;true&quot;</code></p></div>
+          </div>
+          <h4 class="heading--xs">Custom hover, same foundation</h4>
+          <p>The default hover and pressed states change colors only. There is no built-in filter, movement, or decorative pseudo-element to undo. This project class adds its own animated fill while keeping <code>btn="m"</code> dimensions, focus, and disabled behavior. Reduced-motion preferences disable its movement.</p>
+          <div class="btn-demo-row">
+            <div><button type="button" btn="m" class="btn-demo-reveal"><span>Explore the details</span></button><p class="btn-demo-label"><code>btn=&quot;m&quot;</code></p></div>
+            <div><button type="button" btn="m" class="btn-demo-reveal" disabled><span>Unavailable</span></button><p class="btn-demo-label"><code>btn=&quot;m&quot; disabled</code></p></div>
+          </div>
+          <details class="btn-demo-source">
+            <summary>View custom hover code</summary>
+            <p>Add this project class to <code>btn="m"</code>. The foundation supplies sizing, focus, and disabled states; this class adds the purple fill animation.</p>
+            <pre class="code-block"><code><span class="code-tag">&lt;button</span> <span class="code-attr">type</span><span class="code-punctuation">=</span><span class="code-string">&quot;button&quot;</span> <span class="code-attr">btn</span><span class="code-punctuation">=</span><span class="code-string">&quot;m&quot;</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">&quot;btn-demo-reveal&quot;</span><span class="code-punctuation">&gt;</span>
+  <span class="code-tag">&lt;span</span><span class="code-punctuation">&gt;</span>Explore the details<span class="code-tag">&lt;/span</span><span class="code-punctuation">&gt;</span>
+<span class="code-tag">&lt;/button</span><span class="code-punctuation">&gt;</span></code></pre>
+            <pre class="code-block"><code><span class="code-tag">.btn-demo-reveal</span> <span class="code-punctuation">{</span>
+  <span class="code-attr">--btn-bg</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
+  <span class="code-attr">--btn-hover-bg</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
+  <span class="code-attr">--btn-hover-border</span><span class="code-punctuation">:</span> <span class="code-string">#172332</span><span class="code-punctuation">;</span>
+
+  <span class="code-attr">position</span><span class="code-punctuation">:</span> relative<span class="code-punctuation">;</span>
+  <span class="code-attr">isolation</span><span class="code-punctuation">:</span> isolate<span class="code-punctuation">;</span>
+  <span class="code-attr">overflow</span><span class="code-punctuation">:</span> hidden<span class="code-punctuation">;</span>
+
+  &amp;<span class="code-punctuation">:</span><span class="code-punctuation">:</span>before <span class="code-punctuation">{</span>
+    <span class="code-attr">content</span><span class="code-punctuation">:</span> <span class="code-string">&#x27;&#x27;</span><span class="code-punctuation">;</span>
+    <span class="code-attr">position</span><span class="code-punctuation">:</span> absolute<span class="code-punctuation">;</span>
+    <span class="code-attr">inset</span><span class="code-punctuation">:</span> <span class="code-string">0</span><span class="code-punctuation">;</span>
+    <span class="code-attr">z-index</span><span class="code-punctuation">:</span> <span class="code-string">-1</span><span class="code-punctuation">;</span>
+    <span class="code-attr">background</span><span class="code-punctuation">:</span> <span class="code-string">#7c3aed</span><span class="code-punctuation">;</span>
+    <span class="code-attr">transform</span><span class="code-punctuation">:</span> translateX<span class="code-punctuation">(</span><span class="code-string">-101%</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-attr">transition</span><span class="code-punctuation">:</span> transform <span class="code-string">350ms</span> var<span class="code-punctuation">(</span>--easing<span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+  <span class="code-punctuation">}</span>
+
+
+  &amp;<span class="code-punctuation">:</span>where<span class="code-punctuation">(</span><span class="code-punctuation">:</span>not<span class="code-punctuation">(</span><span class="code-punctuation">:</span>disabled<span class="code-punctuation">,</span> [aria-disabled=<span class="code-string">&#x27;true&#x27;</span>]<span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">:</span>focus-visible <span class="code-punctuation">{</span>
+    &amp;<span class="code-punctuation">:</span><span class="code-punctuation">:</span>before <span class="code-punctuation">{</span>
+      <span class="code-attr">transform</span><span class="code-punctuation">:</span> translateX<span class="code-punctuation">(</span><span class="code-string">0</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+
+  <span class="code-punctuation">}</span>
+
+  <span class="code-tag">@media</span> <span class="code-punctuation">(</span><span class="code-attr">hover</span><span class="code-punctuation">:</span> hover<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+    &amp;<span class="code-punctuation">:</span>where<span class="code-punctuation">(</span><span class="code-punctuation">:</span>not<span class="code-punctuation">(</span><span class="code-punctuation">:</span>disabled<span class="code-punctuation">,</span> [aria-disabled=<span class="code-string">&#x27;true&#x27;</span>]<span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">:</span>hover <span class="code-punctuation">{</span>
+      &amp;<span class="code-punctuation">:</span><span class="code-punctuation">:</span>before <span class="code-punctuation">{</span>
+        <span class="code-attr">transform</span><span class="code-punctuation">:</span> translateX<span class="code-punctuation">(</span><span class="code-string">0</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+      <span class="code-punctuation">}</span>
+
+    <span class="code-punctuation">}</span>
+  <span class="code-punctuation">}</span>
+
+  <span class="code-tag">@media</span> <span class="code-punctuation">(</span><span class="code-attr">prefers-reduced-motion</span><span class="code-punctuation">:</span> reduce<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+    &amp;<span class="code-punctuation">:</span><span class="code-punctuation">:</span>before <span class="code-punctuation">{</span>
+      <span class="code-attr">transform</span><span class="code-punctuation">:</span> none<span class="code-punctuation">;</span>
+      <span class="code-attr">transition</span><span class="code-punctuation">:</span> none<span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+  <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span></code></pre>
+          </details>
+          <h4 class="heading--xs">Build on the foundation</h4>
+          <p>Add a project class to override properties such as <code>--btn-bg</code>, <code>--btn-hover-bg</code>, <code>--btn-radius</code>, and <code>--btn-weight</code>. Or use the sizing mixin alone for a completely custom component.</p>
+          <div class="btn-demo-row"><div><button type="button" btn class="btn-demo-configured">Project settings</button><p class="btn-demo-label"><code>btn</code></p></div><button type="button" class="btn-demo-size-only">Sizing mixin only</button></div>
+          <p>To omit button CSS entirely, comment out <code>@forward 'button'</code> in <code>scss/02-components/_index.scss</code>.</p>
+          <p>Additional color themes are optional. Add an entry to <code>$btn-themes</code> only when the project needs another palette; the default empty map generates no extra theme selectors.</p>
+          <p>For a completely custom button, <code>@include btn-size(m)</code> supplies just font size and padding. Your component owns its appearance and interaction states.</p>
+          <pre class="code-block"><code>@use <span class="code-string">&#x27;kni-cascade/scss/00-sass&#x27;</span> as *;
+
+.custom-button <span class="code-punctuation">{</span>
+  @include btn-size(m);
+  // Add your project appearance and interaction styles.
+<span class="code-punctuation">}</span></code></pre>
+        </section>
         </section>
         <section id="utilities">
           <h2 class="heading--m">Utilities</h2>
@@ -517,40 +714,49 @@
           <p>A scrim is a gradient overlay that darkens part of an image and fades to transparent. Use it behind text on photos, hero images, or cards to improve readability while keeping the image visible. Choose a direction that puts the darkest area behind your text, and check contrast against the actual image.</p>
           <p><a href="https://codepen.io/editor/dbox/pen/01a141ca-43cc-7778-aa08-2f78ee8aece5" target="_blank" rel="noopener noreferrer">Explore the scrim preview on CodePen</a></p>
           <div class="scrim-demo-row">
-            <div class="wrapper">
-              <figure scrim="to-t .9 75% ">
-                <img src="https://picsum.photos/400/300" alt="">
-              </figure>
-              <article>
-                <h2>Change "to-t" to try dif directions.</h2>
-              </article>
+            <div class="scrim-demo-item">
+              <div class="wrapper">
+                <figure scrim="to-t .9 75%">
+                  <img src="https://picsum.photos/400/300" alt="">
+                </figure>
+                <article>
+                  <h2 class="heading--xs">Change "to-t" to try dif directions.</h2>
+                </article>
+              </div>
+              <p><code>scrim="to-t .9 75%"</code></p>
             </div>
-
-            <div class="wrapper">
-              <figure scrim>
-                <img src="https://picsum.photos/401/301" alt="">
-              </figure>
-              <article>
-                <h2>default value is to-t-tr</h2>
-              </article>
+            <div class="scrim-demo-item">
+              <div class="wrapper">
+                <figure scrim>
+                  <img src="https://picsum.photos/401/301" alt="">
+                </figure>
+                <article>
+                  <h2 class="heading--xs">default value is to-t-tr</h2>
+                </article>
+              </div>
+              <p><code>scrim</code></p>
             </div>
-
-            <div class="wrapper">
-              <figure scrim="to-br">
-                <img src="https://picsum.photos/402/301" alt="">
-              </figure>
-              <article class="top-aligned">
-                <h2>to-br</h2>
-              </article>
+            <div class="scrim-demo-item">
+              <div class="wrapper">
+                <figure scrim="to-br">
+                  <img src="https://picsum.photos/402/301" alt="">
+                </figure>
+                <article class="top-aligned">
+                  <h2 class="heading--xs">to-br</h2>
+                </article>
+              </div>
+              <p><code>scrim="to-br"</code></p>
             </div>
-
-            <div class="wrapper third">
-              <figure scrim="to-bl 50%" style="--scrim-color:0,20,72">
-                <img src="https://picsum.photos/404/301" alt="">
-              </figure>
-              <article class="top-aligned right">
-                <h2>x</h2>
-              </article>
+            <div class="scrim-demo-item">
+              <div class="wrapper third">
+                <figure scrim="to-bl 50%" style="--scrim-color:0,20,72">
+                  <img src="https://picsum.photos/404/301" alt="">
+                </figure>
+                <article class="top-aligned right">
+                  <h2 class="heading--xs">x</h2>
+                </article>
+              </div>
+              <p><code>scrim="to-bl 50%" style="--scrim-color:0,20,72"</code></p>
             </div>
           </div>
         </section>
@@ -570,11 +776,11 @@
         <section id="media-utilities">
           <h3 class="heading--s">Images &amp; positioning</h3>
           <div class="docs-topic">
-            <h4>Image fitting</h4>
+            <h4 class="heading--xs">Image fitting</h4>
             <p>Give the frame a height or aspect ratio, then choose how the image fills it.</p>
             <div class="docs-media-row">
-              <div class="docs-media-example"><h5>Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
-              <div class="docs-media-example"><h5>Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
+              <div class="docs-media-example"><h5 class="heading--xxs">Cover</h5><p>Fill the frame; crop the edges.</p><figure class="fit-photo cover docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="A gold circle on a teal square, cropped to fill a wide frame"></figure></div>
+              <div class="docs-media-example"><h5 class="heading--xxs">Contain</h5><p>Show the whole image; leave space as needed.</p><figure class="fit-photo contain docs-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%235f9ea0'/%3E%3Ccircle cx='150' cy='150' r='95' fill='%23ffd166'/%3E%3C/svg%3E" alt="The same gold circle and complete teal square contained in a wide frame"></figure></div>
             </div>
             <pre class="code-block"><code><span class="code-tag">&lt;figure</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"fit-photo cover"</span> <span class="code-attr">style</span><span class="code-punctuation">=</span><span class="code-string">"aspect-ratio: 16 / 9;"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;img</span> <span class="code-attr">src</span><span class="code-punctuation">=</span><span class="code-string">"photo.jpg"</span> <span class="code-attr">alt</span><span class="code-punctuation">=</span><span class="code-string">"Describe the image"</span><span class="code-punctuation">&gt;</span>
@@ -582,7 +788,7 @@
             <p class="docs-note">Use <code>.fit-photo.contain</code> instead of <code>.fit-photo.cover</code> to preserve the entire image. Both work with direct child images and videos.</p>
           </div>
           <div class="docs-topic">
-            <h4>Positioning</h4>
+            <h4 class="heading--xs">Positioning</h4>
             <dl class="docs-reference">
               <dt><code>.relative</code></dt><dd>Establishes a positioned parent.</dd>
               <dt><code>.absolute</code></dt><dd>Positions an element relative to its positioned ancestor.</dd>
@@ -590,7 +796,7 @@
             </dl>
           </div>
           <div class="docs-topic">
-            <h4>Clipping</h4>
+            <h4 class="heading--xs">Clipping</h4>
             <p>A decorative layer clipped to its wrapper, with a fixed, viewport-height inner layer.</p>
             <pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container"</span><span class="code-punctuation">&gt;</span>
   <span class="code-tag">&lt;div</span> <span class="code-attr">class</span><span class="code-punctuation">=</span><span class="code-string">"clip-container__inner"</span><span class="code-punctuation">&gt;</span>Decorative content<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span>
@@ -600,7 +806,7 @@
         </section>
         <section id="color-utilities">
           <h3 class="heading--s">Colors</h3>
-          <h4>Color</h4>
+          <h4 class="heading--xs">Color</h4>
           <dl class="docs-reference">
             <dt><code>.color--white</code></dt><dd>White text.</dd>
             <dt><code>.color--black</code></dt><dd>Black text.</dd>
@@ -620,10 +826,10 @@
 <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
 <script>
 // Demo-only enhancement; native scrolling remains available if the CDN fails.
+let lenis;
 const setupSmoothScroll = () => {
   if (typeof window.Lenis !== 'function') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let lenis;
   const sync = () => {
     if (reducedMotion.matches) {
       if (lenis) lenis.destroy();
@@ -642,21 +848,41 @@ const setupSmoothScroll = () => {
   reducedMotion.addEventListener('change', sync);
   sync();
 };
-document.addEventListener('DOMContentLoaded', setupSmoothScroll);
+// Temporarily disabled to isolate scrolling behavior while nav groups open.
+// document.addEventListener('DOMContentLoaded', setupSmoothScroll);
 
 const setupStickyHero = () => {
   const hero = document.getElementById('demo-hero');
+  const title = hero.querySelector('.demo-hero-title');
+  const actions = hero.querySelector('.demo-actions');
+  const baseline = hero.querySelector('.demo-hero-baseline');
+  const sizeProbe = hero.querySelector('.demo-hero-size-probe');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let height;
+  let stripHeight;
+  let lastProgress;
+  const measure = () => {
+    height = hero.offsetHeight;
+    const titleSize = parseFloat(getComputedStyle(title).fontSize);
+    const endSize = parseFloat(getComputedStyle(sizeProbe).fontSize);
+    hero.style.setProperty('--hero-title-end-scale', endSize / titleSize);
+    hero.style.setProperty('--hero-height', `${height}px`);
+    stripHeight = height + parseFloat(getComputedStyle(hero).top);
+    hero.style.setProperty('--hero-title-baseline', `${baseline.offsetTop}px`);
+    hero.style.setProperty('--hero-title-descent', `${title.offsetHeight - baseline.offsetTop}px`);
+    const inlineActions = actions.offsetLeft > title.offsetLeft;
+    hero.style.setProperty('--hero-title-width', `${inlineActions ? title.offsetWidth : 0}px`);
+    lastProgress = undefined;
+  };
   const update = () => {
-    const height = hero.offsetHeight;
-    const stripHeight = 64;
     const travel = Math.max(0, height - stripHeight);
     const progress = Math.min(Math.max(0, window.scrollY), travel);
-    hero.style.setProperty('--hero-height', `${height}px`);
     const fraction = travel > 0 ? progress / travel : 1;
+    if (progress === lastProgress) return;
+    lastProgress = progress;
     hero.style.setProperty('--hero-progress', reducedMotion.matches ? (fraction >= 1 ? 1 : 0) : fraction);
     hero.style.setProperty('--hero-parallax', `${reducedMotion.matches ? 0 : progress * 0.5}px`);
-    hero.classList.toggle('is-compact', window.scrollY >= height - stripHeight - 1);
+    hero.classList.toggle('is-compact', window.scrollY >= travel - 1);
   };
   let queued = false;
   const schedule = () => {
@@ -666,15 +892,18 @@ const setupStickyHero = () => {
     }
   };
   window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  reducedMotion.addEventListener('change', schedule);
-  window.addEventListener('pageshow', update);
-  new ResizeObserver(schedule).observe(hero);
+  const refresh = () => { measure(); schedule(); };
+  window.addEventListener('resize', refresh);
+  reducedMotion.addEventListener('change', refresh);
+  window.addEventListener('pageshow', refresh);
+  new ResizeObserver(refresh).observe(hero);
+  measure();
   update();
 };
 document.addEventListener('DOMContentLoaded', setupStickyHero);
 
 const setupHUD = () => {
+  if (!document.getElementById('hud-container')) return;
   const settings = [
     { id: 'squish', varName: '--active-squish' },
     { id: 'floor', varName: '--active-floor' },
@@ -709,13 +938,65 @@ const setupNavigation = () => {
   window.addEventListener('resize', updateViewport);
   updateViewport();
   const nav = document.querySelector('.demo-nav');
+  const content = document.querySelector('.demo-content');
+  const layout = document.querySelector('.demo-layout');
+  const alignSectionRules = () => {
+    const contentBounds = content.querySelector('main').getBoundingClientRect();
+    const layoutBounds = layout.getBoundingClientRect();
+    const mobile = window.matchMedia('(width < 768px)').matches;
+    const rail = layoutBounds.left + parseFloat(getComputedStyle(layout, '::before').left);
+    content.style.setProperty('--section-rule-left', `${(mobile ? layoutBounds.left : rail) - contentBounds.left}px`);
+    content.style.setProperty('--section-rule-right', `${contentBounds.right - layoutBounds.right}px`);
+  };
+  new ResizeObserver(alignSectionRules).observe(content);
+  window.addEventListener('resize', alignSectionRules);
+  alignSectionRules();
   const links = [...nav.querySelectorAll('a[href^="#"]')];
+  let navigating = false;
+  let navigationId = 0;
+  let currentId;
+  const resumeTracking = () => {
+    navigating = false;
+    requestAnimationFrame(() => nav.classList.remove('is-jumping'));
+  };
+  links.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const target = document.getElementById(link.hash.slice(1));
+      const id = ++navigationId;
+      currentId = target.id;
+      navigating = true;
+      nav.classList.add('is-jumping');
+      const group = link.closest('details');
+      nav.querySelectorAll('details').forEach(item => {
+        item.open = item === group;
+        item.classList.toggle('has-current', item === group);
+      });
+      links.forEach(item => {
+        if (item === link) item.setAttribute('aria-current', 'location');
+        else item.removeAttribute('aria-current');
+      });
+      history.pushState(null, '', link.hash);
+      // Commit the immediate nav state before starting the page scroll.
+      void nav.offsetHeight;
+      const complete = () => {
+        if (id === navigationId) resumeTracking();
+      };
+      if (lenis) {
+        const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+        lenis.scrollTo(target, { offset: -offset, onComplete: complete });
+      } else {
+        target.scrollIntoView({ behavior: 'instant' });
+        complete();
+      }
+    });
+  });
   nav.querySelectorAll('details').forEach(group => {
     const summary = group.querySelector('summary');
     const overview = group.querySelector('a[href^="#"]');
     summary.addEventListener('click', event => {
       event.preventDefault();
-      group.open = true;
       overview.click();
     });
   });
@@ -728,7 +1009,8 @@ const setupNavigation = () => {
     }
   };
   const update = () => {
-    let current = targets[0];
+    if (navigating) return;
+    let current = null;
     let latestTop = -Infinity;
     targets.forEach(target => {
       const top = target.getBoundingClientRect().top;
@@ -738,17 +1020,26 @@ const setupNavigation = () => {
         latestTop = top;
       }
     });
+    const nextId = current ? current.id : null;
+    if (nextId === currentId) return;
+    currentId = nextId;
     links.forEach(link => {
-      const active = link.hash === `#${current.id}`;
+      const active = current !== null && link.hash === `#${current.id}`;
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
     nav.querySelectorAll('details').forEach(group => {
-      group.classList.toggle('has-current', !!group.querySelector('[aria-current]'));
+      const hasCurrent = !!group.querySelector('[aria-current]');
+      group.classList.toggle('has-current', hasCurrent);
+      if (hasCurrent) group.open = true;
+      else if (!current) group.open = false;
     });
   };
   let queued = false;
   window.addEventListener('scroll', () => {
+    if (navigating) {
+      return;
+    }
     if (!queued) {
       queued = true;
       requestAnimationFrame(() => { update(); queued = false; });

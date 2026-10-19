@@ -1,0 +1,118 @@
+@use '../00-sass' as *;
+@use 'sass:map';
+
+// Foundation: leaves transforms and pseudo-elements free for project effects.
+[btn] {
+  // Edit project defaults in scss/00-sass/_variables.scss ($btn-design and $btn-sizes).
+  // For individual buttons, override these CSS variables with a project class.
+  --btn-bg: #{map.get($btn-design, background)};
+  --btn-color: #{map.get($btn-design, text)};
+  --btn-hover-bg: #{map.get($btn-design, hover-background)};
+  --btn-hover-color: #{map.get($btn-design, hover-text)};
+  --btn-radius: #{map.get($btn-design, radius)};
+  --btn-weight: #{map.get($btn-design, weight)};
+  --btn-nudge: #{map.get($btn-design, nudge)};
+  --btn-gap: #{map.get($btn-design, gap)};
+  --btn-speed: #{map.get($btn-design, speed)};
+  --btn-focus: #{map.get($btn-design, focus)};
+
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  margin: 0;
+  font-family: inherit;
+  font-weight: var(--btn-weight);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+
+  @include btn-size;
+
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: 1px solid var(--btn-border, var(--btn-bg));
+  border-radius: var(--btn-radius);
+  transition: background-color var(--btn-speed) var(--easing, ease),
+    color var(--btn-speed) var(--easing, ease),
+    border-color var(--btn-speed) var(--easing, ease);
+
+  :where(span, svg) {
+    font-size: inherit;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--btn-focus);
+    outline-offset: 3px;
+  }
+
+  &:is(:disabled, [aria-disabled='true']) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@each $size, $dimensions in $btn-sizes {
+  [btn~='#{$size}'] {
+    @include btn-size($size);
+  }
+}
+
+// Themes choose colors; outline and inverted always have the same meaning.
+[btn~='inverted'] {
+  --btn-bg: #{map.get($btn-design, text)};
+  --btn-color: #{map.get($btn-design, background)};
+  --btn-hover-bg: color-mix(in srgb, #{map.get($btn-design, hover-text)} 90%, #{map.get($btn-design, hover-background)});
+  --btn-hover-color: #{map.get($btn-design, hover-background)};
+}
+
+@each $theme, $colors in $btn-themes {
+  [btn~='#{$theme}'] {
+    --btn-bg: #{map.get($colors, background)};
+    --btn-color: #{map.get($colors, text)};
+    --btn-hover-bg: #{map.get($colors, hover-background)};
+    --btn-hover-color: #{map.get($colors, hover-text)};
+  }
+
+  [btn~='#{$theme}'][btn~='inverted'] {
+    --btn-bg: #{map.get($colors, text)};
+    --btn-color: #{map.get($colors, background)};
+    --btn-hover-bg: color-mix(in srgb, #{map.get($colors, hover-text)} 90%, #{map.get($colors, hover-background)});
+    --btn-hover-color: #{map.get($colors, hover-background)};
+  }
+}
+
+[btn~='outline'] {
+  background: transparent;
+  color: var(--btn-bg);
+  border-color: currentcolor;
+}
+
+[btn~='block'] {
+  display: flex;
+  width: 100%;
+}
+
+@media (hover: hover) {
+  [btn]:where(:not(:disabled, [aria-disabled='true'])):hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border-color: var(--btn-hover-border, var(--btn-hover-bg));
+  }
+}
+
+[btn]:where(:not(:disabled, [aria-disabled='true'])):active {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-color);
+  border-color: var(--btn-hover-border, var(--btn-hover-bg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [btn] {
+    transition: none;
+  }
+}

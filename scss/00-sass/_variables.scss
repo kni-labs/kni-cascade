@@ -47,3 +47,32 @@ $type-scale: (
 // Colors
 $white: #fff;
 $black: #000;
+
+// Button defaults: appearance, responsive label sizes, and padding.
+// Allow labels to grow beyond their configured mobile/desktop font sizes.
+$btn-scale-up: false !default;
+$btn-design: (
+  radius: 999pxv,
+  weight: 600,
+  nudge: 0.01em,
+  gap: 0.5em,
+  speed: 0.2s,
+  background: #001a3d,
+  text: #fff,
+  hover-background: #123456,
+  hover-text: #fff,
+  focus: #0061c7
+) !default;
+
+// Font sizes and padding live together. Padding grows with the button's clamped font size.
+$btn-sizes: (
+  xs: (desktop: 11, mobile: 10, padding-x: 1.5em, padding-y: 0.5em),
+  s: (desktop: 12, mobile: 11, padding-x: 1.5em, padding-y: 0.625em),
+  m: (desktop: 14, mobile: 12, padding-x: 1.5em, padding-y: 0.75em),
+  l: (desktop: 16, mobile: 14, padding-x: 1.5em, padding-y: 0.75em)
+) !default;
+
+// Optional named palettes. Uncomment an entry only when the project needs it.
+$btn-themes: (
+  // secondary: (background: #369, text: #fff, hover-background: #285580, hover-text: #fff)
+) !default;
