@@ -22,6 +22,7 @@ header { display: flex; flex-wrap: wrap; align-items: center; justify-content: s
 .toolbar { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #e0e3e8; }
 .toolbar { flex-wrap: wrap; }
 .badge { font-size: 12px; background: #f4eff3; color: #a5106f; padding: 5px 8px; border-radius: 4px; }
+.resize-instruction { padding: 12px 20px 0; color: #68717e; font-size: 13px; }
 .canvas { height: 490px; padding: 28px; display: grid; align-items: center; justify-items: center; background: radial-gradient(#d8dce2 1px, transparent 1px); background-size: 16px 16px; }
 .frame { border-radius: 10px; position: relative; width: 100%; border: 1px solid #cbd1db; background: #fff; }
 .frame-bar { border-radius: 9px 9px 0 0; height: 34px; background: #eef0f4; display: flex; align-items: center; gap: 4px; padding: 0 9px; border-bottom: 1px solid #d9dde4; }
@@ -60,6 +61,8 @@ header { display: flex; flex-wrap: wrap; align-items: center; justify-content: s
 .squish-rail { position: absolute; top: 34px; right: -56px; width: 40px; display: flex; align-items: center; justify-content: center; background: #eef0f2; color: #68717e; pointer-events: none; }
 .squish-rail span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 13px; white-space: nowrap; }
 .squish-rail.active { background: #f4eff3; color: #a5106f; }
+.resize-nudge { position: absolute; right: 29px; bottom: -9px; z-index: 4; padding: 6px 9px; border-radius: 5px; background: #fff; color: #172332; border: 1px solid #e0e3e8; font-size: 12px; white-space: nowrap; pointer-events: none; animation: resize-nudge-bounce 800ms ease-in-out 3; }
+@keyframes resize-nudge-bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-7px); } }
 .handle { position: absolute; right: -12px; bottom: -12px; width: 28px; height: 28px; border: 2px solid white; border-radius: 7px; background: #dd1694; color: white; touch-action: none; cursor: nwse-resize; z-index: 2; font-size: 16px; }
 .live-summary { padding: 14px 20px; border-top: 1px solid #e0e3e8; color: #a5106f; font-size: 14px; }
 .hint { padding: 12px 20px; border-top: 1px solid #e0e3e8; font-size: 13px; color: #68717e; }
@@ -158,6 +161,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px 
 <div>
 <section class="panel" aria-label="Resizable composition preview">
 <div class="toolbar"><h2>kni-cascade pxv demo</h2><span class="badge" id="mode">Desktop basis</span></div>
+<p class="resize-instruction">Drag the pink arrow to resize the sample browser. Be sure to try vertical-only as well.</p>
 <div class="canvas" id="canvas">
 <div class="frame" id="frame">
 <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><div class="frame-dimensions"><input id="preview-width" type="number" min="240" max="2000" step="1" aria-label="Preview width" title="Preview width"><span aria-hidden="true">×</span><input id="preview-height" type="number" min="200" max="1600" step="1" aria-label="Preview height" title="Preview height"></div></div>
@@ -166,6 +170,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px 
 <div class="squish-line" id="squish-line"><span id="squish-label"></span></div>
 <div class="floor-line" id="floor-line"><span id="floor-label"></span></div>
 <div class="squish-rail" id="squish-rail"><span id="preview-squish"></span></div>
+<span class="resize-nudge" id="resize-nudge">Drag to resize</span>
 <button class="handle" id="handle" aria-label="Resize preview; use arrow keys to adjust width and height">↘</button>
 </div>
 </div>
@@ -349,6 +354,18 @@ handle.addEventListener('keydown',e=>{const changes={ArrowRight:[10,0],ArrowLeft
 new ResizeObserver(()=>render()).observe($('canvas'));
 addEventListener('resize',render);
 render();
+
+const resizeNudge = $('resize-nudge');
+const dismissResizeNudge = () => {
+ resizeNudge.hidden = true;
+ clearTimeout(resizeNudgeTimer);
+ for (const event of ['pointerdown','keydown','input']) document.removeEventListener(event,dismissResizeNudge,true);
+};
+const resizeNudgeTimer = setTimeout(dismissResizeNudge,6000);
+for (const event of ['pointerdown','keydown','input']) document.addEventListener(event,dismissResizeNudge,true);
+
+
+
 })();
 </script>
 </body>
