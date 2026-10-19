@@ -1,4 +1,5 @@
-/* this is components index */
+// Leave enabled only the components your project uses.
+// Comment out unused forwards, then rebuild to omit their CSS.
 
 @forward 'button';
 @forward 'forms';

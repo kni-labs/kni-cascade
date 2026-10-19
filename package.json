@@ -1,7 +1,7 @@
 {
   "name": "kni-cascade",
-  "version": "1.8.0",
-  "description": "KNI Cascade — an opinionated SCSS engine and single source of truth for design scaling.",
+  "version": "1.9.0",
+  "description": "KNI Cascade \u2014 an opinionated SCSS engine and single source of truth for design scaling.",
   "main": "scss",
   "engines": {
     "node": ">=18 <=22",
@@ -22,7 +22,7 @@
     "husky:init": "test -f .husky/pre-commit || npm run husky:create",
     "husky:create": "npx husky add .husky/pre-commit \"npx lint-staged || { echo 'Commit failed: lint-staged errors'; exit 1; }\" && chmod +x .husky/pre-commit",
     "prepublishOnly": "npm run check && npm run build",
-    "postinstall": "echo '\n✅ KNI Cascade ready — Husky & lint-staged configured!\n'",
+    "postinstall": "echo '\n\u2705 KNI Cascade ready \u2014 Husky & lint-staged configured!\n'",
     "check": "npm run stylelint && node -e \"require('sass').compile('demo/styles.scss')\""
   },
   "author": "Daniel Box",

@@ -2,6 +2,16 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
+## 1.9.0 — 2026-10-18
+
+### Added
+
+- Hover/focus inset-border utility and shared Sass mixin, with configurable color, width, duration, inherited corners, disabled/reduced-motion handling, and demo examples.
+
+### Changed
+
+- Reworked the documentation introduction, pxv input/output examples, primary media-query explanation, and advanced scaling settings; clarified optional breakpoint references and feature inclusion comments.
+
 ## 1.8.0 — 2026-10-18
 
 ### Added

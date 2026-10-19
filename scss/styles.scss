@@ -1,3 +1,5 @@
+// Include only the layers your project uses; comment out unused @use lines.
+// 00-sass provides helpers without generating CSS.
 @use './00-sass' as *;
 @use './01-base' as *;
 @use './02-components' as *;
