@@ -1,0 +1,8 @@
+// Local effect playgrounds consume the library's real attribute implementations.
+// Rebuilding refreshes both demos when the shared mixins change.
+@use '../../scss/01-base/utilities/shadow';
+@use '../../scss/01-base/utilities/scrim';
+
+:root {
+  --easing: cubic-bezier(0.23, 1, 0.32, 1);
+}

@@ -132,7 +132,7 @@ By default, **Gulp** runs:
 
 ### Demo & Reference
 
-The Demo & Reference page lives in `demo/index.html`, with demo styles in `demo/styles.scss`. It is both a living reference and a visual test page.
+The Demo & Reference page lives in `demo/index.html`, with demo styles in `demo/scss/styles.scss` and shared effect-demo styles in `demo/scss/effect-demos.scss`. Generated styles go into the ignored `demo/css/` folder, without source maps. It is both a living reference and a visual test page. The [interactive scaling demo](demo/scaling-demo.html) provides a resizable sample site with live scaling controls, guides, and the current calculation. The [scrim demo](demo/scrim-demo.html) and [shadow demo](demo/shadow-demo.html) keep their interactive controls local and use the library’s current attribute implementations.
 
 Every new feature or behavior change must include a working example in the demo. Show the default, available options, and relevant responsive or interaction states. For bug fixes, include an example that makes the corrected behavior easy to verify. Check the examples at mobile and desktop widths and with keyboard navigation where applicable.
 

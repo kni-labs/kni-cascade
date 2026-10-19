@@ -1,5 +1,4 @@
 node_modules
 .DS_Store
-demo/*.css
-demo/*.css.map
+demo/css/
 WARP.md
