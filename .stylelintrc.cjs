@@ -2,7 +2,7 @@ module.exports = {
   extends: ['stylelint-config-standard-scss'],
   ignoreFiles: [
     '**/*.{js,mjs,jsx,ts,tsx,json,md,mdx}',
-    'demo/*.{css,css.map}',
+    'demo/**/*.{css,css.map}',
   ],
   rules: {
     'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],

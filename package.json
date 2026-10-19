@@ -23,7 +23,7 @@
     "husky:create": "npx husky add .husky/pre-commit \"npx lint-staged || { echo 'Commit failed: lint-staged errors'; exit 1; }\" && chmod +x .husky/pre-commit",
     "prepublishOnly": "npm run check && npm run build",
     "postinstall": "echo '\n\u2705 KNI Cascade ready \u2014 Husky & lint-staged configured!\n'",
-    "check": "npm run stylelint && node -e \"require('sass').compile('demo/styles.scss')\""
+    "check": "npm run stylelint && node -e \"['demo/scss/styles.scss','demo/scss/effect-demos.scss'].forEach(file => require('sass').compile(file))\""
   },
   "author": "Daniel Box",
   "license": "ISC",

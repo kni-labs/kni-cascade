@@ -1,9 +1,9 @@
-// @use '../scss/site' as *;
-@use '../scss/00-sass' as *;
-@use '../scss/01-base' as *;
-@use '../scss/02-components' as *;
-@use '../scss/03-modules' as *;
-@use '../scss/04-pages' as *;
+// @use '../../scss/site' as *;
+@use '../../scss/00-sass' as *;
+@use '../../scss/01-base' as *;
+@use '../../scss/02-components' as *;
+@use '../../scss/03-modules' as *;
+@use '../../scss/04-pages' as *;
 
 :root {
   --font-family-monospace: 'Geist Mono', ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace;
@@ -1717,4 +1717,8 @@ section {
     bottom: 0;
     font-size: 12px;
   }
+}
+
+.demo-content hr {
+  background-color: #e3e6e9;
 }

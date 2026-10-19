@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&amp;display=swap" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
       html.lenis,
       html.lenis body {
@@ -31,7 +31,7 @@
 <a class="demo-npm" href="https://www.npmjs.com/package/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/kni-cascade?label=npm&amp;color=2B7190" alt="kni-cascade version published on npm" height="20" /></a>
 <a class="demo-github" href="https://github.com/kni-labs/kni-cascade" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-kni--cascade-24292f?logo=github&amp;logoColor=white" alt="View kni-cascade on GitHub" height="20" /></a>
         </div>
-        <a class="demo-scaling-link" href="scaling-lab.html" target="_blank" rel="noopener">Scaling demo <span aria-hidden="true">↗</span></a>
+        <a class="demo-scaling-link" href="scaling-demo.html" target="_blank" rel="noopener">Scaling demo <span aria-hidden="true">↗</span></a>
       </div>
     </div>
 
@@ -144,15 +144,16 @@
         </section>
         <section id="scaling">
           <h2 class="heading--m">Scaling</h2>
-          <p>kni-cascade uses a shared scale to keep dimensions, spacing, and typography in proportion as the viewport changes.</p>
-          <p><a href="scaling-lab.html">Open the interactive scaling demo</a> to resize a sample site and explore squish, reference proportions, the height floor, and scaling limits. The demo starts at 75% squish to make the effect easier to explore; the library default is 100%.</p>
+          <p>Scaling is at the foundation of kni-cascade. A shared scale keeps typography, spacing, and dimensions working together as the viewport changes, preserving the proportions of your design without sizing every element independently. The demo shows how width, height, and limits shape that scale.</p>
+          <p><a href="scaling-demo.html" btn target="_blank" rel="noopener noreferrer">Explore the scaling demo <span aria-hidden="true">↗</span></a></p>
+          <hr>
           <section id="pxv">
             <h3 class="heading--s">postcss-pxv</h3>
             <div class="demo-actions">
               <a class="demo-github" href="https://github.com/kni-labs/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-postcss--pxv-24292f?logo=github&amp;logoColor=white" alt="View postcss-pxv on GitHub" height="20" /></a>
               <a class="demo-npm" href="https://www.npmjs.com/package/postcss-pxv" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/postcss-pxv?label=npm&amp;color=2B7190" alt="postcss-pxv version published on npm" height="20" /></a>
             </div>
-            <p>Think of pxv as a design-reference pixel. Write the size from your design, and kni-cascade scales it using the viewport and the active mobile or desktop settings.</p>
+            <p>kni-cascade comes bundled with pxv, our custom viewport unit. Write the size from your design, and kni-cascade scales it using the viewport and the active mobile or desktop settings.</p>
             <h4 class="heading--xs">You write</h4>
             <pre class="code-block"><code><span class="code-tag">.card</span> {
   <span class="code-attr">padding</span>: <span class="code-string">24pxv</span>;
@@ -897,7 +898,10 @@
         </section>
         <section id="shadows">
           <h3 class="heading--s">[shadow]</h3>
-          <p><a href="https://codepen.io/dbox/pen/emdzLLe" target="_blank" rel="noopener noreferrer">Explore the shadow CodePen</a></p>
+          <p>Shadows add depth and help separate an element from its background. Use them on cards, menus, or floating controls to make the visual hierarchy clearer. Each preset combines multiple shadow layers for a soft falloff; elevation controls how lifted it feels, while intensity controls how dark it appears.</p>
+          <p>Layering a tight shadow with broader, softer shadows creates a more natural sense of depth than a single uniform blur. The presets balance those layers for you and provide a consistent set of shadows to reuse across a site, without tuning blur, spread, offset, and opacity for every component. They use standard CSS <code>box-shadow</code> underneath. Use a preset for a shared elevation level, or write your own <code>box-shadow</code> when a component needs a custom treatment.</p>
+          <p><a href="shadow-demo.html" btn target="_blank" rel="noopener noreferrer">Explore the shadow demo <span aria-hidden="true">↗</span></a></p>
+          <hr>
           <p>Combine elevation, intensity, and an optional color. Options can appear in any order.</p>
           <div class="demo-code-scroll"><pre class="code-block"><code><span class="code-tag">&lt;div</span> <span class="code-attr">shadow</span><span class="code-punctuation">=</span><span class="code-string">"20 .1 blue"</span><span class="code-punctuation">&gt;</span>A low blue shadow<span class="code-tag">&lt;/div</span><span class="code-punctuation">&gt;</span></code></pre></div>
           <dl class="docs-reference">
@@ -963,7 +967,8 @@
           <h3 class="heading--s">[scrim]</h3>
           <p>A scrim is a gradient overlay that darkens part of an image and fades to transparent. Use it behind text on photos, hero images, or cards to improve readability while keeping the image visible. Choose a direction that puts the darkest area behind your text, and check contrast against the actual image.</p>
           <p>Scrims use an eased, multi-stop gradient for a more gradual fade into the image than a standard two-stop gradient. Learn more in <a href="https://css-tricks.com/easing-linear-gradients/" target="_blank" rel="noopener noreferrer">Easing Linear Gradients on CSS-Tricks</a>.</p>
-          <p><a href="https://codepen.io/editor/dbox/pen/01a141ca-43cc-7778-aa08-2f78ee8aece5" target="_blank" rel="noopener noreferrer">Explore the scrim preview on CodePen</a></p>
+          <p><a href="scrim-demo.html" btn target="_blank" rel="noopener noreferrer">Explore the scrim demo <span aria-hidden="true">↗</span></a></p>
+          <hr>
           <div class="scrim-demo-row">
             <div class="scrim-demo-item">
               <div class="wrapper">

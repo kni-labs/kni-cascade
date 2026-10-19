@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kni-cascade shadow demo</title>
+<link rel="stylesheet" href="css/effect-demos.css">
+<style>
+* { box-sizing: border-box; }
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #172332; background: #f8f8fa; }
+body { margin: 0; min-height: 100svh; padding: 28px; display: flex; flex-direction: column; align-items: center; }
+input { font: inherit; }
+.demo-page-heading { width: min(100%, 1500px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.demo-page-heading h1 { margin: 0; font-size: 24px; letter-spacing: -.04em; }
+.demo-docs-link { color: #68717e; font-size: 13px; text-underline-offset: 4px; }
+.demo-docs-link:hover { color: #a5106f; }
+#target-box { width: 180px; height: 180px; flex-shrink: 0; display: grid; place-items: center; margin: 0; border-radius: 24px; background: #fff; }
+#lbl-size { margin: 0; font-size: 48px; font-weight: 700; letter-spacing: -.04em; }
+.demo-layout { width: min(100%, 1500px); display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.canvas { min-height: 490px; display: grid; place-items: center; padding: 60px; border: 1px solid #e0e3e8; border-radius: 12px; background: #fff; }
+.controls { min-width: 0; width: 100%; border: 1px solid #e0e3e8; border-radius: 12px; background: #fff; overflow: hidden; }
+.group { padding: 20px; }
+.group + .group { border-top: 1px solid #e0e3e8; }
+.control-label, .group > label { display: block; margin-bottom: 12px; color: #68717e; font-size: 14px; line-height: 1.4; }
+.radio-bar { display: flex; gap: 4px; padding: 4px; border-radius: 8px; background: #f8f8fa; }
+.radio-bar label { flex: 1; padding: 10px 0; border-radius: 5px; color: #68717e; text-align: center; font-size: 14px; cursor: pointer; transition: background .15s, color .15s; }
+.radio-bar label:hover { color: #a5106f; background: #f4eff3; }
+.radio-bar input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.radio-bar input:checked + label { background: #dd1694; color: #fff; font-weight: 600; }
+.radio-bar input:focus-visible + label, input:focus-visible, a:focus-visible { outline: 2px solid #dd1694; outline-offset: 4px; }
+input[type=range] { width: 100%; margin: 4px 0; accent-color: #dd1694; cursor: pointer; }
+.val-display { float: right; color: #a5106f; font-family: ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+.code-group { padding: 0; }
+.code-group .control-label { margin: 0; padding: 16px 20px; color: #172332; font-size: 14px; font-weight: 600; }
+#markup-out { margin: 0; padding: 20px; background: #0f172a; color: #cbd5e1; font: 13px/1.75 ui-monospace, SFMono-Regular, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code-attribute { color: #f472b6; }
+.code-value { color: #7dd3fc; }
+@media (max-width: 800px) { .demo-layout { grid-template-columns: 1fr; } .canvas { min-height: 360px; padding: 48px; } }
+@media (max-width: 550px) { body { padding: 20px 16px; } .demo-page-heading h1 { font-size: 22px; } }
+</style>
+</head>
+<body>
+<header class="demo-page-heading"><h1>kni-cascade shadow demo</h1><a class="demo-docs-link" href="index.html#shadows">Back to docs ↗</a></header>
+<main class="demo-layout">
+<section class="canvas" aria-label="Shadow preview">
+<div id="target-box" shadow="30 .1">
+  <p id="lbl-size">30</p>
+</div>
+</section>
+
+<aside class="controls" aria-label="Shadow controls">
+  
+  <div class="group">
+    <span class="control-label" id="elevation-label">Elevation</span>
+    <div class="radio-bar" role="group" aria-labelledby="elevation-label">
+      <input type="radio" name="z" id="z10" value="10"><label for="z10">10</label>
+      <input type="radio" name="z" id="z20" value="20"><label for="z20">20</label>
+      <input type="radio" name="z" id="z30" value="30" checked=""><label for="z30">30</label>
+      <input type="radio" name="z" id="z40" value="40"><label for="z40">40</label>
+      <input type="radio" name="z" id="z50" value="50"><label for="z50">50</label>
+    </div>
+  </div>
+
+  <div class="group">
+    <label for="alpha-slide">Intensity <span class="val-display" id="lbl-alpha">.1</span></label>
+    <input type="range" id="alpha-slide" min="1" max="9" step="1" value="1">
+  </div>
+
+  <div class="group code-group">
+    <span class="control-label">Generated HTML</span>
+    <pre id="markup-out"><code>&lt;div <span class="code-attribute">shadow</span>=<span class="code-value" id="markup-value">"30 .1"</span>&gt;…&lt;/div&gt;</code></pre>
+  </div>
+
+</aside>
+</main>
+<script>
+(() => {
+const box=document.getElementById('target-box');
+const slider=document.getElementById('alpha-slide');
+const render=()=>{
+ const elevation=document.querySelector('input[name="z"]:checked').value;
+ const opacity='.'+slider.value;
+ box.setAttribute('shadow',elevation+' '+opacity);
+ document.getElementById('lbl-size').textContent=elevation;
+ document.getElementById('lbl-alpha').textContent=opacity;
+ document.getElementById('markup-value').textContent='"'+elevation+' '+opacity+'"';
+};
+document.querySelectorAll('input[name="z"]').forEach(input=>input.addEventListener('change',render));
+slider.addEventListener('input',render);
+render();
+})();
+</script>
+</body>
+</html>

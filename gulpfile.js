@@ -2,9 +2,8 @@
  * 🧠 KNI Cascade — Gulpfile
  * Local dev / test harness for the Cascade engine.
  *
- * - demo/styles.scss is the entry for local testing
- * - demo/styles.scss should `@use '../scss/styles' as *;`
- * - Compiles demo/styles.scss -> demo/styles.css
+ * - demo/scss/*.scss are the local demo entry files
+ * - Compiles demo/scss/*.scss -> demo/css/*.css
  * - Applies postcss-pxv
  * - Uses .stylelintrc.cjs for linting (auto-resolved by Stylelint)
  */
@@ -12,7 +11,6 @@
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const gulpSass = require('gulp-dart-sass');
-const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
 const { exec } = require('child_process');
@@ -25,9 +23,8 @@ const postcssPxv = require('postcss-pxv');
 // --------------------------
 const paths = {
   scssSrc: path.resolve(__dirname, 'scss'),
-  entry: path.resolve(__dirname, 'demo/styles.scss'),
-  dist: path.resolve(__dirname, 'demo'),
-  cssOutput: 'styles.css',
+  entry: path.resolve(__dirname, 'demo/scss/*.scss'),
+  dist: path.resolve(__dirname, 'demo/css'),
 };
 
 const sassSrcFile = paths.entry;
@@ -94,7 +91,6 @@ gulp.task('build-sass', function () {
 
   return gulp
     .src(sassSrcFile)
-    .pipe(sourcemaps.init())
     .pipe(plumber())
     .pipe(
       gulpSass({ outputStyle: 'expanded' }).on(
@@ -103,21 +99,12 @@ gulp.task('build-sass', function () {
       ),
     )
     .pipe(postcss(postcssPlugins))
-    .pipe(
-      sourcemaps.write('./', {
-        includeContent: true,
-        sourceRoot: '../scss',
-      }),
-    )
     .pipe(gulp.dest(sassOutDir))
     .pipe(browserSync.stream())
     .on('end', () => {
       console.log(
         colors.green(
-          `✅ Built demo/styles.scss → ${path.join(
-            sassOutDir,
-            paths.cssOutput,
-          )}`,
+          `✅ Built demo stylesheets → ${sassOutDir}`,
         ),
       );
     });

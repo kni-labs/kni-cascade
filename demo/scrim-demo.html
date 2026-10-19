@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kni-cascade scrim demo</title>
+<link rel="stylesheet" href="css/effect-demos.css">
+<style>
+
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;color:#e9e9eb;background:#101114;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}.app{max-width:1440px;margin:auto;padding:clamp(16px,3vw,42px)}header{margin-bottom:24px}header h3{font-size:24px;font-weight:600;letter-spacing:-.03em;line-height:1.2;margin:0}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px}.preview{position:relative;aspect-ratio:1.36;min-height:320px;overflow:hidden;border-radius:13px;background:#34353a;user-select:none}.photo,.overlay{position:absolute;inset:0}.photo{background-size:cover;background-position:center;background-image:url('https://picsum.photos/id/1018/1600/1100')}.overlay{pointer-events:none}.sample-text{position:absolute;z-index:2;color:white;max-width:75%;padding:clamp(20px,4%,40px);pointer-events:none;background:transparent;border:0;box-shadow:none;text-shadow:0 2px 18px rgba(0,0,0,.22)}.sample-text h2{font-size:clamp(24px,3.5vw,44px);line-height:1.05;letter-spacing:-.045em;margin:0 0 9px}.sample-text p{font-size:clamp(12px,1.25vw,16px);line-height:1.5;margin:0}.sample-text.bl{left:0;bottom:0;text-align:left}.sample-text.br{right:0;bottom:0;text-align:right}.sample-text.tl{top:0;left:0;text-align:left}.sample-text.tr{top:0;right:0;text-align:right}.sample-text.bottom{left:50%;bottom:0;transform:translateX(-50%);text-align:center}.sample-text.top{left:50%;top:0;transform:translateX(-50%);text-align:center}.sample-text.left{left:0;top:50%;transform:translateY(-50%);text-align:left}.sample-text.right{right:0;top:50%;transform:translateY(-50%);text-align:right}.panel{background:#1a1b20;border:1px solid #303138;border-radius:13px;padding:22px;display:flex;flex-direction:column;gap:24px}.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#888b98;margin:0 0 13px}.control{margin-bottom:19px}.control:last-child{margin-bottom:0}.control-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:13px}.number-field{display:flex;align-items:center;gap:2px;color:#aaaeba;font-variant-numeric:tabular-nums}.number-field input{width:3.5ch;min-width:0;padding:0;border:0;background:transparent;color:inherit;text-align:right;font:inherit;outline-offset:3px;appearance:textfield;-moz-appearance:textfield}.number-field input:focus{color:#baffc0}.number-field input::-webkit-inner-spin-button,.number-field input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=range]{width:100%;accent-color:#baffc0;cursor:pointer}input[type=color]{width:40px;height:32px;background:transparent;border:0;padding:0;cursor:pointer}.color-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}.buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.buttons button,.action,.upload{border:1px solid #404149;background:#24252b;color:#e5e6e8;border-radius:7px;padding:11px 8px;font-size:12px;text-align:center}.buttons button{display:flex;align-items:center;justify-content:center;width:100%;height:80px;min-width:0}.buttons button:hover,.action:hover,.upload:hover{border-color:#baffc0}.buttons button.active{background:#baffc0;color:#111;border-color:#baffc0}.direction-center{display:flex;align-items:center;justify-content:center;width:100%;height:80px;color:#666}/* Sixteen-point direction compass */
+.direction-picker{display:grid;justify-items:center;gap:12px}
+.direction-wheel{position:relative;width:min(100%,242px);aspect-ratio:1;border:1px solid #41434b;border-radius:50%;background:radial-gradient(circle,#24262c 0 23%,transparent 24%),repeating-conic-gradient(from -11.25deg,#202127 0deg 22.5deg,#292a31 22.5deg 45deg)}
+.direction-wheel:after{content:"SCRIM";position:absolute;inset:38%;border:1px solid #51535b;border-radius:50%;display:grid;place-items:center;color:#858895;font-size:9px;letter-spacing:.12em;pointer-events:none}
+.direction-wheel button{position:absolute;left:50%;top:50%;width:35px;height:35px;display:grid;place-items:center;transform:translate(-50%,-50%);border:1px solid #52545d;border-radius:50%;background:#292b32;color:#dedfe4;font-size:16px;line-height:1;cursor:pointer;transition:background .15s,border-color .15s}
+.direction-wheel button:hover{border-color:#baffc0}
+.direction-wheel button.active{background:#baffc0;border-color:#baffc0;color:#111}
+.direction-wheel button:focus-visible{outline:2px solid white;outline-offset:2px}
+.direction-info{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;font-size:12px;color:#aaaeba}
+.direction-info code{color:#baffc0;font-size:12px}
+.image-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.image-actions .upload,.image-actions .action{display:flex;align-items:center;justify-content:center;min-height:42px;padding:10px;width:100%}.upload{position:relative;cursor:pointer}.upload input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.hint{color:#9699a3;font-size:12px;line-height:1.6;margin:0}.output{margin-top:22px;background:#1a1b20;border:1px solid #303138;border-radius:13px;overflow:hidden}.codehead{padding:16px 20px;border-bottom:1px solid #303138;display:flex;justify-content:space-between;align-items:center;gap:12px}.codehead span{font-size:12px;letter-spacing:.1em;color:#9b9da7;text-transform:uppercase}.action{padding:9px 17px}.code{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;padding:20px;font-size:13px;line-height:1.75;color:#c8efce;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.status{font-size:12px;color:#aaaeba;margin-top:8px;min-height:1.4em}@media(max-width:850px){.layout{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:1fr 1fr;gap:24px}}@media(max-width:550px){.panel{grid-template-columns:1fr}.preview{aspect-ratio:1;min-height:280px}.sample-text{max-width:90%}}
+
+.demo-page-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.demo-page-heading h1{font-size:24px;margin:0;letter-spacing:-.03em}.demo-docs-link{color:inherit;font-size:13px;text-underline-offset:4px}button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid #dd1694;outline-offset:4px}*{box-sizing:border-box}
+
+figure.preview{margin:0}.panel section{margin:0}.upload:focus-within{outline:2px solid #dd1694;outline-offset:4px}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="demo-page-heading"><h1>kni-cascade scrim demo</h1><a class="demo-docs-link" href="index.html#scrim">Scrim docs ↗</a></header>
+<div class="layout">
+  <figure class="preview" id="preview" scrim>
+    <div class="photo" id="photo"></div>
+    <div class="sample-text" id="sampleText" style="inset: 100% auto auto 0%; transform: translate(0%, -100%); text-align: left;"><h2>Make an impression.</h2><p>Beautiful imagery deserves a little contrast.</p></div>
+  </figure>
+  <aside class="panel">
+    <section>
+      <p class="section-title">Gradient controls</p>
+      <div class="control"><div class="control-head"><label for="opacity">Opacity</label><div class="number-field"><input type="number" id="opacityInput" min="10" max="100" step="10" value="100" aria-label="Opacity percentage"><span>%</span></div></div><input id="opacity" type="range" min="0" max="9" step="1" value="9"></div>
+      <div class="control"><div class="control-head"><label for="distance">Distance</label><div class="number-field"><input type="number" id="distanceInput" min="10" max="100" value="100" aria-label="Distance percentage"><span>%</span></div></div><input id="distance" type="range" min="0" max="6" step="1" value="6"></div>
+      <p class="hint">Only values supported by kni-cascade are selectable.</p>
+    </section>
+    <section><p class="section-title">Direction</p>
+      <div class="direction-picker">
+        <div class="direction-wheel" id="presets" role="group" aria-label="Gradient direction"></div>
+        <div class="direction-info"><span id="directionLabel">Top · Top right</span><code id="directionToken">to-t-tr</code></div>
+      </div>
+    </section>
+    <section><p class="section-title">Your image</p><div class="image-actions"><label class="upload">Upload image<input id="imageUpload" type="file" accept="image/*"></label><button class="action" id="randomImage" type="button">Random image ↻</button></div><div class="status" id="imageStatus" role="status"></div></section>
+    <p class="hint">Choose a direction to move the sample text to the darkest part of the image.</p>
+  </aside>
+</div>
+<div class="output"><div class="codehead"><span>Generated HTML</span><button class="action" id="copy" type="button">Copy HTML</button></div><pre class="code" id="code" aria-live="polite">&lt;figure scrim&gt;</pre></div>
+</div>
+<script>
+
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const preview = $('preview'), photo = $('photo'), sampleText = $('sampleText');
+  const defaults = {direction:'to-t-tr',opacity:1,distance:100};
+  const opacityValues=[10,20,30,40,50,60,70,80,90,100];
+  const distanceValues=[10,25,33,50,66,75,100];
+  const selectedOpacity=()=>opacityValues[Number($('opacity').value)];
+  const selectedDistance=()=>distanceValues[Number($('distance').value)];
+  let currentDirection = defaults.direction, objectUrl = null, lastImageId = 1018, randomBusy = false;
+  // Tokens and angles match the original kni-cascade/scrim CodePen.
+  // CSS angles describe the fade direction, from opaque toward transparent.
+  const directions = [
+    ['to-t','Top',0],['to-t-tr','Top · Top right',22.5],
+    ['to-tr','Top right',45],['to-r-tr','Right · Top right',67.5],
+    ['to-r','Right',90],['to-r-br','Right · Bottom right',112.5],
+    ['to-br','Bottom right',135],['to-b-br','Bottom · Bottom right',157.5],
+    ['to-b','Bottom',180],['to-b-bl','Bottom · Bottom left',202.5],
+    ['to-bl','Bottom left',225],['to-l-bl','Left · Bottom left',247.5],
+    ['to-l','Left',270],['to-l-tl','Left · Top left',292.5],
+    ['to-tl','Top left',315],['to-t-tl','Top · Top left',337.5]
+  ];
+  const compass = $('presets');
+  directions.forEach(([token,label,angle])=>{
+    const button=document.createElement('button');
+    button.type='button';button.dataset.dir=token;
+    button.setAttribute('aria-label',label);
+    button.title=label;
+    // Place buttons on the compass in the direction of the gradient fade.
+    const radians=angle*Math.PI/180;
+    const radius=35;
+    button.style.left=`${50+radius*Math.sin(radians)}%`;
+    button.style.top=`${50-radius*Math.cos(radians)}%`;
+    const arrow=document.createElement('span');
+    arrow.textContent='↑';
+    arrow.style.display='block';
+    arrow.style.transform=`rotate(${angle}deg)`;
+    arrow.style.pointerEvents='none';
+    button.append(arrow);
+    compass.append(button);
+  });
+  function setTextPosition(angle){
+    // Place the text at the opaque end of the gradient.
+    // Reset every axis explicitly so no previous direction can leak through.
+    const radians = angle * Math.PI / 180;
+    const x = -Math.sin(radians);
+    const y = Math.cos(radians);
+    const horizontal = x < -0.38 ? 'left' : x > 0.38 ? 'right' : 'center';
+    const vertical = y < -0.38 ? 'top' : y > 0.38 ? 'bottom' : 'middle';
+    sampleText.style.left = horizontal === 'left' ? '0%' : horizontal === 'right' ? '100%' : '50%';
+    sampleText.style.top = vertical === 'top' ? '0%' : vertical === 'bottom' ? '100%' : '50%';
+    sampleText.style.right = 'auto';
+    sampleText.style.bottom = 'auto';
+    const translateX = horizontal === 'left' ? '0%' : horizontal === 'right' ? '-100%' : '-50%';
+    const translateY = vertical === 'top' ? '0%' : vertical === 'bottom' ? '-100%' : '-50%';
+    sampleText.style.transform = `translate(${translateX}, ${translateY})`;
+    sampleText.style.textAlign = horizontal === 'right' ? 'right' : horizontal === 'center' ? 'center' : 'left';
+  }
+  function updateDirection(){
+    const entry=directions.find(([token])=>token===currentDirection)||directions[1];
+    const [token,label,angle]=entry;
+    $('directionLabel').textContent=label;
+    $('directionToken').textContent=token;
+    compass.querySelectorAll('button').forEach(button=>{
+      const selected=button.dataset.dir===token;
+      button.classList.toggle('active',selected);
+      button.setAttribute('aria-pressed',String(selected));
+    });
+    setTextPosition(angle);
+  }
+  function attribute(){
+    const opacity=selectedOpacity()/100, distance=selectedDistance();
+    const values=[];
+    if(currentDirection!==defaults.direction) values.push(currentDirection);
+    if(opacity!==defaults.opacity) values.push(`.${Math.round(opacity*10)}`);
+    if(distance!==defaults.distance) values.push(`${distance}%`);
+    return values.length ? `<figure scrim="${values.join(' ')}">…</figure>` : '<figure scrim>…</figure>';
+  }
+  function render(){
+    const tokens=[];
+    if(currentDirection!==defaults.direction)tokens.push(currentDirection);
+    const opacity=selectedOpacity()/100,distance=selectedDistance();
+    if(opacity!==defaults.opacity)tokens.push('.'+Math.round(opacity*10));
+    if(distance!==defaults.distance)tokens.push(distance+'%');
+    preview.setAttribute('scrim',tokens.join(' '));
+    $('code').textContent=attribute();
+    $('opacityInput').value=selectedOpacity();
+    $('distanceInput').value=selectedDistance();
+  }
+  for(const [id,values] of [['opacity',opacityValues],['distance',distanceValues]]){
+    const slider=$(id),field=$(id+'Input');
+    slider.addEventListener('input',render);
+    function commit(){
+      const requested=Number(field.value);
+      if(Number.isFinite(requested)&&field.value.trim()!==''){
+        let closest=0;
+        for(let i=1;i<values.length;i++){
+          if(Math.abs(values[i]-requested)<Math.abs(values[closest]-requested))closest=i;
+        }
+        slider.value=closest;
+      }
+      render();
+    }
+    field.addEventListener('change',commit);
+    field.addEventListener('blur',commit);
+    field.addEventListener('keydown',e=>{if(e.key==='Enter'){field.blur();}});
+  }
+  compass.addEventListener('click',event=>{
+    const button=event.target.closest('button[data-dir]');if(!button)return;
+    currentDirection=button.dataset.dir;updateDirection();render();
+  });
+  $('imageUpload').addEventListener('change',event=>{
+    const file=event.target.files?.[0];if(!file)return;
+    if(!file.type.startsWith('image/')){$('imageStatus').textContent='Please choose an image file.';return;}
+    const next=URL.createObjectURL(file);
+    photo.style.backgroundImage=`url("${next}")`;
+    if(objectUrl)URL.revokeObjectURL(objectUrl);
+    objectUrl=next;$('imageStatus').textContent='Showing your local image.';
+  });
+  // Curated Picsum photo IDs provide a dependable changing selection, without API keys.
+  const imageIds=[1018,1015,1016,1020,1024,1036,1039,1040,1043,1045,1050,1056,1067,1074,1084,1080,1002,1003,1006,1011,1019];
+  $('randomImage').addEventListener('click',()=>{
+    if(randomBusy)return;
+    const choices=imageIds.filter(id=>id!==lastImageId);
+    const nextId=choices[Math.floor(Math.random()*choices.length)];
+    const url=`https://picsum.photos/id/${nextId}/1600/1100`;
+    const button=$('randomImage');randomBusy=true;button.disabled=true;$('imageStatus').textContent='Loading image…';
+    const img=new Image();
+    img.onload=()=>{photo.style.backgroundImage=`url("${url}")`;lastImageId=nextId;$('imageStatus').textContent='';randomBusy=false;button.disabled=false;};
+    img.onerror=()=>{$('imageStatus').textContent='Image could not load. Try again.';randomBusy=false;button.disabled=false;};
+    img.src=url;
+  });
+  $('copy').addEventListener('click',async()=>{
+    const code=attribute(),button=$('copy');let copied=false;
+    try{await navigator.clipboard.writeText(code);copied=true;}catch{
+      const textarea=document.createElement('textarea');textarea.value=code;document.body.append(textarea);textarea.select();copied=document.execCommand('copy');textarea.remove();
+    }
+    button.textContent=copied?'Copied!':'Copy failed';setTimeout(()=>{button.textContent='Copy HTML';},1500);
+  });
+  $('opacity').value=opacityValues.indexOf(defaults.opacity*100);
+  $('distance').value=distanceValues.indexOf(defaults.distance);
+  updateDirection();render();
+})();
+
+</script>
+</body>
+</html>
