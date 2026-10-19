@@ -72,7 +72,18 @@ $btn-sizes: (
   l: (desktop: 16, mobile: 14, padding-x: 1.5em, padding-y: 0.75em)
 ) !default;
 
-// Optional named palettes. Uncomment an entry only when the project needs it.
-$btn-themes: (
-  // secondary: (background: #369, text: #fff, hover-background: #285580, hover-text: #fff)
+// Optional named button palettes; empty by default.
+$btn-themes: () !default;
+
+// Native form controls. Typography and text color inherit from the page.
+$form-design: (
+  radius: 4pxv,
+  padding-x: 0.875em,
+  padding-y: 0.4375em,
+  background: #fff,
+  border: #c5cbd1,
+  muted: #68717e,
+  accent: #001a3d,
+  focus: #0061c7,
+  error: #b42318
 ) !default;

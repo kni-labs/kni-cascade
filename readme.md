@@ -255,3 +255,64 @@ $btn-sizes: (
 Font-size values are reference pixels processed through kni-cascade scaling.
 `padding-x` and `padding-y` follow the clamped font size. Filled buttons have a
 1px border matching the background, keeping their dimensions aligned with outlines.
+
+## Forms
+
+Native form styling is included through `@forward 'forms'` in
+`scss/02-components/_index.scss`. Comment out that forward to omit it; no
+styling attributes are required in your HTML.
+
+Edit `$form-design` in `scss/00-sass/_variables.scss` for project defaults:
+`radius`, `padding-x`, `padding-y`, `background`, `border`, `muted`, `accent`,
+`focus`, and `error`. Controls inherit typography and text color, with a 16px
+minimum control font size and `em` padding. Borders stay 1px. Inputs, native
+selects, and textareas share the same appearance; checkboxes and radios use thin borders and animated checkmarks/dots with native
+keyboard and selection behavior. The 0.2-second animation respects reduced-motion
+preferences, and forced-colors mode restores the native appearance. Textareas resize vertically.
+
+Defaults become inherited CSS variables on the root. Override them on any form,
+wrapper, or individual control. The selectors use `:where()` to keep specificity
+low, so regular project styles can override them easily:
+
+```scss
+.contact-form {
+  --form-bg: #fff9f7;
+  --form-border: #963a30;
+  --form-radius: 0;
+  --form-accent: #963a30;
+}
+```
+
+Other available variables are `--form-padding-x`, `--form-padding-y`,
+`--form-muted`, `--form-focus`, `--form-error`, and `--form-select-arrow`
+(a background image). The native select dropdown is preserved. Multiple/list
+selects retain their native selection UI. Specialized file, color, and range
+controls are not replaced with custom widgets.
+
+Use native `disabled` and `readonly` attributes. Validation errors use
+`aria-invalid="true"` plus an associated `.form-error` message; help text uses
+`.form-help`. Connect messages to their control with `aria-describedby`.
+Validation logic, submission, field grouping, and form layout remain project
+responsibilities. See the [forms demo](demo/index.html#forms) for complete examples.
+
+Range tracks use `--form-accent` for the filled portion and thumb. Firefox draws
+its filled portion natively. For Chromium/WebKit, update `--form-range-fill`
+with the current percentage on initialization and each `input` event:
+
+```js
+const updateRange = (range) => {
+  const min = range.min === '' ? 0 : Number(range.min);
+  const max = range.max === '' ? 100 : Number(range.max);
+  const percent = max > min
+    ? Math.max(0, Math.min(100, (Number(range.value) - min) / (max - min) * 100))
+    : 0;
+  range.style.setProperty('--form-range-fill', `${percent}%`);
+};
+document.querySelectorAll('input[type="range"]').forEach(range => {
+  updateRange(range);
+  range.addEventListener('input', () => updateRange(range));
+});
+```
+
+Call the updater after programmatic value changes or form resets as needed.
+The input's dragging and keyboard behavior remain native without this helper.
