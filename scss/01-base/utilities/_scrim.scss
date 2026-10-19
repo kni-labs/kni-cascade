@@ -1,31 +1,7 @@
+@use '../../00-sass/scrim' as *;
+
 [scrim] {
-  position: relative;
-  overflow: hidden;
-  display: block;
-
-  --scrim-color: 0, 0, 0; 
-  --scrim-dir: 22.5deg;
-  --scrim-a: 1.0; 
-  --scrim-dist: 100%;
-}
-
-[scrim]::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  display: block;
-  background-image: linear-gradient(
-    var(--scrim-dir),
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 1)) 0%,
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.852)) calc(var(--scrim-dist) * 0.12),
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.621)) calc(var(--scrim-dist) * 0.28),
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.385)) calc(var(--scrim-dist) * 0.46),
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.183)) calc(var(--scrim-dist) * 0.66),
-    rgba(var(--scrim-color), calc(var(--scrim-a) * 0.054)) calc(var(--scrim-dist) * 0.85),
-    rgba(var(--scrim-color), 0) var(--scrim-dist)
-  );
+  @include scrim;
 }
 
 /* Intermediate Directions */

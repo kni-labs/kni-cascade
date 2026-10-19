@@ -1385,18 +1385,18 @@ section {
   line-height: 1.6;
 }
 
-// Documentation links share the coral accents without affecting button links.
+// Documentation link underlines match the quiet inline code pink.
 .demo-content :is(p, dd, td, li) a:not([btn]) {
   color: #27313b;
   text-decoration-line: underline;
-  text-decoration-color: #fc7f71;
+  text-decoration-color: #dd1694;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
   transition: color 160ms ease, text-decoration-color 160ms ease;
 
   &:hover {
-    color: #963a30;
-    text-decoration-color: #fc7f71;
+    color: #a5106f;
+    text-decoration-color: #dd1694;
     text-decoration-thickness: 2px;
   }
 
@@ -1467,3 +1467,17 @@ section {
   height: 2em;
 }
 
+
+// Utilities can also be included directly in project component classes.
+.mixin-shadow-card {
+  @include shadow(20, 0.1);
+  @include shadow-hover(30, 0.2);
+}
+
+.mixin-shadow-hover {
+  @include shadow-hover(20, 0.2, (0, 20, 190));
+}
+
+.mixin-scrim-image {
+  @include scrim(to-t, 0.6, 75%, (0, 20, 72));
+}

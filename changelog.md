@@ -2,6 +2,12 @@
 
 This changelog starts with 1.5.0 and covers changes since 1.4.1, including work committed during development.
 
+## 1.8.0 — 2026-10-18
+
+### Added
+
+- Shadow, shadow-hover, and scrim Sass mixins shared with their attribute utilities, with component-class examples in the demo. Importing the Sass helpers alone generates no CSS.
+
 ## 1.7.0 — 2026-10-17
 
 ### Added

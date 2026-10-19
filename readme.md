@@ -155,7 +155,7 @@ Run `npx gulp` to preview changes with live reload. Use `npm run build` for a on
 
 ## Automated npm releases
 
-`.github/workflows/publish.yml` validates PRs targeting `main`. After a PR merges, it checks for a teammate's approval of the final PR commit, validates the merged code, and publishes an unpublished stable package version to npm. Re-runs skip versions already on npm; registry lookup errors fail the release instead of attempting a publish. Version numbers remain an explicit PR change, not an automatic bump. Do not merge releases out of version order.
+`.github/workflows/publish.yml` validates PRs targeting `main`. After a PR merges, it validates the merged code and publishes an unpublished stable package version to npm. Re-runs skip versions already on npm; registry lookup errors fail the release instead of attempting a publish. Version numbers remain an explicit PR change, not an automatic bump. Do not merge releases out of version order.
 
 ### One-time npm setup
 
@@ -169,7 +169,7 @@ In the `kni-cascade` package settings on npm, add a GitHub Actions **Trusted Pub
 | Environment | Leave blank |
 | Allowed actions | Allow direct publishing with `npm publish` |
 
-No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. Publishing independently checks an approval from an owner, organization member, or collaborator on the final PR commit. The workflow uses Node 22 and npm 11 for npm's OIDC support.
+No npm token or GitHub secret is needed. Keep the existing teammate-review requirement on `main`; also require the workflow's `validate` check before merging. PR approval is enforced by the repository’s merge rules rather than checked again during publishing. The workflow uses Node 22 and npm 11 for npm's OIDC support.
 
 Merge the workflow through the normal review process. Until the trusted publisher is configured, publishing will fail with an authentication error. Once configured, a merged PR with a new stable version and matching lockfile publishes automatically. Check the **Validate and publish** workflow under GitHub Actions for the result. An existing version is safely skipped; publishing is never attempted from an unmerged PR.
 
@@ -316,3 +316,40 @@ document.querySelectorAll('input[type="range"]').forEach(range => {
 
 Call the updater after programmatic value changes or form resets as needed.
 The input's dragging and keyboard behavior remain native without this helper.
+
+## Utility mixins
+
+Shadow and scrim utilities work through attributes or Sass mixins. Importing the
+Sass helpers alone produces no CSS; each include generates styles for its selector.
+The attribute utilities use these same implementations.
+
+```scss
+@use 'kni-cascade/scss/00-sass' as *;
+
+.news-card {
+  @include shadow(20, 0.1);
+  @include shadow-hover(30, 0.2);
+}
+
+.hero-image {
+  @include scrim(to-t, 0.6, 75%, (0, 20, 72));
+}
+```
+
+`shadow($elevation: 30, $opacity: 0.08, $color: null)` accepts the existing
+10–50 elevation presets. Color is an optional RGB channel list, such as
+`(0, 20, 190)`. `shadow-hover()` accepts the same arguments, all optional;
+omitted values retain the resting settings. It also activates on keyboard focus
+and disables transitions for reduced motion. A hover-only shadow starts invisible.
+
+`scrim($direction: to-t-tr, $opacity: 1, $distance: 100%, $color: (0, 0, 0))`
+accepts the same direction names as the attribute, with arbitrary opacity and
+percentage distance values. It positions the host, clips overflow, and reserves
+`::before` for the overlay. Set text above the overlay in your component layout.
+
+Commenting out utility forwards removes the attribute CSS while keeping these
+mixins available through `00-sass`.
+
+Scrims use an eased, multi-stop gradient for a more gradual fade into the image
+than a standard two-stop gradient. Read [Easing Linear Gradients on CSS-Tricks](https://css-tricks.com/easing-linear-gradients/)
+for the technique behind this approach.
